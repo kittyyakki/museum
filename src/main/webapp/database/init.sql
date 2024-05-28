@@ -34,7 +34,7 @@ CREATE TABLE artwork
 	name varchar(45) NOT NULL,
 	kind varchar(45) NOT NULL,
 	artist varchar(45) NOT NULL,
-	year year(4) NOT NULL,
+	year varchar(4) NOT NULL,
 	material varchar(45) NOT NULL,
 	size varchar(45) NOT NULL,
 	display char(1) DEFAULT 'Y' NOT NULL,
@@ -61,6 +61,7 @@ CREATE TABLE member
 	email varchar(45) NOT NULL,
 	indate datetime DEFAULT NOW() NOT NULL,
 	phone varchar(45) NOT NULL,
+	adminyn char DEFAULT 'N' NOT NULL,
 	PRIMARY KEY (id)
 );
 
