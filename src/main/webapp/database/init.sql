@@ -2,12 +2,11 @@ SET SESSION FOREIGN_KEY_CHECKS=0;
 
 /* Drop Tables */
 
-DROP TABLE IF EXISTS notice;
-DROP TABLE IF EXISTS admin;
 DROP TABLE IF EXISTS favorite_artwork;
-DROP TABLE IF EXISTS review_board;
+DROP TABLE IF EXISTS review;
 DROP TABLE IF EXISTS artwork;
 DROP TABLE IF EXISTS member_gallery;
+DROP TABLE IF EXISTS notice;
 DROP TABLE IF EXISTS member;
 DROP TABLE IF EXISTS qna;
 
@@ -15,18 +14,6 @@ DROP TABLE IF EXISTS qna;
 
 
 /* Create Tables */
-
-CREATE TABLE admin
-(
-	id varchar(45) NOT NULL,
-	name varchar(45) DEFAULT '미상' NOT NULL,
-	pwd varchar(45) NOT NULL,
-	email varchar(45) NOT NULL,
-	indate datetime DEFAULT NOW() NOT NULL,
-	phone varchar(45) NOT NULL,
-	PRIMARY KEY (id)
-);
-
 
 CREATE TABLE artwork
 (
@@ -108,7 +95,7 @@ CREATE TABLE qna
 );
 
 
-CREATE TABLE review_board
+CREATE TABLE review
 (
 	rseq int unsigned NOT NULL AUTO_INCREMENT,
 	title varchar(100) NOT NULL,
@@ -116,22 +103,12 @@ CREATE TABLE review_board
 	author varchar(45) NOT NULL,
 	writedate datetime DEFAULT NOW() NOT NULL,
 	content text NOT NULL,
-	readcount int unsigned DEFAULT 0 NOT NULL,
-	category int unsigned NOT NULL,
 	PRIMARY KEY (rseq)
 );
 
 
 
 /* Create Foreign Keys */
-
-ALTER TABLE notice
-	ADD FOREIGN KEY (author)
-	REFERENCES admin (id)
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
-;
-
 
 ALTER TABLE favorite_artwork
 	ADD FOREIGN KEY (aseq)
@@ -141,7 +118,7 @@ ALTER TABLE favorite_artwork
 ;
 
 
-ALTER TABLE review_board
+ALTER TABLE review
 	ADD FOREIGN KEY (aseq)
 	REFERENCES artwork (aseq)
 	ON UPDATE CASCADE
@@ -165,7 +142,15 @@ ALTER TABLE member_gallery
 ;
 
 
-ALTER TABLE review_board
+ALTER TABLE notice
+	ADD FOREIGN KEY (author)
+	REFERENCES member (id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE review
 	ADD FOREIGN KEY (author)
 	REFERENCES member (id)
 	ON UPDATE CASCADE
