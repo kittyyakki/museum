@@ -11,7 +11,6 @@ public class MemberVO {
 	private String phone;
 	private String adminyn;
 	
-	
 	public String getId() {
 		return id;
 	}
