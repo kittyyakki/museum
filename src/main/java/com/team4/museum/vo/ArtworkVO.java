@@ -1,6 +1,7 @@
 package com.team4.museum.vo;
 
-import java.sql.Timestamp;
+import java.sql.Date;
+
 
 public class ArtworkVO {
 	private Integer aseq;
@@ -14,7 +15,7 @@ public class ArtworkVO {
 	private String content;
 	private String image;
 	private String savefilename;
-	private Timestamp indate;
+	private Date indate;
 	
 	public Integer getAseq() {
 		return aseq;
@@ -82,10 +83,10 @@ public class ArtworkVO {
 	public void setSavefilename(String savefilename) {
 		this.savefilename = savefilename;
 	}
-	public Timestamp getIndate() {
+	public Date getIndate() {
 		return indate;
 	}
-	public void setIndate(Timestamp indate) {
+	public void setIndate(Date indate) {
 		this.indate = indate;
 	}
 	
