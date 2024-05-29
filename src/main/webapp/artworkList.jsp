@@ -6,9 +6,9 @@
 <section>
 	<form action="museum.do?command=artwork" method="post">
 		<h2>예술품 검색</h2>
-		<div>
-			<input type="text" placeholder="작품명 또는 작가명을 검색하세요" name="search-word">
-			<input type="submit" value="검색" onclick="return go_search_artwork()">
+		<div class="search">
+			<input type="text" placeholder="작품명 또는 작가명을 검색하세요" name="search-word" class="search-input">
+			<input type="submit" value="검색" onclick="return go_search_artwork()" class="search-btn">
 		</div>
 	</form>
 	<div>
@@ -21,7 +21,7 @@
 
 <main>
 	<article>
-		<h2>${artworkCategory[categoryNum]}</h2>
+		<h2 class="current-category">${artworkCategory[categoryNum]}</h2>
 		<div class="artwork-list">
 			<c:forEach items="${artworkList}" var="artwork">
 				<div onclick="location.href='museum.do?command=artworkDetail&aseq=${artwork.aseq}'" class="artwork">
