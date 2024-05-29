@@ -6,9 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Museum</title>
+<link rel="stylesheet" href="css/reset.css">
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/footer.css">
 <link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/artwork.css">
 <script src="script/header.js"></script>
 </head>
 <body>
