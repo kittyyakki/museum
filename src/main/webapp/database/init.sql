@@ -65,6 +65,8 @@ CREATE TABLE member_gallery
 	image varchar(100) NOT NULL,
 	savefilename varchar(200) NOT NULL,
 	likecount int unsigned DEFAULT 0 NOT NULL,
+	publicyn char DEFAULT 'N',
+	reply text,
 	PRIMARY KEY (mseq)
 );
 
@@ -89,8 +91,8 @@ CREATE TABLE qna
 	content text NOT NULL,
 	writedate datetime DEFAULT NOW() NOT NULL,
 	email varchar(45) NOT NULL,
-	pwd varchar(45) NOT NULL,
-	phone varchar(45) NOT NULL,
+	pwd varchar(45),
+	phone varchar(45),
 	PRIMARY KEY (qseq)
 );
 
