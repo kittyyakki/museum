@@ -35,29 +35,33 @@ public class ArtworkDao {
 
 	}
 
-	public List<ArtworkVO> selectKindArtwork(String kind) {
-		return executeSelect("Select * From ArtWork where kind =? ",
+	public List<ArtworkVO> selectCategoryArtwork(String kind) {
+		return executeSelect("SELECT * FROM artwork WHERE kind=?",
 				pstmt -> pstmt.setString(1, kind),
 				ArtworkDao::extractArtworkVO);
 
 	}
+	
+	public List<ArtworkVO> selectArtwork(){
+		return executeSelect("SELECT * FROM artwork", ArtworkDao::extractArtworkVO);
+	}
 
 	private static ArtworkVO extractArtworkVO(ResultSet rs) throws SQLException {
 
-		ArtworkVO pvo = new ArtworkVO();
-		pvo.setAseq(rs.getInt("aseq"));
-		pvo.setName(rs.getString("name"));
-		pvo.setKind(rs.getString("kind"));
-		pvo.setArtist(rs.getString("artist"));
-		pvo.setYear(rs.getString("year"));
-		pvo.setMaterial(rs.getString("material"));
-		pvo.setSize(rs.getString("size"));
-		pvo.setDisplay(rs.getString("display"));
-		pvo.setContent(rs.getString("content"));
-		pvo.setImage(rs.getString("image"));
-		pvo.setSavefilename(rs.getString("savefilename"));
-		pvo.setIndate(rs.getDate("indate"));
-		return pvo;
+		ArtworkVO avo = new ArtworkVO();
+		avo.setAseq(rs.getInt("aseq"));
+		avo.setName(rs.getString("name"));
+		avo.setKind(rs.getString("kind"));
+		avo.setArtist(rs.getString("artist"));
+		avo.setYear(rs.getString("year"));
+		avo.setMaterial(rs.getString("material"));
+		avo.setSize(rs.getString("size"));
+		avo.setDisplay(rs.getString("display"));
+		avo.setContent(rs.getString("content"));
+		avo.setImage(rs.getString("image"));
+		avo.setSavefilename(rs.getString("savefilename"));
+		avo.setIndate(rs.getDate("indate"));
+		return avo;
 
 	}
 
