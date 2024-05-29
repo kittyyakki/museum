@@ -1,6 +1,7 @@
 package com.team4.museum.controller;
 
 import com.team4.museum.controller.action.Action;
+import com.team4.museum.controller.action.ArtworkListAction;
 import com.team4.museum.controller.action.IndexAction;
 
 public class ActionFactory {
@@ -18,8 +19,8 @@ public class ActionFactory {
 		return switch (command) {
 
 		case "index" -> new IndexAction();
+		case "artwork" -> new ArtworkListAction();
 		default -> null;
-
 		};
 	}
 
