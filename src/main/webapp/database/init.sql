@@ -58,7 +58,6 @@ CREATE TABLE member_gallery
 	mseq int unsigned NOT NULL AUTO_INCREMENT,
 	author varchar(45) NOT NULL,
 	title varchar(100) NOT NULL,
-	aseq int unsigned NOT NULL,
 	writedate datetime DEFAULT NOW() NOT NULL,
 	content text NOT NULL,
 	readcount int unsigned DEFAULT 0 NOT NULL,
