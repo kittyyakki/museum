@@ -18,7 +18,23 @@ public class ArtworkDao {
         return instance;
     }
     
-    public void insertArtwork(ArtworkVO avo) {
+    public int insertArtwork(ArtworkVO artwork) {
+    	return executeUpdate(
+				"INSERT INTO notice (name, kind, artist, year, material, size, display, content, image, savefilename) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+				pstmt -> {
+					pstmt.setString(1, artwork.getName());
+					pstmt.setString(2, artwork.getKind());
+					pstmt.setString(3, artwork.getArtist());
+					pstmt.setString(4, artwork.getYear());
+					pstmt.setString(5, artwork.getMaterial());
+					pstmt.setString(6, artwork.getSize());
+					pstmt.setString(7, artwork.getDisplay());
+					pstmt.setString(8, artwork.getContent());
+					pstmt.setString(9, artwork.getImage());
+					pstmt.setString(10, artwork.getSavefilename());
+				});
+	
+    	
     	
     	
     }
