@@ -6,19 +6,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Museum</title>
+<link rel="stylesheet" href="css/reset01.css">
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/footer.css">
 <link rel="stylesheet" href="css/main.css">
+
 <script src="script/header.js"></script>
 </head>
 <body>
-	<div>
+	<div class="wrap">
 		<header>
 			<nav>
-				<a href="#">
-					<img alt="logo" src="images/logo.png" class="logo">
-				</a>
-				<div class="menu">
+				<h1>
+					<a href="museum.do?command=index" title="로고"></a>
+				</h1>
+				<div class="header_gnb">
 					<a href="museum.do?command=artwork">예술품</a>
 					<a href="museum.do?command=notice">소식지</a>
 					<a href="museum.do?command=gallery">이용자 갤러리</a>
@@ -29,10 +31,10 @@
 						<input type="text" placeholder="검색어를 입력하세요">
 					</div>
 					<div>
-						<img alt="검색아이콘" src="">
+						<a class="btn_icon" href="#" title="검색"></a>
 					</div>
 				</div>
-				<div>
+				<div class="login_join_box">
 					<c:choose>
 						<c:when test="${empty loginUser}">
 							<a href="museum.do?command=loginForm">로그인</a>
