@@ -26,33 +26,40 @@ public class QnaDao {
 	}
 
 	public List<QnaVO> selectQna(Paging paging) {
-		return executeSelect("SELECT * FROM qna ORDER BY qseq DESC LIMIT ? OFFSET ?", 
-			pstmt -> {
-			pstmt.setInt(1, paging.getDisplayRow());
-			pstmt.setInt(2, paging.getStartNum() - 1);
-		}, QnaDao::extractQnaVO);
+		return executeSelect(
+				"SELECT * FROM qna ORDER BY qseq DESC LIMIT ? OFFSET ?",
+				pstmt -> {
+					pstmt.setInt(1, paging.getDisplayRow());
+					pstmt.setInt(2, paging.getStartNum() - 1);
+				},
+				QnaDao::extractQnaVO);
 	}
 
 	public QnaVO getQna(int qseq) {
-		return executeSelectOne("SELECT * FROM qna WHERE qseq = ?",
+		return executeSelectOne(
+				"SELECT * FROM qna WHERE qseq = ?",
 				pstmt -> pstmt.setInt(1, qseq),
 				QnaDao::extractQnaVO);
 	}
 
 	public void insertQna(QnaVO qvo) {
-		executeUpdate("INSERT INTO qna (qseq, title, content, email, pwd, phone) "
-				+ "VALUES (?, ?, ?, ?, ? ,?)", pstmt -> {
-			pstmt.setInt(1, qvo.getQseq());
-			pstmt.setString(2, qvo.getTitle());
-			pstmt.setString(3, qvo.getContent());
-			pstmt.setString(4, qvo.getEmail());
-			pstmt.setString(5, qvo.getPwd());
-			pstmt.setString(6, qvo.getPhone());
-		});
+		executeUpdate(
+				"INSERT INTO qna (qseq, title, content, email, pwd, phone) "
+						+ "VALUES (?, ?, ?, ?, ? ,?)",
+				pstmt -> {
+					pstmt.setInt(1, qvo.getQseq());
+					pstmt.setString(2, qvo.getTitle());
+					pstmt.setString(3, qvo.getContent());
+					pstmt.setString(4, qvo.getEmail());
+					pstmt.setString(5, qvo.getPwd());
+					pstmt.setString(6, qvo.getPhone());
+				});
 	}
 
 	public int getAllCount() {
-		return executeSelectOne("SELECT COUNT(*) AS cnt FROM qna", rs -> rs.getInt("cnt"));
+		return executeSelectOne(
+				"SELECT COUNT(*) AS cnt FROM qna",
+				rs -> rs.getInt("cnt"));
 	}
 
 	private static QnaVO extractQnaVO(ResultSet rs) throws SQLException {
