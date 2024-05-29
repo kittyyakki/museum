@@ -9,4 +9,14 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>MuseumServlet</display-name>
+    <servlet-name>MuseumServlet</servlet-name>
+    <servlet-class>com.team4.museum.controller.MuseumServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MuseumServlet</servlet-name>
+    <url-pattern>/museum.do</url-pattern>
+  </servlet-mapping>
 </web-app>
