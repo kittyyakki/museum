@@ -28,6 +28,7 @@ CREATE TABLE artwork
 	content text NOT NULL,
 	image varchar(100) NOT NULL,
 	savefilename varchar(200) NOT NULL,
+	indate datetime DEFAULT NOW(),
 	PRIMARY KEY (aseq)
 );
 
