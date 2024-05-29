@@ -1,0 +1,22 @@
+@charset "UTF-8";
+nav{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+a{
+	text-decoration: none;
+}
+
+.logo{
+	width:80px;
+	
+}
+.search{
+	display: flex;
+}
+
+.sub-menu{
+	display: none;
+}
