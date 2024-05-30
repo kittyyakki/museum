@@ -13,7 +13,14 @@
 	</form>
 	<div>
 		<c:forEach items="${artworkCategory}" var="category" varStatus="status">
-			<a href="museum.do?command=artwork&category=${status.index}" class="artwork-category-btn">${category.name()}</a>
+			<c:choose>
+				<c:when test="${categoryNum == status.index && titleState == 'on'}">
+					<a href="museum.do?command=artwork&category=${status.index}" class="selected-category-btn">${category.name()}</a>
+				</c:when>
+				<c:otherwise>
+					<a href="museum.do?command=artwork&category=${status.index}" class="artwork-category-btn">${category.name()}</a>
+				</c:otherwise>
+			</c:choose>
 		</c:forEach>
 	</div>
 </section>
@@ -21,16 +28,13 @@
 
 <main>
 	<article>
-		<c:if test="${titleState == 'on'}">
-			<h2 class="current-category">${artworkCategory[categoryNum]}</h2>
-		</c:if>
 		<div class="artwork-list">
 			<c:forEach items="${artworkList}" var="artwork">
 				<div onclick="location.href='museum.do?command=artworkDetail&aseq=${artwork.aseq}'" class="artwork">
-					<img src="images/artwork/${artwork.savefilename}" alt="artwork_image" />
-					<div>${artwork.artist}</div>
-					<div>${artwork.name}</div>
-					<div>${artwork.year}</div>
+					<img src="images/artwork/${artwork.savefilename}" alt="artwork_image" class="artwork_img"/>
+					<div class="artwork_artist">${artwork.artist}</div>
+					<div class="artwork_name">${artwork.name}</div>
+					<div class="artwork_year">${artwork.year}</div>
 				</div>
 			</c:forEach>
 		</div>
