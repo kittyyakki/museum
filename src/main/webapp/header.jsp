@@ -16,7 +16,7 @@
 	<div>
 		<header>
 			<nav>
-				<a href="#">
+				<a href="museum.do?command=index">
 					<img alt="logo" src="images/logo.png" class="logo">
 				</a>
 				<div class="menu">
