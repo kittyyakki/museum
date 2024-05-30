@@ -9,6 +9,7 @@ import com.team4.museum.controller.action.member.JoinFormAction;
 import com.team4.museum.controller.action.member.LoginAction;
 import com.team4.museum.controller.action.member.LoginFormAction;
 import com.team4.museum.controller.action.member.LogoutAction;
+import com.team4.museum.controller.action.notice.NoticeAction;
 import com.team4.museum.controller.action.qna.QnaListAction;
 
 public class ActionFactory {
@@ -34,6 +35,7 @@ public class ActionFactory {
 		case "idcheckForm" -> new IdcheckFormAction();
 		case "artwork" -> new ArtworkListAction();
 		case "qnaList" -> new QnaListAction();
+		case "notice" -> new NoticeAction();
 		default -> null;
 
 		};
