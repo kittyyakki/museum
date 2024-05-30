@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="header.jsp"%>
+<%@ include file="/header.jsp"%>
 
 <!-- museum.do?command=artwork 의 목적지 -->
 
@@ -41,4 +41,4 @@
 	</article>
 </main>
 
-<%@ include file="footer.jsp"%>
+<%@ include file="/footer.jsp"%>

@@ -1,62 +1,79 @@
 @charset "UTF-8";
 
-* {margin: 0; padding: 0; box-sizing:border-box;}
-
-
-body{
-  font-family: 'Nanum Gothic', sans-serif;
-  font-size: 16px;
-  line-height: 1;
-}
-button {border: none; background: none; cursor: pointer;}
-
-a{
-  text-decoration: none;
-  color: #000;
-}
-li{
-  list-style: none;
-}
-.clearfix::after{
-  content: " ";
-  display: block;
-  clear: both;
-}
-.ir_pm{
-  text-indent: -9999em;
-  white-space: nowrap;
-  overflow: hidden;
-}
-fieldset{
-  border: none;
-}
-.screen_out{
-  position: absolute;
-  top: -9999em;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
-ul, ol {list-style-type: none;}
+body {
+	font-family: 'Nanum Gothic', sans-serif;
+	font-size: 16px;
+	line-height: 1;
+}
 
-.modal{
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;height: 100%;
-  background: rgba(0,0,0,0.7);
-  z-index: 99;
-  display: none;
+button {
+	border: none;
+	background: none;
+	cursor: pointer;
+}
+
+a {
+	text-decoration: none;
+	color: #000;
+}
+
+li {
+	list-style: none;
+}
+
+.clearfix::after {
+	content: " ";
+	display: block;
+	clear: both;
+}
+
+.ir_pm {
+	text-indent: -9999em;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+fieldset {
+	border: none;
+}
+
+.screen_out {
+	position: absolute;
+	top: -9999em;
+}
+
+ul, ol {
+	list-style-type: none;
+}
+
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.7);
+	z-index: 99;
+	display: none;
 }
 
 input {
-  color: #222222;
-  width: 300px;
-  height:30px;
-  border: none;
-  border-bottom: solid #aaaaaa 1px;
-  padding-left: 10px;
-  position: relative;
-  background: none;
-  z-index: 5;
-  align-content:center;
+	color: #222222;
+	width: 300px;
+	height: 30px;
+	border: none;
+	border-bottom: solid #aaaaaa 1px;
+	padding-left: 10px;
+	position: relative;
+	background: none;
+	z-index: 5;
+	align-content: center;
 }
 
 /* label {
@@ -67,16 +84,20 @@ input {
   bottom: 8px;
   transition: all .2s;
 } */
+input::placeholder {
+	color: #aaaaaa;
+}
 
-input::placeholder { color: #aaaaaa; }
-input:focus { outline: none; }
+input:focus {
+	outline: none;
+}
 
 input:focus ~ label, input:valid ~ label {
-  bottom: 40px;
-  color: #666;
-  font-weight: bold;
+	bottom: 40px;
+	color: #666;
+	font-weight: bold;
 }
 
 input:focus ~ span, input:valid ~ span {
-  width: 100%;
+	width: 100%;
 }

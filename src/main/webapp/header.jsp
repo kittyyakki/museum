@@ -16,7 +16,7 @@
 <script src="script/member.js"></script>
 <script src="script/header.js"></script>
 <script src="script/artwork.js"></script>
-<script src="join.js"></script>
+<script src="script/join.js"></script>
 </head>
 <body>
 	<div class="body-wrap">

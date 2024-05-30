@@ -1,4 +1,4 @@
-package com.team4.museum.controller.action;
+package com.team4.museum.controller.action.member;
 
 import java.io.IOException;
 
@@ -24,7 +24,7 @@ public class IdcheckFormAction implements Action {
 		
 		request.setAttribute("id", id);
 		
-		request.getRequestDispatcher("idcheck.jsp").forward(request, response);
+		request.getRequestDispatcher("member/idcheck.jsp").forward(request, response);
 
 	}
 

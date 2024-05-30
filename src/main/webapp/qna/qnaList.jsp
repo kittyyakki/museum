@@ -71,4 +71,4 @@
 	</div>
 	<input class="qna-list_submit" type="button" value="질문하기" onClick="location.href='museum.do?command=writeQnaForm'" />
 </section>
-<%@ include file="../footer.jsp"%>
+<%@ include file="/footer.jsp"%>

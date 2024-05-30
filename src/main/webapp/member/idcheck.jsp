@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="join.js"></script>
+<script type="text/javascript" src="script/join.js"></script>
 </head>
 <body>
 <h2>ID 중복확인</h2>

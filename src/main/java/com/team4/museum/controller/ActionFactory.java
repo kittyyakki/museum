@@ -1,14 +1,14 @@
 package com.team4.museum.controller;
 
 import com.team4.museum.controller.action.Action;
-import com.team4.museum.controller.action.IdcheckFormAction;
-import com.team4.museum.controller.action.ArtworkListAction;
 import com.team4.museum.controller.action.IndexAction;
-import com.team4.museum.controller.action.LoginAction;
-import com.team4.museum.controller.action.LoginFormAction;
-import com.team4.museum.controller.action.LogoutAction;
-import com.team4.museum.controller.action.JoinAction;
-import com.team4.museum.controller.action.JoinFormAction;
+import com.team4.museum.controller.action.artwork.ArtworkListAction;
+import com.team4.museum.controller.action.member.IdcheckFormAction;
+import com.team4.museum.controller.action.member.JoinAction;
+import com.team4.museum.controller.action.member.JoinFormAction;
+import com.team4.museum.controller.action.member.LoginAction;
+import com.team4.museum.controller.action.member.LoginFormAction;
+import com.team4.museum.controller.action.member.LogoutAction;
 import com.team4.museum.controller.action.qna.QnaListAction;
 
 public class ActionFactory {
