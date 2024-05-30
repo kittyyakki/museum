@@ -4,6 +4,7 @@ import com.team4.museum.controller.action.Action;
 import com.team4.museum.controller.action.IndexAction;
 import com.team4.museum.controller.action.LoginAction;
 import com.team4.museum.controller.action.LoginFormAction;
+import com.team4.museum.controller.action.LogoutAction;
 
 public class ActionFactory {
 
@@ -22,6 +23,7 @@ public class ActionFactory {
 		case "index" -> new IndexAction();
 		case "loginForm" -> new LoginFormAction();
 		case "login" -> new LoginAction();
+		case "logout" -> new LogoutAction();
 		default -> null;
 
 		};
