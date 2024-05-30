@@ -11,10 +11,11 @@
 <link rel="stylesheet" href="css/footer.css">
 <link rel="stylesheet" href="css/main.css">
 <link rel="stylesheet" href="css/artwork.css">
+<script src="script/header.js"></script>
 <script src="script/artwork.js"></script>
 </head>
 <body>
-	<div>
+	<div class="body-wrap">
 		<header>
 			<nav>
 				<a href="#">
