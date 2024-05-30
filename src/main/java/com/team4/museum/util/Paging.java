@@ -21,12 +21,11 @@ public class Paging {
 		totalPage = (int) Math.ceil(totalCount / (double) displayRow);
 		if (totalPage < endPage) {
 			endPage = totalPage;
-			next = false;
-		} else {
-			next = true;
 		}
 
-		prev = beginPage != 1;
+		prev = page > 1;
+		next = page < totalPage;
+
 		startNum = (page - 1) * displayRow + 1;
 		endNum = page * displayRow;
 	}
