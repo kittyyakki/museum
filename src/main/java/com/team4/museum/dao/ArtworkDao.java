@@ -55,6 +55,13 @@ public class ArtworkDao {
 	public List<ArtworkVO> selectArtwork() {
 		return executeSelect("SELECT * FROM artwork", ArtworkDao::extractArtworkVO);
 	}
+	
+	public ArtworkVO selectArtworkOne(int aseq) {
+		return executeSelectOne("SELECT * FROM artwork WHERE aseq=?",
+				pstmt ->{
+					pstmt.setInt(1, aseq);
+				}, ArtworkDao::extractArtworkVO);
+	}
 
 	private static ArtworkVO extractArtworkVO(ResultSet rs) throws SQLException {
 
