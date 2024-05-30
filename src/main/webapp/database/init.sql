@@ -24,7 +24,7 @@ CREATE TABLE artwork
 	year varchar(4) NOT NULL,
 	material varchar(45) NOT NULL,
 	size varchar(45) NOT NULL,
-	display char(1) DEFAULT 'Y' NOT NULL,
+	displayyn char(1) DEFAULT 'Y' NOT NULL,
 	content text NOT NULL,
 	image varchar(100) NOT NULL,
 	savefilename varchar(200) NOT NULL,
