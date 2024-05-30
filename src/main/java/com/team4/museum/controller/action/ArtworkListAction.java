@@ -38,8 +38,9 @@ public class ArtworkListAction implements Action{
 		}
 		else if(category.equals("0")) // 전체목록 조회
 			list = adao.selectArtwork();
-		else 	// 카테고리 조회
+		else { // 카테고리 조회
 			list = adao.selectCategoryArtwork(categoryName);
+		}
 		
 		request.setAttribute("searchWord", searchWord);
 		request.setAttribute("titleState", titleState);
@@ -47,11 +48,11 @@ public class ArtworkListAction implements Action{
 		request.setAttribute("categoryName", categoryName);
 		// 카테고리로 조회한 예술품 리스트 전달
 		request.setAttribute("artworkList", list);
-		// 분류명 목록을 배열로 전달
+		// 분류명 목록을 배열로 전달 
 		request.setAttribute("artworkCategory", ArtworkCategory.values());
 		request.setAttribute("categoryNum", categoryNum);
+		 
+		
 		request.getRequestDispatcher("artworkList.jsp").forward(request, response);
 	}
-
-	
 }
