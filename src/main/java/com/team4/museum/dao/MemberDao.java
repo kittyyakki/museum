@@ -50,6 +50,7 @@ public class MemberDao {
 			pstmt.setString(3, mvo.getEmail());
 			pstmt.setString(4, mvo.getPhone());
 			pstmt.setString(5, mvo.getAdminyn());
+			pstmt.setString(6, mvo.getId());
 		});
 	}
 
