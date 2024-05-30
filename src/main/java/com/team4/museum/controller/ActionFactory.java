@@ -3,6 +3,7 @@ package com.team4.museum.controller;
 import com.team4.museum.controller.action.Action;
 import com.team4.museum.controller.action.IndexAction;
 import com.team4.museum.controller.action.artwork.ArtworkListAction;
+import com.team4.museum.controller.action.artwork.ArtworkViewAction;
 import com.team4.museum.controller.action.member.IdcheckFormAction;
 import com.team4.museum.controller.action.member.JoinAction;
 import com.team4.museum.controller.action.member.JoinFormAction;
@@ -34,6 +35,7 @@ public class ActionFactory {
 		case "idcheckForm" -> new IdcheckFormAction();
 		case "artwork" -> new ArtworkListAction();
 		case "qnaList" -> new QnaListAction();
+		case "artworkView" -> new ArtworkViewAction(); 
 		default -> null;
 
 		};
