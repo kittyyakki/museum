@@ -10,8 +10,7 @@
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/footer.css">
 <link rel="stylesheet" href="css/main.css">
-
-<script src="script/header.js"></script>
+<script src="script/member.js"></script>
 </head>
 <body>
 	<div class="wrap">
@@ -42,7 +41,7 @@
 						</c:when>
 						<c:otherwise>
 							<a href="#">${loginUser.name}(${loginUser.id})</a>
-							<a href="museum.do?command=logout">LOGOUT</a>
+							<a href="museum.do?command=logout">로그아웃</a>
 						</c:otherwise>
 					</c:choose>
 				</div>
