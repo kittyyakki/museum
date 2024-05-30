@@ -19,7 +19,7 @@ CREATE TABLE artwork
 (
 	aseq int unsigned NOT NULL AUTO_INCREMENT,
 	name varchar(45) NOT NULL,
-	kind varchar(45) NOT NULL,
+	category varchar(45) NOT NULL,
 	artist varchar(45) NOT NULL,
 	year varchar(4) NOT NULL,
 	material varchar(45) NOT NULL,
@@ -77,7 +77,7 @@ CREATE TABLE notice
 	writedate datetime DEFAULT NOW() NOT NULL,
 	content text NOT NULL,
 	readcount int unsigned DEFAULT 0 NOT NULL,
-	category int unsigned NOT NULL,
+	category varchar(45) NOT NULL,
 	PRIMARY KEY (nseq)
 );
 
