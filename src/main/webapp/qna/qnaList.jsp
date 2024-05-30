@@ -21,7 +21,14 @@
 						<c:when test="${empty qnaVO.reply}">NO</c:when>
 						<c:otherwise>YES</c:otherwise>
 					</c:choose></li>
-				<li><a href="museum.do?command=qnaView&qseq=${qnaVO.qseq}"> ${qnaVO.isPublic() ? "🔒" : ""}${qnaVO.title}</a></li>
+				<li><c:choose>
+						<c:when test="${qnaVO.isPublic()}">
+							<a href="museum.do?command=qnaView&qseq=${qnaVO.qseq}"> ${qnaVO.title}</a>
+						</c:when>
+						<c:otherwise>
+							<span onclick="qnaPwdCheck(${qnaVO.qseq})">🔒${qnaVO.title}</span>
+						</c:otherwise>
+					</c:choose></li>
 				<li><fmt:formatDate value="${qnaVO.writedate}" pattern="yyyy-MM-dd" /></li>
 			</ul>
 		</c:forEach>

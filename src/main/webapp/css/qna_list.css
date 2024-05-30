@@ -58,6 +58,10 @@
 	text-align: left;
 }
 
+.qna-list_table>ul:not(.header)>li>span {
+	cursor: pointer;
+}
+
 .qna-list_table>ul.header {
 	font-weight: bold;
 	border-bottom: 1px solid #ccc;
