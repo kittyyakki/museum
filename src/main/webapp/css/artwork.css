@@ -1,5 +1,17 @@
 @charset "UTF-8";
 
+.artwork-list-header{
+	width:80%;
+	margin: 50px auto;
+	padding-bottom: 30px;
+	border-bottom: 2px solid gray;
+}
+
+.artwork-list-main{
+	width:80%;
+	margin: 50px auto;
+}
+
 .artwork-search-form{
 	display: flex;
 	flex-direction: column;
@@ -71,7 +83,9 @@
 
 .artwork-list {
 	display: flex;
+	justify-content: center;
 	flex-wrap: wrap;
+	cursor: pointer;
 }
 
 .artwork-list>div {
@@ -81,6 +95,13 @@
 	margin: 40px 15px;
 	font-size: 15px;
 	font-weight: 600;
+}
+
+.artwork-list>div>div{
+	margin-top: 5px;
+}
+.artwork-list>div:hover{
+	text-decoration: underline;
 }
 
 .artwork-list .artwork_img {
