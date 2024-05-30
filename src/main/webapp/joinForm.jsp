@@ -1,39 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="header.jsp"%>
-
 <section>
-
 	<article>
-		<form action="museum.do?command=join" method="post" name="joinForm">
+		<form action="museum.do?command=join" method="post" name="joinForm" class="joinForm">
 			<h2>회원가입</h2>
 
-
+		<div class="middle">
 			<div class="field">
-				<span>*</span><label>이름</label>
-				<input type="text" name="name">
+				<span>*</span><label>이름</label> <input type="text" name="name">
 			</div>
 			<div class="field">
-				<span>*</span><label>아이디</label>
+				<span>*</span>
+				<label>아이디</label>
 				<div>
-					<input type="text" name="userid" size="12">
-					<input type="hidden" name="reid">
+					<input type="text" name="userid" size="12"> 
+					<input type="hidden" name="reid"> 
 					<input type="button" value="중복 체크" onclick="idcheck()">
 				</div>
 			</div>
-			<div class="field">
-				<span>*</span><label>비밀번호</label>
-				<input type="password" name="pwd">
+			<p style="font-size:13px;">아이디는 4자~12자 이내의 영문과 숫자로 공백 없이 입력하시면 됩니다. 영문 대소문자를 구분하지 않습니다.</p>
+			<div class="field">	
+				<span>*</span><label>비밀번호</label> <input type="password" name="pwd">
 			</div>
 			<div class="field">
-				<span>*</span><label>비밀번호 확인</label>
-				<input type="password" name="pwdCheck">
+				<span>*</span><label>비밀번호 확인</label> <input type="password" name="pwdCheck">
 			</div>
 
 			<div class="field">
-				<span>*</span><label>출생연도</label>
-				<select id=birth name=birth style="width: 100px;">
+				<span>*</span><label>출생연도</label> <select id=birth name=birth style="width: 70px; height:30px;">
 					<option value="2024">2024</option>
 					<option value="2023">2023</option>
 					<option value="2022">2022</option>
@@ -134,35 +128,23 @@
 					<option value="1927">1927</option>
 					<option value="1926">1926</option>
 					<option value="1925">1925</option>
-
-
-
-					
-
-
 				</select>
 			</div>
 			<div class="field">
-				<label>연락처</label>
-				<input type="text" name="phone" />
-				<input type="text" name="phone" />
-				<input type="text" name="phone" />
-				
+				<span>*</span><label>연락처</label> 
+				<input type="text" name="phone" > 
 			</div>
 			<div class="field">
-				<span>*</span><label>이메일</label>
-				<input type="text" name="email" />
-				
-			</div>
-			
-			<div class="btn">
-				<input type="button" value="이전" onclick="go_save()">
-				<input type="button" value="다음" onClick="location.href='museum.do?command=index'">
-			</div>
+				<span>*</span><label>이메일</label> <input type="text" name="email" />
 
+			</div>
+		</div>
+			<div class="btn">
+				<input type="button" value="이전" onclick="location.href='museum.do?command=index'"> 
+				<input type="button" value="다음" onClick="go_save()">
+			</div>
 		</form>
 	</article>
-	</div>
 </section>
 
 <%@ include file="footer.jsp"%>
