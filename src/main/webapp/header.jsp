@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/footer.css">
 <link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/qna_list.css">
 <script src="script/header.js"></script>
 </head>
 <body>
@@ -22,7 +23,7 @@
 					<a href="museum.do?command=artwork">예술품</a>
 					<a href="museum.do?command=notice">소식지</a>
 					<a href="museum.do?command=gallery">이용자 갤러리</a>
-					<a href="">고객센터</a>
+					<a href="museum.do?command=qnaList">고객센터</a>
 				</div>
 				<div class="search">
 					<div>
