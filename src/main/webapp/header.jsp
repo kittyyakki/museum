@@ -17,6 +17,7 @@
 <script src="script/header.js"></script>
 <script src="script/artwork.js"></script>
 <script src="script/join.js"></script>
+<script src="script/qna.js"></script>
 </head>
 <body>
 	<div class="body-wrap">
