@@ -13,7 +13,7 @@
 				<span>*</span>
 				<label>아이디</label>
 				<div>
-					<input type="text" name="userid" size="12"> 
+					<input type="text" name="id" size="12"> 
 					<input type="hidden" name="reid"> 
 					<input type="button" value="중복 체크" onclick="idcheck()">
 				</div>
