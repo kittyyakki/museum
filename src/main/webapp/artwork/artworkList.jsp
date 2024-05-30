@@ -26,6 +26,7 @@
 </section>
 
 <main class="artwork-list-main">
+	<h4>검색결과가 총 ${artworkList.size()}건 입니다</h4>
 	<div class="artwork-list">
 		<c:forEach items="${artworkList}" var="artwork">
 			<div onclick="location.href='museum.do?command=artworkView&aseq=${artwork.aseq}'">
