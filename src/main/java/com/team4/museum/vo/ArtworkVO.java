@@ -6,7 +6,7 @@ import java.sql.Date;
 public class ArtworkVO {
 	private Integer aseq;
 	private String name;
-	private String kind;
+	private String category;
 	private String artist;
 	private String year;
 	private String material;
@@ -29,11 +29,12 @@ public class ArtworkVO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getKind() {
-		return kind;
+	
+	public String getCategory() {
+		return category;
 	}
-	public void setKind(String kind) {
-		this.kind = kind;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	public String getArtist() {
 		return artist;
