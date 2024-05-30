@@ -14,12 +14,14 @@ public class QnaListAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		QnaDao qdao = QnaDao.getInstance();
 
+		int totalCount = qdao.getAllCount();
 		Paging paging = new Paging();
 		paging.setPage(getPage(request));
-		paging.setTotalCount(qdao.getAllCount());
+		paging.setTotalCount(totalCount);
 
 		request.setAttribute("paging", paging);
 		request.setAttribute("qnaList", qdao.selectQna(paging));
+		request.setAttribute("totalCount", totalCount);
 
 		request.getRequestDispatcher("qna/qnaList.jsp").forward(request, response);
 	}
