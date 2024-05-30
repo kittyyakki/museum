@@ -35,14 +35,24 @@ public class ArtworkDao {
 
 	}
 
+	public List<ArtworkVO> selectSearchArtwork(String searchWord) {
+		return executeSelect(
+				"SELECT * FROM artwork WHERE name LIKE CONCAT('%', ?, '%') OR artist LIKE CONCAT('%', ?, '%')",
+				pstmt -> {
+					pstmt.setString(1, searchWord);
+					pstmt.setString(2, searchWord);
+				},
+				ArtworkDao::extractArtworkVO);
+	}
+
 	public List<ArtworkVO> selectCategoryArtwork(String kind) {
 		return executeSelect("SELECT * FROM artwork WHERE kind=?",
 				pstmt -> pstmt.setString(1, kind),
 				ArtworkDao::extractArtworkVO);
 
 	}
-	
-	public List<ArtworkVO> selectArtwork(){
+
+	public List<ArtworkVO> selectArtwork() {
 		return executeSelect("SELECT * FROM artwork", ArtworkDao::extractArtworkVO);
 	}
 
