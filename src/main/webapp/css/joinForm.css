@@ -21,19 +21,19 @@
    
 }
 
-article form h2{
+.joinForm h2{
 	line-height:nomal;
 	font-size:40px;
 	
 }
 
-article form .field{
+.joinForm .field{
 	display: flex;
 	margin:5px 5px;
 }
 
 
-article form .field input{
+.joinForm .field input{
 	margin-left:10px;
 	padding: 3px;
     border-radius: 3px;

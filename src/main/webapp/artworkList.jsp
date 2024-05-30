@@ -6,7 +6,7 @@
 <section>
 	<form action="museum.do?command=artwork" method="post" name="searchForm" class="search-form">
 		<h2>예술품 검색</h2>
-		<div class="search">
+		<div>
 			<input type="text" placeholder="작품명 또는 작가명을 검색하세요" name="searchWord" class="search-input" value="${searchWord}">
 			<input type="submit" value="검색" onclick="return go_search_artwork()" class="search-btn">
 		</div>
@@ -30,7 +30,7 @@
 	<article>
 		<div class="artwork-list">
 			<c:forEach items="${artworkList}" var="artwork">
-				<div onclick="location.href='museum.do?command=artworkDetail&aseq=${artwork.aseq}'" class="artwork">
+				<div onclick="location.href='museum.do?command=artworkDetail&aseq=${artwork.aseq}'">
 					<img src="images/artwork/${artwork.savefilename}" alt="artwork_image" class="artwork_img"/>
 					<div class="artwork_artist">${artwork.artist}</div>
 					<div class="artwork_name">${artwork.name}</div>
