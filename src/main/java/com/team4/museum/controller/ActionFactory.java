@@ -16,9 +16,9 @@ public class ActionFactory {
 	}
 
 	public Action getAction(String command) {
-		return switch (command) {
+		return switch (command != null ? command : "") {
 
-		case "index" -> new IndexAction();
+		case "", "index" -> new IndexAction();
 		case "qnaList" -> new QnaListAction();
 		default -> null;
 
