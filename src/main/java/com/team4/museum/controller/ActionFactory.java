@@ -25,15 +25,24 @@ public class ActionFactory {
 	public Action getAction(String command) {
 		return switch (command != null ? command : "") {
 
+		// index action
 		case "", "index" -> new IndexAction();
+
+		// member actions
 		case "loginForm" -> new LoginFormAction();
 		case "login" -> new LoginAction();
 		case "logout" -> new LogoutAction();
 		case "join" -> new JoinAction();
 		case "joinForm" -> new JoinFormAction();
 		case "idcheckForm" -> new IdcheckFormAction();
+
+		// artwork actions
 		case "artwork" -> new ArtworkListAction();
+
+		// QnA actions
 		case "qnaList" -> new QnaListAction();
+
+		// default
 		default -> null;
 
 		};
