@@ -12,20 +12,20 @@ public class Paging {
 	private boolean next;
 	private int startNum;
 	private int endNum;
+	private int totalPage;
 
 	private void calPaging() {
 		endPage = ((int) (Math.ceil(page / (double) displayPage))) * displayPage;
 		beginPage = endPage - (displayPage - 1);
 
-		int totalPage = (int) Math.ceil(totalCount / (double) displayRow);
+		totalPage = (int) Math.ceil(totalCount / (double) displayRow);
 		if (totalPage < endPage) {
 			endPage = totalPage;
-			next = false;
-		} else {
-			next = true;
 		}
 
-		prev = beginPage != 1;
+		prev = page > 1;
+		next = page < totalPage;
+
 		startNum = (page - 1) * displayRow + 1;
 		endNum = page * displayRow;
 	}
@@ -77,6 +77,14 @@ public class Paging {
 
 	public void setEndPage(int endPage) {
 		this.endPage = endPage;
+	}
+
+	public int getTotalPage() {
+		return totalPage;
+	}
+
+	public int setTotalPage(int totalPage) {
+		return totalPage;
 	}
 
 	public boolean isPrev() {
