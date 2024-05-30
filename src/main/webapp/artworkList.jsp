@@ -4,10 +4,10 @@
 <!-- museum.do?command=artwork 의 목적지 -->
 
 <section>
-	<form action="museum.do?command=artwork" method="post">
+	<form action="museum.do?command=artwork" method="post" name="searchForm">
 		<h2>예술품 검색</h2>
 		<div class="search">
-			<input type="text" placeholder="작품명 또는 작가명을 검색하세요" name="search-word" class="search-input">
+			<input type="text" placeholder="작품명 또는 작가명을 검색하세요" name="searchWord" class="search-input" value="${searchWord}">
 			<input type="submit" value="검색" onclick="return go_search_artwork()" class="search-btn">
 		</div>
 	</form>
@@ -21,7 +21,9 @@
 
 <main>
 	<article>
-		<h2 class="current-category">${artworkCategory[categoryNum]}</h2>
+		<c:if test="${titleState == 'on'}">
+			<h2 class="current-category">${artworkCategory[categoryNum]}</h2>
+		</c:if>
 		<div class="artwork-list">
 			<c:forEach items="${artworkList}" var="artwork">
 				<div onclick="location.href='museum.do?command=artworkDetail&aseq=${artwork.aseq}'" class="artwork">
