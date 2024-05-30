@@ -11,6 +11,14 @@
 	color: inherit;
 }
 
+.qna-list>h1 {
+	margin: 2rem 0 1rem 1rem;
+}
+
+.qna-list>p {
+	margin: 0 0 1rem 1rem;
+}
+
 .qna-list_table {
 	border-top: 1px solid #202020;
 	border-bottom: 1px solid #202020;
@@ -64,7 +72,6 @@
 	background: transparent;
 	min-width: 20rem;
 	margin: 1rem 1rem 1rem auto;
-	padding: 1rem;
 	border-radius: 5rem;
 	border: 0;
 	font-size: 1rem;
