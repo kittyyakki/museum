@@ -32,7 +32,7 @@ public class MemberDao {
 
 	public int insertMember(MemberVO mvo) {
 		return executeUpdate(
-				"INSERT INTO member (id, name, pwd, email, phone, adminyn)" + " VALUES ( ?, ?, ?, ?, ?, ?, ? )",
+				"INSERT INTO member (id, name, pwd, email, phone)" + " VALUES ( ?, ?, ?, ?, ?, ? )",
 				pstmt -> {
 					pstmt.setString(1, mvo.getId());
 					pstmt.setString(2, mvo.getName());
