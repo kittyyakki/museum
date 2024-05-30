@@ -1,10 +1,13 @@
 package com.team4.museum.controller;
 
 import com.team4.museum.controller.action.Action;
+import com.team4.museum.controller.action.IdcheckFormAction;
 import com.team4.museum.controller.action.IndexAction;
 import com.team4.museum.controller.action.LoginAction;
 import com.team4.museum.controller.action.LoginFormAction;
 import com.team4.museum.controller.action.LogoutAction;
+import com.team4.museum.controller.action.JoinAction;
+import com.team4.museum.controller.action.JoinFormAction;
 
 public class ActionFactory {
 
@@ -24,6 +27,9 @@ public class ActionFactory {
 		case "loginForm" -> new LoginFormAction();
 		case "login" -> new LoginAction();
 		case "logout" -> new LogoutAction();
+		case "join" -> new JoinAction();
+		case "joinForm" -> new JoinFormAction();
+		case "idcheckForm" -> new IdcheckFormAction();
 		default -> null;
 
 		};
