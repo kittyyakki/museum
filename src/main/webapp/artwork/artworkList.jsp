@@ -3,7 +3,7 @@
 
 <!-- museum.do?command=artwork 의 목적지 -->
 
-<section>
+<section class="artwork-list-header">
 	<form action="museum.do?command=artwork" method="post" name="searchForm" class="artwork-search-form">
 		<h2>예술품 검색</h2>
 		<div>
@@ -24,21 +24,18 @@
 		</c:forEach>
 	</div>
 </section>
-<hr>
 
-<main>
-	<article>
-		<div class="artwork-list">
-			<c:forEach items="${artworkList}" var="artwork">
-				<div onclick="location.href='museum.do?command=artworkView&aseq=${artwork.aseq}'">
-					<img src="images/artwork/${artwork.savefilename}" alt="artwork_image" class="artwork_img"/>
-					<div class="artwork_artist">${artwork.artist}</div>
-					<div class="artwork_name">${artwork.name}</div>
-					<div class="artwork_year">${artwork.year}</div>
-				</div>
-			</c:forEach>
-		</div>
-	</article>
+<main class="artwork-list-main">
+	<div class="artwork-list">
+		<c:forEach items="${artworkList}" var="artwork">
+			<div onclick="location.href='museum.do?command=artworkView&aseq=${artwork.aseq}'">
+				<img src="images/artwork/${artwork.savefilename}" alt="artwork_image" class="artwork_img" />
+				<div class="artwork_artist">${artwork.artist}</div>
+				<div class="artwork_name">${artwork.name}</div>
+				<div class="artwork_year">${artwork.year}</div>
+			</div>
+		</c:forEach>
+	</div>
 </main>
 
 <%@ include file="/footer.jsp"%>
