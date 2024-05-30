@@ -19,10 +19,10 @@ public class ArtworkDao {
 
 	public int insertArtwork(ArtworkVO artwork) {
 		return executeUpdate(
-				"INSERT INTO notice (name, kind, artist, year, material, size, display, content, image, savefilename) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+				"INSERT INTO notice (name, category, artist, year, material, size, display, content, image, savefilename) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
 				pstmt -> {
 					pstmt.setString(1, artwork.getName());
-					pstmt.setString(2, artwork.getKind());
+					pstmt.setString(2, artwork.getCategory());
 					pstmt.setString(3, artwork.getArtist());
 					pstmt.setString(4, artwork.getYear());
 					pstmt.setString(5, artwork.getMaterial());
@@ -45,9 +45,9 @@ public class ArtworkDao {
 				ArtworkDao::extractArtworkVO);
 	}
 
-	public List<ArtworkVO> selectCategoryArtwork(String kind) {
-		return executeSelect("SELECT * FROM artwork WHERE kind=?",
-				pstmt -> pstmt.setString(1, kind),
+	public List<ArtworkVO> selectCategoryArtwork(String category) {
+		return executeSelect("SELECT * FROM artwork WHERE category=?",
+				pstmt -> pstmt.setString(1, category),
 				ArtworkDao::extractArtworkVO);
 
 	}
@@ -61,7 +61,7 @@ public class ArtworkDao {
 		ArtworkVO avo = new ArtworkVO();
 		avo.setAseq(rs.getInt("aseq"));
 		avo.setName(rs.getString("name"));
-		avo.setKind(rs.getString("kind"));
+		avo.setCategory(rs.getString("category"));
 		avo.setArtist(rs.getString("artist"));
 		avo.setYear(rs.getString("year"));
 		avo.setMaterial(rs.getString("material"));
