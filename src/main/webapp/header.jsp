@@ -11,12 +11,14 @@
 <link rel="stylesheet" href="css/footer.css">
 <link rel="stylesheet" href="css/main.css">
 <link rel="stylesheet" href="css/joinForm.css">
+<link rel="stylesheet" href="css/artwork.css">
 <script src="script/member.js"></script>
 <script src="script/header.js"></script>
+<script src="script/artwork.js"></script>
 <script src= "join.js"></script>
 </head>
 <body>
-	<div class="wrap">
+	<div class="body-wrap">
 		<header>
 			<nav>
 				<h1>
