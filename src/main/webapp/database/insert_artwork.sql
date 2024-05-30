@@ -1,4 +1,4 @@
-INSERT INTO artwork (name, kind, artist, year, material, size, content, image, savefilename)
+INSERT INTO artwork (name, category, artist, year, material, size, content, image, savefilename)
 VALUES ('시간도 끝나가고 테이프도 끝나간다', '판화', '백남준 PAIK Nam June', '1984', '종이에 인타글리오 프린트', '29.7x37.5',
         '<시간도 끝나가고 테이프도 끝나간다>(1984)는 시간을 근거로 하여, 흰색의 선 밑에 원색의 글씨들이 겹쳐져 보이는 우연적 요소를 화면에 차용함으로써 새로운 시각적 효과를 창출한 작품이다.',
         '시간도 끝나가고 테이프도 끝나간다.jpg', '시간도 끝나가고 테이프도 끝나간다.jpg'),
