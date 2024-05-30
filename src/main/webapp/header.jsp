@@ -9,7 +9,9 @@
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/footer.css">
 <link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/joinForm.css">
 <script src="script/header.js"></script>
+<script src= "join.js"></script>
 </head>
 <body>
 	<div>
