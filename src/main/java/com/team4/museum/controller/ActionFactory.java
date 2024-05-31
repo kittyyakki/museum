@@ -9,10 +9,16 @@ import com.team4.museum.controller.action.member.JoinFormAction;
 import com.team4.museum.controller.action.member.LoginAction;
 import com.team4.museum.controller.action.member.LoginFormAction;
 import com.team4.museum.controller.action.member.LogoutAction;
+import com.team4.museum.controller.action.notice.DeleteNoticeAction;
 import com.team4.museum.controller.action.notice.InsertNoticeAction;
 import com.team4.museum.controller.action.notice.InsertNoticeFormAction;
 import com.team4.museum.controller.action.notice.NoticeAction;
 import com.team4.museum.controller.action.notice.NoticeViewAction;
+import com.team4.museum.controller.action.notice.NoticeViewWithoutCnt;
+import com.team4.museum.controller.action.notice.NoticeViewWithoutCntAction;
+import com.team4.museum.controller.action.notice.UpdateNoticeAction;
+import com.team4.museum.controller.action.notice.UpdateNoticeForm;
+import com.team4.museum.controller.action.notice.UpdateNoticeFormAction;
 import com.team4.museum.controller.action.qna.QnaListAction;
 
 public class ActionFactory {
@@ -42,7 +48,10 @@ public class ActionFactory {
 		case "insertNoticeForm" -> new InsertNoticeFormAction();
 		case "insertNotice" -> new InsertNoticeAction();
 		case "noticeView" -> new NoticeViewAction();
-		case "updateNoticeForm" -> new UpdateNoticeForm();
+		case "updateNoticeForm" -> new UpdateNoticeFormAction();
+		case "updateNotice" -> new UpdateNoticeAction();
+		case "noticeViewWithoutCnt" -> new NoticeViewWithoutCntAction();
+		case "deleteNotice" -> new DeleteNoticeAction();
 		default -> null;
 
 		};
