@@ -3,13 +3,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="/header.jsp" %>
 
-<div id="main_container">
-	<h2>게시글 등록</h2>
-	<div class="board">
+<div class="notice_insert_box">
+	<h2>소식지 등록</h2>
+	<div class="notice_insert_header_box">
 		<form class="insertNotice" method="post" name="insertNotice" 
 			action="museum.do"	enctype="multipart/form-data">
 			<input type="hidden" name="command" value="insertNotice" />
-			<div class="field">
+			<div class="notice_insert_field">
 				<label>작성자</label>
 				<input type="text" name="id" value="${loginUser.id}" readonly/>
 			</div>
