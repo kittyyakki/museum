@@ -101,8 +101,14 @@ final public class NoticeDAO {
 	public int getReplyCount(Object num) {
 		int count = 0;
 		Db.getConnection();
-		String sql =  "select count(*) as cnt from reply where noticenum=?";
+		String sql =  "select count(*) as cnt from reply where noticeNseq=?";
 		return count;
 	}
+
+	public void plusReadCount(int nseq) {
+		Db.getConnection();
+		String sql = "update notice set readcount=readcount+1 where nseq=?";
+	}
+
 
 }
