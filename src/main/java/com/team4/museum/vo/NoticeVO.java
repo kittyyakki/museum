@@ -9,7 +9,7 @@ public class NoticeVO {
 	private Date writedate;
 	private String content;
 	private Integer readcount;
-	private Integer category;
+	private String category;
 	private String image;
 	private String savefilename;
 
@@ -61,11 +61,11 @@ public class NoticeVO {
 		this.readcount = readcount;
 	}
 
-	public Integer getCategory() {
+	public String getCategory() {
 		return category;
 	}
 
-	public void setCategory(Integer category) {
+	public void setCategory(String category) {
 		this.category = category;
 	}
 
