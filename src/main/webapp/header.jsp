@@ -15,12 +15,14 @@
 <link rel="stylesheet" href="css/qna_list.css">
 <link rel="stylesheet" href="css/qna_view.css">
 <link rel="stylesheet" href="css/galleryForm.css">
+<link rel="stylesheet" href="css/notice.css">
 <script src="script/member.js"></script>
 <script src="script/header.js"></script>
 <script src="script/artwork.js"></script>
 <script src="script/join.js"></script>
 <script src="script/qna.js"></script>
 <script src="script/gallery.js"></script>
+<script src="script/notice.js"></script>
 </head>
 <body>
 	<div class="body-wrap">

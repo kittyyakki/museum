@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+
+import com.team4.museum.util.Db;
 import com.team4.museum.vo.NoticeVO;
 import static com.team4.museum.util.Db.*;
 
@@ -18,6 +20,7 @@ final public class NoticeDAO {
 		return instance;
 	}
 
+	/* paging 파라미터 추가 */
 	public List<NoticeVO> selectNoticeList() {
 		return executeSelect(
 				"SELECT * FROM notice",
@@ -47,7 +50,7 @@ final public class NoticeDAO {
 					pstmt.setString(1, notice.getTitle());
 					pstmt.setString(2, notice.getAuthor());
 					pstmt.setString(3, notice.getContent());
-					pstmt.setInt(4, notice.getCategory());
+					pstmt.setString(4, notice.getCategory());
 				});
 	}
 
@@ -58,7 +61,7 @@ final public class NoticeDAO {
 					pstmt.setString(1, notice.getTitle());
 					pstmt.setString(2, notice.getAuthor());
 					pstmt.setString(3, notice.getContent());
-					pstmt.setInt(4, notice.getCategory());
+					pstmt.setString(4, notice.getCategory());
 					pstmt.setInt(5, notice.getNseq());
 				});
 	}
@@ -83,8 +86,28 @@ final public class NoticeDAO {
 		notice.setWritedate(rs.getDate("writedate"));
 		notice.setContent(rs.getString("content"));
 		notice.setReadcount(rs.getInt("readcount"));
-		notice.setCategory(rs.getInt("category"));
+		notice.setCategory(rs.getString("category"));
 		return notice;
 	}
+
+	public int getNoticeAllCount() {
+		int count = 0;
+		Db.getConnection();
+		String sql = "select count(*) as cnt from notice";
+		return count;
+	}
+
+	public int getReplyCount(Object num) {
+		int count = 0;
+		Db.getConnection();
+		String sql =  "select count(*) as cnt from reply where noticeNseq=?";
+		return count;
+	}
+
+	public void plusReadCount(int nseq) {
+		Db.getConnection();
+		String sql = "update notice set readcount=readcount+1 where nseq=?";
+	}
+
 
 }
