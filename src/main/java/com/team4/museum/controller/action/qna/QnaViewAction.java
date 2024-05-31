@@ -15,6 +15,7 @@ public class QnaViewAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		request.removeAttribute("qnaContent");
+		request.removeAttribute("qnaOwned");
 		request.removeAttribute("qvo");
 
 		String url = "qna/qnaView.jsp?qseq=" + request.getParameter("qseq");
@@ -49,6 +50,9 @@ public class QnaViewAction implements Action {
 		// 세션에 비밀번호 확인 기록이 있는 경우 'qnaContent'를 제공
 		if (session.getAttribute("qnaPass" + qseq) != null) {
 			request.setAttribute("qnaContent", qvo.getContent());
+
+			// 'qnaOwned'를 'true'로 설정
+			request.setAttribute("qnaOwned", true);
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}

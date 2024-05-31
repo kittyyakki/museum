@@ -10,7 +10,19 @@
 	</script>
 </c:if>
 <section class="qna-view">
-	<h1>Q &amp; A</h1>
+	<div class="qna-view_title">
+		<h1>Q &amp; A</h1>
+		<c:choose>
+			<c:when test="${empty qnaOwned}">
+				<a href="#"></a>
+			</c:when>
+			<c:otherwise>
+				<a href="museum.do?command=writeQna&qseq=${qvo.qseq}">
+					<button class="qna-view_submit">수정하기</button>
+				</a>
+			</c:otherwise>
+		</c:choose>
+	</div>
 	<div class="qna-view_header">
 		<h1>${qvo.title}</h1>
 		<ul>
