@@ -3,26 +3,30 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="/header.jsp"%>
 
-<div id="notice_container">
+<div class="notice_box">
+<div class="notice_header_box">
 	<h2>전체</h2>
 	<h3>공지사항</h3>
 	<h3>이벤트</h3>
 	<div class="writebutton">
 		<input type="button" value="게시글 등록" onClick="location.href='notice.do?command=insertNoticeForm'" />
 	</div>
-	<div class="notice">
-		<div class="title_row">
-			<div class="title_col">번호</div>
-			<div class="title_col">제목</div>
-			<div class="title_col">작성자</div>
-			<div class="title_col">작성일</div>
-			<div class="title_col">조회수</div>
+	</div>
+	<div class="notice_title_box">
+		<div class="notice_title_row">
+			<div class="notice_title_col">번호</div>
+			<div class="notice_title_col">제목</div>
+			<div class="notice_title_col">작성자</div>
+			<div class="notice_title_col">작성일</div>
+			<div class="notice_title_col">조회수</div>
 		</div>
 		<c:forEach items="${noticeList}" var="notice">
-			<div class="row">
-				<div class="col">${notice.nseq}</div>
-				<div class="col">
-					<a style="text-decoration: none" href="museum.do?command=noticeView&nseq=${notice.nseq}"> ${notice.title} </a>&nbsp;
+			<div class="notice_reply_row">
+				<div class="notice_reply_col">${notice.nseq}</div>
+				<div class="notice_reply_col">
+					<a style="text-decoration: none" href="museum.do?command=noticeView&nseq=${notice.nseq}"> 
+						${notice.title} 
+					</a>&nbsp;
 					<c:if test="${notice.replycnt>0}">
 						<span style="color: red; font-weight: bold">[${notice.replycnt}]</span>
 					</c:if>
@@ -32,11 +36,11 @@
 					</c:if>
 
 				</div>
-				<div class="col">${notice.id}</div>
-				<div class="col">
+				<div class="notice_reply_col">${notice.id}</div>
+				<div class="notice_reply_col">
 					<fmt:formatDate value="${notice.writedate}" />
 				</div>
-				<div class="col">${notice.readcount}</div>
+				<div class="notice_reply_col">${notice.readcount}</div>
 			</div>
 		</c:forEach>
 		<!-- 페이징 시작 -->
