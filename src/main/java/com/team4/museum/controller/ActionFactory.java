@@ -1,8 +1,11 @@
 package com.team4.museum.controller;
 
 import com.team4.museum.controller.action.Action;
+
 import com.team4.museum.controller.action.IndexAction;
 import com.team4.museum.controller.action.artwork.ArtworkListAction;
+import com.team4.museum.controller.action.gallery.GalleryListAction;
+import com.team4.museum.controller.action.gallery.GalleryWriteFormAction;
 import com.team4.museum.controller.action.member.IdcheckFormAction;
 import com.team4.museum.controller.action.member.JoinAction;
 import com.team4.museum.controller.action.member.JoinFormAction;
@@ -40,6 +43,8 @@ public class ActionFactory {
 		case "editMemberForm" -> new EditMemberFormAction();
 		case "editMember" -> new EditMemberAction();
 		case "myPage" -> new MyPageAction();
+		case "galleryList" -> new GalleryListAction();
+		case "galleryWriteForm" -> new GalleryWriteFormAction();
 		default -> null;
 		
 		};
