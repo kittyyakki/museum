@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="css/joinForm.css">
 <link rel="stylesheet" href="css/artwork.css">
 <link rel="stylesheet" href="css/qna_list.css">
+<link rel="stylesheet" href="css/qna_view.css">
 <script src="script/member.js"></script>
 <script src="script/header.js"></script>
 <script src="script/artwork.js"></script>

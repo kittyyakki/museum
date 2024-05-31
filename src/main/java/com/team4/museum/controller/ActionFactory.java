@@ -10,6 +10,7 @@ import com.team4.museum.controller.action.member.LoginAction;
 import com.team4.museum.controller.action.member.LoginFormAction;
 import com.team4.museum.controller.action.member.LogoutAction;
 import com.team4.museum.controller.action.qna.QnaListAction;
+import com.team4.museum.controller.action.qna.QnaViewAction;
 
 public class ActionFactory {
 
@@ -41,6 +42,7 @@ public class ActionFactory {
 
 		// QnA actions
 		case "qnaList" -> new QnaListAction();
+		case "qnaView" -> new QnaViewAction();
 
 		// default
 		default -> null;
