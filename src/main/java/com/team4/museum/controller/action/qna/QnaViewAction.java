@@ -12,10 +12,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 public class QnaViewAction implements Action {
-	private final int RESULT_SUCCESS = 1;
-	private final int RESULT_NOT_FOUND = 2;
-	private final int RESULT_PWD_WRONG = 3;
-
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		request.removeAttribute("qnaContent");
