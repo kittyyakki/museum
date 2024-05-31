@@ -13,47 +13,55 @@ import jakarta.servlet.http.HttpSession;
 
 public class QnaViewAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		QnaVO qnaVO = getQnaVO(request, response);
+
+		if (qnaVO != null) {
+			request.setAttribute("qnaVO", qnaVO);
+			request.setAttribute("qnaContent", qnaVO.getContent());
+		}
+
+		request.getRequestDispatcher("qna/qnaView.jsp").forward(request, response);
+	}
+
+	private QnaVO getQnaVO(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		request.removeAttribute("qnaContent");
 		request.removeAttribute("qnaOwned");
 		request.removeAttribute("qnaVO");
 
-		String url = "qna/qnaView.jsp?qseq=" + request.getParameter("qseq");
-
-		// 파라미터에 'qseq'가 없으면 'result'를 RESULT_NOT_FOUND 로 설정
+		// 파라미터에 'qseq'가 없으면 null 을 반환
 		String qseqStr = request.getParameter("qseq");
 		if (qseqStr == null || qseqStr.equals("") || !qseqStr.matches("^[0-9]*$")) {
-			request.getRequestDispatcher(url).forward(request, response);
-			return;
+			return null;
 		}
 
-		// 'qseq' 파라미터에 해당하는 'QnaVO'가 없으면 'result'를 RESULT_NOT_FOUND 로 설정
 		int qseq = Integer.parseInt(qseqStr);
-		QnaDao qdao = QnaDao.getInstance();
-		QnaVO qnaVO = qdao.getQna(qseq);
-		request.setAttribute("qnaVO", qnaVO);
+		QnaVO qnaVO = QnaDao.getInstance().getQna(qseq);
+
+		// 'qseq' 파라미터에 해당하는 'QnaVO'가 없으면 null 을 반환
 		if (qnaVO == null) {
-			request.getRequestDispatcher(url).forward(request, response);
-			return;
+			return null;
 		}
 
-		// 'qnaVO'가 공개 상태면 'qnaContent'를 제공
+		// 'qnaVO'가 공개 상태면 qnaVO 을 반환
 		if (qnaVO.isPublic()) {
-			request.setAttribute("qnaContent", qnaVO.getContent());
+			return qnaVO;
 		}
 
-		// 어드민이면 'qnaContent'를 제공
-		if (session.getAttribute("isAdmin") != null && (boolean) session.getAttribute("isAdmin")) {
-			request.setAttribute("qnaContent", qnaVO.getContent());
-		}
-
-		// 세션에 비밀번호 확인 기록이 있는 경우 'qnaContent'를 제공
+		// 세션에 비밀번호 확인 기록이 있는 경우 'qnaOwned'를 'true'로 설정하고 qnaVO 을 반환
 		if (session.getAttribute("qnaPass" + qseq) != null) {
-			request.setAttribute("qnaContent", qnaVO.getContent());
-
-			// 'qnaOwned'를 'true'로 설정
 			request.setAttribute("qnaOwned", true);
+
+			return qnaVO;
 		}
-		request.getRequestDispatcher(url).forward(request, response);
+
+		// 'qnaVO'가 공개 상태거나 멤버가 관리자인 경우 qnaVO 을 반환
+		if (qnaVO.isPublic() || session.getAttribute("isAdmin") != null) {
+
+			return qnaVO;
+		}
+
+		// 아니면 null 을 반환
+		return null;
 	}
 }
