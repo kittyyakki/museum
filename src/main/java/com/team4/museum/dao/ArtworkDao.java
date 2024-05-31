@@ -19,7 +19,7 @@ public class ArtworkDao {
 
 	public int insertArtwork(ArtworkVO artwork) {
 		return executeUpdate(
-				"INSERT INTO notice (name, category, artist, year, material, size, displayyn, content, image, savefilename) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+				"INSERT INTO artwork (name, category, artist, year, material, size, displayyn, content, image, savefilename) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
 				pstmt -> {
 					pstmt.setString(1, artwork.getName());
 					pstmt.setString(2, artwork.getCategory());
