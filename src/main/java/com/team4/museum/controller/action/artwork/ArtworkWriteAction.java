@@ -8,11 +8,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class ArtworkInsertAction implements Action{
+public class ArtworkWriteAction implements Action{
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("artwork/artworkInsertForm.jsp").forward(request, response);
+		request.getRequestDispatcher("artwork/artworkWriteForm.jsp").forward(request, response);
 	}
 
 }
