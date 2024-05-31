@@ -4,6 +4,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+
+import com.team4.museum.util.Db;
+import com.team4.museum.util.Paging;
 import com.team4.museum.vo.NoticeVO;
 import static com.team4.museum.util.Db.*;
 
@@ -18,7 +21,8 @@ final public class NoticeDAO {
 		return instance;
 	}
 
-	public List<NoticeVO> selectNoticeList() {
+	/* paging 파라미터 추가 */
+	public List<NoticeVO> selectNoticeList(Paging paging) {
 		return executeSelect(
 				"SELECT * FROM notice",
 				NoticeDAO::extractNoticeVO);
@@ -85,6 +89,20 @@ final public class NoticeDAO {
 		notice.setReadcount(rs.getInt("readcount"));
 		notice.setCategory(rs.getInt("category"));
 		return notice;
+	}
+
+	public int getNoticeAllCount() {
+		int count = 0;
+		Db.getConnection();
+		String sql = "select count(*) as cnt from notice";
+		return count;
+	}
+
+	public int getReplyCount(Object num) {
+		int count = 0;
+		Db.getConnection();
+		String sql =  "select count(*) as cnt from reply where noticenum=?";
+		return count;
 	}
 
 }
