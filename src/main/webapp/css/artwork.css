@@ -57,7 +57,7 @@
 	border-radius: 50px;
 	margin: 0 5px;
 	box-shadow: 1px 1px 2px gray;
-	transition: 0.3s
+	transition: 0.3s;
 }
 
 .artwork-category-btn:hover {
@@ -84,13 +84,13 @@
 	font-size: 40px;
 }
 
-.artwork-list-head{
+.artwork-list-head {
 	display: flex;
 	justify-content: space-between;
 }
 
 /* 예술품 등록 버튼 스타일 ==========> */
-.artwork-list-head>input{
+.artwork-list-head>input {
 	display: block;
 	width: 120px;
 	height: 50px;
@@ -111,8 +111,8 @@
 	background-color: #3a86ff;
 	color: #fefae0;
 }
-/* <====================== */
 
+/* <====================== */
 .artwork-list {
 	display: flex;
 	justify-content: center;
@@ -129,12 +129,12 @@
 	font-weight: 600;
 }
 
-.artwork-list>div>div {
-	margin-top: 5px;
-}
-
 .artwork-list>div:hover {
 	text-decoration: underline;
+}
+
+.artwork-list>div>div {
+	margin-top: 5px;
 }
 
 .artwork-list .artwork_img {
@@ -194,8 +194,8 @@
 	color: ivory;
 	border: 2px solid #3a86ff;
 }
-/* <====================*/
 
+/* <====================*/
 .artwork-view-img {
 	display: flex;
 	flex-direction: column;
@@ -241,6 +241,119 @@
 	line-height: 30px;
 }
 
-.hidden {
-	display: none;
+/* artworkWriteForm.jsp */
+.artwork-write-form-title {
+	height: 5rem;
+	font-size: 2rem;
+	text-align: center;
+	align-content: center;
+	background-color: #98c1d9;
+}
+
+.artwork-write-form-container {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+}
+
+.artwork-write-form {
+	width: 80%;
+	margin: 30px;
+	display: flex;
+	flex-direction: column;
+	justify-content: cenwter;
+	align-items: center;
+}
+
+.artwork-write-form input[type=text],
+.artwork-write-form input[type=file],
+.artwork-write-form select{
+	width: 250px;
+	height: 30px;
+	border: none;
+	border-bottom: solid #aaaaaa 1px;
+	padding-left: 10px;
+	position: relative;
+	background: none;
+	z-index: 5;
+	align-content: center;
+	outline: none;
+}
+
+.artwork-write-form input[type=checkbox] {
+	width: 15px;
+	align-content: center;
+	margin-left: 10px;
+}
+
+.artwork-write-form input[type=radio] {
+	width: 15px;
+	align-content: center;
+	margin-left: 10px;
+}
+
+/* .artwork-write-form select{
+	outline: none;
+	width: 250px;
+	border: none;
+} */
+
+.artwork-write-form-info {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.artwork-write-form-info>ul, .artwork-write-form-info>div {
+	width: 30%;
+}
+
+.artwork-write-form-info li {
+	margin: 20px 0;
+	display: flex;
+}
+
+.artwork-write-form-info>div {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.artwork-write-form-info li>div, .artwork-write-form-info>div>div {
+	width: 100px;
+	height: 30px;
+	align-content: center;
+	font-weight: bold;
+}
+
+.artwork-write-form-info li>label {
+	width: 60px;
+	font-size: 15px;
+	align-content: center;
+	margin-left: 5px;
+}
+
+.artwork-write-form-btn>input {
+	cursor: pointer;
+}
+
+.artwork-write-form-btn>input:hover {
+	border-bottom: solid black 2px;
+}
+
+.artwork-write-form img {
+	width: 300px;
+}
+
+.artwork-write-form textarea {
+	width: 400px;
+	height: 500px;
+	font-size: 18px;
+	background-color: #8b8b8b1c;
+	color: black;
+	resize: none;
+	border: none;
+	border-bottom: 2px solid #0000007e;
+	outline: none;
 }
