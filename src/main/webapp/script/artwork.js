@@ -26,7 +26,7 @@ function artworkUpdate() {
 		alert("작품설명을 입력하세요")
 	else if (form.displayYn.value == "")
 		alert("전시여부를 선택하세요")
-	else{
+	else {
 		form.submit();
 	}
 }
@@ -44,3 +44,14 @@ function unknown() {
 	else
 		form.year.value = "";
 }
+
+function previewImage(input) {
+	let reader = new FileReader(); // 파일을 읽을 FileReader 객체 생성
+	let form = document.artworkWriteForm;
+	reader.onload = function() {
+		let output = form.uploadedImage;
+		output.src = reader.result; // 파일의 데이터를 img 태그의 src에 설정
+	};
+	reader.readAsDataURL(event.target.files[0]); // 선택한 파일을 읽어들임
+}
+
