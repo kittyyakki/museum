@@ -25,12 +25,12 @@
 		<script type="text/javascript">
 			window.onload = function() {
 				var form = document.getElementById("qnaPwdCheckForm");
-				var pwd = opener.prompt("비밀번호를 입력하세요:");
+				var pwd = self.prompt("비밀번호를 입력하세요:");
 				if (pwd !== null && pwd !== undefined && pwd !== "") {
 					form.pwd.value = pwd;
 					form.submit();
 				} else {
-					opener.alert("비밀번호 입력이 취소되었습니다.");
+					self.alert("비밀번호 입력이 취소되었습니다.");
 					self.close();
 				}
 			};
@@ -39,14 +39,14 @@
 	<c:when test="${qnaPwdResult == 2}">
 		<!-- RESULT_NOT_FOUND -->
 		<script type="text/javascript">
-			opener.alert("잘못된 접근입니다.");
+			self.alert("잘못된 접근입니다.");
 			self.close();
 		</script>
 	</c:when>
 	<c:when test="${qnaPwdResult == 3}">
 		<!-- RESULT_PWD_WRONG -->
 		<script type="text/javascript">
-			opener.alert("잘못된 비밀번호입니다. 다시 입력해주세요.");
+			self.alert("잘못된 비밀번호입니다. 다시 입력해주세요.");
 			self.close();
 		</script>
 	</c:when>
