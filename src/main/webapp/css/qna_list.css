@@ -86,3 +86,7 @@
 .qna-list_submit:hover {
 	box-shadow: 0.125rem 0.125rem 0.5rem 0.5rem rgb(18 156 41/ 20%);
 }
+
+#qnaPwdCheckForm {
+	display: none;
+}

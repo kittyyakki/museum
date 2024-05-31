@@ -2,6 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="/header.jsp"%>
+<c:if test="${not empty qnaPwdCheckResult and qnaPwdCheckResult.use()}">
+	<script type="text/javascript">
+	    window.onload = function() {
+	    	handleQnaPwdCheckResult('${qnaPwdCheckResult.result}', '${qnaPwdCheckResult.qseq}');
+	    }
+    </script>
+</c:if>
 <section class="qna-list">
 	<h1>Q &amp; A</h1>
 	<p>
@@ -72,5 +79,9 @@
 		</c:choose>
 	</div>
 	<input class="qna-list_submit" type="button" value="질문하기" onClick="location.href='museum.do?command=writeQnaForm'" />
+	<form id="qnaPwdCheckForm" method="post" action="museum.do?command=qnaPwdCheck">
+		<input type="hidden" name="qseq">
+		<input type="hidden" name="pwd">
+	</form>
 </section>
 <%@ include file="/footer.jsp"%>

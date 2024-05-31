@@ -6,44 +6,36 @@ function onReplySubmit() {
 }
 
 function qnaPwdCheck(qseq) {
-	window.open(
-		"museum.do?command=qnaPwdCheck&qseq=" + qseq,
-		"qnaPwdCheck",
-		"width=9999999, height=500, right=0, top=1, scrollbars=no, resizable=no"
-	);
+	var form = document.getElementById("qnaPwdCheckForm");
+	form.qseq.value = qseq;
+	form.pwd.value = '';
+	form.submit();
 }
 
-function onQnaPwdResult(result, qseq) {
+function handleQnaPwdCheckResult(result, qseq) {
 	switch (result) {
-		case 0: // RESULT_SUCCESS
-			opener.document.location.href = "museum.do?command=qnaView&qseq=" + qseq;
-			window.close();
+		case 'success':
+			document.location.href = "museum.do?command=qnaView&qseq=" + qseq;
 			return;
 
-		case 1: // RESULT_REQUEST_PWD
+		case 'notFound':
+			alert("잘못된 접근입니다.");
+			return;
+
+		case 'requestPwd':
 			var form = document.getElementById("qnaPwdCheckForm");
-			var pwd = self.prompt("비밀번호를 입력하세요:");
+			var pwd = self.prompt(qseq + "번 QnA 글의 비밀번호를 입력하세요:");
 			if (pwd !== null && pwd !== undefined && pwd !== "") {
+				form.qseq.value = qseq;
 				form.pwd.value = pwd;
 				form.submit();
 			} else {
 				self.alert("비밀번호 입력이 취소되었습니다.");
-				self.close();
 			}
 			return;
 
-		case 2: // RESULT_NOT_FOUND
-			alert("잘못된 접근입니다.");
-			window.close();
-			return;
-
-		case 3: // RESULT_PWD_WRONG
+		case 'pwdWrong':
 			alert("잘못된 비밀번호입니다. 다시 입력해주세요.");
-			window.close();
 			return;
-
-		default: // result가 null이거나, 0, 1, 2, 3이 아닌 경우
-			alert("잘못된 접근입니다.");
-			window.close();
 	}
 }
