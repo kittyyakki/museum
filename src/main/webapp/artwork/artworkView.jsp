@@ -1,6 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="/header.jsp"%>
 
 <section class="artwork-view">
@@ -9,8 +7,14 @@
 			<span>${artwork.artist} |&nbsp;</span> <span>${artwork.name} |&nbsp;</span> <span>${artwork.year}</span>
 		</div>
 		<div class="artwork-view-title-side">
-			<input type="button" value="나의 갤러리 +" onclick="" />
-			<input type="button" value="수정" class="hidden" />
+		<c:choose>
+			<c:when test="${loginUser.adminyn.equals('Y')}">
+				<input type="button" value="수정" onclick="location.href='museum.do?command=artworkUpdate'"/>
+			</c:when>
+			<c:otherwise>
+				<input type="button" value="나의 갤러리 +" onclick="location.href='museum.do?command=mypageFavorite'" />
+			</c:otherwise>
+		</c:choose>
 			<input type="button" value="목록으로" onclick="location.href='museum.do?command=artwork'" />
 		</div>
 	</div>
@@ -27,7 +31,9 @@
 			<li><span>재료</span> <span>${artwork.material}</span></li>
 			<li><span>규격</span> <span>${artwork.size}</span></li>
 			<li><span>부문</span> <span>${artwork.category}</span></li>
-			<li><span>전시상태</span> <span>${artwork.displayyn}</span></li>
+			<c:if test="${loginUser.adminyn.equals('Y')}">
+				<li><span>전시상태</span> <span>${artwork.displayyn}</span></li>
+			</c:if>
 		</ul>
 	</div>
 	<div class="artwork-view-content">
