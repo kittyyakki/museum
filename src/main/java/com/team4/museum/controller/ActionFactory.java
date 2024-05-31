@@ -9,6 +9,7 @@ import com.team4.museum.controller.action.member.JoinFormAction;
 import com.team4.museum.controller.action.member.LoginAction;
 import com.team4.museum.controller.action.member.LoginFormAction;
 import com.team4.museum.controller.action.member.LogoutAction;
+import com.team4.museum.controller.action.notice.InsertNoticeAction;
 import com.team4.museum.controller.action.notice.InsertNoticeFormAction;
 import com.team4.museum.controller.action.notice.NoticeAction;
 import com.team4.museum.controller.action.qna.QnaListAction;
@@ -39,6 +40,7 @@ public class ActionFactory {
 		case "notice" -> new NoticeAction();
 		case "insertNoticeForm" -> new InsertNoticeFormAction();
 		case "insertNotice" -> new InsertNoticeAction();
+		case "noticeView" -> new NoticeViewAction();
 		default -> null;
 
 		};
