@@ -14,7 +14,6 @@ import com.team4.museum.controller.action.notice.InsertNoticeAction;
 import com.team4.museum.controller.action.notice.InsertNoticeFormAction;
 import com.team4.museum.controller.action.notice.NoticeAction;
 import com.team4.museum.controller.action.notice.NoticeViewAction;
-import com.team4.museum.controller.action.notice.NoticeViewWithoutCnt;
 import com.team4.museum.controller.action.notice.NoticeViewWithoutCntAction;
 import com.team4.museum.controller.action.notice.UpdateNoticeAction;
 import com.team4.museum.controller.action.notice.UpdateNoticeForm;
