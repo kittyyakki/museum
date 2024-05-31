@@ -19,13 +19,20 @@ public class QnaPwdCheckFormAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
+		request.setAttribute("qnaPwdResult", getResult(request, response));
+		try {
+			request.getRequestDispatcher("qna/qnaPwdCheck.jsp?qseq=" + request.getParameter("qseq"))
+					.forward(request, response);
+		} catch (ServletException | IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-		// 파라미터에 'qseq'가 없으면 'result'를 RESULT_NOT_FOUND 로 설정
+	private int getResult(HttpServletRequest request, HttpServletResponse response) {
+		// 파라미터에 'qseq'가 없으면 RESULT_NOT_FOUND 를 반환
 		String qseqStr = request.getParameter("qseq");
 		if (qseqStr == null || qseqStr.equals("") || !qseqStr.matches("^[0-9]*$")) {
-			setResult(request, response, RESULT_NOT_FOUND);
-			return;
+			return RESULT_NOT_FOUND;
 		}
 
 		int qseq = Integer.parseInt(qseqStr);
@@ -33,54 +40,41 @@ public class QnaPwdCheckFormAction implements Action {
 		QnaVO qvo = qdao.getQna(qseq);
 		request.setAttribute("qseq", qseq);
 
-		// 'qseq' 파라미터에 해당하는 'QnaVO'가 없으면 'result'를 RESULT_NOT_FOUND 로 설정
+		// 'qseq' 파라미터에 해당하는 'QnaVO'가 없으면 RESULT_NOT_FOUND 를 반환
 		if (qvo == null) {
-			setResult(request, response, RESULT_NOT_FOUND);
-			return;
+			return RESULT_NOT_FOUND;
 		}
 
-		// 'qvo'가 공개 상태면 'result'를 RESULT_SUCCESS 로 설정
+		// 'qvo'가 공개 상태면 RESULT_SUCCESS 를 반환
 		if (qvo.isPublic()) {
-			setResult(request, response, RESULT_SUCCESS);
-			return;
+			return RESULT_SUCCESS;
 		}
 
-		// 어드민이면 'result'를 RESULT_SUCCESS 로 설정
+		HttpSession session = request.getSession();
+		// 어드민이면 RESULT_SUCCESS 를 반환
 		if (session.getAttribute("isAdmin") != null && (boolean) session.getAttribute("isAdmin")) {
-			setResult(request, response, RESULT_SUCCESS);
-			return;
+			return RESULT_SUCCESS;
 		}
 
-		// 세션에 비밀번호 확인 기록이 있는 경우 'result'를 RESULT_SUCCESS 로 설정
+		// 세션에 비밀번호 확인 기록이 있는 경우 RESULT_SUCCESS 를 반환
 		if (session.getAttribute("qnaPass" + qseq) != null) {
-			setResult(request, response, RESULT_SUCCESS);
-			return;
+			return RESULT_SUCCESS;
 		}
 
-		// 'pwd' 파라미터가 없으면 'result'를 RESULT_REQUEST_PWD 으로 설정
+		// 'pwd' 파라미터가 없으면 RESULT_REQUEST_PWD 를 반환
 		String pwd = request.getParameter("pwd");
 		if (pwd == null || pwd.trim().equals("")) {
-			setResult(request, response, RESULT_REQUEST_PWD);
-			return;
+			return RESULT_REQUEST_PWD;
 		}
 
-		// 'pwd' 파라미터에 입력된 값이 'QnaVO'의 'pwd'와 같으면 'result'를 RESULT_SUCCESS 로 설정
+		// 'pwd'가 비밀번호와 같으면 세션에 비밀번호 확인 기록을 남기고 RESULT_SUCCESS 를 반환
 		if (qvo.getPwd().equals(pwd)) {
 			session.setAttribute("qnaPass" + qseq, qseq);
-			setResult(request, response, RESULT_SUCCESS);
-		} else { // 다르면 'result'를 RESULT_PWD_WRONG 으로 설정
-			setResult(request, response, RESULT_PWD_WRONG);
+			return RESULT_SUCCESS;
 		}
-	}
 
-	private void setResult(HttpServletRequest request, HttpServletResponse response, int result) {
-		request.setAttribute("qnaPwdResult", result);
-		try {
-			request.getRequestDispatcher("qna/qnaPwdCheck.jsp?qseq=" + request.getParameter("qseq"))
-					.forward(request, response);
-		} catch (ServletException | IOException e) {
-			e.printStackTrace();
-		}
+		// 아니면 RESULT_PWD_WRONG 를 반환
+		return RESULT_PWD_WRONG;
 	}
 
 }
