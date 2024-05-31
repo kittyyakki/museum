@@ -29,7 +29,7 @@
 	<div class="artwork-list-head">
 		<h4>검색결과가 총 ${artworkList.size()}건 입니다</h4>
 		<c:if test="${loginUser.adminyn.equals('Y')}">
-			<input type="button" value="예술품 등록" onclick="location.href='museum.do?command=artworkInsert'">
+			<input type="button" value="예술품 등록" onclick="location.href='museum.do?command=artworkWrite'">
 		</c:if>
 	</div>
 	<div class="artwork-list">
