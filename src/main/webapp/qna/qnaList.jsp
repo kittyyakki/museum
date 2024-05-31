@@ -11,9 +11,14 @@
 </c:if>
 <section class="qna-list">
 	<h1>Q &amp; A</h1>
-	<p>
-		총 <span>${totalCount}</span> 건이 검색되었습니다.
-	</p>
+	<div class="qna-list_subheader">
+		<p>
+			총 <span>${totalCount}</span> 건이 검색되었습니다.
+		</p>
+		<a href="museum.do?command=writeQna">
+			<button class="qna-list_submit">질문하기</button>
+		</a>
+	</div>
 	<div class="qna-list_table">
 		<ul class="header">
 			<li>번호</li>
@@ -78,7 +83,6 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
-	<input class="qna-list_submit" type="button" value="질문하기" onClick="location.href='museum.do?command=writeQnaForm'" />
 	<form id="qnaPwdCheckForm" method="post" action="museum.do?command=qnaPwdCheck">
 		<input type="hidden" name="qseq">
 		<input type="hidden" name="pwd">
