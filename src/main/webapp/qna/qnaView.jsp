@@ -17,7 +17,7 @@
 				<a href="#"></a>
 			</c:when>
 			<c:otherwise>
-				<a href="museum.do?command=writeQna&qseq=${qnaVO.qseq}">
+				<a href="museum.do?command=qnaWriteForm&qseq=${qnaVO.qseq}">
 					<button class="qna-view_submit">수정하기</button>
 				</a>
 			</c:otherwise>

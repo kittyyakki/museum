@@ -15,7 +15,7 @@
 		<p>
 			총 <span>${totalCount}</span> 건이 검색되었습니다.
 		</p>
-		<a href="museum.do?command=writeQna">
+		<a href="museum.do?command=qnaWriteForm">
 			<button class="qna-list_submit">질문하기</button>
 		</a>
 	</div>
