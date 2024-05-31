@@ -2,11 +2,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="/header.jsp"%>
+<c:if test="${not empty qnaPwdCheckResult and qnaPwdCheckResult.use()}">
+	<script type="text/javascript">
+	    window.onload = function() {
+	    	handleQnaPwdCheckResult('${qnaPwdCheckResult.result}', '${qnaPwdCheckResult.qseq}');
+	    }
+    </script>
+</c:if>
 <section class="qna-list">
 	<h1>Q &amp; A</h1>
-	<p>
-		총 <span>${totalCount}</span> 건이 검색되었습니다.
-	</p>
+	<div class="qna-list_subheader">
+		<p>
+			총 <span>${totalCount}</span> 건이 검색되었습니다.
+		</p>
+		<a href="museum.do?command=qnaWriteForm">
+			<button class="qna-list_submit">질문하기</button>
+		</a>
+	</div>
 	<div class="qna-list_table">
 		<ul class="header">
 			<li>번호</li>
@@ -21,7 +33,9 @@
 						<c:when test="${empty qnaVO.reply}">NO</c:when>
 						<c:otherwise>YES</c:otherwise>
 					</c:choose></li>
-				<li><a href="museum.do?command=qnaView&qseq=${qnaVO.qseq}"> ${qnaVO.isPublic() ? "🔒" : ""}${qnaVO.title}</a></li>
+				<li><span onclick="qnaPwdCheck(${qnaVO.qseq})"> <c:if test="${!qnaVO.isPublic()}">
+							<span>🔒</span>
+						</c:if>${qnaVO.title}</span></li>
 				<li><fmt:formatDate value="${qnaVO.writedate}" pattern="yyyy-MM-dd" /></li>
 			</ul>
 		</c:forEach>
@@ -69,6 +83,9 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
-	<input class="qna-list_submit" type="button" value="질문하기" onClick="location.href='museum.do?command=writeQnaForm'" />
+	<form id="qnaPwdCheckForm" method="post" action="museum.do?command=qnaPwdCheck">
+		<input type="hidden" name="qseq">
+		<input type="hidden" name="pwd">
+	</form>
 </section>
 <%@ include file="/footer.jsp"%>

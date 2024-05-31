@@ -13,6 +13,9 @@ import com.team4.museum.controller.action.member.LoginAction;
 import com.team4.museum.controller.action.member.LoginFormAction;
 import com.team4.museum.controller.action.member.LogoutAction;
 import com.team4.museum.controller.action.qna.QnaListAction;
+import com.team4.museum.controller.action.qna.QnaPwdCheckFormAction;
+import com.team4.museum.controller.action.qna.QnaReplyAction;
+import com.team4.museum.controller.action.qna.QnaViewAction;
 
 public class ActionFactory {
 
@@ -28,18 +31,30 @@ public class ActionFactory {
 	public Action getAction(String command) {
 		return switch (command != null ? command : "") {
 
+		// index action
 		case "", "index" -> new IndexAction();
+
+		// member actions
 		case "loginForm" -> new LoginFormAction();
 		case "login" -> new LoginAction();
 		case "logout" -> new LogoutAction();
 		case "join" -> new JoinAction();
 		case "joinForm" -> new JoinFormAction();
 		case "idcheckForm" -> new IdcheckFormAction();
+
+		// artwork actions
 		case "artwork" -> new ArtworkListAction();
 		case "artworkView" -> new ArtworkViewAction();
 		case "artworkWrite" -> new ArtworkWriteAction();
 		case "artworkWriteForm" -> new ArtworkWriteFormAction();
+
+		// QnA actions
 		case "qnaList" -> new QnaListAction();
+		case "qnaPwdCheck" -> new QnaPwdCheckFormAction();
+		case "qnaView" -> new QnaViewAction();
+		case "qnaReply" -> new QnaReplyAction();
+
+		// default
 		default -> null;
 
 		};

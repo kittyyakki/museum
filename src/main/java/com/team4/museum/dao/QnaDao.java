@@ -74,6 +74,15 @@ public class QnaDao {
 				});
 	}
 
+	public void updateQnaReply(int qseq, String reply) {
+		executeUpdate(
+				"UPDATE qna SET reply = ? WHERE qseq = ?",
+				pstmt -> {
+					pstmt.setString(1, reply);
+					pstmt.setInt(2, qseq);
+				});
+	}
+
 	public int getAllCount() {
 		return executeSelectOne(
 				"SELECT COUNT(*) AS cnt FROM qna",

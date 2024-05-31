@@ -11,6 +11,33 @@
 	color: inherit;
 }
 
+.qna-list>h1 {
+	margin: 2rem 0 1rem 1rem;
+}
+
+.qna-list_subheader {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0 0 1rem 1rem;
+}
+
+.qna-list_submit {
+	background: transparent;
+	padding: 0.25rem 2em;
+	border-radius: 0.25rem;
+	margin-right: 2rem;
+	border: 0;
+	font-size: 1rem;
+	box-shadow: 0.125rem 0.125rem 0.5rem 0.2rem rgba(0, 0, 0, 0.1);
+	transition: box-shadow 0.3s;
+}
+
+.qna-list_submit:hover {
+	box-shadow: 0.125rem 0.125rem 0.5rem 0.5rem rgba(52, 234, 19, 0.2);
+}
+
 .qna-list_table {
 	border-top: 1px solid #202020;
 	border-bottom: 1px solid #202020;
@@ -50,6 +77,10 @@
 	text-align: left;
 }
 
+.qna-list_table>ul:not(.header)>li>span {
+	cursor: pointer;
+}
+
 .qna-list_table>ul.header {
 	font-weight: bold;
 	border-bottom: 1px solid #ccc;
@@ -60,18 +91,6 @@
 	margin: 0 auto;
 }
 
-.qna-list_submit {
-	background: transparent;
-	min-width: 20rem;
-	margin: 1rem 1rem 1rem auto;
-	padding: 1rem;
-	border-radius: 5rem;
-	border: 0;
-	font-size: 1rem;
-	box-shadow: 0.125rem 0.125rem 0.5rem 0.2rem rgba(0, 0, 0, 0.1);
-	transition: box-shadow 0.3s;
-}
-
-.qna-list_submit:hover {
-	box-shadow: 0.125rem 0.125rem 0.5rem 0.5rem rgb(18 156 41/ 20%);
+#qnaPwdCheckForm {
+	display: none;
 }
