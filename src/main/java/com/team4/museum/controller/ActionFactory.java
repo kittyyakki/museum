@@ -1,17 +1,23 @@
 package com.team4.museum.controller;
 
 import com.team4.museum.controller.action.Action;
+
 import com.team4.museum.controller.action.IndexAction;
 import com.team4.museum.controller.action.artwork.ArtworkListAction;
 import com.team4.museum.controller.action.artwork.ArtworkViewAction;
 import com.team4.museum.controller.action.artwork.ArtworkWriteAction;
 import com.team4.museum.controller.action.artwork.ArtworkWriteFormAction;
+import com.team4.museum.controller.action.gallery.GalleryListAction;
+import com.team4.museum.controller.action.gallery.GalleryWriteFormAction;
 import com.team4.museum.controller.action.member.IdcheckFormAction;
 import com.team4.museum.controller.action.member.JoinAction;
 import com.team4.museum.controller.action.member.JoinFormAction;
 import com.team4.museum.controller.action.member.LoginAction;
 import com.team4.museum.controller.action.member.LoginFormAction;
 import com.team4.museum.controller.action.member.LogoutAction;
+import com.team4.museum.controller.action.member.MyPageAction;
+import com.team4.museum.controller.action.member.EditMemberAction;
+import com.team4.museum.controller.action.member.EditMemberFormAction;
 import com.team4.museum.controller.action.qna.QnaListAction;
 import com.team4.museum.controller.action.qna.QnaPwdCheckFormAction;
 import com.team4.museum.controller.action.qna.QnaReplyAction;
@@ -41,6 +47,9 @@ public class ActionFactory {
 		case "join" -> new JoinAction();
 		case "joinForm" -> new JoinFormAction();
 		case "idcheckForm" -> new IdcheckFormAction();
+		case "editMemberForm" -> new EditMemberFormAction();
+		case "editMember" -> new EditMemberAction();
+		case "myPage" -> new MyPageAction();
 
 		// artwork actions
 		case "artwork" -> new ArtworkListAction();
@@ -53,6 +62,10 @@ public class ActionFactory {
 		case "qnaPwdCheck" -> new QnaPwdCheckFormAction();
 		case "qnaView" -> new QnaViewAction();
 		case "qnaReply" -> new QnaReplyAction();
+
+		// user gallery
+		case "galleryList" -> new GalleryListAction();
+		case "galleryWriteForm" -> new GalleryWriteFormAction();
 
 		// default
 		default -> null;
