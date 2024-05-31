@@ -26,7 +26,12 @@
 </section>
 
 <main class="artwork-list-main">
-	<h4>검색결과가 총 ${artworkList.size()}건 입니다</h4>
+	<div class="artwork-list-head">
+		<h4>검색결과가 총 ${artworkList.size()}건 입니다</h4>
+		<c:if test="${loginUser.adminyn.equals('Y')}">
+			<input type="button" value="예술품 등록" onclick="location.href='museum.do?command=artworkInsert'">
+		</c:if>
+	</div>
 	<div class="artwork-list">
 		<c:forEach items="${artworkList}" var="artwork">
 			<div onclick="location.href='museum.do?command=artworkView&aseq=${artwork.aseq}'">
