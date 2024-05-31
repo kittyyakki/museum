@@ -35,53 +35,25 @@
 				<fmt:formatDate value="${notice.writedate}" />
 			</div>
 		</div>
+		<div class="label" style="flex:0.5;">이미지</div>
+			<div class="text" style="flex:2;">
+				<c:choose>
+					<c:when test="${empty  notice.savefilename}">
+						<img src="images/noname.jpg" width="250" />
+					</c:when>
+					<c:otherwise>
+						<img src="images/${notice.savefilename}" width="350" />
+					</c:otherwise>
+				</c:choose>
+			</div>
 		<div class="notice-button">
-			<input type="button" class="btn-notice" value="수정" onClick="location.href='museum.do?command=updateNoticeForm&nseq=${notice.nseq}'" /> 
-			<input type="button" class="btn-notice" value="삭제" onClick="deleteNotice('${notice.author}')" /> 
-			<input type="button" class="btn-notice" value="목록" onClick="location.href='notice.do?command=notice'" />
+			<input type="button" class="btn-notice" value="수정" 
+			onClick="location.href='museum.do?command=updateNoticeForm&nseq=${notice.nseq}'" /> 
+			<input type="button" class="btn-notice" value="삭제" 
+			onClick="deleteNotice('${loginUser.id}')" /> 
+			<input type="button" class="btn-notice" value="목록" 
+			onClick="location.href='notice.do?command=notice'" />
 		</div>
-	</div>
-	<div class="reply">
-		<div class="reply_row">
-			<div class="reply_col reply_title">작성자</div>
-			<div class="reply_col reply_title">작성일시</div>
-			<div class="reply_col reply_title" style="text-align: center">댓글</div>
-			<div class="reply_col reply_title">작성/삭제</div>
-		</div>
-		<form action="notice.do" name="reply">
-			<input type="hidden" name="command" value="insertReply" /> 
-			<input type="hidden" name="id" value="${notice.author}" /> 
-			<input type="hidden" name="noticeNseq" value="${notice.nseq}" />
-			<div class="reply_row">
-				<div class="reply_col">${notice.author}</div>
-				<div class="reply_col">
-					<c:set var="now" value="<%=new java.util.Date()%>" />
-					<fmt:formatDate value="${now}" pattern="MM/dd hh:mm" />
-				</div>
-				<div class="reply_col">
-					<input type="text" name="content" size="75">
-				</div>
-				<div class="reply_col">
-					<input type="submit" value="답글 작성" onClick="return replyCheck();">
-				</div>
-			</div>
-		</form>
-
-		<c:forEach items="${replyList}" var="reply">
-			<div class="reply_row">
-				<div class="reply_col">${reply.id}</div>
-				<div class="reply_col">
-					<fmt:formatDate value="${reply.writedate}" pattern="MM/dd hh:mm" />
-				</div>
-				<div class="reply_col">${reply.content}</div>
-				<div class="reply_col">
-					<c:if test="${reply.id == notice.author}">
-						<input type="button" value="삭제" onClick="location.href='museum.do?command=deleteReply&replyNseq=${reply.replyNseq}
-						&noticeNseq=${reply.noticeNseq}'" />
-					</c:if>
-				</div>
-			</div>
-		</c:forEach>
 	</div>
 </div>
 
