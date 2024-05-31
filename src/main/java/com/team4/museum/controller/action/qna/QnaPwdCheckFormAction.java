@@ -29,16 +29,16 @@ public class QnaPwdCheckFormAction implements Action {
 
 		int qseq = Integer.parseInt(qseqStr);
 		QnaDao qdao = QnaDao.getInstance();
-		QnaVO qvo = qdao.getQna(qseq);
+		QnaVO qnaVO = qdao.getQna(qseq);
 		request.setAttribute("qseq", qseq);
 
 		// 'qseq' 파라미터에 해당하는 'QnaVO'가 없으면 RESULT_NOT_FOUND 를 반환
-		if (qvo == null) {
+		if (qnaVO == null) {
 			return new QnaPwdCheckResult(QnaPwdCheckResult.RESULT_NOT_FOUND, qseqStr);
 		}
 
-		// 'qvo'가 공개 상태면 RESULT_SUCCESS 를 반환
-		if (qvo.isPublic()) {
+		// 'qnaVO'가 공개 상태면 RESULT_SUCCESS 를 반환
+		if (qnaVO.isPublic()) {
 			return new QnaPwdCheckResult(QnaPwdCheckResult.RESULT_SUCCESS, qseqStr);
 		}
 
@@ -60,7 +60,7 @@ public class QnaPwdCheckFormAction implements Action {
 		}
 
 		// 'pwd'가 비밀번호와 같으면 세션에 비밀번호 확인 기록을 남기고 RESULT_SUCCESS 를 반환
-		if (qvo.getPwd().equals(pwd)) {
+		if (qnaVO.getPwd().equals(pwd)) {
 			session.setAttribute("qnaPass" + qseq, qseq);
 			return new QnaPwdCheckResult(QnaPwdCheckResult.RESULT_SUCCESS, qseqStr);
 		}

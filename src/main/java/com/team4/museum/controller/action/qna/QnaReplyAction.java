@@ -34,15 +34,15 @@ public class QnaReplyAction implements Action {
 
 		int qseq = Integer.parseInt(qseqParam);
 		QnaDao qdao = QnaDao.getInstance();
-		QnaVO qvo = qdao.getQna(qseq);
-		request.setAttribute("qvo", qvo);
+		QnaVO qnaVO = qdao.getQna(qseq);
+		request.setAttribute("qnaVO", qnaVO);
 
 		// 'qseq' 파라미터에 해당하는 데이터가 없으면 false 를 반환
-		if (qvo == null) {
+		if (qnaVO == null) {
 			return false;
 		}
-		request.setAttribute("qnaContent", qvo.getContent());
-		request.setAttribute("qvo", qvo);
+		request.setAttribute("qnaContent", qnaVO.getContent());
+		request.setAttribute("qnaVO", qnaVO);
 
 		try {
 			// 답변을 업데이트
