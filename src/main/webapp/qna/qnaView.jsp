@@ -9,14 +9,6 @@
 		history.back();
 	</script>
 </c:if>
-<script type="text/javascript">
-	function onReplySubmit() {
-		if (confirm("답변을 등록하시겠습니까?")) {
-			var form = document.getElementById("qnaReplyForm");
-			form.submit();
-		}
-	}
-</script>
 <section class="qna-view">
 	<h1>Q &amp; A</h1>
 	<div class="qna-view_header">
