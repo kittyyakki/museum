@@ -6,7 +6,6 @@ import java.util.List;
 
 
 import com.team4.museum.util.Db;
-import com.team4.museum.util.Paging;
 import com.team4.museum.vo.NoticeVO;
 import static com.team4.museum.util.Db.*;
 
@@ -22,7 +21,7 @@ final public class NoticeDAO {
 	}
 
 	/* paging 파라미터 추가 */
-	public List<NoticeVO> selectNoticeList(Paging paging) {
+	public List<NoticeVO> selectNoticeList() {
 		return executeSelect(
 				"SELECT * FROM notice",
 				NoticeDAO::extractNoticeVO);
@@ -51,7 +50,7 @@ final public class NoticeDAO {
 					pstmt.setString(1, notice.getTitle());
 					pstmt.setString(2, notice.getAuthor());
 					pstmt.setString(3, notice.getContent());
-					pstmt.setInt(4, notice.getCategory());
+					pstmt.setString(4, notice.getCategory());
 				});
 	}
 
@@ -62,7 +61,7 @@ final public class NoticeDAO {
 					pstmt.setString(1, notice.getTitle());
 					pstmt.setString(2, notice.getAuthor());
 					pstmt.setString(3, notice.getContent());
-					pstmt.setInt(4, notice.getCategory());
+					pstmt.setString(4, notice.getCategory());
 					pstmt.setInt(5, notice.getNseq());
 				});
 	}
@@ -87,7 +86,7 @@ final public class NoticeDAO {
 		notice.setWritedate(rs.getDate("writedate"));
 		notice.setContent(rs.getString("content"));
 		notice.setReadcount(rs.getInt("readcount"));
-		notice.setCategory(rs.getInt("category"));
+		notice.setCategory(rs.getString("category"));
 		return notice;
 	}
 
