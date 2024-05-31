@@ -17,7 +17,7 @@ public class QnaPwdCheckFormAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getSession().setAttribute("qnaPwdCheckResult", getResult(request, response));
 		String page = request.getParameter("page");
-		response.sendRedirect("museum.do?command=qnaList&" + (page != null ? "page=" + page : ""));
+		response.sendRedirect("museum.do?command=qnaList" + (page != null ? "&page=" + page : ""));
 	}
 
 	private QnaPwdCheckResult getResult(HttpServletRequest request, HttpServletResponse response) {
