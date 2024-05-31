@@ -26,7 +26,7 @@ public class EditMemberAction 	implements Action {
 			mvo1.setName(request.getParameter("name"));
 			mvo1.setEmail(request.getParameter("email"));
 			mvo1.setPhone(request.getParameter("phone"));
-			mvo1.setAdminyn(request.getParameter("adminyn"));
+			mvo1.setAdminyn("N");
 			MemberDao mdao = MemberDao.getInstance();
 			mdao.updateMember(mvo1);
 			
