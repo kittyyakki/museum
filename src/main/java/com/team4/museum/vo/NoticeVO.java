@@ -10,6 +10,8 @@ public class NoticeVO {
 	private String content;
 	private Integer readcount;
 	private Integer category;
+	private String image;
+	private String savefilename;
 
 	public Integer getNseq() {
 		return nseq;
@@ -66,5 +68,23 @@ public class NoticeVO {
 	public void setCategory(Integer category) {
 		this.category = category;
 	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getSavefilename() {
+		return savefilename;
+	}
+
+	public void setSavefilename(String savefilename) {
+		this.savefilename = savefilename;
+	}
+	
+	
 
 }
