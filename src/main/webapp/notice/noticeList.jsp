@@ -8,7 +8,7 @@
 	<h3>공지사항</h3>
 	<h3>이벤트</h3>
 	<div class="writebutton">
-		<input type="button" value="게시글 등록" onClick="location.href='notice.do?command=insertnoticeForm'" />
+		<input type="button" value="게시글 등록" onClick="location.href='notice.do?command=insertNoticeForm'" />
 	</div>
 	<div class="notice">
 		<div class="title_row">
@@ -20,9 +20,9 @@
 		</div>
 		<c:forEach items="${noticeList}" var="notice">
 			<div class="row">
-				<div class="col">${notice.num}</div>
+				<div class="col">${notice.nseq}</div>
 				<div class="col">
-					<a style="text-decoration: none" href="museum.do?command=noticeView&num=${notice.num}"> ${notice.title} </a>&nbsp;
+					<a style="text-decoration: none" href="museum.do?command=noticeView&nseq=${notice.nseq}"> ${notice.title} </a>&nbsp;
 					<c:if test="${notice.replycnt>0}">
 						<span style="color: red; font-weight: bold">[${notice.replycnt}]</span>
 					</c:if>
@@ -40,7 +40,7 @@
 			</div>
 		</c:forEach>
 		<!-- 페이징 시작 -->
-		<c:set var="pageListPrefix" value="museum.do?command=qnaList&page=" />
+		<c:set var="pageListPrefix" value="museum.do?command=noticeList&page=" />
 		<div class="paging">
 			<c:choose>
 				<c:when test="${paging.prev}">
