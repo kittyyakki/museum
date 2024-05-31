@@ -20,10 +20,12 @@ public class InsertNoticeAction implements Action{
 		NoticeDAO ndao = NoticeDAO.getInstance();
 		NoticeVO nvo = new NoticeVO();
 		
+		/* 소식지에 게시물을 올릴때 필요한 파라미터(관리자용) */
 		nvo.setTitle( request.getParameter("title") );
 		nvo.setAuthor( request.getParameter("author") );
 		nvo.setContent( request.getParameter("content") );
-		nvo.setCategory(request.getParameter("category"));
+		
+		ndao.insertNotice(nvo);
+		response.sendRedirect("museum.do?command=index");
 	}
-
 }
