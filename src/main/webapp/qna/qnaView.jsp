@@ -9,6 +9,14 @@
 		history.back();
 	</script>
 </c:if>
+<script type="text/javascript">
+	function onReplySubmit() {
+		if (confirm("답변을 등록하시겠습니까?")) {
+			var form = document.getElementById("qnaReplyForm");
+			form.submit();
+		}
+	}
+</script>
 <section class="qna-view">
 	<h1>Q &amp; A</h1>
 	<div class="qna-view_header">
@@ -29,28 +37,17 @@
 	<div class="qna-view_reply">
 		<h2>답변</h2>
 		<c:choose>
-			<c:when test="${empty qvo.reply}">
-				<c:choose>
-					<c:when test="${isAdmin}">
-						<form action="museum.do?command=qnaReply" method="post">
-							<input type="hidden" name="qseq" value="${qvo.qseq}" />
-							<textarea name="reply" placeholder="답변을 입력하세요"></textarea>
-							<input type="submit" value="답변" />
-						</form>
-					</c:when>
-					<c:otherwise>
-						<span class="qna-view_reply_no">답변이 아직 없습니다.</span>
-					</c:otherwise>
-				</c:choose>
+			<c:when test="${isAdmin}">
+				<form id="qnaReplyForm" action="museum.do?command=qnaReply" method="post">
+					<input type="hidden" name="qseq" value="${qvo.qseq}" />
+					<textarea name="reply" placeholder="답변을 입력하세요"><c:out value="${qvo.reply}" /></textarea>
+					<input type="submit" value="답변 등록" onclick="onReplySubmit(); return false;" />
+				</form>
 			</c:when>
 			<c:otherwise>
 				<c:choose>
-					<c:when test="${isAdmin}">
-						<form action="museum.do?command=qnaReply" method="post">
-							<input type="hidden" name="qseq" value="${qvo.qseq}" />
-							<textarea name="reply" placeholder="답변을 입력하세요"><c:out value="${qvo.reply}" /></textarea>
-							<input type="submit" value="수정" />
-						</form>
+					<c:when test="${empty qvo.reply}">
+						<span class="qna-view_reply_no">답변이 아직 없습니다.</span>
 					</c:when>
 					<c:otherwise>
 						<c:out value="${qvo.reply}" />
