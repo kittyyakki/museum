@@ -123,4 +123,4 @@ VALUES
 
 
 
-delete from notice;
+--delete from notice;
