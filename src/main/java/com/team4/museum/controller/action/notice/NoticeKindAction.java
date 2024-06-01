@@ -14,10 +14,9 @@ public class NoticeKindAction implements Action{
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String category = request.getParameter("category");
-        String[] categotyList = {"공지사항", "이벤트", "매거진", "신문"};
 
         request.setAttribute("categoryNotice", NoticeDAO.getInstance().selectCategoryNotice(category));
-        request.setAttribute("category", categotyList[Integer.parseInt(category)]);
+        request.setAttribute("category", category);
         request.getRequestDispatcher("notice/noticeCategory.jsp").forward(request, response);
 		
 	}
