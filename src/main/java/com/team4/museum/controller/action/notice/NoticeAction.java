@@ -27,7 +27,7 @@ public class NoticeAction implements Action {
 		paging.setPage(getPage(request));
 		paging.setTotalCount(totalCount);
 		
-		List<NoticeVO> noticeList = ndao.selectNoticeList(10,1);
+		List<NoticeVO> noticeList = ndao.selectNoticeList(paging);
 
 		request.setAttribute("paging", paging);
         request.setAttribute("noticeList", noticeList);

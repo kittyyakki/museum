@@ -6,11 +6,21 @@
 
 <div class="notice_box">
 	<div class="notice_header_box">
-		<h2><a href="museum.do?command=notice">전체</a></h2>
-		<h3><a href="museum.do?command=notice">공지사항</a></h3>
-		<h3><a href="museum.do?command=notice">이벤트</a></h3>
-		<h3><a href="museum.do?command=notice">매거진</a></h3>
-		<h3><a href="museum.do?command=notice">신문</a></h3>
+		<h2>
+			<a href="museum.do?command=notice">전체</a>
+		</h2>
+		<h3>
+			<a href="museum.do?command=noticeKind&category=0">공지사항</a>
+		</h3>
+		<h3>
+			<a href="museum.do?command=noticeKind&category=1">이벤트</a>
+		</h3>
+		<h3>
+			<a href="museum.do?command=notice">매거진</a>
+		</h3>
+		<h3>
+			<a href="museum.do?command=notice">신문</a>
+		</h3>
 		<div class="writebutton">
 			<input type="button" value="게시글 등록" onClick="location.href='notice.do?command=insertNoticeForm'" />
 		</div>
@@ -42,7 +52,7 @@
 
 
 	<!-- 페이징 시작 -->
-	<c:set var="pageListPrefix" value="museum.do?command=noticeList&page=" />
+	<c:set var="pageListPrefix" value="museum.do?command=notice&page=" />
 	<div class="paging_wrap">
 		<div class="paging">
 			<c:choose>
