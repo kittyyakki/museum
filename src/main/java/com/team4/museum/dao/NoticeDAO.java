@@ -1,14 +1,17 @@
 package com.team4.museum.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
-
 
 import com.team4.museum.util.Db;
 import com.team4.museum.util.Paging;
 import com.team4.museum.vo.NoticeVO;
 
+import jakarta.security.auth.message.callback.PrivateKeyCallback.Request;
 
 import static com.team4.museum.util.Db.*;
 
@@ -23,7 +26,11 @@ final public class NoticeDAO {
 	public static NoticeDAO getInstance() {
 		return instance;
 	}
-
+	
+	Connection con=null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	
 	/* paging 파라미터 추가 */
 	public List<NoticeVO> selectNoticeList() {
 		return executeSelect(
@@ -41,11 +48,11 @@ final public class NoticeDAO {
 				NoticeDAO::extractNoticeVO);
 	}
 
-	public NoticeVO selectNotice(int nseq) {
-		return executeSelectOne(
-				"SELECT * FROM notice WHERE nseq = ?",
-				pstmt -> pstmt.setInt(1, nseq), NoticeDAO::extractNoticeVO);
-	}
+	/*
+	 * public NoticeVO selectNotice(int nseq) { return executeSelectOne(
+	 * "SELECT * FROM notice WHERE nseq = ?", pstmt -> pstmt.setInt(1, nseq),
+	 * NoticeDAO::extractNoticeVO); }
+	 */
 	
 	   public List<NoticeVO> selectCategoryNotice(String category) {
 	        return executeSelect("SELECT * FROM notice WHERE category = ?",
@@ -109,15 +116,79 @@ final public class NoticeDAO {
 
 	public int getReplyCount(Object num) {
 		int count = 0;
-		Db.getConnection();
+		con = Db.getConnection();
 		String sql =  "select count(*) as cnt from reply where noticeNseq=?";
 		return count;
 	}
 
 	public void plusReadCount(int nseq) {
-		Db.getConnection();
+		con = Db.getConnection();
 		String sql = "update notice set readcount=readcount+1 where nseq=?";
 	}
+	
+	public NoticeVO getNotice(int nseq) {
+		/* ArrayList<NoticeVO> list = new ArrayList<NoticeVO>(); */
+		NoticeVO nvo = null; 
+		//NoticeVO nvo = new NoticeVO();
+		con = Db.getConnection();
+		String sql = "select * from notice where nseq=?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, nseq);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				
+				nvo = new NoticeVO();
+				nvo.setNseq(rs.getInt("nseq"));
+				nvo.setTitle(rs.getString("title"));
+				nvo.setAuthor(rs.getString("author"));
+				nvo.setWritedate( rs.getDate("writedate" ));
+				nvo.setContent(rs.getString("content"));
+				nvo.setReadcount(rs.getInt("readcount"));
+				nvo.setCategory(rs.getString("category"));
+				/*
+				 * nvo.setImage( rs.getString("image") ); nvo.setSavefilename(
+				 * rs.getString("savefilename"));
+				 */
+				//System.out.println(nvo.getTitle());
 
+			}
+		} catch (SQLException e) { e.printStackTrace();
+		}finally { Db.close(con, pstmt, rs);	}
+		return nvo;
+	}
+
+	public ArrayList<NoticeVO> getAllnoitce( Paging paging ) {
+		ArrayList<NoticeVO> list = new ArrayList<NoticeVO>();
+		con = Db.getConnection();
+		// String sql = "select * from board order by num desc";
+		String sql = "select * from notice order by nseq desc limit ? offset ?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1,  paging.getDisplayRow() );
+			pstmt.setInt(2,  paging.getStartNum()-1  );
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				NoticeVO nvo = new NoticeVO();
+				nvo.setNseq(rs.getInt("nseq"));
+				nvo.setTitle(rs.getString("title"));
+				nvo.setAuthor(rs.getString("author"));
+				nvo.setWritedate( rs.getDate("writedate" ));
+				nvo.setContent(rs.getString("content"));
+				nvo.setReadcount(rs.getInt("readcount"));
+				nvo.setCategory(rs.getString("category"));
+				//System.out.println("list DAO OK : " + list);
+				//System.out.println(nvo.getTitle());
+				/*
+				 * nvo.setImage( rs.getString("image") ); nvo.setSavefilename(
+				 * rs.getString("savefilename"));
+				 */
+				
+				list.add(nvo);
+			}
+		} catch (SQLException e) { e.printStackTrace();
+		}finally { Db.close(con, pstmt, rs);	}
+		return list;
+	}
 
 }
