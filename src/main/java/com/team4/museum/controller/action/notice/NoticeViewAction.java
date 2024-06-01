@@ -1,6 +1,7 @@
 package com.team4.museum.controller.action.notice;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.team4.museum.controller.action.Action;
 import com.team4.museum.dao.NoticeDAO;
@@ -21,10 +22,10 @@ public class NoticeViewAction implements Action{
 		// 조회수 증가
 		ndao.plusReadCount( nseq );
 		// 게시물 상세 조회
-		NoticeVO nvo = ndao.selectNotice( nseq );
+		NoticeVO nvo = ndao.getNotice( nseq );
 		
 		
-		request.setAttribute("notice", ndao);
+		request.setAttribute("noticeView", nvo);
 		request.getRequestDispatcher("notice/noticeView.jsp").forward(request, response);
 		
 	}
