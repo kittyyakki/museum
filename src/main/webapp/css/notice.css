@@ -27,7 +27,6 @@
 
 .notice_header_box .writebutton {
     margin-left: auto;
-    border: 1px solid red;
     width: 30%;
 }
 
@@ -76,12 +75,12 @@
 
 .notice_title_col.col_author,
 .notice_col.col_author {
-    width: 15%;
+    width: 10%;
 }
 
 .notice_title_col.col_content,
 .notice_col.col_content {
-    width: 25%;
+    width: 30%;
 }
 
 .notice_title_col.col_date,
