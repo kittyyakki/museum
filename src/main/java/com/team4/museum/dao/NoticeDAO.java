@@ -6,8 +6,14 @@ import java.util.List;
 
 
 import com.team4.museum.util.Db;
+import com.team4.museum.util.Paging;
 import com.team4.museum.vo.NoticeVO;
+
+import kim.present.kdt.shoesshop.dao.ProductDao;
+import kim.present.kdt.shoesshop.dto.ProductVO;
+
 import static com.team4.museum.util.Db.*;
+import static kim.present.kdt.shoesshop.util.Db.executeSelect;
 
 final public class NoticeDAO {
 
@@ -32,7 +38,7 @@ final public class NoticeDAO {
 				"SELECT * FROM notice LIMIT ? OFFSET ?",
 				pstmt -> {
 					pstmt.setInt(1, limit);
-					pstmt.setInt(2, offset);
+			        pstmt.setInt(2, offset);
 				},
 				NoticeDAO::extractNoticeVO);
 	}
@@ -42,6 +48,13 @@ final public class NoticeDAO {
 				"SELECT * FROM notice WHERE nseq = ?",
 				pstmt -> pstmt.setInt(1, nseq), NoticeDAO::extractNoticeVO);
 	}
+	
+	   public List<NoticeVO> selectCategoryNotice(String category) {
+	        return executeSelect("SELECT * FROM notice WHERE category = ?",
+	                pstmt -> pstmt.setString(1, category),
+	                NoticeDAO::extractNoticeVO
+	        );
+	    }
 
 	public int insertNotice(NoticeVO notice) {
 		return executeUpdate(
@@ -91,10 +104,9 @@ final public class NoticeDAO {
 	}
 
 	public int getNoticeAllCount() {
-		int count = 0;
-		Db.getConnection();
-		String sql = "select count(*) as cnt from notice";
-		return count;
+		return executeSelectOne(
+				"SELECT COUNT(*) AS cnt FROM notice",
+				rs -> rs.getInt("cnt"));
 	}
 
 	public int getReplyCount(Object num) {
