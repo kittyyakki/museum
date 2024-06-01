@@ -9,11 +9,9 @@ import com.team4.museum.util.Db;
 import com.team4.museum.util.Paging;
 import com.team4.museum.vo.NoticeVO;
 
-import kim.present.kdt.shoesshop.dao.ProductDao;
-import kim.present.kdt.shoesshop.dto.ProductVO;
 
 import static com.team4.museum.util.Db.*;
-import static kim.present.kdt.shoesshop.util.Db.executeSelect;
+
 
 final public class NoticeDAO {
 
@@ -33,12 +31,12 @@ final public class NoticeDAO {
 				NoticeDAO::extractNoticeVO);
 	}
 
-	public List<NoticeVO> selectNoticeList(int limit, int offset) {
+	public List<NoticeVO> selectNoticeList(Paging paging) {
 		return executeSelect(
 				"SELECT * FROM notice LIMIT ? OFFSET ?",
 				pstmt -> {
-					pstmt.setInt(1, limit);
-			        pstmt.setInt(2, offset);
+					pstmt.setInt(1, paging.getDisplayRow());
+					pstmt.setInt(2, paging.getStartNum() - 1);
 				},
 				NoticeDAO::extractNoticeVO);
 	}
