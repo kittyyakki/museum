@@ -6,7 +6,7 @@
 
 <div class="notice_box">
 	<div class="notice_header_box">
-		<h2><a href="museum.do?command=notice">전체</a></h2>
+		<h2><a href="museum.do?command=noticeList">전체</a></h2>
 		<h3><a href="museum.do?command=noticeKind&category=0">공지사항</a></h3>
 		<h3><a href="museum.do?command=noticeKind&category=1">이벤트</a></h3>
 		<h3><a href="museum.do?command=notice">매거진</a></h3>
@@ -24,18 +24,18 @@
 			<div class="notice_title_col col_author">작성자</div>
 			<div class="notice_title_col col_views">조회수</div>
 		</div>
-		<c:forEach items="${noticeList}" var="notice">
+		<c:forEach items="${noticeList}" var="noticeList">
 			<div class="row">
-				<div class="col col_number">${notice.nseq}</div>
+				<div class="col col_number">${noticeList.nseq}</div>
 				<div class="col col_title">
-					<a href="museum.do?command=noticeView&nseq=${notice.nseq}"> ${notice.title} </a>&nbsp;
+					<a href="museum.do?command=noticeView&nseq=${noticeList.nseq}"> ${noticeList.title} </a>&nbsp;
 				</div>
-				<div class="col col_content">${notice.content}</div>
+				<div class="col col_content">${noticeList.content}</div>
 				<div class="col col_date">
-					<fmt:formatDate value="${notice.writedate}" pattern="yyyy-MM-dd" />
+					<fmt:formatDate value="${noticeList.writedate}" pattern="yyyy-MM-dd" />
 				</div>
-				<div class="col col_author">${notice.author}</div>
-				<div class="col col_views">${notice.readcount}</div>
+				<div class="col col_author">${noticeList.author}</div>
+				<div class="col col_views">${noticeList.readcount}</div>
 			</div>
 		</c:forEach>
 	</div>
