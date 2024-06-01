@@ -23,7 +23,7 @@
 				</div>
 				<div class="btn">
 					<input type="submit" value="로그인" onclick="return loginCheck()" required>
-					<input type="button" value="회원가입" onclick="" required>
+					<input type="button" value="회원가입" onclick="location.href='museum.do?command=joinForm'" required>
 					<input type="button" value="아이디 찾기" onclick="" required>
 				</div>
 				<div style="font-size: 80%; font-weight: bold">${message}</div>
