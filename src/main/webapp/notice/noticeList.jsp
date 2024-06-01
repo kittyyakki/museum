@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <%@ include file="/header.jsp"%>
 
 <div class="notice_box">
 	<div class="notice_header_box">
-		<h2>전체</h2>
-		<h3>공지사항</h3>
-		<h3>이벤트</h3>
+		<h2><a href="museum.do?command=notice">전체</a></h2>
+		<h3><a href="museum.do?command=notice">공지사항</a></h3>
+		<h3><a href="museum.do?command=notice">이벤트</a></h3>
+		<h3><a href="museum.do?command=notice">매거진</a></h3>
+		<h3><a href="museum.do?command=notice">신문</a></h3>
 		<div class="writebutton">
 			<input type="button" value="게시글 등록" onClick="location.href='notice.do?command=insertNoticeForm'" />
 		</div>
@@ -16,29 +19,25 @@
 		<div class="notice_title_row">
 			<div class="notice_title_col col_number">번호</div>
 			<div class="notice_title_col col_title">제목</div>
-			<div class="notice_title_col col_author">작성자</div>
 			<div class="notice_title_col col_content">내용</div>
 			<div class="notice_title_col col_date">작성일</div>
+			<div class="notice_title_col col_author">작성자</div>
 			<div class="notice_title_col col_views">조회수</div>
 		</div>
 		<c:forEach items="${noticeList}" var="notice">
 			<div class="row">
 				<div class="col col_number">${notice.nseq}</div>
 				<div class="col col_title">
-					<a style="text-decoration: none" href="museum.do?command=noticeView&nseq=${notice.nseq}"> ${notice.title} </a>&nbsp;
-					<c:if test="${not empty notice.image}">
-						<span style="color: blue; font-weight: bold; font-size: 90%">[img]</span>
-					</c:if>
+					<a href="museum.do?command=noticeView&nseq=${notice.nseq}"> ${notice.title} </a>&nbsp;
 				</div>
-				<div class="col col_author">${notice.author}</div>
 				<div class="col col_content">${notice.content}</div>
 				<div class="col col_date">
 					<fmt:formatDate value="${notice.writedate}" pattern="yyyy-MM-dd" />
 				</div>
+				<div class="col col_author">${notice.author}</div>
 				<div class="col col_views">${notice.readcount}</div>
 			</div>
 		</c:forEach>
-
 	</div>
 
 
