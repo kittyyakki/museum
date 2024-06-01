@@ -33,7 +33,7 @@
 				</h1>
 				<div class="header_gnb">
 					<a href="museum.do?command=artwork">예술품</a>
-					<a href="museum.do?command=notice">소식지</a>
+					<a href="museum.do?command=noticeList">소식지</a>
 					<a href="museum.do?command=galleryList">이용자 갤러리</a>
 					<a href="museum.do?command=qnaList">고객센터</a>
 					<a href="museum.do?command=myPage">마이페이지</a>
