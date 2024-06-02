@@ -2,10 +2,15 @@ package com.team4.museum.controller;
 
 import com.team4.museum.controller.action.Action;
 import com.team4.museum.controller.action.IndexAction;
+import com.team4.museum.controller.action.artwork.ArtworkDeleteAction;
+import com.team4.museum.controller.action.artwork.ArtworkDisplaySetAction;
 import com.team4.museum.controller.action.artwork.ArtworkListAction;
+import com.team4.museum.controller.action.artwork.ArtworkUpdateAction;
+import com.team4.museum.controller.action.artwork.ArtworkUpdateFormAction;
 import com.team4.museum.controller.action.artwork.ArtworkViewAction;
 import com.team4.museum.controller.action.artwork.ArtworkWriteAction;
 import com.team4.museum.controller.action.artwork.ArtworkWriteFormAction;
+import com.team4.museum.controller.action.artwork.MypageFavoriteAction;
 import com.team4.museum.controller.action.gallery.GalleryListAction;
 import com.team4.museum.controller.action.gallery.GalleryWriteFormAction;
 import com.team4.museum.controller.action.member.EditMemberAction;
@@ -59,10 +64,15 @@ public class ActionFactory {
 		case "myPage" -> new MyPageAction();
 
 		// artwork actions
-		case "artwork" -> new ArtworkListAction();
+		case "artworkList" -> new ArtworkListAction();
 		case "artworkView" -> new ArtworkViewAction();
 		case "artworkWrite" -> new ArtworkWriteAction();
 		case "artworkWriteForm" -> new ArtworkWriteFormAction();
+		case "artworkUpdate" -> new ArtworkUpdateAction();
+		case "artworkUpdateForm" -> new ArtworkUpdateFormAction();
+		case "artworkDelete" -> new ArtworkDeleteAction();
+		case "artworkDisplaySet" -> new ArtworkDisplaySetAction();
+		case "mypageFavorite" -> new MypageFavoriteAction();
 
 		// QnA actions
 		case "qnaList" -> new QnaListAction();
