@@ -18,12 +18,13 @@ function qnaPwdCheck(qseq, mode) {
 			var response = JSON.parse(xhr.responseText);
 			switch (response.code) {
 				case 'success':
-					location.href = response.url;
+					location.href = response.data;
 					break;
 
-				case 'pwd_invalid':
-					alert("잘못된 비밀번호입니다. 다시 입력해주세요.");
-				// 의도적으로 break를 생략. 비밀번호를 다시 입력 받기 위해 prompt를 호출합니다.
+				case 'failure':
+					alert(response.data);
+					break;
+
 				case 'pwd_request':
 					var pwd = prompt(qseq + "번 QnA 글의 비밀번호를 입력하세요:");
 					if (pwd !== null && pwd !== undefined && pwd !== "") {
@@ -33,9 +34,8 @@ function qnaPwdCheck(qseq, mode) {
 					}
 					break;
 
-				case 'not_found':
-				case 'mode_invalid':
-					alert("잘못된 접근입니다.");
+				default:
+					alert("알 수 없는 오류가 발생했습니다.");
 					break;
 			}
 		};

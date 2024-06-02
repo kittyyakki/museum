@@ -21,10 +21,10 @@ public class QnaPwdCheckAction implements Action {
 	}
 
 	private QnaPwdCheckResult getResult(HttpServletRequest request, HttpServletResponse response) {
-		// 파라미터에 'qseq'가 없으면 NOT_FOUND 를 반환
+		// 파라미터에 'qseq'가 없으면 FAILURE 를 반환
 		String qseqStr = request.getParameter("qseq");
 		if (qseqStr == null || qseqStr.equals("") || !qseqStr.matches("^[0-9]*$")) {
-			return new QnaPwdCheckResult(QnaPwdCheckResult.NOT_FOUND);
+			return new QnaPwdCheckResult(QnaPwdCheckResult.FAILURE, "잘못된 요청입니다.");
 		}
 
 		int qseq = Integer.parseInt(qseqStr);
@@ -32,9 +32,9 @@ public class QnaPwdCheckAction implements Action {
 		QnaVO qnaVO = qdao.getQna(qseq);
 		request.setAttribute("qseq", qseq);
 
-		// 'qseq' 파라미터에 해당하는 'QnaVO'가 없으면 NOT_FOUND 를 반환
+		// 'qseq' 파라미터에 해당하는 'QnaVO'가 없으면 FAILURE 를 반환
 		if (qnaVO == null) {
-			return new QnaPwdCheckResult(QnaPwdCheckResult.NOT_FOUND);
+			return new QnaPwdCheckResult(QnaPwdCheckResult.FAILURE, "존재하지 않는 문의입니다.");
 		}
 
 		String url, mode = request.getParameter("mode");
@@ -43,7 +43,7 @@ public class QnaPwdCheckAction implements Action {
 			url = "museum.do?command=qnaView&qseq=" + qseqStr;
 			break;
 		default:
-			return new QnaPwdCheckResult(QnaPwdCheckResult.MODE_INVAILD);
+			return new QnaPwdCheckResult(QnaPwdCheckResult.FAILURE, "잘못된 모드입니다.");
 		}
 
 		// 'qnaVO'가 공개 상태면 SUCCESS 를 반환
@@ -65,7 +65,7 @@ public class QnaPwdCheckAction implements Action {
 		// 'pwd' 파라미터가 없으면 PWD_REQUEST 를 반환
 		String pwd = request.getParameter("pwd");
 		if (pwd == null || pwd.trim().equals("")) {
-			return new QnaPwdCheckResult(QnaPwdCheckResult.PWD_REQUEST);
+			return new QnaPwdCheckResult(QnaPwdCheckResult.PWD_REQUEST, "비밀번호를 입력해주세요.");
 		}
 
 		// 'pwd'가 비밀번호와 같으면 세션에 비밀번호 확인 기록을 남기고 SUCCESS 를 반환
@@ -74,31 +74,25 @@ public class QnaPwdCheckAction implements Action {
 			return new QnaPwdCheckResult(QnaPwdCheckResult.SUCCESS, url);
 		}
 
-		// 아니면 PWD_INVAILD 를 반환
-		return new QnaPwdCheckResult(QnaPwdCheckResult.PWD_INVAILD);
+		// 아니면 FAILURE 를 반환
+		return new QnaPwdCheckResult(QnaPwdCheckResult.FAILURE, "잘못된 비밀번호입니다.");
 	}
 
 	public class QnaPwdCheckResult {
 		public static final String SUCCESS = "success";
-		public static final String NOT_FOUND = "not_found";
-		public static final String MODE_INVAILD = "mode_invalid";
+		public static final String FAILURE = "failure";
 		public static final String PWD_REQUEST = "pwd_request";
-		public static final String PWD_INVAILD = "pwd_invalid";
 
 		public String code;
-		public String url;
+		public String data;
 
-		public QnaPwdCheckResult(String code) {
-			this(code, "");
-		}
-
-		public QnaPwdCheckResult(String code, String qseq) {
+		public QnaPwdCheckResult(String code, String data) {
 			this.code = code;
-			this.url = qseq;
+			this.data = data;
 		}
 
 		public String toJson() {
-			return "{\"code\":\"" + code + "\",\"url\":\"" + url + "\"}";
+			return "{\"code\":\"" + code + "\",\"data\":\"" + data + "\"}";
 		}
 	}
 }
