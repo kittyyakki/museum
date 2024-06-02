@@ -16,16 +16,15 @@ public class QnaPwdCheckAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getSession().setAttribute("qnaPwdCheckResult", getResult(request, response));
-		String page = request.getParameter("page");
-		response.sendRedirect("museum.do?command=qnaList" + (page != null ? "&page=" + page : ""));
+		response.setContentType("application/json");
+		response.getWriter().write(getResult(request, response).toJson());
 	}
 
 	private QnaPwdCheckResult getResult(HttpServletRequest request, HttpServletResponse response) {
-		// 파라미터에 'qseq'가 없으면 RESULT_NOT_FOUND 를 반환
+		// 파라미터에 'qseq'가 없으면 NOT_FOUND 를 반환
 		String qseqStr = request.getParameter("qseq");
 		if (qseqStr == null || qseqStr.equals("") || !qseqStr.matches("^[0-9]*$")) {
-			return new QnaPwdCheckResult(QnaPwdCheckResult.RESULT_NOT_FOUND, "");
+			return new QnaPwdCheckResult(QnaPwdCheckResult.NOT_FOUND);
 		}
 
 		int qseq = Integer.parseInt(qseqStr);
@@ -33,72 +32,73 @@ public class QnaPwdCheckAction implements Action {
 		QnaVO qnaVO = qdao.getQna(qseq);
 		request.setAttribute("qseq", qseq);
 
-		// 'qseq' 파라미터에 해당하는 'QnaVO'가 없으면 RESULT_NOT_FOUND 를 반환
+		// 'qseq' 파라미터에 해당하는 'QnaVO'가 없으면 NOT_FOUND 를 반환
 		if (qnaVO == null) {
-			return new QnaPwdCheckResult(QnaPwdCheckResult.RESULT_NOT_FOUND, qseqStr);
+			return new QnaPwdCheckResult(QnaPwdCheckResult.NOT_FOUND);
 		}
 
-		// 'qnaVO'가 공개 상태면 RESULT_SUCCESS 를 반환
+		String url, mode = request.getParameter("mode");
+		switch (mode) {
+		case "view":
+			url = "museum.do?command=qnaView&qseq=" + qseqStr;
+			break;
+		default:
+			return new QnaPwdCheckResult(QnaPwdCheckResult.MODE_INVAILD);
+		}
+
+		// 'qnaVO'가 공개 상태면 SUCCESS 를 반환
 		if (qnaVO.isPublic()) {
-			return new QnaPwdCheckResult(QnaPwdCheckResult.RESULT_SUCCESS, qseqStr);
+			return new QnaPwdCheckResult(QnaPwdCheckResult.SUCCESS, url);
 		}
 
 		HttpSession session = request.getSession();
-		// 어드민이면 RESULT_SUCCESS 를 반환
+		// 어드민이면 SUCCESS 를 반환
 		if (session.getAttribute("isAdmin") != null && (boolean) session.getAttribute("isAdmin")) {
-			return new QnaPwdCheckResult(QnaPwdCheckResult.RESULT_SUCCESS, qseqStr);
+			return new QnaPwdCheckResult(QnaPwdCheckResult.SUCCESS, url);
 		}
 
-		// 세션에 비밀번호 확인 기록이 있는 경우 RESULT_SUCCESS 를 반환
+		// 세션에 비밀번호 확인 기록이 있는 경우 SUCCESS 를 반환
 		if (session.getAttribute("qnaPass" + qseq) != null) {
-			return new QnaPwdCheckResult(QnaPwdCheckResult.RESULT_SUCCESS, qseqStr);
+			return new QnaPwdCheckResult(QnaPwdCheckResult.SUCCESS, url);
 		}
 
-		// 'pwd' 파라미터가 없으면 RESULT_REQUEST_PWD 를 반환
+		// 'pwd' 파라미터가 없으면 PWD_REQUEST 를 반환
 		String pwd = request.getParameter("pwd");
 		if (pwd == null || pwd.trim().equals("")) {
-			return new QnaPwdCheckResult(QnaPwdCheckResult.RESULT_REQUEST_PWD, qseqStr);
+			return new QnaPwdCheckResult(QnaPwdCheckResult.PWD_REQUEST);
 		}
 
-		// 'pwd'가 비밀번호와 같으면 세션에 비밀번호 확인 기록을 남기고 RESULT_SUCCESS 를 반환
+		// 'pwd'가 비밀번호와 같으면 세션에 비밀번호 확인 기록을 남기고 SUCCESS 를 반환
 		if (qnaVO.getPwd().equals(pwd)) {
 			session.setAttribute("qnaPass" + qseq, qseq);
-			return new QnaPwdCheckResult(QnaPwdCheckResult.RESULT_SUCCESS, qseqStr);
+			return new QnaPwdCheckResult(QnaPwdCheckResult.SUCCESS, url);
 		}
 
-		// 아니면 RESULT_PWD_WRONG 를 반환
-		return new QnaPwdCheckResult(QnaPwdCheckResult.RESULT_PWD_WRONG, qseqStr);
+		// 아니면 PWD_INVAILD 를 반환
+		return new QnaPwdCheckResult(QnaPwdCheckResult.PWD_INVAILD);
 	}
 
 	public class QnaPwdCheckResult {
-		public static final String RESULT_SUCCESS = "success";
-		public static final String RESULT_NOT_FOUND = "notFound";
-		public static final String RESULT_REQUEST_PWD = "requestPwd";
-		public static final String RESULT_PWD_WRONG = "pwdWrong";
+		public static final String SUCCESS = "success";
+		public static final String NOT_FOUND = "not_found";
+		public static final String MODE_INVAILD = "mode_invalid";
+		public static final String PWD_REQUEST = "pwd_request";
+		public static final String PWD_INVAILD = "pwd_invalid";
 
-		private String result;
-		private String qseq;
-		private boolean isUsed;
+		public String code;
+		public String url;
 
-		public QnaPwdCheckResult(String result, String qseq) {
-			this.result = result;
-			this.qseq = qseq;
+		public QnaPwdCheckResult(String code) {
+			this(code, "");
 		}
 
-		public String getResult() {
-			return result;
+		public QnaPwdCheckResult(String code, String qseq) {
+			this.code = code;
+			this.url = qseq;
 		}
 
-		public String getQseq() {
-			return qseq;
-		}
-
-		public boolean use() {
-			if (this.isUsed) {
-				return false;
-			}
-			this.isUsed = true;
-			return true;
+		public String toJson() {
+			return "{\"code\":\"" + code + "\",\"url\":\"" + url + "\"}";
 		}
 	}
 }
