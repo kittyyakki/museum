@@ -26,7 +26,7 @@ import com.team4.museum.controller.action.notice.NoticeViewWithoutCntAction;
 import com.team4.museum.controller.action.notice.UpdateNoticeAction;
 import com.team4.museum.controller.action.notice.UpdateNoticeFormAction;
 import com.team4.museum.controller.action.qna.QnaListAction;
-import com.team4.museum.controller.action.qna.QnaPwdCheckFormAction;
+import com.team4.museum.controller.action.qna.QnaPwdCheckAction;
 import com.team4.museum.controller.action.qna.QnaReplyAction;
 import com.team4.museum.controller.action.qna.QnaViewAction;
 
@@ -66,7 +66,7 @@ public class ActionFactory {
 
 		// QnA actions
 		case "qnaList" -> new QnaListAction();
-		case "qnaPwdCheck" -> new QnaPwdCheckFormAction();
+		case "qnaPwdCheck" -> new QnaPwdCheckAction();
 		case "qnaView" -> new QnaViewAction();
 		case "qnaReply" -> new QnaReplyAction();
 

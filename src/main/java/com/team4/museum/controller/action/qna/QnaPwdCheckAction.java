@@ -1,6 +1,7 @@
 package com.team4.museum.controller.action.qna;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.team4.museum.controller.action.Action;
 import com.team4.museum.dao.QnaDao;
@@ -11,7 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-public class QnaPwdCheckFormAction implements Action {
+public class QnaPwdCheckAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
