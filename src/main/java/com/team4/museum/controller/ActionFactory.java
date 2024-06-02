@@ -29,6 +29,8 @@ import com.team4.museum.controller.action.qna.QnaListAction;
 import com.team4.museum.controller.action.qna.QnaPwdCheckAction;
 import com.team4.museum.controller.action.qna.QnaReplyAction;
 import com.team4.museum.controller.action.qna.QnaViewAction;
+import com.team4.museum.controller.action.qna.QnaWriteAction;
+import com.team4.museum.controller.action.qna.QnaWriteFormAction;
 
 public class ActionFactory {
 
@@ -69,11 +71,13 @@ public class ActionFactory {
 		case "qnaPwdCheck" -> new QnaPwdCheckAction();
 		case "qnaView" -> new QnaViewAction();
 		case "qnaReply" -> new QnaReplyAction();
+		case "qnaWriteForm" -> new QnaWriteFormAction();
+		case "qnaWrite" -> new QnaWriteAction();
 
 		// user gallery
 		case "galleryList" -> new GalleryListAction();
 		case "galleryWriteForm" -> new GalleryWriteFormAction();
-		
+
 		// notice
 		case "notice" -> new NoticeAction();
 		case "noticeView" -> new NoticeViewAction();

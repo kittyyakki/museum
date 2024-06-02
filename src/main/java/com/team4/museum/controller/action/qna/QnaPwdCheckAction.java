@@ -1,7 +1,6 @@
 package com.team4.museum.controller.action.qna;
 
 import java.io.IOException;
-import java.util.List;
 
 import com.team4.museum.controller.action.Action;
 import com.team4.museum.dao.QnaDao;
@@ -37,24 +36,27 @@ public class QnaPwdCheckAction implements Action {
 			return new QnaPwdCheckResult(QnaPwdCheckResult.FAILURE, "존재하지 않는 문의입니다.");
 		}
 
+		HttpSession session = request.getSession();
 		String url, mode = request.getParameter("mode");
 		switch (mode) {
 		case "view":
 			url = "museum.do?command=qnaView&qseq=" + qseqStr;
+
+			// 'qnaVO'가 공개 상태면 SUCCESS 를 반환
+			if (qnaVO.isPublic()) {
+				return new QnaPwdCheckResult(QnaPwdCheckResult.SUCCESS, url);
+			}
+
+			// 관리자 일 경우 SUCCESS 를 반환
+			if (session.getAttribute("isAdmin") != null) {
+				return new QnaPwdCheckResult(QnaPwdCheckResult.SUCCESS, url);
+			}
+			break;
+		case "edit":
+			url = "museum.do?command=qnaWriteForm&qseq=" + qseqStr;
 			break;
 		default:
 			return new QnaPwdCheckResult(QnaPwdCheckResult.FAILURE, "잘못된 모드입니다.");
-		}
-
-		// 'qnaVO'가 공개 상태면 SUCCESS 를 반환
-		if (qnaVO.isPublic()) {
-			return new QnaPwdCheckResult(QnaPwdCheckResult.SUCCESS, url);
-		}
-
-		HttpSession session = request.getSession();
-		// 어드민이면 SUCCESS 를 반환
-		if (session.getAttribute("isAdmin") != null && (boolean) session.getAttribute("isAdmin")) {
-			return new QnaPwdCheckResult(QnaPwdCheckResult.SUCCESS, url);
 		}
 
 		// 세션에 비밀번호 확인 기록이 있는 경우 SUCCESS 를 반환
