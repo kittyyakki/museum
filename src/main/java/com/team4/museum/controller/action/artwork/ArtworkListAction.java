@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.team4.museum.util.ArtworkCategory;
+import com.team4.museum.util.Paging;
 import com.team4.museum.vo.ArtworkVO;
 import com.team4.museum.vo.MemberVO;
 import com.team4.museum.controller.action.Action;
@@ -16,6 +17,17 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 public class ArtworkListAction implements Action {
+	
+	private int getPage(HttpServletRequest request) {
+		if (request.getParameter("page") != null) {
+			int page = Integer.parseInt(request.getParameter("page"));
+			request.getSession().setAttribute("page", page);
+			return page;
+		} else if (request.getSession().getAttribute("page") != null) {
+			return (int) request.getSession().getAttribute("page");
+		}
+		return 1;
+	}
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,16 +35,24 @@ public class ArtworkListAction implements Action {
 		response.setCharacterEncoding("utf-8");
 		
 		HttpSession session = request.getSession();
-		
-		// artworkView 페이지에서 '목록으로'이동하기 위해 현재 조회중인 category를 세션에 저장
+		MemberVO mvo = (MemberVO)session.getAttribute("loginUser");
+		ArtworkDao adao = ArtworkDao.getInstance();
 		session.removeAttribute("category");
 		
-		MemberVO mvo = (MemberVO)session.getAttribute("loginUser");
+		int totalCount = adao.getAllCount();
+		Paging paging = new Paging();
+		paging.setPage(getPage(request));
+		paging.setDisplayRow(3);
+		paging.setTotalCount(totalCount);
 
-		ArtworkDao adao = ArtworkDao.getInstance();
+		request.setAttribute("paging", paging);
+		request.setAttribute("ArtworkList", adao.selectArtwork(paging));
+		request.setAttribute("totalCount", totalCount);
+
+		
+
 		String category = request.getParameter("category") == null ? ArtworkCategory.전체.name()
 				: request.getParameter("category");
-		String titleState = "on";
 		// 검색창에 입력한 단어 전달받음
 		String searchWord = request.getParameter("searchWord");
 
@@ -43,7 +63,6 @@ public class ArtworkListAction implements Action {
 			if (searchWord != null) { // 검색어로 조회
 				list = adao.searchArtworkAdmin(searchWord);
 				category = null;
-//				titleState = "off";
 			} else if (category.equals(ArtworkCategory.전체.name())) // 전체목록 조회
 				list = adao.selectArtworkAdmin();				
 			else { // 카테고리 조회
@@ -54,16 +73,15 @@ public class ArtworkListAction implements Action {
 			if (searchWord != null) { // 검색어로 조회
 				list = adao.searchArtwork(searchWord);
 				category = null;
-//				titleState = "off";
 			} else if (category.equals(ArtworkCategory.전체.name())) // 전체목록 조회
-				list = adao.selectArtwork();				
+//				list = adao.selectArtwork();	
+				list = adao.selectArtwork(paging);
 			else { // 카테고리 조회
 				list = adao.selectCategoryArtwork(category);
 			}
 		}
 		
 		request.setAttribute("searchWord", searchWord);
-//		request.setAttribute("titleState", titleState);
 		// 카테고리 이름 전달
 		request.setAttribute("categoryName", category);
 		session.setAttribute("category", category);
