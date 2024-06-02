@@ -58,7 +58,7 @@ public class ArtworkWriteFormAction implements Action{
 		}
 		
 		adao.insertArtwork(avo);
-		request.getRequestDispatcher("museum.do?command=artwork").forward(request, response);
+		request.getRequestDispatcher("museum.do?command=artworkList").forward(request, response);
 	}
 
 }
