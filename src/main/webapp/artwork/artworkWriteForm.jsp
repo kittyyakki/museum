@@ -9,7 +9,7 @@
 				<li>
 					<div>작가명</div>
 					<input type="text" name="artist">
-					<input type="checkbox" name="unknownArtist" onclick="unknown()" id="unknownArtist">
+					<input type="checkbox" name="unknownArtist" onclick="artistUnknown()" id="unknownArtist">
 					<label for="unknownArtist" class="unknown-label">작자미상</label>
 				</li>
 				<li>
@@ -19,7 +19,7 @@
 				<li>
 					<div>제작연도</div>
 					<input type="text" name="year">
-					<input type="checkbox" name="unknownYear" onclick="unknown()" id="unknownYear">
+					<input type="checkbox" name="unknownYear" onclick="yearUnknown()" id="unknownYear">
 					<label for="unknownYear" class="unknown-label">연도미상</label>
 				</li>
 				<li>
