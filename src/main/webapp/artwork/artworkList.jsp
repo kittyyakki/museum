@@ -4,7 +4,7 @@
 <!-- museum.do?command=artwork 의 목적지 -->
 
 <section class="artwork-list-header">
-	<form action="museum.do?command=artwork" method="post" name="searchForm" class="artwork-search-form">
+	<form action="museum.do?command=artworkList" method="post" name="searchForm" class="artwork-search-form">
 		<h2>예술품 검색</h2>
 		<div>
 			<input type="text" placeholder="작품명 또는 작가명을 검색하세요" name="searchWord" class="artwork-search-form_input" value="${searchWord}">
@@ -14,11 +14,11 @@
 	<div class="category-btn-container">
 		<c:forEach items="${artworkCategory}" var="category" varStatus="status">
 			<c:choose>
-				<c:when test="${categoryName.equals(category.name()) && titleState.equals('on')}">
-					<a href="museum.do?command=artwork&category=${category.name()}" class="artwork-list_btn artwork-list_selected-btn">${category.name()}</a>
+				<c:when test="${categoryName.equals(category.name())}">
+					<a href="museum.do?command=artworkList&category=${category.name()}" class="artwork-list_btn artwork-list_selected-btn">${category.name()}</a>
 				</c:when>
 				<c:otherwise>
-					<a href="museum.do?command=artwork&category=${category.name()}" class="artwork-list_btn">${category.name()}</a>
+					<a href="museum.do?command=artworkList&category=${category.name()}" class="artwork-list_btn">${category.name()}</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
