@@ -3,7 +3,11 @@ package com.team4.museum.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+
+import com.team4.museum.util.Paging;
 import com.team4.museum.vo.ArtworkVO;
+import com.team4.museum.vo.QnaVO;
+
 import static com.team4.museum.util.Db.*;
 
 public class ArtworkDao {
@@ -131,6 +135,22 @@ public class ArtworkDao {
 		avo.setIndate(rs.getDate("indate"));
 		return avo;
 
+	}
+
+	public int getAllCount() {
+		return executeSelectOne(
+				"SELECT COUNT(*) AS cnt FROM artwork",
+				rs -> rs.getInt("cnt"));
+	}
+
+	public List<ArtworkVO> selectArtwork(Paging paging) {
+			return executeSelect(
+					"SELECT * FROM artwork ORDER BY aseq DESC LIMIT ? OFFSET ?",
+					pstmt -> {
+						pstmt.setInt(1, paging.getDisplayRow());
+						pstmt.setInt(2, paging.getStartNum() - 1);
+					},
+					ArtworkDao::extractArtworkVO);
 	}
 
 	
