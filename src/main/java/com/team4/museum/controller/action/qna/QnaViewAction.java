@@ -25,9 +25,6 @@ public class QnaViewAction implements Action {
 
 	private QnaVO getQnaVO(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
-		request.removeAttribute("qnaContent");
-		request.removeAttribute("qnaOwned");
-		request.removeAttribute("qnaVO");
 
 		// 파라미터에 'qseq'가 없으면 null 을 반환
 		String qseqStr = request.getParameter("qseq");
@@ -41,11 +38,6 @@ public class QnaViewAction implements Action {
 		// 'qseq' 파라미터에 해당하는 'QnaVO'가 없으면 null 을 반환
 		if (qnaVO == null) {
 			return null;
-		}
-
-		// 'qnaVO'가 공개 상태면 qnaVO 을 반환
-		if (qnaVO.isPublic()) {
-			return qnaVO;
 		}
 
 		// 세션에 비밀번호 확인 기록이 있는 경우 'qnaOwned'를 'true'로 설정하고 qnaVO 을 반환
