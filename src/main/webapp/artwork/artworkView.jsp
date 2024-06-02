@@ -11,13 +11,22 @@
 		<div class="artwork-view_btn">
 			<c:choose>
 				<c:when test="${loginUser.adminyn.equals('Y')}">
-					<input type="button" value="수정" onclick="location.href='museum.do?command=artworkUpdate'" />
+					<c:choose>
+						<c:when test="${artwork.displayyn.equals('Y')}">
+							<input type="button" value="비공개로 전환" onclick="location.href='museum.do?command=artworkDisplaySet&aseq=${artwork.aseq}'">
+						</c:when>
+						<c:otherwise>
+							<input type="button" value="공개로 전환" onclick="location.href='museum.do?command=artworkDisplaySet&aseq=${artwork.aseq}'">
+						</c:otherwise>
+					</c:choose>
+					<input type="button" value="수정" onclick="location.href='museum.do?command=artworkUpdate&aseq=${artwork.aseq}'" />
+					<input type="button" value="삭제" onclick="go_deleteArtwork('${artwork.aseq}')" />
 				</c:when>
 				<c:otherwise>
-					<input type="button" value="나의 갤러리 +" onclick="location.href='museum.do?command=mypageFavorite'" />
+					<input type="button" value="나의 갤러리 +" onclick="location.href='museum.do?command=mypageFavorite&aseq=${artwork.aseq}'" />
 				</c:otherwise>
 			</c:choose>
-			<input type="button" value="목록으로" onclick="history.back()" />
+			<input type="button" value="목록으로" onclick="location.href='museum.do?command=artworkList&category=${category}'"/>
 		</div>
 	</div>
 	<div class="artwork-view_img">
@@ -54,7 +63,14 @@
 			<c:if test="${loginUser.adminyn.equals('Y')}">
 				<li>
 					<span>전시상태</span>
-					<span>${artwork.displayyn}</span>
+					<c:choose>
+						<c:when test="${artwork.displayyn.equals('Y')}">
+							<span>공개</span>
+						</c:when>
+						<c:otherwise>
+							<span>비공개</span>
+						</c:otherwise>
+					</c:choose>
 				</li>
 			</c:if>
 		</ul>
