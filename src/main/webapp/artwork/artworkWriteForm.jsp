@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/header.jsp"%>
-<h2 class="artwork-write-form-title">예술품 등록</h2>
-<section class="artwork-write-form-container">
-	<form method="post" name="artworkWriteForm" action="museum.do?command=artworkWriteForm" class="artwork-write-form" enctype="multipart/form-data">
-		<div class="artwork-write-form-info">
+<h2 class="artwork-write-form-header">예술품 등록</h2>
+<section class="artwork-write-form-main">
+	<form method="post" name="artworkWriteForm" action="museum.do?command=artworkWriteForm" class="artwork-write-form"
+		enctype="multipart/form-data">
+		<div class="artwork-write-form_info">
 			<ul>
 				<li>
 					<div>작가명</div>
@@ -60,13 +61,8 @@
 				</li>
 			</ul>
 			<div>
-				<ul>
-					<li>
-						<div>작품설명</div>
-						<textarea name="content"></textarea>
-					</li>
-
-				</ul>
+				<div>작품설명</div>
+				<textarea name="content"></textarea>
 			</div>
 		</div>
 		<div class="artwork-write-form-btn">
