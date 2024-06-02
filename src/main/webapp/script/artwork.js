@@ -31,14 +31,18 @@ function artworkUpdate() {
 	}
 }
 
-function unknown() {
+function artistUnknown() {
 	let form = document.artworkWriteForm;
 
 	if (form.unknownArtist.checked)
 		form.artist.value = "작자미상";
 	else
 		form.artist.value = "";
+}
 
+function yearUnknown() {
+	let form = document.artworkWriteForm;
+	
 	if (form.unknownYear.checked)
 		form.year.value = "연도미상";
 	else
