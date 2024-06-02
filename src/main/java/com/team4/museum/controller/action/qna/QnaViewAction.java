@@ -35,21 +35,11 @@ public class QnaViewAction implements Action {
 		int qseq = Integer.parseInt(qseqStr);
 		QnaVO qnaVO = QnaDao.getInstance().getQna(qseq);
 
-		// 'qseq' 파라미터에 해당하는 'QnaVO'가 없으면 null 을 반환
-		if (qnaVO == null) {
-			return null;
-		}
-
-		// 세션에 비밀번호 확인 기록이 있는 경우 'qnaOwned'를 'true'로 설정하고 qnaVO 을 반환
-		if (session.getAttribute("qnaPass" + qseq) != null) {
-			request.setAttribute("qnaOwned", true);
-
-			return qnaVO;
-		}
-
-		// 'qnaVO'가 공개 상태거나 멤버가 관리자인 경우 qnaVO 을 반환
-		if (qnaVO.isPublic() || session.getAttribute("isAdmin") != null) {
-
+		// 'qseq' 파라미터에 해당하는 'QnaVO'가 있고, 세션에 비밀번호 확인 기록이 있거나 관리자이거나 문의글이 공개 상태인 경우
+		if (qnaVO != null && (session.getAttribute("qnaPass" + qseq) != null
+				|| session.getAttribute("isAdmin") != null
+				|| qnaVO.isPublic())) {
+			// qnaVO 를 반환
 			return qnaVO;
 		}
 
