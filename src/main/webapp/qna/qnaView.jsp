@@ -12,16 +12,7 @@
 <section class="qna-view">
 	<div class="qna-view_title">
 		<h1>Q &amp; A</h1>
-		<c:choose>
-			<c:when test="${empty qnaOwned}">
-				<a href="#"></a>
-			</c:when>
-			<c:otherwise>
-				<a href="museum.do?command=qnaWriteForm&qseq=${qnaVO.qseq}">
-					<button class="qna-view_submit">수정하기</button>
-				</a>
-			</c:otherwise>
-		</c:choose>
+		<button class="qna-view_submit" onclick="qnaPwdCheck(${qnaVO.qseq}, 'edit')">수정하기</button>
 	</div>
 	<div class="qna-view_header">
 		<h1>${qnaVO.title}</h1>
