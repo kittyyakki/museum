@@ -40,7 +40,10 @@
 				<div class="col col_title">
 					<a href="museum.do?command=noticeView&nseq=${noticeList.nseq}"> ${noticeList.title} </a>&nbsp;
 				</div>
-				<div class="col col_content">${noticeList.content}</div>
+				<div class="col col_title">
+					<a href="museum.do?command=noticeView&nseq=${noticeList.nseq}"> ${noticeList.content} </a>&nbsp;
+				</div>
+				<%-- <div class="col col_content">${noticeList.content}</div> --%>
 				<div class="col col_date">
 					<fmt:formatDate value="${noticeList.writedate}" pattern="yyyy-MM-dd" />
 				</div>
