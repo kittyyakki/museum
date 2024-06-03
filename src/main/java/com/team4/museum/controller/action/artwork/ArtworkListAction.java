@@ -18,17 +18,6 @@ import jakarta.servlet.http.HttpSession;
 
 public class ArtworkListAction implements Action {
 	
-	private int getPage(HttpServletRequest request) {
-		if (request.getParameter("page") != null) {
-			int page = Integer.parseInt(request.getParameter("page"));
-			request.getSession().setAttribute("page", page);
-			return page;
-		} else if (request.getSession().getAttribute("page") != null) {
-			return (int) request.getSession().getAttribute("page");
-		}
-		return 1;
-	}
-
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
@@ -39,15 +28,7 @@ public class ArtworkListAction implements Action {
 		ArtworkDao adao = ArtworkDao.getInstance();
 		session.removeAttribute("category");
 		
-		int totalCount = adao.getAllCount();
-		Paging paging = new Paging();
-		paging.setPage(getPage(request));
-		paging.setDisplayRow(3);
-		paging.setTotalCount(totalCount);
 
-		request.setAttribute("paging", paging);
-		request.setAttribute("ArtworkList", adao.selectArtwork(paging));
-		request.setAttribute("totalCount", totalCount);
 
 		
 
@@ -74,12 +55,12 @@ public class ArtworkListAction implements Action {
 				list = adao.searchArtwork(searchWord);
 				category = null;
 			} else if (category.equals(ArtworkCategory.전체.name())) // 전체목록 조회
-//				list = adao.selectArtwork();	
-				list = adao.selectArtwork(paging);
+				list = adao.selectArtwork();	
 			else { // 카테고리 조회
 				list = adao.selectCategoryArtwork(category);
 			}
 		}
+		
 		
 		request.setAttribute("searchWord", searchWord);
 		// 카테고리 이름 전달
