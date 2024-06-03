@@ -14,3 +14,15 @@ function go_save(){
 	}
 }
 
+function go_gallery(){
+	let Form = document.galleryList;
+	if(Form.id.value==""){
+		alert("로그인이 필요합니다 로그인 후 이용해주세요");
+		Form.id.focus();
+	}else{
+		Form.action='museum.do?command=galleryWrite';
+		Form.submit();
+	}
+	
+	
+}
