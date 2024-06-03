@@ -26,7 +26,6 @@ import com.team4.museum.controller.action.member.MyPageAction;
 import com.team4.museum.controller.action.notice.DeleteNoticeAction;
 import com.team4.museum.controller.action.notice.InsertNoticeAction;
 import com.team4.museum.controller.action.notice.InsertNoticeFormAction;
-import com.team4.museum.controller.action.notice.NoticeCategoryAction;
 import com.team4.museum.controller.action.notice.NoticeListAction;
 import com.team4.museum.controller.action.notice.NoticeViewAction;
 import com.team4.museum.controller.action.notice.NoticeViewWithoutCntAction;
@@ -100,7 +99,6 @@ public class ActionFactory {
 		case "updateNotice" -> new UpdateNoticeAction();
 		case "noticeViewWithoutCnt" -> new NoticeViewWithoutCntAction();
 		case "deleteNotice" -> new DeleteNoticeAction();
-		case "noticeCategory" -> new NoticeCategoryAction();
 
 		// default
 		default -> null;
