@@ -29,18 +29,17 @@ final public class NoticeDAO {
 	ResultSet rs = null;
 
 	/* paging 파라미터 추가 */
-	public List<NoticeVO> selectNoticeList() {
-		return executeSelect(
-				"SELECT * FROM notice",
-				NoticeDAO::extractNoticeVO);
-	}
+	/*
+	 * public List<NoticeVO> selectNoticeList() { return executeSelect(
+	 * "SELECT * FROM notice", NoticeDAO::extractNoticeVO); }
+	 */
 
-	public List<NoticeVO> selectNoticeList(Paging paging) {
+	public List<NoticeVO> selectNoticeList(Pagination paging) {
 		return executeSelect(
 				"SELECT * FROM notice LIMIT ? OFFSET ?",
 				pstmt -> {
-					pstmt.setInt(1, paging.getDisplayRow());
-					pstmt.setInt(2, paging.getStartNum() - 1);
+					pstmt.setInt(1, paging.getLimit());
+					pstmt.setInt(2, paging.getOffset());
 				},
 				NoticeDAO::extractNoticeVO);
 	}
@@ -51,9 +50,13 @@ final public class NoticeDAO {
 	 * NoticeDAO::extractNoticeVO); }
 	 */
 
-	public List<NoticeVO> selectCategoryNotice(String category) {
-		return executeSelect("SELECT * FROM notice WHERE category = ?",
-				pstmt -> pstmt.setString(1, category),
+	public List<NoticeVO> selectCategoryNotice(String category, Pagination paging) {
+		return executeSelect("SELECT * FROM notice WHERE category = ? LIMIT ? OFFSET ?",
+				pstmt -> {
+					pstmt.setString(1, category);
+					pstmt.setInt(2, paging.getLimit());
+					pstmt.setInt(3, paging.getOffset());
+				},
 				NoticeDAO::extractNoticeVO);
 	}
 
@@ -89,6 +92,13 @@ final public class NoticeDAO {
 	public int getNoticeCount() {
 		return executeSelectOne(
 				"SELECT COUNT(*) FROM notice",
+				rs -> rs.getInt(1));
+	}
+	
+	public int getNoticeCount(String category) {
+		return executeSelectOne(
+				"SELECT COUNT(*) FROM notice WHERE category = ?",
+				pstmt -> pstmt.setString(1, category),
 				rs -> rs.getInt(1));
 	}
 
