@@ -92,6 +92,7 @@ public class ArtworkDao {
 		}
 		return result;
 	}
+	
 	/* <========================================================================= */
 
 	public List<ArtworkVO> searchArtwork(String searchWord) {
@@ -137,12 +138,6 @@ public class ArtworkDao {
 
 	}
 
-	public int getAllCount() {
-		return executeSelectOne(
-				"SELECT COUNT(*) AS cnt FROM artwork",
-				rs -> rs.getInt("cnt"));
-	}
-
 	public List<ArtworkVO> selectArtwork(Paging paging) {
 			return executeSelect(
 					"SELECT * FROM artwork ORDER BY aseq DESC LIMIT ? OFFSET ?",
@@ -152,8 +147,4 @@ public class ArtworkDao {
 					},
 					ArtworkDao::extractArtworkVO);
 	}
-
-	
-
-	
 }
