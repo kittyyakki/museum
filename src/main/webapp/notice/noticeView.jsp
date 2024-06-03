@@ -47,7 +47,9 @@
 			</div>
 		</div>
 		<div class="noticeView-button">
-			<input type="button" class="btn-noticeView" value="수정" onClick="location.href='museum.do?command=updateNoticeForm&nseq=${noticeView.nseq}'" /> <input type="button" class="btn-noticeView" value="삭제" onClick="deleteNotice('${loginUser.id}')" /> <input type="button" class="btn-noticeView" value="목록" onClick="location.href='museum.do?command=noticeList'" />
+			<input type="button" class="btn-noticeView" value="수정" onClick="location.href='museum.do?command=updateNoticeForm&nseq=${noticeView.nseq}'" /> 
+			<input type="button" class="btn-noticeView" value="삭제" onClick="deleteNotice('${loginUser.id}')" /> 
+			<input type="button" class="btn-noticeView" value="목록" onClick="location.href='museum.do?command=noticeList'" />
 		</div>
 	</div>
 </div>
