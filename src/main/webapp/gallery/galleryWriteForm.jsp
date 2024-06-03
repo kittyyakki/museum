@@ -13,7 +13,7 @@
 				<ul>
 					<li>
 						<label>아이디</label>
-							<input type="text"  name="authorid" value="${loginUser.id} " readonly>
+							<input type="text"  name="authorid" value="${loginUser.id}" readonly>
 					</li>
 					
 					<li>
