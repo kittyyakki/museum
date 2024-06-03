@@ -20,9 +20,6 @@
 		<div class="gallery-list">
 			<c:forEach items="${galleryList}" var="gallery">
 				<div onclick="location.href='museum.do?command=galleryDetail&aseq=${gallery.mseq}'">
-					<div class="artwork_artist">${artwork.artist}</div>
-					<div class="artwork_name">${artwork.name}</div>
-					<div class="artwork_year">${artwork.year}</div>
 				</div>
 			</c:forEach>
 		</div>
