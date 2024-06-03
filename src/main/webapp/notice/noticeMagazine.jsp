@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="/header.jsp"%>
 
-	<div class="notice_header_box">
+<%-- 	<div class="notice_header_box">
 		<c:forEach items="${noticeCategory}" var="category" varStatus="status">
 			<c:choose>
 				<c:when test="${categoryName.equals(category.name())}">
@@ -14,7 +14,7 @@
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
-	</div>
+	</div> --%>
 	
 <div class="noticeMagazine_container">
 	
@@ -74,7 +74,9 @@
 
 
 
-
+<div>test</div>
+<div>test</div>
+<div>test</div>
 
 
 
