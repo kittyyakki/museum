@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Museum</title>
 <link rel="stylesheet" href="css/reset01.css">
+<link rel="stylesheet" href="css/pagination.css">
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/footer.css">
 <link rel="stylesheet" href="css/main.css">
