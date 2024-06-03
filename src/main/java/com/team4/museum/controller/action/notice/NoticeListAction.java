@@ -6,8 +6,9 @@ import java.util.List;
 
 import com.team4.museum.controller.action.Action;
 import com.team4.museum.dao.NoticeDAO;
+import com.team4.museum.util.ArtworkCategory;
 import com.team4.museum.util.NoticeCategory;
-import com.team4.museum.util.Paging;
+import com.team4.museum.util.Pagination;
 import com.team4.museum.vo.MemberVO;
 import com.team4.museum.vo.NoticeVO;
 
@@ -33,37 +34,29 @@ public class NoticeListAction implements Action {
 				: request.getParameter("category");
 		
 		
-		int totalCount = ndao.getNoticeAllCount();
+		Pagination pagination = Pagination
+				.fromRequest(request)
+				.setUrlTemplate("museum.do?command=noticeList&page=%d")
+				.setItemCount(ndao.getNoticeAllCount())
+				.setItemsPerPage(10);
 		
-		Paging paging = new Paging();
-		paging.setPage(getPage(request));
-		paging.setTotalCount(totalCount);
 		
-		
-		List<NoticeVO> noticeList = ndao.getAllnoitce(paging);
+		List<NoticeVO> noticeList = ndao.getAllnoitce(pagination);
+		if(category.equals(ArtworkCategory.전체.name())) // 전체목록 조회
+			noticeList = ndao.selectNoticeList();	
+		else { // 카테고리 조회
+			noticeList = ndao.selectCategoryNotice(category);
+		}
 
 		request.setAttribute("categoryName", category);
 		session.setAttribute("category", category);
-		request.setAttribute("paging", paging);
+		request.setAttribute("pagination", pagination);
         request.setAttribute("noticeList", noticeList);
-        request.setAttribute("totalCount", totalCount);
         
 
         request.setAttribute("noticeCategory", NoticeCategory.values());
 		request.getRequestDispatcher("notice/noticeList.jsp").forward(request, response);
 		
 	}
-	private int getPage(HttpServletRequest request) {
-        if (request.getParameter("page") != null) {
-            int page = Integer.parseInt(request.getParameter("page"));
-            request.getSession().setAttribute("page", page);
-            return page;
-        } else if (request.getSession().getAttribute("page") != null) {
-            return (int) request.getSession().getAttribute("page");
-        }
-        return 1;
-    
-	}
-	
 
 }
