@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import com.team4.museum.util.Db;
+import com.team4.museum.util.Pagination;
 import com.team4.museum.util.Paging;
 import com.team4.museum.vo.NoticeVO;
 
@@ -167,14 +168,14 @@ final public class NoticeDAO {
 		return nvo;
 	}
 
-	public ArrayList<NoticeVO> getAllnoitce(Paging paging) {
+	public ArrayList<NoticeVO> getAllnoitce(Pagination pagination) {
 		ArrayList<NoticeVO> list = new ArrayList<NoticeVO>();
 		con = Db.getConnection();
 		String sql = "select * from notice order by nseq desc limit ? offset ?";
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, paging.getDisplayRow());
-			pstmt.setInt(2, paging.getStartNum() - 1);
+			pstmt.setInt(1, pagination.getLimit());
+			pstmt.setInt(2, pagination.getOffset());
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				NoticeVO nvo = new NoticeVO();
