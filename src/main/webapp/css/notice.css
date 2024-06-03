@@ -72,12 +72,12 @@
 
 .notice_title_col.col_title,
 .notice_col.col_title {
-    width: 30%;
+    width: 25%;
 }
 
 .notice_title_col.col_author,
 .notice_col.col_author {
-    width: 10%;
+    width: 7%;
 }
 
 .notice_title_col.col_content,
@@ -92,9 +92,12 @@
 
 .notice_title_col.col_views,
 .notice_col.col_views {
-    width: 10%;
+    width: 8%;
 }
-
+.notice_title_col.col_category,
+.notice_col.col_category{
+	width:10%;
+}
 .row {
     display: table-row;
 }
@@ -345,5 +348,9 @@ h2 {
 
 .notice_update_field img {
     vertical-align: middle;
+}
+.notice-list_btn{
+	margin-right:30px;
+	
 }
 
