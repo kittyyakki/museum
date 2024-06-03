@@ -2,26 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/header.jsp" />
-<c:if test="${empty qnaContent or empty qnaVO}">
-	<script type="text/javascript">
-	<!-- qnaContent 혹은 qnaVO 값이 존재하지 않을 때 -->
-		alert("잘못된 접근입니다.");
-		history.back();
-	</script>
-</c:if>
 <section class="qna-view">
 	<div class="qna-view_title">
 		<h1>Q &amp; A</h1>
-		<c:choose>
-			<c:when test="${empty qnaOwned}">
-				<a href="#"></a>
-			</c:when>
-			<c:otherwise>
-				<a href="museum.do?command=qnaWriteForm&qseq=${qnaVO.qseq}">
-					<button class="qna-view_submit">수정하기</button>
-				</a>
-			</c:otherwise>
-		</c:choose>
+		<button class="qna-view_submit" onclick="qnaPwdCheck(${qnaVO.qseq}, 'edit')">수정하기</button>
 	</div>
 	<div class="qna-view_header">
 		<h1>${qnaVO.title}</h1>
@@ -36,7 +20,7 @@
 		</ul>
 	</div>
 	<div class="qna-view_content">
-		<c:out value="${qnaContent}" />
+		<c:out value="${qnaVO.content}" />
 	</div>
 	<div class="qna-view_reply">
 		<h2>답변</h2>

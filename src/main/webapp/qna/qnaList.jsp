@@ -2,13 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="/header.jsp"%>
-<c:if test="${not empty qnaPwdCheckResult and qnaPwdCheckResult.use()}">
-	<script type="text/javascript">
-	    window.onload = function() {
-	    	handleQnaPwdCheckResult('${qnaPwdCheckResult.result}', '${qnaPwdCheckResult.qseq}');
-	    }
-    </script>
-</c:if>
 <section class="qna-list">
 	<h1>Q &amp; A</h1>
 	<div class="qna-list_subheader">
@@ -33,7 +26,7 @@
 						<c:when test="${empty qnaVO.reply}">NO</c:when>
 						<c:otherwise>YES</c:otherwise>
 					</c:choose></li>
-				<li><span onclick="qnaPwdCheck(${qnaVO.qseq})"> <c:if test="${!qnaVO.isPublic()}">
+				<li><span onclick="qnaPwdCheck(${qnaVO.qseq}, 'view')"> <c:if test="${!qnaVO.isPublic()}">
 							<span>🔒</span>
 						</c:if>${qnaVO.title}</span></li>
 				<li><fmt:formatDate value="${qnaVO.writedate}" pattern="yyyy-MM-dd" /></li>
@@ -83,9 +76,5 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
-	<form id="qnaPwdCheckForm" method="post" action="museum.do?command=qnaPwdCheck">
-		<input type="hidden" name="qseq">
-		<input type="hidden" name="pwd">
-	</form>
 </section>
 <%@ include file="/footer.jsp"%>
