@@ -6,13 +6,23 @@
 
 <div class="notice_box">
 	<div class="notice_header_box">
-		<h2><a href="museum.do?command=noticeList">전체</a></h2>
-		<h3><a href="museum.do?command=noticeKind&category=0">공지사항</a></h3>
-		<h3><a href="museum.do?command=noticeKind&category=1">이벤트</a></h3>
-		<h3><a href="museum.do?command=notice">매거진</a></h3>
-		<h3><a href="museum.do?command=notice">신문</a></h3>
+		<h2>
+			<a href="museum.do?command=noticeList">전체</a>
+		</h2>
+		<h3>
+			<a href="museum.do?command=noticeCategory&category=0">공지사항</a>
+		</h3>
+		<h3>
+			<a href="museum.do?command=noticeCategory&category=1">이벤트</a>
+		</h3>
+		<h3>
+			<a href="museum.do?command=noticeCategory&category=2">매거진</a>
+		</h3>
+		<h3>
+			<a href="museum.do?command=noticeCategory&category=3">신문</a>
+		</h3>
 		<div class="writebutton">
-			<input type="button" value="게시글 등록" onClick="location.href='notice.do?command=insertNoticeForm'" />
+			<input type="button" value="게시글 등록" onClick="location.href='museum.do?command=insertNoticeForm'" />
 		</div>
 	</div>
 	<div class="notice_title_box">
@@ -29,6 +39,9 @@
 				<div class="col col_number">${noticeList.nseq}</div>
 				<div class="col col_title">
 					<a href="museum.do?command=noticeView&nseq=${noticeList.nseq}"> ${noticeList.title} </a>&nbsp;
+				</div>
+				<div class="col col_title">
+					<a href="museum.do?command=noticeView&nseq=${noticeList.nseq}"> ${noticeList.content} </a>&nbsp;
 				</div>
 				<div class="col col_content">${noticeList.content}</div>
 				<div class="col col_date">
