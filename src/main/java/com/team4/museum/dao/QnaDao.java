@@ -8,11 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.team4.museum.dao.QnaDao;
-
+import com.team4.museum.util.Pagination;
 import com.team4.museum.vo.QnaVO;
-
-import com.team4.museum.util.Paging;
 
 public class QnaDao {
 
@@ -25,12 +22,12 @@ public class QnaDao {
 		return instance;
 	}
 
-	public List<QnaVO> selectQna(Paging paging) {
+	public List<QnaVO> selectQna(Pagination pagination) {
 		return executeSelect(
 				"SELECT * FROM qna ORDER BY qseq DESC LIMIT ? OFFSET ?",
 				pstmt -> {
-					pstmt.setInt(1, paging.getDisplayRow());
-					pstmt.setInt(2, paging.getStartNum() - 1);
+					pstmt.setInt(1, pagination.getLimit());
+					pstmt.setInt(2, pagination.getOffset());
 				},
 				QnaDao::extractQnaVO);
 	}
