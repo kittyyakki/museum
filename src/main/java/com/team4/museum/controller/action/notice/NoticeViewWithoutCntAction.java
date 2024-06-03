@@ -18,7 +18,7 @@ public class NoticeViewWithoutCntAction implements Action{
 		int nseq = Integer.parseInt( request.getParameter("nseq") );
 		NoticeDAO ndao = NoticeDAO.getInstance();
 		// 게시물 상세 조회
-		NoticeVO nvo = ndao.selectNotice( nseq );
+		NoticeVO nvo = ndao.getNotice( nseq );
 		
 		request.setAttribute("notice", nvo);
 		request.getRequestDispatcher("notice/noticeView.jsp").forward(request, response);
