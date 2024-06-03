@@ -67,7 +67,7 @@
 		</div>
 		<div class="artwork-write-form-btn">
 			<input type="button" value="등록" onclick="artworkWrite(this)">
-			<input type="button" value="취소" onclick="location.href='museum.do?command=artwork'">
+			<input type="button" value="취소" onclick="location.href='museum.do?command=artworkList'">
 		</div>
 	</form>
 </section>
