@@ -1,6 +1,7 @@
 package com.team4.museum.controller.action.gallery;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.util.Calendar;
 
@@ -24,6 +25,8 @@ public class GalleryWriteFormAction implements Action {
 			MemberGalleryVO mgvo = new MemberGalleryVO();
 			mgvo.setTitle(request.getParameter("title"));
 			mgvo.setContent(request.getParameter("content"));
+			mgvo.setAuthorId(request.getParameter("authorid"));
+			
 			
 			HttpSession session = request.getSession();
 			ServletContext context = session.getServletContext();
