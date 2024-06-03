@@ -76,7 +76,77 @@ VALUES
 ('박물관 정기 휴관일', 'admin', '2024-05-29', '매월 첫째 주 월요일은 박물관 정기 휴관일입니다. 방문에 참고 바랍니다.', '이벤트');
 
 
+insert into notice (title, author, writedate, content, category)
+VALUES 
+('NMK Magazine Vol.67', 'National Museum Korea', '발행일 2024.04.', 'SPECIAL FEATURE
 
+The Spirit of Goguryeo Engraved on a Digital Stele
+
+ 
+
+SPECIAL FEATURE
+
+An Exhibition Dedicated to the Value of Sharing
+
+The National Museum of Korea Reopens the Donated Collection after a Two-Year Wait
+
+ 
+
+CURRENT
+
+The Year of the Dragon, a Mysterious Journey
+
+ 
+
+CURRENT
+
+What’s New? Embracing Local History and Culture
+
+ 
+
+CURATOR"S TALK
+
+Never Ending Story of the Royal Procession to Hwaseong
+
+Wise and Unbiased, Royal Philosophy in Paintings and Calligraphy of the Joseon Dynasty
+
+ 
+
+K-MUSEUM
+
+Perfectly Imperfect: Korean Buncheong Ceramics
+
+ 
+
+INTERVIEW
+
+I’m Here to Meet the Spirit of My Father
+
+A meeting with Park Nohwon, daughter of the great art collector Dr. Park Byeong-rae,
+
+the donor of 375 Joseon Dynasty ceramic objects
+
+ 
+
+PUBLICATION
+
+National Museum of Korea & Regional National Museums
+
+ 
+
+INSIDE THE MUSEUM
+
+Main Plans of the National Museum of Korea in 2024
+
+ 
+
+NEWS
+
+ 
+
+GIFTS & PUBLICATIONS
+
+Arrival of museum gifts and souvenirs with the gentle breeze of spring', '매거진');
 
 
 --delete from notice;
