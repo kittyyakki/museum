@@ -1,26 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 
 <%@ include file="/header.jsp"%>
 
 <div class="notice_box">
 	<div class="notice_header_box">
-		<h2>
-			<a href="museum.do?command=noticeList">전체</a>
-		</h2>
-		<h3>
-			<a href="museum.do?command=noticeKind&category=0">공지사항</a>
-		</h3>
-		<h3>
-			<a href="museum.do?command=noticeKind&category=1">이벤트</a>
-		</h3>
-		<h3>
-			<a href="museum.do?command=noticeList">매거진</a>
-		</h3>
-		<h3>
-			<a href="museum.do?command=noticeList">신문</a>
-		</h3>
+		<c:forEach items="${noticeCategory}" var="category" varStatus="status">
+			<c:choose>
+				<c:when test="${categoryName.equals(category.name())}">
+					<a href="museum.do?command=noticeList&category=${category.name()}" class="notice-list_btn">${category.name()}</a>
+				</c:when>
+				<c:otherwise>
+					<a href="museum.do?command=noticeList&category=${category.name()}" class="notice-list_btn">${category.name()}</a>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
 		<div class="writebutton">
 			<input type="button" value="게시글 등록" onClick="location.href='museum.do?command=insertNoticeForm'" />
 		</div>
