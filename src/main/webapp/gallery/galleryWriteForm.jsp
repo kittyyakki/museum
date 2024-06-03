@@ -6,19 +6,24 @@
 
 <section>
 	<div class="write_top">
-	<form action="museum.do?command=gallery" method="post" name="galleryForm" class="write-form">
+	<form action="museum.do?command=galleryWriteForm" method="post" name="galleryWriteForm" class="write-form" enctype="multipart/form-data">
 		
 		<h3>나의 갤러리 생성</h3>
 		<div class="write_middle">
 				<ul>
 					<li>
+						<label>아이디</label>
+							<input type="text"  name="authorid" value="${loginUser.id} " readonly>
+					</li>
+					
+					<li>
 						<label>갤러리명</label>
-							<input type="text" placeholder="갤러리명 10자 이내로 입력하세요" name="gname">
+							<input type="text" placeholder="갤러리명 10자 이내로 입력하세요" name="title">
 					</li>
 			
 					<li>
 						<label>갤러리명 설명</label>
-							<input type="text" name="ginfo">	
+							<input type="text" name="content">	
 					</li>
 				</ul>
 			<label>이미지 첨부</label><input type="file" name="image"/>

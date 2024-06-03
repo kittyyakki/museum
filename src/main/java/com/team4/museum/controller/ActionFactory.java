@@ -12,6 +12,7 @@ import com.team4.museum.controller.action.artwork.ArtworkWriteAction;
 import com.team4.museum.controller.action.artwork.ArtworkWriteFormAction;
 import com.team4.museum.controller.action.artwork.MypageFavoriteAction;
 import com.team4.museum.controller.action.gallery.GalleryListAction;
+import com.team4.museum.controller.action.gallery.GalleryWriteAction;
 import com.team4.museum.controller.action.gallery.GalleryWriteFormAction;
 import com.team4.museum.controller.action.member.EditMemberAction;
 import com.team4.museum.controller.action.member.EditMemberFormAction;
@@ -88,6 +89,7 @@ public class ActionFactory {
 		// user gallery
 		case "galleryList" -> new GalleryListAction();
 		case "galleryWriteForm" -> new GalleryWriteFormAction();
+		case "galleryWrite" -> new GalleryWriteAction();
 
 		// notice
 		case "noticeList" -> new NoticeListAction();

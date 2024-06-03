@@ -1,17 +1,28 @@
 function go_save(){
-	var theForm = document.galleryForm;
-	if(theForm.gname.value==""){
+	let theForm = document.galleryWriteForm;
+	if(theForm.title.value==""){
 		alert("갤러리명을 입력하세요");
-		theForm.gname.focus();
-	}else if(theForm.ginfo.value==""){
+		theForm.title.focus();
+	}else if(theForm.content.value==""){
 		alert("갤러리 설명을 입력하세요");
-		theForm.ginfo.focus();
+		theForm.content.focus();
 	}else if(theForm.image.value==""){
 		alert("이미지를 첨부해주세요");
 		theForm.image.focus();
 	}else{
-		theForm.action = "museum.do?command=galleryWrite";
 		theForm.submit();
 	}
 }
 
+function go_gallery(){
+	let Form = document.galleryList;
+	if(Form.id.value==""){
+		alert("로그인이 필요합니다 로그인 후 이용해주세요");
+		Form.id.focus();
+	}else{
+		Form.action='museum.do?command=galleryWrite';
+		Form.submit();
+	}
+	
+	
+}
