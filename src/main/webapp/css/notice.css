@@ -291,3 +291,59 @@ h2 {
 .btn-noticeView:hover {
     background-color: #0056b3;
 }
+
+/* CSS 예시 */
+#notice_update_box {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
+
+.notice_update_innerbox {
+    margin-top: 20px;
+}
+
+.notice_update_field {
+    margin-bottom: 15px;
+}
+
+.notice_update_field label {
+    display: inline-block;
+    width: 100px;
+    font-weight: bold;
+}
+
+.notice_update_field input[type="text"],
+.notice_update_field input[type="password"],
+.notice_update_field textarea {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.notice_update_field textarea {
+    height: 150px;
+}
+
+.notice_update_field input[type="submit"],
+.notice_update_field input[type="button"] {
+    padding: 8px 15px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.notice_update_field input[type="submit"]:hover,
+.notice_update_field input[type="button"]:hover {
+    background-color: #45a049;
+}
+
+.notice_update_field img {
+    vertical-align: middle;
+}
+
