@@ -27,6 +27,7 @@
 			<div class="notice_title_col col_date">작성일</div>
 			<div class="notice_title_col col_author">작성자</div>
 			<div class="notice_title_col col_views">조회수</div>
+			<div class="notice_title_col col_category">분류</div>	
 		</div>
 		<c:forEach items="${noticeList}" var="noticeList">
 			<div class="row">
@@ -43,57 +44,14 @@
 				</div>
 				<div class="col col_author">${noticeList.author}</div>
 				<div class="col col_views">${noticeList.readcount}</div>
+				<div class="col col_category">${noticeList.category}</div>
 			</div>
 		</c:forEach>
 	</div>
 
 
-	<!-- 페이징 시작 -->
-	<c:set var="pageListPrefix" value="museum.do?command=noticeList&page=" />
-	<div class="paging_wrap">
-		<div class="paging">
-			<c:choose>
-				<c:when test="${paging.prev}">
-					<a class="paging_button" href="${pageListPrefix}1">«</a>
-				</c:when>
-				<c:otherwise>
-					<span class="paging_button">«</span>
-				</c:otherwise>
-			</c:choose>
-			<c:choose>
-				<c:when test="${paging.prev}">
-					<a class="paging_button" href="${pageListPrefix}${paging.beginPage-1}">‹</a>
-				</c:when>
-				<c:otherwise>
-					<span class="paging_button">‹</span>
-				</c:otherwise>
-			</c:choose>
-			<c:forEach begin="${paging.beginPage}" end="${paging.endPage}" var="index">
-				<c:if test="${index==paging.page}">
-					<span class="current-page">${index}</span>
-				</c:if>
-				<c:if test="${index!=paging.page}">
-					<a href="${pageListPrefix}${index}">${index}</a>
-				</c:if>
-			</c:forEach>
-			<c:choose>
-				<c:when test="${paging.next}">
-					<a class="paging_button" href="${pageListPrefix}${paging.endPage+1}">›</a>
-				</c:when>
-				<c:otherwise>
-					<span class="paging_button">›</span>
-				</c:otherwise>
-			</c:choose>
-			<c:choose>
-				<c:when test="${paging.next}">
-					<a class="paging_button" href="${pageListPrefix}${paging.totalPage}">»</a>
-				</c:when>
-				<c:otherwise>
-					<span class="paging_button">»</span>
-				</c:otherwise>
-			</c:choose>
-		</div>
-	</div>
+<%@ include file="/util/pagination.jsp"%>
+
 </div>
 
 <%@ include file="/footer.jsp"%>
