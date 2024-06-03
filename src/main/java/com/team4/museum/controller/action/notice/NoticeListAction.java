@@ -3,7 +3,6 @@ package com.team4.museum.controller.action.notice;
 import java.io.IOException;
 import java.util.List;
 
-
 import com.team4.museum.controller.action.Action;
 import com.team4.museum.dao.NoticeDAO;
 import com.team4.museum.util.ArtworkCategory;
@@ -23,40 +22,44 @@ public class NoticeListAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-		
+
 		HttpSession session = request.getSession();
-		MemberVO mvo = (MemberVO)session.getAttribute("loginUser");
+		MemberVO mvo = (MemberVO) session.getAttribute("loginUser");
 		NoticeDAO ndao = NoticeDAO.getInstance();
 		session.removeAttribute("category");
-		
-		
+
 		String category = request.getParameter("category") == null ? NoticeCategory.전체.name()
 				: request.getParameter("category");
-		
-		
+
 		Pagination pagination = Pagination
 				.fromRequest(request)
-				.setUrlTemplate("museum.do?command=noticeList&page=%d")
-				.setItemCount(ndao.getNoticeAllCount())
+				.setUrlTemplate("museum.do?command=noticeList&category=" + category + "&page=%d")
+				.setItemCount(ndao.getNoticeCount(category))
 				.setItemsPerPage(10);
-		
-		
+
 		List<NoticeVO> noticeList = ndao.getAllnoitce(pagination);
-		if(category.equals(ArtworkCategory.전체.name())) // 전체목록 조회
-			noticeList = ndao.selectNoticeList();	
-		else { // 카테고리 조회
-			noticeList = ndao.selectCategoryNotice(category);
+		if (category.equals(NoticeCategory.전체.name())) {// 전체목록 조회
+			pagination.setItemCount(ndao.getNoticeAllCount());
+			noticeList = ndao.selectNoticeList(pagination);
+		}
+		else if (category.equals(NoticeCategory.매거진.name())) {
+			request.getRequestDispatcher("notice/noticeMagazine.jsp").forward(request, response);
+			return;
+		} else if (category.equals(NoticeCategory.신문.name())) {
+			request.getRequestDispatcher("notice/noticeNewpaper.jsp").forward(request, response);
+			return;
+		} else { // 카테고리 조회
+			noticeList = ndao.selectCategoryNotice(category, pagination);
 		}
 
 		request.setAttribute("categoryName", category);
 		session.setAttribute("category", category);
 		request.setAttribute("pagination", pagination);
-        request.setAttribute("noticeList", noticeList);
-        
+		request.setAttribute("noticeList", noticeList);
 
-        request.setAttribute("noticeCategory", NoticeCategory.values());
+		request.setAttribute("noticeCategory", NoticeCategory.values());
 		request.getRequestDispatcher("notice/noticeList.jsp").forward(request, response);
-		
+
 	}
 
 }
