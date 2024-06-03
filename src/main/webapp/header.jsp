@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="css/qna_view.css">
 <link rel="stylesheet" href="css/galleryForm.css">
 <link rel="stylesheet" href="css/notice.css">
+<link rel="stylesheet" href="css/admin.css">
 <script src="script/member.js"></script>
 <script src="script/header.js"></script>
 <script src="script/artwork.js"></script>
@@ -23,6 +24,7 @@
 <script src="script/qna.js"></script>
 <script src="script/gallery.js"></script>
 <script src="script/notice.js"></script>
+<script src="script/admin.js"></script>
 </head>
 <body>
 	<div class="body-wrap">
@@ -54,6 +56,9 @@
 						</c:when>
 						<c:otherwise>
 							<a href="#">${loginUser.name}(${loginUser.id})</a>
+							<c:if test="${loginUser.adminyn.equals('Y')}">
+								<a href="museum.do?command=admin">관리자페이지</a>
+							</c:if>
 							<a href="museum.do?command=logout">로그아웃</a>
 						</c:otherwise>
 					</c:choose>
