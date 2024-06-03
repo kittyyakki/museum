@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/header.jsp"%>
-<h2 class="artwork-write-form-title">예술품 등록</h2>
-<section class="artwork-write-form-container">
-	<form method="post" name="artworkWriteForm" action="museum.do?command=artworkWriteForm" class="artwork-write-form" enctype="multipart/form-data">
-		<div class="artwork-write-form-info">
+<h2 class="artwork-write-form-header">예술품 등록</h2>
+<section class="artwork-write-form-main">
+	<form method="post" name="artworkWriteForm" action="museum.do?command=artworkWriteForm" class="artwork-write-form"
+		enctype="multipart/form-data">
+		<div class="artwork-write-form_info">
 			<ul>
 				<li>
 					<div>작가명</div>
 					<input type="text" name="artist">
-					<input type="checkbox" name="unknownArtist" onclick="unknown()" id="unknownArtist">
+					<input type="checkbox" name="unknownArtist" onclick="artistUnknown()" id="unknownArtist">
 					<label for="unknownArtist" class="unknown-label">작자미상</label>
 				</li>
 				<li>
@@ -18,7 +19,7 @@
 				<li>
 					<div>제작연도</div>
 					<input type="text" name="year">
-					<input type="checkbox" name="unknownYear" onclick="unknown()" id="unknownYear">
+					<input type="checkbox" name="unknownYear" onclick="yearUnknown()" id="unknownYear">
 					<label for="unknownYear" class="unknown-label">연도미상</label>
 				</li>
 				<li>
@@ -60,18 +61,13 @@
 				</li>
 			</ul>
 			<div>
-				<ul>
-					<li>
-						<div>작품설명</div>
-						<textarea name="content"></textarea>
-					</li>
-
-				</ul>
+				<div>작품설명</div>
+				<textarea name="content"></textarea>
 			</div>
 		</div>
 		<div class="artwork-write-form-btn">
-			<input type="button" value="등록" onclick="artworkUpdate(this)">
-			<input type="button" value="취소" onclick="location.href='museum.do?command=artwork'">
+			<input type="button" value="등록" onclick="artworkWrite(this)">
+			<input type="button" value="취소" onclick="location.href='museum.do?command=artworkList'">
 		</div>
 	</form>
 </section>
