@@ -353,55 +353,7 @@ h2 {
 	margin-right:30px;
 	
 }
-/* noticeMagazine  */
 
-.noticeMagazine_container {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-}
-
-.noticeMagazine_nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-.noticeMagazine_nav ul li {
-    display: inline;
-    margin-right: 20px;
-}
-
-.noticeMagazine_nav ul li a {
-    color: #fff;
-    text-decoration: none;
-}
-
-.noticeMagazine_category {
-    float: left;
-    width: 20%;
-    margin-right: 20px;
-}
-
-.noticeMagazine_category h2 {
-    margin-top: 0;
-}
-
-.noticeMagazine_archive-list {
-    float: left;
-    width: 75%;
-}
-
-.noticeMagazine_archive-list h2 {
-    margin-top: 0;
-}
-
-.noticeMagazine_item {
-    border-bottom: 1px solid #ccc;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-}
 
 
 
