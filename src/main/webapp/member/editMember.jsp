@@ -3,7 +3,7 @@
 <section>
 	<article>
 		<form action="museum.do?command=editMember" method="post" name="joinForm" class="joinForm">
-			<h2>회원가입</h2>
+			<h2>회원정보 수정</h2>
 
 		<div class="middle">
 			<div class="field">
