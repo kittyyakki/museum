@@ -140,9 +140,7 @@ final public class NoticeDAO {
 	}
 
 	public NoticeVO getNotice(int nseq) {
-		/* ArrayList<NoticeVO> list = new ArrayList<NoticeVO>(); */
 		NoticeVO nvo = null;
-		// NoticeVO nvo = new NoticeVO();
 		con = Db.getConnection();
 		String sql = "select * from notice where nseq=?";
 		try {
@@ -159,11 +157,6 @@ final public class NoticeDAO {
 				nvo.setContent(rs.getString("content"));
 				nvo.setReadcount(rs.getInt("readcount"));
 				nvo.setCategory(rs.getString("category"));
-				/*
-				 * nvo.setImage( rs.getString("image") ); nvo.setSavefilename(
-				 * rs.getString("savefilename"));
-				 */
-				// System.out.println(nvo.getTitle());
 
 			}
 		} catch (SQLException e) {
@@ -177,7 +170,6 @@ final public class NoticeDAO {
 	public ArrayList<NoticeVO> getAllnoitce(Paging paging) {
 		ArrayList<NoticeVO> list = new ArrayList<NoticeVO>();
 		con = Db.getConnection();
-		// String sql = "select * from board order by num desc";
 		String sql = "select * from notice order by nseq desc limit ? offset ?";
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -193,13 +185,6 @@ final public class NoticeDAO {
 				nvo.setContent(rs.getString("content"));
 				nvo.setReadcount(rs.getInt("readcount"));
 				nvo.setCategory(rs.getString("category"));
-				// System.out.println("list DAO OK : " + list);
-				// System.out.println(nvo.getTitle());
-				/*
-				 * nvo.setImage( rs.getString("image") ); nvo.setSavefilename(
-				 * rs.getString("savefilename"));
-				 */
-
 				list.add(nvo);
 			}
 		} catch (SQLException e) {
