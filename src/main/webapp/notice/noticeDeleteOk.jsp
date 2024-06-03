@@ -6,7 +6,7 @@
 
 <script type="text/javascript">
 alert("게시물 삭제가 완료되었습니다");
-location.href='museum.do?command=notice';
+location.href='museum.do?command=noticeList';
 </script>
 
 
