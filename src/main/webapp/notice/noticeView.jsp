@@ -4,7 +4,7 @@
 <%@ include file="/header.jsp"%>
 
 
-<div id="noticeView_container">
+<div class="noticeView_container">
 	<h2>상세 보기</h2>
 	<div class="noticeView_box">
 		<div class="noticeView_field">
