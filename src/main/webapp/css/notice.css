@@ -15,6 +15,7 @@
     border-bottom: 1px solid #e0e0e0;
     display: flex;
     align-items: center;
+    z-index:10;
 }
 
 .notice_header_box h2,
@@ -31,18 +32,20 @@
 }
 
 .notice_header_box .writebutton input {
-    background-color: #0073e6;
-    color: #fff;
+    background-color: #fff;
+    color: #000;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
     font-size: 1em;
     width: 100%;
     height:40px;
+    border: 1px solid #000;
+    transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 .notice_header_box .writebutton input:hover {
-    background-color: #005bb5;
+    background-color: #000;
+    color: #fff;
     
 }
 
@@ -282,17 +285,19 @@ h2 {
 
 .btn-noticeView {
     padding: 10px 20px;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: color 0.3s ease, background-color 0.3s ease;
+     
 }
 
 .btn-noticeView:hover {
-    background-color: #0056b3;
+    background-color: #000;
+    color: #fff;
+    
 }
 
 /* CSS 예시 */
@@ -353,6 +358,97 @@ h2 {
 	margin-right:30px;
 	
 }
+/* magazine */
+.noticeMagazine_container{
+	display:flex;
+	width:95%;
+	height:auto;
+	margin: 0 auto;
+	margin-top:40px;
+	margin-bottom:40px;
+}
+.mu-news_left{
+	width:45%;
+}
+
+.l-img{
+	width:500px;
+	height:650px;
+	background: url(../images/magazine/magazine1.jpg) no-repeat center/contain;
+	box-shadow: 6px 6px #dadada;
+	margin-bottom: 40px;
+}
+
+.mu-news_left .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: #fff;
+    color: #000;
+    text-decoration: none;
+    border: 1px solid #000;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+.mu-news_left .pdf-down i, .mu-news_left .pdf-down i {
+    width: 20px;
+    height: 20px;
+    padding-left: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    background: url(../images/magazine/ico_pdf_type1.png) no-repeat right;
+    background-size: 20px;
+}
+
+.mu-news_left .btn-link i, .mu-news_left .btn-link i {
+    width: 20px;
+    height: 20px;
+    padding-left: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    background: url(../images/magazine/ico_link_arrow.png) no-repeat right;
+    background-size: 20px;
+}
+.mu-news_left .btn-link{
+	margin-left:10px;
+}
+.txt-area_right{
+	margin-left:50px;
+}
+
+
+.mu-news_left .btn:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.mu-news_left .btn-link {
+    border-color: #000;
+}
+
+.mu-news_left .btn-link:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.mu-news_left .pdf-down {
+    border-color: #000;
+}
+
+.mu-news_left .pdf-down:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.chapter-info {
+    display: block;
+    padding: 50px 30px;
+    box-sizing: border-box;
+    background-color: #f8f8f8;
+    height: 650px;
+    overflow: auto;
+}
+
+
 
 
 
