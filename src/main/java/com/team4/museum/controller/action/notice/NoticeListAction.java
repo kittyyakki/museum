@@ -6,21 +6,32 @@ import java.util.List;
 
 import com.team4.museum.controller.action.Action;
 import com.team4.museum.dao.NoticeDAO;
+import com.team4.museum.util.NoticeCategory;
 import com.team4.museum.util.Paging;
+import com.team4.museum.vo.MemberVO;
 import com.team4.museum.vo.NoticeVO;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class NoticeListAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 게시판의 게시물을 모두 조회해서  request 에 담고 noticeList.jsp  로  포워딩합니다
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		
+		HttpSession session = request.getSession();
+		MemberVO mvo = (MemberVO)session.getAttribute("loginUser");
 		NoticeDAO ndao = NoticeDAO.getInstance();
-		//NoticeVO nvo = new NoticeVO();
+		session.removeAttribute("category");
+		
+		
+		String category = request.getParameter("category") == null ? NoticeCategory.전체.name()
+				: request.getParameter("category");
+		
 		
 		int totalCount = ndao.getNoticeAllCount();
 		
@@ -28,20 +39,19 @@ public class NoticeListAction implements Action {
 		paging.setPage(getPage(request));
 		paging.setTotalCount(totalCount);
 		
-		/* List<NoticeVO> noticeList = ndao.selectNoticeList(paging); */
+		
 		List<NoticeVO> noticeList = ndao.getAllnoitce(paging);
 
+		request.setAttribute("categoryName", category);
+		session.setAttribute("category", category);
 		request.setAttribute("paging", paging);
         request.setAttribute("noticeList", noticeList);
         request.setAttribute("totalCount", totalCount);
+        
 
+        request.setAttribute("noticeCategory", NoticeCategory.values());
+		request.getRequestDispatcher("notice/noticeList.jsp").forward(request, response);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("notice/noticeList.jsp");
-		rd.forward(request, response);
-		
-		//System.out.println("list ok : " + noticeList);
-		//System.out.println(nvo.getTitle());
-
 	}
 	private int getPage(HttpServletRequest request) {
         if (request.getParameter("page") != null) {
