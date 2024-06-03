@@ -12,6 +12,11 @@
 		<div class="write_middle">
 				<ul>
 					<li>
+						<label>아이디</label>
+							<input type="text"  name="authorid" value="${loginUser.id} " readonly>
+					</li>
+					
+					<li>
 						<label>갤러리명</label>
 							<input type="text" placeholder="갤러리명 10자 이내로 입력하세요" name="title">
 					</li>
