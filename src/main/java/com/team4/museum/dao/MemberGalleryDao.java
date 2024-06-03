@@ -1,13 +1,26 @@
 package com.team4.museum.dao;
 
+import static com.team4.museum.util.Db.executeSelectOne;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import com.team4.museum.util.Db;
+import com.team4.museum.util.Paging;
 import com.team4.museum.vo.MemberGalleryVO;
+import com.team4.museum.vo.NoticeVO;
 
 public class MemberGalleryDao {
 
 	private MemberGalleryDao() {
 	}
-
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	
 	private static MemberGalleryDao mgdao = new MemberGalleryDao();
 
 	public static MemberGalleryDao getInstance() {
@@ -61,4 +74,39 @@ public class MemberGalleryDao {
 				pstmt -> pstmt.setInt(1, mseq));
 	}
 
+	public int getGalleryAllCount() {
+		return executeSelectOne(
+				"SELECT COUNT(*) AS cnt FROM member_gallery",
+				rs -> rs.getInt("cnt"));
+	}
+	
+	public ArrayList<MemberGalleryVO> getAllgallery(Paging paging) {
+		ArrayList<MemberGalleryVO> list = new ArrayList<MemberGalleryVO>();
+		con = Db.getConnection();
+		
+		String sql = "select * from notice order by nseq desc limit ? offset ?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, paging.getDisplayRow());
+			pstmt.setInt(2, paging.getStartNum() - 1);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				MemberGalleryVO mgdto = new MemberGalleryVO();
+				mgdto.setMseq(rs.getInt("mseq"));
+				mgdto.setTitle(rs.getString("title"));
+				mgdto.setAuthorId(rs.getString("author"));
+				mgdto.setWritedate(rs.getDate("writedate"));
+				mgdto.setContent(rs.getString("content"));
+				mgdto.setReadcount(rs.getInt("readcount"));
+				mgdto.setImage(rs.getString("Image"));
+				
+				list.add(mgdto);
+			}
+			}catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				Db.close(con, pstmt, rs);}
+			return list;
+		}
 }
+
