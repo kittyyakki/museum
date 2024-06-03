@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/header.jsp"%>
 
-<!-- museum.do?command=artwork 의 목적지 -->
+<!-- museum.do?command=artworkList 의 목적지 -->
 
 <section class="artwork-list-header">
 	<form action="museum.do?command=artworkList" method="post" name="searchForm" class="artwork-search-form">
@@ -27,8 +27,9 @@
 
 <main class="artwork-list-main">
 	<div class="artwork-list-head">
-		<h4>검색결과가 총 ${paging.totalCount}건 입니다</h4>
+		<h4>검색결과가 총 ${artworkList.size()}건 입니다</h4>
 		<c:if test="${loginUser.adminyn.equals('Y')}">
+			
 			<a href="museum.do?command=artworkWrite" class="artwork-list_btn">예술품 등록</a>
 		</c:if>
 	</div>
@@ -44,48 +45,6 @@
 			</div>
 		</c:forEach>
 	</div>
-	<c:set var="pageListPrefix" value="museum.do?command=artworkList&page=" />
-	<div class="paging">
-		<c:choose>
-			<c:when test="${paging.prev}">
-				<a class="paging_button" href="${pageListPrefix}1">«</a>
-			</c:when>
-			<c:otherwise>
-				<span class="paging_button">«</span>
-			</c:otherwise>
-		</c:choose>
-		<c:choose>
-			<c:when test="${paging.prev}">
-				<a class="paging_button" href="${pageListPrefix}${paging.beginPage-1}">‹</a>
-			</c:when>
-			<c:otherwise>
-				<span class="paging_button">‹</span>
-			</c:otherwise>
-		</c:choose>
-		<c:forEach begin="${paging.beginPage}" end="${paging.endPage}" var="index">
-			<c:if test="${index==paging.page}">
-				<span class="current-page">${index}</span>
-			</c:if>
-			<c:if test="${index!=paging.page}">
-				<a href="${pageListPrefix}${index}">${index}</a>
-			</c:if>
-		</c:forEach>
-		<c:choose>
-			<c:when test="${paging.next}">
-				<a class="paging_button" href="${pageListPrefix}${paging.endPage+1}">›</a>
-			</c:when>
-			<c:otherwise>
-				<span class="paging_button">›</span>
-			</c:otherwise>
-		</c:choose>
-		<c:choose>
-			<c:when test="${paging.next}">
-				<a class="paging_button" href="${pageListPrefix}${paging.totalPage}">»</a>
-			</c:when>
-			<c:otherwise>
-				<span class="paging_button">»</span>
-			</c:otherwise>
-		</c:choose>
 </main>
 
 <%@ include file="/footer.jsp"%>
