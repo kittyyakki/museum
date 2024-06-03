@@ -15,18 +15,19 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 
-public class ArtworkWriteFormAction implements Action{
+public class ArtworkUpdateFormAction implements Action{
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArtworkDao adao = ArtworkDao.getInstance();
 		ArtworkVO avo = new ArtworkVO();
-		avo.setName(request.getParameter("artname"));
-		avo.setCategory(request.getParameter("category"));
+		int aseq = Integer.parseInt(request.getParameter("aseq"));
+		avo.setAseq(aseq);
 		avo.setArtist(request.getParameter("artist"));
+		avo.setName(request.getParameter("artname"));
 		avo.setYear(request.getParameter("year"));
 		avo.setMaterial(request.getParameter("material"));
 		avo.setSize(request.getParameter("size"));
+		avo.setCategory(request.getParameter("category"));
 		avo.setDisplayyn(request.getParameter("displayYn"));
 		avo.setContent(request.getParameter("content"));
 		
@@ -57,8 +58,7 @@ public class ArtworkWriteFormAction implements Action{
 			}
 		}
 		
-		adao.insertArtwork(avo);
-		request.getRequestDispatcher("museum.do?command=artworkList").forward(request, response);
+		ArtworkDao.getInstance().updateArtwork(avo);
+		request.getRequestDispatcher("museum.do?command=artworkView&aseq=" + aseq).forward(request, response);
 	}
-
 }
