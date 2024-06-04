@@ -26,49 +26,49 @@
 <script src="script/notice.js"></script>
 </head>
 <body>
-	<div class="body-wrap">
-		<header>
-			<nav>
-				<h1>
-					<a href="museum.do?command=index" title="로고"></a>
-				</h1>
-				<div class="header_gnb">
-					<a href="museum.do?command=artworkList">예술품</a>
-					<a href="museum.do?command=noticeList">소식지</a>
-					<a href="museum.do?command=galleryList">이용자 갤러리</a>
-					<a href="museum.do?command=qnaList">고객센터</a>
-					<a href="museum.do?command=myPage">마이페이지</a>
+	<header>
+		<nav>
+			<h1>
+				<a href="museum.do?command=index" title="로고"></a>
+			</h1>
+			<div class="header_gnb">
+				<a href="museum.do?command=artworkList">예술품</a>
+				<a href="museum.do?command=noticeList">소식지</a>
+				<a href="museum.do?command=galleryList">이용자 갤러리</a>
+				<a href="museum.do?command=qnaList">고객센터</a>
+				<a href="museum.do?command=myPage">마이페이지</a>
+			</div>
+			<div class="search">
+				<div>
+					<input type="text" placeholder="검색어를 입력하세요">
 				</div>
-				<div class="search">
-					<div>
-						<input type="text" placeholder="검색어를 입력하세요">
-					</div>
-					<div>
-						<a class="btn_icon" href="#" title="검색"></a>
-					</div>
+				<div>
+					<a class="btn_icon" href="#" title="검색"></a>
 				</div>
-				<div class="login_join_box">
-					<c:choose>
-						<c:when test="${empty loginUser}">
-							<a href="museum.do?command=loginForm">로그인</a>
-							<a href="museum.do?command=joinForm">회원가입</a>
-						</c:when>
-						<c:otherwise>
-							<a href="#">${loginUser.name}(${loginUser.id})</a>
-							<a href="museum.do?command=logout">로그아웃</a>
-						</c:otherwise>
-					</c:choose>
-				</div>
-				<div class="artwork sub-menu">
-					<!-- request.setAttribute("kindList", ArtworkKind.values()); -->
-					<c:forEach items="${artworkCategory}" var="category" varStatus="status">
-						<a href="museum.do?command=artwork&category=${status.index}">${category.name()}</a>
-					</c:forEach>
-				</div>
-				<div class="notice sub-menu">
-					<c:forEach items="${noticeCategory}" var="category" varStatus="status">
-						<a href="museum.do?command=notice&category=${status.index}">${category.name()}</a>
-					</c:forEach>
-				</div>
-			</nav>
-		</header>
+			</div>
+			<div class="login_join_box">
+				<c:choose>
+					<c:when test="${empty loginUser}">
+						<a href="museum.do?command=loginForm">로그인</a>
+						<a href="museum.do?command=joinForm">회원가입</a>
+					</c:when>
+					<c:otherwise>
+						<a href="#">${loginUser.name}(${loginUser.id})</a>
+						<a href="museum.do?command=logout">로그아웃</a>
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<div class="artwork sub-menu">
+				<!-- request.setAttribute("kindList", ArtworkKind.values()); -->
+				<c:forEach items="${artworkCategory}" var="category" varStatus="status">
+					<a href="museum.do?command=artwork&category=${status.index}">${category.name()}</a>
+				</c:forEach>
+			</div>
+			<div class="notice sub-menu">
+				<c:forEach items="${noticeCategory}" var="category" varStatus="status">
+					<a href="museum.do?command=notice&category=${status.index}">${category.name()}</a>
+				</c:forEach>
+			</div>
+		</nav>
+	</header>
+	<div class="content-wrap">
