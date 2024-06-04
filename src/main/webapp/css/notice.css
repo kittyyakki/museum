@@ -575,4 +575,7 @@ h2 {
 	background-color: #000;
 	color: #fff;
 }
+.notice_insert_field select{
+	height: 30px;
+}
 
