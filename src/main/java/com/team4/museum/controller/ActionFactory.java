@@ -4,6 +4,7 @@ import com.team4.museum.controller.action.Action;
 import com.team4.museum.controller.action.IndexAction;
 import com.team4.museum.controller.action.admin.AdminAction;
 import com.team4.museum.controller.action.admin.AdminArtworkListAction;
+import com.team4.museum.controller.action.admin.AdminDeleteMemberAction;
 import com.team4.museum.controller.action.admin.AdminMemberListAction;
 import com.team4.museum.controller.action.admin.AdminQnaListAction;
 import com.team4.museum.controller.action.admin.GrantAdminRightsAction;
@@ -113,6 +114,7 @@ public class ActionFactory {
 		case "adminArtworkList" -> new AdminArtworkListAction();
 		case "adminQnaList" -> new AdminQnaListAction();
 		case "grantAdminRights" -> new GrantAdminRightsAction();
+		case "adminDeleteMember" -> new AdminDeleteMemberAction();
 		
 		// default
 		default -> null;
