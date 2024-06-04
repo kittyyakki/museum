@@ -58,6 +58,7 @@ function go_editMember(){
 	    alert("이메일을 입력해 주세요.");	   
 	    document.joinForm.email.focus();
 	} else{
+	    alert("회원정보 수정을 완료했습니다.");
 	    document.joinForm.submit();
 	}
 	

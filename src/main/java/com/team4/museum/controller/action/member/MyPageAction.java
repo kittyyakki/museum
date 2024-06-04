@@ -19,7 +19,7 @@ public class MyPageAction implements Action {
 	    if(mvo==null) {
 	    	response.sendRedirect("museum.do?command=loginForm");
 	    }else {
-	    	request.getRequestDispatcher("member/editMember.jsp").forward(request, response);
+	    	request.getRequestDispatcher("member/myPage.jsp").forward(request, response);
 	    }
 	    
 	}

@@ -28,3 +28,17 @@
     margin-bottom: 30px;
 }
 
+.gallery-list-header{
+	width:80%;
+	margin:3rem auto;
+	border-bottom:3px soild blue;
+}
+
+.edit-id{
+	background-color:#ddd;
+}
+
+#birth{
+	background-color:#ddd;
+	pointer-events:none;
+}
