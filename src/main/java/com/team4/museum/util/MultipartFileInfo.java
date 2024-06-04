@@ -23,6 +23,13 @@ final public class MultipartFileInfo {
 		return saveFileName;
 	}
 
+	/**
+	 * 요청에서 파일을 읽어서 저장
+	 * 
+	 * @param request       요청
+	 * @param uploadDirName 업로드 디렉토리 이름
+	 * @return 파일 정보
+	 */
 	public static MultipartFileInfo saveFileFrom(HttpServletRequest request, String uploadDirName)
 			throws ServletException, IOException {
 		// 서블릿 컨텍스트를 이용하여 업로드 디렉토리를 생성
