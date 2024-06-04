@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/header.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:include page="/header.jsp">
+	<jsp:param name="stylesheet" value="css/artwork.css" />
+	<jsp:param name="script" value="script/artwork.js" />
+</jsp:include>
 
 <section class="artwork-view">
 	<div class="artwork-view-header">

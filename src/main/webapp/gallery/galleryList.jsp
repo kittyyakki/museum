@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/header.jsp"%>
+<jsp:include page="/header.jsp">
+	<jsp:param name="script" value="script/gallery.js" />
+</jsp:include>
 
 <section>
 	<form action="museum.do?command=galleryList" method="post" name="searchForm" class="search-form">

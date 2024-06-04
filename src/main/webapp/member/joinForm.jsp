@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/header.jsp"%>
+<jsp:include page="/header.jsp">
+	<jsp:param name="stylesheet" value="css/joinForm.css" />
+	<jsp:param name="script" value="script/join.js" />
+</jsp:include>
 <section>
 	<article>
 		<form action="museum.do?command=join" method="post" name="joinForm" class="joinForm">
