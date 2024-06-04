@@ -48,7 +48,7 @@
 				<li>${avo.size}</li>
 				<li>${avo.indate}</li>
 				<li>
-					<img alt="artwork-img" src="images/artwork/${avo.savefilename}">
+					<img alt="artwork-img" src="images/artwork/${avo.fullSavefilename}">
 				</li>
 			</ul>
 		</c:forEach>

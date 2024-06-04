@@ -96,6 +96,14 @@ public class ArtworkVO {
 		this.savefilename = savefilename;
 	}
 
+	public String getFullSavefilename() {
+		if (savefilename.startsWith("http")) {
+			return savefilename;
+		}
+
+		return "images/artwork/" + savefilename;
+	}
+
 	public Date getIndate() {
 		return indate;
 	}

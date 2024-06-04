@@ -39,7 +39,7 @@
 	<div class="artwork-list">
 		<c:forEach items="${artworkList}" var="artwork">
 			<div onclick="location.href='museum.do?command=artworkView&aseq=${artwork.aseq}'">
-				<img src="images/artwork/${artwork.savefilename}" alt="artwork_image" class="artwork-list_img" />
+				<img src="${artwork.fullSavefilename}" alt="artwork_image" class="artwork-list_img" />
 				<div class="artwork-list_info">
 					<span>${artwork.artist}</span>
 					<p>${artwork.name}</p>
