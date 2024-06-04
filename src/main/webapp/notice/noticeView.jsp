@@ -15,8 +15,8 @@
 			<div class="noticeView_label">제목</div>
 			<div class="noticeView_text">${noticeView.title}</div>
 		</div>
-		<%-- <div class="noticeView_label" style="flex: 0.5;">이미지</div>
-		<div class=noticeView_text style="flex: 2;">
+		<div class="noticeView_label" style="flex: 0.5;">이미지</div>
+		<%-- <div class=noticeView_text style="flex: 2;">
 			<c:choose>
 				<c:when test="${empty  noticeView.savefilename}">
 					<img src="images/noname.jpg" width="250" />
