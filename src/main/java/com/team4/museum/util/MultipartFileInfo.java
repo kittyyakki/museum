@@ -30,7 +30,7 @@ final public class MultipartFileInfo {
 	 * @param uploadDirName 업로드 디렉토리 이름
 	 * @return 파일 정보
 	 */
-	public static MultipartFileInfo saveFileFrom(HttpServletRequest request, String uploadDirName)
+	public static MultipartFileInfo getFromRequest(HttpServletRequest request, String uploadDirName)
 			throws ServletException, IOException {
 		// 서블릿 컨텍스트를 이용하여 업로드 디렉토리를 생성
 		ServletContext context = request.getSession().getServletContext();
