@@ -40,12 +40,15 @@ public class MuseumServlet extends HttpServlet {
 
 		// 'command' 파라미터로 요청된 'Action'을 찾아 실행
 		String command = request.getParameter("command");
+
+		System.out.print("Request : " + request.getQueryString() + " -> ");
 		Action ac = ActionFactory.getInstance().getAction(command);
 		if (ac == null) {
 			System.out.println("Action not found : " + command);
 			request.getRequestDispatcher("util/404.jsp").forward(request, response);
 			return;
 		}
+		System.out.println(ac.getClass().getSimpleName());
 
 		ac.execute(request, response);
 	}
