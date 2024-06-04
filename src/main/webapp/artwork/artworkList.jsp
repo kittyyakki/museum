@@ -31,8 +31,8 @@
 <main class="artwork-list-main">
 	<div class="artwork-list-head">
 		<h4>검색결과가 총 ${artworkList.size()}건 입니다</h4>
-		<c:if test="${loginUser.adminyn.equals('Y')}">
-			
+		<c:if test="${isAdmin}">
+<%-- <c:if test="${loginUser.adminyn.eqauls('Y')}"> --%>
 			<a href="museum.do?command=artworkWrite" class="artwork-list_btn">예술품 등록</a>
 		</c:if>
 	</div>
