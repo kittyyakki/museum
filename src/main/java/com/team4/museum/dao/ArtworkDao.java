@@ -41,10 +41,14 @@ public class ArtworkDao {
 
 	}
 
+	// 기본적인 전체조회
 	public List<ArtworkVO> selectArtworkAdmin() {
 		return executeSelect("SELECT * FROM artwork", ArtworkDao::extractArtworkVO);
 	}
 
+	// 관리자용 검색조회(admin 페이지, 예술품 페이지의 관리자 로그인)
+	// 어차피 관리자는 admin 페이지에서 displayyn이 N인 데이터의 조회가 가능한데
+	// 굳이 artworkList에서 관리자용 로직(loginUser가 관리자일 때 Y,N 모두 표시)을 따로 처리해야 할까
 	public List<ArtworkVO> searchArtworkAdmin(String searchWord) {
 		return executeSelect(
 				"SELECT * FROM artwork WHERE name LIKE CONCAT('%', ?, '%') OR artist LIKE CONCAT('%', ?, '%')",
@@ -53,7 +57,7 @@ public class ArtworkDao {
 					pstmt.setString(2, searchWord);
 				}, ArtworkDao::extractArtworkVO);
 	}
-	
+	// 위 검색조회와 같지만 페이징 처리가 가능 -> 모두 페이징 처리를 하고 위 코드를 삭제하는게 맞음
 	public List<ArtworkVO> searchArtworkAdmin(Pagination pagination, String searchWord) {
 		return executeSelect(
 				"SELECT * FROM artwork "
@@ -67,11 +71,13 @@ public class ArtworkDao {
 				}, ArtworkDao::extractArtworkVO);
 	}
 
+	// 카테고리를 기준으로 전체 조회
 	public List<ArtworkVO> selectCategoryArtworkAdmin(String category) {
 		return executeSelect("SELECT * FROM artwork WHERE category=?", pstmt -> pstmt.setString(1, category),
 				ArtworkDao::extractArtworkVO);
 	}
 
+	// 관리자용 예술품 삭제
 	public void deleteArtwork(Integer aseq) {
 		executeUpdate("DELETE FROM artwork WHERE aseq = ?", pstmt -> pstmt.setInt(1, aseq));
 
@@ -107,6 +113,16 @@ public class ArtworkDao {
 		return result;
 	}
 	
+	public List<ArtworkVO> selectArtworkAsDisplayyn(Pagination pagination, String displayState) {
+		return executeSelect(
+				"SELECT * FROM artwork WHERE displayyn=? ORDER BY aseq DESC LIMIT ? OFFSET ?",
+				pstmt -> {
+					pstmt.setString(1, displayState);
+					pstmt.setInt(2, pagination.getLimit());
+					pstmt.setInt(3, pagination.getOffset());
+				},
+				ArtworkDao::extractArtworkVO);
+	}
 	/* <========================================================================= */
 
 	public List<ArtworkVO> searchArtwork(String searchWord) {
