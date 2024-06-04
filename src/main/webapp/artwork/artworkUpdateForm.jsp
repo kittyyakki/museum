@@ -88,7 +88,7 @@
 					<input type="file" name="image" accept="image/*" onchange="previewImage()">
 				</li>
 				<li>
-					<img alt="image" src="images/artwork/${artwork.savefilename}" name="uploadedImage">
+					<img alt="image" src="${artwork.fullSavefilename}" name="uploadedImage">
 				</li>
 			</ul>
 			<div>
