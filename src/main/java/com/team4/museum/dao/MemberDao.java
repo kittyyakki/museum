@@ -1,8 +1,14 @@
 package com.team4.museum.dao;
 
-import static com.team4.museum.util.Db.executeUpdate;
+import static com.team4.museum.util.Db.executeSelect;
 import static com.team4.museum.util.Db.executeSelectOne;
-import com.team4.museum.dao.MemberDao;
+import static com.team4.museum.util.Db.executeUpdate;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import com.team4.museum.util.Pagination;
 import com.team4.museum.vo.MemberVO;
 
 public class MemberDao {
@@ -30,6 +36,16 @@ public class MemberDao {
 		});
 	}
 
+	public List<MemberVO> getMemberList(Pagination pagination) {
+		return executeSelect(
+				"SELECT * FROM member ORDER BY id DESC LIMIT ? OFFSET ?",
+				pstmt -> {
+					pstmt.setInt(1, pagination.getLimit());
+					pstmt.setInt(2, pagination.getOffset());
+				},
+				MemberDao::extractMemberVO);
+	}
+
 	public int insertMember(MemberVO mvo) {
 		return executeUpdate(
 				"INSERT INTO member (id, name, pwd, email, phone)" + " VALUES ( ?, ?, ?, ?, ? )",
@@ -54,6 +70,32 @@ public class MemberDao {
 	}
 
 	public void deleteMember(String id) {
-		executeUpdate("UPDATE member SET adminyn = 'N' WHERE id = ?", pstmt -> pstmt.setString(1, id));
+		executeUpdate("DELETE FROM member WHERE id = ?", pstmt -> pstmt.setString(1, id));
+	}
+
+	private static MemberVO extractMemberVO(ResultSet rs) throws SQLException {
+
+		MemberVO mvo = new MemberVO();
+		mvo.setId(rs.getString("id"));
+		mvo.setName(rs.getString("name"));
+		mvo.setEmail(rs.getString("email"));
+		mvo.setIndate(rs.getDate("indate"));
+		mvo.setPhone(rs.getString("phone"));
+		mvo.setAdminyn(rs.getString("adminyn"));
+		return mvo;
+
+	}
+
+	public int getAllCount() {
+		return executeSelectOne("SELECT COUNT(*) as cnt FROM member",
+				rs -> rs.getInt("cnt"));
+	}
+
+	public void adminRightsAction(String memberId, String action) {
+		executeUpdate("UPDATE member SET adminyn=? WHERE id=?",
+				pstmt -> {
+					pstmt.setString(1, action.equals("grant") ? "Y" : "N");
+					pstmt.setString(2, memberId);
+				});
 	}
 }

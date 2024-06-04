@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.team4.museum.util.Pagination;
 import com.team4.museum.util.Paging;
 import com.team4.museum.vo.ArtworkVO;
 import com.team4.museum.vo.QnaVO;
@@ -138,13 +139,18 @@ public class ArtworkDao {
 
 	}
 
-	public List<ArtworkVO> selectArtwork(Paging paging) {
+	public List<ArtworkVO> selectArtwork(Pagination pagination) {
 			return executeSelect(
 					"SELECT * FROM artwork ORDER BY aseq DESC LIMIT ? OFFSET ?",
 					pstmt -> {
-						pstmt.setInt(1, paging.getDisplayRow());
-						pstmt.setInt(2, paging.getStartNum() - 1);
+						pstmt.setInt(1, pagination.getLimit());
+						pstmt.setInt(2, pagination.getOffset());
 					},
 					ArtworkDao::extractArtworkVO);
+	}
+
+	public int getAllCount() {
+		return executeSelectOne("SELECT COUNT(*) as cnt FROM artwork", 
+				rs -> rs.getInt("cnt"));
 	}
 }

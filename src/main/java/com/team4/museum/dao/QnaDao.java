@@ -21,6 +21,12 @@ public class QnaDao {
 	public static QnaDao getInstance() {
 		return instance;
 	}
+	
+	public List<QnaVO> selectQna() {
+		return executeSelect(
+				"SELECT * FROM qna",
+				QnaDao::extractQnaVO);
+	}
 
 	public List<QnaVO> selectQna(Pagination pagination) {
 		return executeSelect(

@@ -1,0 +1,194 @@
+@charset "UTF-8";
+
+/* 관리자 페이지 adminMain.jsp ====================>*/
+.admin-main-menu {
+	margin: 5rem 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.admin-main-menu li {
+	border: 2px solid gray;
+	width: 20%;
+	height: 5rem;
+	text-align: center;
+	margin: 0.5rem;
+	box-shadow: 1px 1px 2px gray;
+	font-size: 2rem;
+}
+
+.admin-main-menu li:hover {
+	translate: -3px -3px;
+	background: gray;
+	color: white;
+	box-shadow: 4px 4px 2px #373737;
+}
+
+.admin-main-menu a {
+	display: block;
+	color: inherit;
+	height: 100%;
+	align-content: center;
+}
+/* <======================================== */
+
+/* 관리자 페이지 사이드 메뉴바 admin/sub_menu.jsp =============>*/
+.admin-sub-menu {
+	margin: 0;
+	width: 10rem;
+	height: 30%;
+	background: #faedcd;
+	border-radius: 0 20px 20px 0;
+	text-align: right;
+	position: absolute;
+	left: 0px;
+	top: 20%;
+	transition: 0.5s;
+}
+
+.admin-sub-menu:hover {
+	width: 11rem;
+}
+
+.admin-sub-menu li {
+	width: 100%;
+	height: 2rem;
+	margin: 1rem 0;
+}
+
+.admin-sub-menu a {
+	display: block;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	align-content: center;
+}
+
+.admin-sub-menu a:hover {
+	background: #dad7cd;
+	border-radius: 5px;
+}
+/* <======================================== */
+
+/* 관리자 페이지의 리스트 스타일 =========================>*/
+.admin-list {
+	margin: 0 0 6rem 12rem;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 45rem;
+}
+
+.admin-list ul {
+	width: 80%;
+	display: flex;
+	border: 1px solid gray;
+}
+
+.admin-list li {
+	height: 4rem;
+	font-size: 1rem;
+	align-content: center;
+	text-align: center;
+}
+
+.admin-list img {
+	display: inline-block;
+	height: 100%;
+}
+
+.admin-list img:hover {
+	max-height: 15rem;
+	position: absolute;
+	z-index: 10;
+	right: 0%;
+}
+
+.admin-list input[type=checkbox] {
+	width: 100%;
+}
+
+.admin-list ul>li:nth-of-type(1) {
+	flex: 0.2;
+}
+
+.admin-list ul>li:nth-of-type(2) {
+	flex: 0.5;
+}
+
+.admin-list ul>li:nth-of-type(3) {
+	flex: 0.5;
+}
+
+.admin-list ul>li:nth-of-type(4) {
+	flex: 1;
+}
+
+.admin-list ul>li:nth-of-type(5) {
+	flex: 1;
+}
+
+.admin-list ul>li:nth-of-type(6) {
+	flex: 1;
+}
+
+.admin-list ul>li:nth-of-type(7) {
+	flex: 0.5;
+}
+
+.admin-list ul>li:nth-of-type(8) {
+	flex: 1;
+}
+
+.admin-list ul>li:nth-of-type(9) {
+	flex: 0.5;
+}
+
+.admin-list ul>li:nth-of-type(10) {
+	flex: 0.5;
+}
+
+.admin-list ul>li:nth-of-type(11) {
+	flex: 1;
+}
+
+.admin-list-btn {
+	display: flex;
+	margin: 1rem 0;
+	flex-direction: row;
+}
+
+.admin-list-btn input[type=button] {
+	width: 8rem;
+	height: 2rem;
+	padding: 0;
+	margin: 0 0.5rem;
+	background-color: white;
+	color: black;
+	font-weight: bold;
+	border: 2px solid black;
+	border-radius: 50px;
+	box-shadow: 1px 1px 2px gray;
+	transition: 0.3s;
+	cursor: pointer;
+}
+
+.admin-list-btn input[type=button]:hover {
+	background-color: black;
+	color: white;
+}
+
+.admin-list-main{
+	cursor: pointer;
+}
+
+.admin-list-main:hover{
+	background-color: #faedcd;
+}
+
+.artwork-name:hover{
+	text-decoration: underline;
+}
