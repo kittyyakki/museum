@@ -9,7 +9,6 @@ import com.team4.museum.controller.action.Action;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 public class JoinAction implements Action {
 
@@ -25,9 +24,8 @@ public class JoinAction implements Action {
 		mvo.setPhone(request.getParameter("phone"));
 
 		int result = mdao.insertMember(mvo);
-		HttpSession session = request.getSession();
-		if(result == 1) session.setAttribute("message", "회원가입이 완료되었습니다. 로그인하세요");
-		else session.setAttribute("message", "회원가입 실패 관리자에게 문의하세요");
+		if(result == 1) request.setAttribute("message", "회원가입이 완료되었습니다. 로그인하세요");
+		else request.setAttribute("message", "회원가입 실패 관리자에게 문의하세요");
 
 		request.getRequestDispatcher("member/loginForm.jsp").forward(request, response);
 

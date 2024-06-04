@@ -17,6 +17,7 @@ public class AdminArtworkListAction implements Action{
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArtworkDao adao = ArtworkDao.getInstance();
+		String searchWord = request.getParameter("searchWord");
 		
 		Pagination pagination = Pagination
 				.fromRequest(request)
@@ -25,8 +26,12 @@ public class AdminArtworkListAction implements Action{
 				.setItemsPerPage(10);
 
 		request.setAttribute("pagination", pagination);
-		
-		request.setAttribute("artworkList", adao.selectArtwork(pagination));
+
+		if(searchWord != null) {
+			request.setAttribute("artworkList", adao.searchArtworkAdmin(pagination, searchWord));			
+		}else {
+			request.setAttribute("artworkList", adao.selectArtwork(pagination));
+		}
 		request.getRequestDispatcher("admin/adminArtworkList.jsp").forward(request, response);
 	}
 

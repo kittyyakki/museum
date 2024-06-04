@@ -12,13 +12,13 @@ function checkAll() {
 	});
 }
 
-function selectCheckedList(url){
+function selectCheckedList(url, selector){
 	const selectedMembers = [];
 	const checkBoxes = document.querySelectorAll('.check-box:checked');
 
 	checkBoxes.forEach(checkBox => {
 		const memberRow = checkBox.closest('ul');
-		const memberId = memberRow.querySelector('li:nth-child(2)>span:first-child').textContent.trim();
+		const memberId = memberRow.querySelector(selector).textContent.trim();
 		selectedMembers.push(memberId);
 	});
 	
@@ -28,23 +28,23 @@ function selectCheckedList(url){
 	}
 
 	// 선택된 회원 ID들을 숨겨진 input 필드에 저장합니다.
-	const memberIdsInput = document.grantAdminForm.memberIds;
+	const memberIdsInput = document.adminForm.memberIds;
 	memberIdsInput.value = selectedMembers.join(',');
 
 	// 폼을 제출합니다.
-	document.grantAdminForm.action = url;
-	document.grantAdminForm.submit();
+	document.adminForm.action = url;
+	document.adminForm.submit();
 }
 
 function adminRightsAction(act) {
-	document.grantAdminForm.action.value = act;
-	selectCheckedList("museum.do?command=grantAdminRights");
+	document.adminForm.action.value = act;
+	selectCheckedList("museum.do?command=grantAdminRights", 'li:nth-child(2)>span:first-child');
 }
 
 function deleteMember(){
 	let ans = confirm("정말 삭제하시겠습니까?");
 	if(ans){
-		selectCheckedList("museum.do?command=adminDeleteMember");
+		selectCheckedList("museum.do?command=adminDeleteMember", 'li:nth-child(2)>span:first-child');
 	}else{
 		return;
 	}
@@ -52,8 +52,49 @@ function deleteMember(){
 
 function go_check(event) {
     // 클릭한 요소가 체크박스가 아닌 경우에만 체크박스를 체크/체크 해제
-    if (!event.target.classList.contains('check-box') || !event.target.classList.contains('artwork-name')) {
+    if (!event.target.classList.contains('check-box') && !event.target.classList.contains('view-link')) {
         let checkbox = event.currentTarget.querySelector('.check-box');
         checkbox.checked = !checkbox.checked;
     }
+}
+
+function updateArtwork(){
+	const checkBoxes = document.querySelectorAll('.check-box:checked');
+
+	if(checkBoxes.length > 1){
+		alert("한 개만 선택하세요");
+		return;
+	}
+	const memberRow = checkBoxes[0].closest('ul');
+	const aseq = memberRow.querySelector('li:nth-child(3)').textContent.trim();
+	
+	location.href = "museum.do?command=artworkUpdate&aseq=" + aseq;
+}
+
+function deleteArtwork(){
+	let ans = confirm("정말 삭제하시겠습니까?");
+	if(ans){
+		selectCheckedList("museum.do?command=adminDeleteArtwork", 'li:nth-child(3)');
+	}else{
+		return;
+	}
+}
+
+function deleteQna(){
+	let ans = confirm("정말 삭제하시겠습니까?");
+	if(ans){
+		selectCheckedList("museum.do?command=adminQnaDelete", 'li:nth-child(2)')		
+	}else{
+		return;
+	}
+}
+
+function searchAdminArtwork(){
+	const searchWord = document.adminForm.searchWord.value;
+	if(!searchWord || searchWord === ""){
+		alert("검색어를 입력하세요");
+		return;
+	}else{
+		location.href="museum.do?command=adminArtworkList&searchWord=" + searchWord;
+	}
 }
