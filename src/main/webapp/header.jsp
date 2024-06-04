@@ -21,7 +21,7 @@
 	<header>
 		<nav>
 			<h1>
-				<a href="museum.do?command=index" title="로고"></a>
+				<img class="header_logo" src="images/header_logo.png" alt="로고" id="header_logo">
 			</h1>
 			<div class="header_gnb">
 				<a href="museum.do?command=artworkList">예술품</a> <a href="museum.do?command=noticeList">소식지</a> <a href="museum.do?command=galleryList">이용자 갤러리</a> <a href="museum.do?command=qnaList">고객센터</a> <a href="museum.do?command=myPage">마이페이지</a>
