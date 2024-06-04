@@ -36,7 +36,7 @@ final public class NoticeDAO {
 
 	public List<NoticeVO> selectNoticeList(Pagination paging) {
 		return executeSelect(
-				"SELECT * FROM notice LIMIT ? OFFSET ?",
+				"SELECT * FROM notice LIMIT ? OFFSET ? ",
 				pstmt -> {
 					pstmt.setInt(1, paging.getLimit());
 					pstmt.setInt(2, paging.getOffset());
@@ -44,6 +44,7 @@ final public class NoticeDAO {
 				NoticeDAO::extractNoticeVO);
 	}
 
+	//ORDER BY nseq DESC
 	/*
 	 * public NoticeVO selectNotice(int nseq) { return executeSelectOne(
 	 * "SELECT * FROM notice WHERE nseq = ?", pstmt -> pstmt.setInt(1, nseq),
@@ -51,7 +52,7 @@ final public class NoticeDAO {
 	 */
 
 	public List<NoticeVO> selectCategoryNotice(String category, Pagination paging) {
-		return executeSelect("SELECT * FROM notice WHERE category = ? LIMIT ? OFFSET ?",
+		return executeSelect("SELECT * FROM notice WHERE category = ? ORDER BY nseq DESC LIMIT ? OFFSET ?",
 				pstmt -> {
 					pstmt.setString(1, category);
 					pstmt.setInt(2, paging.getLimit());
@@ -60,14 +61,14 @@ final public class NoticeDAO {
 				NoticeDAO::extractNoticeVO);
 	}
 
-	public int insertNotice(NoticeVO notice) {
+	public int insertNotice(NoticeVO nvo) {
 		return executeUpdate(
 				"INSERT INTO notice (title, author, content, category) VALUES (?, ?, ?, ?)",
 				pstmt -> {
-					pstmt.setString(1, notice.getTitle());
-					pstmt.setString(2, notice.getAuthor());
-					pstmt.setString(3, notice.getContent());
-					pstmt.setString(4, notice.getCategory());
+					pstmt.setString(1, nvo.getTitle());
+					pstmt.setString(2, nvo.getAuthor());
+					pstmt.setString(3, nvo.getContent());
+					pstmt.setString(4, nvo.getCategory());
 				});
 	}
 
@@ -91,15 +92,16 @@ final public class NoticeDAO {
 
 	public int getNoticeCount() {
 		return executeSelectOne(
-				"SELECT COUNT(*) FROM notice",
-				rs -> rs.getInt(1));
+				"SELECT COUNT(*) AS cnt FROM notice",
+
+				rs -> rs.getInt("cnt"));
 	}
 	
 	public int getNoticeCount(String category) {
 		return executeSelectOne(
-				"SELECT COUNT(*) FROM notice WHERE category = ?",
+				"SELECT COUNT(*) AS cnt FROM notice WHERE category = ?",
 				pstmt -> pstmt.setString(1, category),
-				rs -> rs.getInt(1));
+				rs -> rs.getInt("cnt"));
 	}
 
 	private static NoticeVO extractNoticeVO(ResultSet rs) throws SQLException {
@@ -112,12 +114,6 @@ final public class NoticeDAO {
 		notice.setReadcount(rs.getInt("readcount"));
 		notice.setCategory(rs.getString("category"));
 		return notice;
-	}
-
-	public int getNoticeAllCount() {
-		return executeSelectOne(
-				"SELECT COUNT(*) AS cnt FROM notice",
-				rs -> rs.getInt("cnt"));
 	}
 
 	public int getReplyCount(int nseq) {
@@ -176,34 +172,6 @@ final public class NoticeDAO {
 			Db.close(con, pstmt, rs);
 		}
 		return nvo;
-	}
-
-	public ArrayList<NoticeVO> getAllnoitce(Pagination pagination) {
-		ArrayList<NoticeVO> list = new ArrayList<NoticeVO>();
-		con = Db.getConnection();
-		String sql = "select * from notice order by nseq desc limit ? offset ?";
-		try {
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, pagination.getLimit());
-			pstmt.setInt(2, pagination.getOffset());
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				NoticeVO nvo = new NoticeVO();
-				nvo.setNseq(rs.getInt("nseq"));
-				nvo.setTitle(rs.getString("title"));
-				nvo.setAuthor(rs.getString("author"));
-				nvo.setWritedate(rs.getDate("writedate"));
-				nvo.setContent(rs.getString("content"));
-				nvo.setReadcount(rs.getInt("readcount"));
-				nvo.setCategory(rs.getString("category"));
-				list.add(nvo);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			Db.close(con, pstmt, rs);
-		}
-		return list;
 	}
 
 }
