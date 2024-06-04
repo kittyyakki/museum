@@ -156,7 +156,7 @@ public class Pagination {
 	 * @return 아이템 오프셋
 	 */
 	public int getOffset() {
-		return Math.max(0, getCurrentPage() - 1 * itemsPerPage);
+		return Math.max(0, getCurrentPage() - 1) * itemsPerPage;
 	}
 
 	/**
