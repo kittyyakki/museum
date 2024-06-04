@@ -12,18 +12,18 @@ function checkAll() {
 	});
 }
 
-function grantAdmin() {
+function selectCheckedList(url){
 	const selectedMembers = [];
 	const checkBoxes = document.querySelectorAll('.check-box:checked');
 
 	checkBoxes.forEach(checkBox => {
 		const memberRow = checkBox.closest('ul');
-		const memberId = memberRow.querySelector('li:nth-child(2)').textContent.trim();
+		const memberId = memberRow.querySelector('li:nth-child(2)>span:first-child').textContent.trim();
 		selectedMembers.push(memberId);
 	});
-
+	
 	if (selectedMembers.length === 0) {
-		alert('Please select at least one member to grant admin rights.');
+		alert('한 개 이상 선택하세요');
 		return;
 	}
 
@@ -32,5 +32,28 @@ function grantAdmin() {
 	memberIdsInput.value = selectedMembers.join(',');
 
 	// 폼을 제출합니다.
+	document.grantAdminForm.action = url;
 	document.grantAdminForm.submit();
+}
+
+function adminRightsAction(act) {
+	document.grantAdminForm.action.value = act;
+	selectCheckedList("museum.do?command=grantAdminRights");
+}
+
+function deleteMember(){
+	let ans = confirm("정말 삭제하시겠습니까?");
+	if(ans){
+		selectCheckedList("museum.do?command=adminDeleteMember");
+	}else{
+		return;
+	}
+}
+
+function go_check(event) {
+    // 클릭한 요소가 체크박스가 아닌 경우에만 체크박스를 체크/체크 해제
+    if (!event.target.classList.contains('check-box') || !event.target.classList.contains('artwork-name')) {
+        let checkbox = event.currentTarget.querySelector('.check-box');
+        checkbox.checked = !checkbox.checked;
+    }
 }

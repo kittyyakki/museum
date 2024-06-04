@@ -70,7 +70,7 @@ public class MemberDao {
 	}
 
 	public void deleteMember(String id) {
-		executeUpdate("UPDATE member SET adminyn = 'N' WHERE id = ?", pstmt -> pstmt.setString(1, id));
+		executeUpdate("DELETE FROM member WHERE id = ?", pstmt -> pstmt.setString(1, id));
 	}
 
 	private static MemberVO extractMemberVO(ResultSet rs) throws SQLException {
@@ -87,7 +87,15 @@ public class MemberDao {
 	}
 
 	public int getAllCount() {
-		return executeSelectOne("SELECT COUNT(*) as cnt FROM member", 
+		return executeSelectOne("SELECT COUNT(*) as cnt FROM member",
 				rs -> rs.getInt("cnt"));
+	}
+
+	public void adminRightsAction(String memberId, String action) {
+		executeUpdate("UPDATE member SET adminyn=? WHERE id=?",
+				pstmt -> {
+					pstmt.setString(1, action.equals("grant") ? "Y" : "N");
+					pstmt.setString(2, memberId);
+				});
 	}
 }

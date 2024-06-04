@@ -3,11 +3,14 @@
 <%@ include file="/admin/sub_menu.jsp" %>
 
 <section class="admin-list">
-        <form action="museum.do?command=grantAdminRights" method="post" name="grantAdminForm">
+        <form method="post" name="grantAdminForm">
             <div class="admin-list-btn">
-                <input type="hidden" name="memberIds" value="">
-                <input type="button" value="관리자 권한 부여" onclick="grantAdmin()">
-                <input type="button" value="회원 삭제" onclick="">
+            	<!-- 체크된 id들이 배열값으로 들어오고 String 변환되어 넘어감 -->
+                <input type="hidden" name="memberIds">
+                <input type="hidden" name="action">
+                <input type="button" value="관리자 권한 부여" onclick="adminRightsAction('grant')">
+                <input type="button" value="관리자 권한 해제" onclick="adminRightsAction('revoke')">
+                <input type="button" value="회원 삭제" onclick="deleteMember()">
             </div>
             <ul class="admin-list-header">
                 <li>
@@ -20,11 +23,12 @@
                 <li>전화번호</li>
             </ul>
             <c:forEach items="${memberList}" var="mvo">
-                <ul>
+                <ul class="admin-list-main" onclick="go_check(event)">
                     <li>
                         <input type="checkbox" class="check-box">
                     </li>
-                    <li>${mvo.id}
+                    <li>
+                    	<span>${mvo.id}</span>
                         <c:if test="${mvo.adminyn == 'Y'}"><span style="color:red;">[admin]</span></c:if>
                     </li>
                     <li>${mvo.name}</li>
