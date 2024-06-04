@@ -21,7 +21,7 @@ public class AdminMemberListAction implements Action{
 		
 		Pagination pagination = Pagination
 				.fromRequest(request)
-				.setUrlTemplate("museum.do?command=adminArtworkList&page=%d")
+				.setUrlTemplate("museum.do?command=adminMemberList&page=%d")
 				.setItemCount(mdao.getAllCount())
 				.setItemsPerPage(10);
 
