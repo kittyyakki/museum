@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+/* 관리자 페이지 adminMain.jsp ====================>*/
 .admin-main-menu {
 	margin: 5rem 0;
 	width: 100%;
@@ -32,12 +33,14 @@
 	height: 100%;
 	align-content: center;
 }
+/* <======================================== */
 
+/* 관리자 페이지 사이드 메뉴바 admin/sub_menu.jsp =============>*/
 .admin-sub-menu {
 	margin: 0;
 	width: 10rem;
 	height: 30%;
-	background: #d4a373;
+	background: #faedcd;
 	border-radius: 0 20px 20px 0;
 	text-align: right;
 	position: absolute;
@@ -65,12 +68,14 @@
 }
 
 .admin-sub-menu a:hover {
-	background: #faedcd;
+	background: #dad7cd;
 	border-radius: 5px;
 }
+/* <======================================== */
 
+/* 관리자 페이지의 리스트 스타일 =========================>*/
 .admin-list {
-	margin-left: 12rem;
+	margin: 0 0 6rem 12rem;
 	display: flex;
 	flex-direction: column;
 	width: 100%;
@@ -112,7 +117,6 @@
 
 .admin-list ul>li:nth-of-type(2) {
 	flex: 0.5;
-	background: #faedcd;
 }
 
 .admin-list ul>li:nth-of-type(3) {
@@ -121,7 +125,6 @@
 
 .admin-list ul>li:nth-of-type(4) {
 	flex: 1;
-	background: #faedcd;
 }
 
 .admin-list ul>li:nth-of-type(5) {
@@ -130,7 +133,6 @@
 
 .admin-list ul>li:nth-of-type(6) {
 	flex: 1;
-	background: #faedcd;
 }
 
 .admin-list ul>li:nth-of-type(7) {
@@ -139,7 +141,6 @@
 
 .admin-list ul>li:nth-of-type(8) {
 	flex: 1;
-	background: #faedcd;
 }
 
 .admin-list ul>li:nth-of-type(9) {
@@ -148,7 +149,6 @@
 
 .admin-list ul>li:nth-of-type(10) {
 	flex: 0.5;
-	background: #faedcd;
 }
 
 .admin-list ul>li:nth-of-type(11) {
@@ -179,4 +179,16 @@
 .admin-list-btn input[type=button]:hover {
 	background-color: black;
 	color: white;
+}
+
+.admin-list-main{
+	cursor: pointer;
+}
+
+.admin-list-main:hover{
+	background-color: #faedcd;
+}
+
+.artwork-name:hover{
+	text-decoration: underline;
 }
