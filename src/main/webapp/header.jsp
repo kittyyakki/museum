@@ -13,15 +13,20 @@
 <c:forEach items="${paramValues.stylesheet}" var="css">
 	<link rel="stylesheet" href="${css}">
 </c:forEach>
+<script src="script/header.js"></script>
 <c:forEach items="${paramValues.script}" var="js">
 	<script src="${js}"></script>
 </c:forEach>
+<script>
+
+
+</script>
 </head>
 <body>
 	<header>
 		<nav>
 			<h1>
-				<img class="header_logo" src="images/header_logo.png" alt="로고" id="header_logo">
+				<img class="header_logo" src="images/header_logo.png" alt="로고" id="header_logo" style="width: 200px; height: 100px;" onclick="">
 			</h1>
 			<div class="header_gnb">
 				<a href="museum.do?command=artworkList">예술품</a> <a href="museum.do?command=noticeList">소식지</a> <a href="museum.do?command=galleryList">이용자 갤러리</a> <a href="museum.do?command=qnaList">고객센터</a> <a href="museum.do?command=myPage">마이페이지</a>
