@@ -8,6 +8,37 @@
 	flex-direction: column;
 	text-align: center;
 	padding: 4rem auto;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.not-found.bg-0 {
+	background-image: url('../images/404/undraw_0.svg');
+}
+
+.not-found.bg-1 {
+	background-image: url('../images/404/undraw_1.svg');
+}
+
+.not-found.bg-2 {
+	background-image: url('../images/404/undraw_2.svg');
+}
+
+.not-found.bg-3 {
+	background-image: url('../images/404/undraw_3.svg');
+}
+
+.not-found.bg-4 {
+	background-image: url('../images/404/undraw_4.svg');
+}
+
+.not-found.bg-5 {
+	background-image: url('../images/404/undraw_5.svg');
+}
+
+.not-found.bg-6 {
+	background-image: url('../images/404/undraw_6.svg');
 }
 
 .not-found p {
@@ -22,6 +53,9 @@
 }
 
 @media ( max-width : 768px) {
+	.not-found {
+		background-size: cover;
+	}
 	.not-found p {
 		font-size: 2rem;
 		padding: 1rem 0.5rem;
