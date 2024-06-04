@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/header.jsp">
 	<jsp:param name="stylesheet" value="css/notice.css" />
@@ -17,7 +18,7 @@
 			<div class="noticeView_label">제목</div>
 			<div class="noticeView_text">${noticeView.title}</div>
 		</div>
-		<div class="noticeView_label" style="flex: 0.5;">이미지</div>
+<%-- 		<div class="noticeView_label" style="flex: 0.5;">이미지</div>
 		 <div class=noticeView_text style="flex: 2;">
 			<c:choose>
 				<c:when test="${empty  noticeView.savefilename}">
@@ -27,7 +28,7 @@
 					<img src="images/${noticeView.savefilename}" width="100%" />
 				</c:otherwise>
 			</c:choose>
-		</div>
+		</div> --%>
 		<div class="noticeView_field">
 			<div class="noticeView_label">내용</div>
 			<div class="noticeView_text">
@@ -49,9 +50,11 @@
 			</div>
 		</div>
 		<div class="noticeView-button">
+		<c:if test="${isAdmin}">
 			<input type="button" class="btn-noticeView" value="수정" onClick="location.href='museum.do?command=updateNoticeForm&nseq=${noticeView.nseq}'" /> 
 			<input type="button" class="btn-noticeView" value="삭제" onClick="deleteNotice('${loginUser.pwd}', '${noticeView.nseq}')"/>
 			<input type="button" class="btn-noticeView" value="목록" onClick="location.href='museum.do?command=noticeList'" />
+		</c:if>
 		</div>
 	</div>
 </div>

@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 
-<%@ include file="/header.jsp"%>
+<jsp:include page="/header.jsp">
+	<jsp:param name="stylesheet" value="css/notice.css" />
+	<jsp:param name="script" value="script/notice.js" />
+</jsp:include>
 
 <div class="noticeNewpaper_containner">
 	<ul class="noticeNewpaper_innerbox">

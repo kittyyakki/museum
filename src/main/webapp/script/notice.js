@@ -1,7 +1,7 @@
 function noticeCheck(){
-	if(  document.insertNotice.pass.value==""){
+	if(  document.insertNotice.pwd.value==""){
 		alert("비밀번호를 입력하세요");
-		document.insertNotice.pass.focus();
+		document.insertNotice.pwd.focus();
 		return false;
 	}else if(  document.insertNotice.email.value==""){
 		alert("이메일을 입력하세요");
