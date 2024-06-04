@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.team4.museum.controller.action.Action;
 import com.team4.museum.dao.NoticeDAO;
-import com.team4.museum.util.ArtworkCategory;
 import com.team4.museum.util.NoticeCategory;
 import com.team4.museum.util.Pagination;
 import com.team4.museum.vo.MemberVO;
@@ -37,9 +36,9 @@ public class NoticeListAction implements Action {
 				.setItemCount(ndao.getNoticeCount(category))
 				.setItemsPerPage(10);
 
-		List<NoticeVO> noticeList = ndao.getAllnoitce(pagination);
+		List<NoticeVO> noticeList = ndao.selectNoticeList(pagination);
 		if (category.equals(NoticeCategory.전체.name())) {// 전체목록 조회
-			pagination.setItemCount(ndao.getNoticeAllCount());
+			pagination.setItemCount(ndao.getNoticeCount());
 			noticeList = ndao.selectNoticeList(pagination);
 		}
 		else if (category.equals(NoticeCategory.매거진.name())) {
@@ -51,6 +50,8 @@ public class NoticeListAction implements Action {
 		} else { // 카테고리 조회
 			noticeList = ndao.selectCategoryNotice(category, pagination);
 		}
+		
+		System.out.println(pagination.getItemCount());
 
 		request.setAttribute("categoryName", category);
 		session.setAttribute("category", category);
