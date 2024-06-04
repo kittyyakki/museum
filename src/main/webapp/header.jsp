@@ -70,7 +70,9 @@
 					<input type="text" placeholder="검색어를 입력하세요">
 				</div>
 				<div>
-					<a class="btn_icon" href="#" title="검색"></a>
+					<a class="btn_icon" href="#" title="검색">
+					<img src="images/header/btn_search_open.png" alt="검색">
+					</a>
 				</div>
 			</div>
 
