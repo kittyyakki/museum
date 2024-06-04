@@ -53,6 +53,19 @@ public class ArtworkDao {
 					pstmt.setString(2, searchWord);
 				}, ArtworkDao::extractArtworkVO);
 	}
+	
+	public List<ArtworkVO> searchArtworkAdmin(Pagination pagination, String searchWord) {
+		return executeSelect(
+				"SELECT * FROM artwork "
+						+ " WHERE name LIKE CONCAT('%', ?, '%') OR artist LIKE CONCAT('%', ?, '%') "
+						+ " ORDER BY aseq DESC LIMIT ? OFFSET ?",
+				pstmt -> {
+					pstmt.setString(1, searchWord);
+					pstmt.setString(2, searchWord);
+					pstmt.setInt(3, pagination.getLimit());
+					pstmt.setInt(4, pagination.getOffset());
+				}, ArtworkDao::extractArtworkVO);
+	}
 
 	public List<ArtworkVO> selectCategoryArtworkAdmin(String category) {
 		return executeSelect("SELECT * FROM artwork WHERE category=?", pstmt -> pstmt.setString(1, category),
