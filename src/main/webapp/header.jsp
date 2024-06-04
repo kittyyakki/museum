@@ -42,6 +42,9 @@
 					</c:when>
 					<c:otherwise>
 						<a href="#">${loginUser.name}(${loginUser.id})</a>
+						<c:if test="${loginUser.adminyn.equals('Y')}">
+							<a href="museum.do?command=admin">관리자 페이지</a>	
+						</c:if>
 						<a href="museum.do?command=logout">로그아웃</a>
 					</c:otherwise>
 				</c:choose>
