@@ -12,11 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@MultipartConfig(	
-		fileSizeThreshold = 1024*1024,
-		maxFileSize = 1024*1024*5,
-		maxRequestSize = 1024*1024*5*5 
-)
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 public class MuseumServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -47,6 +43,7 @@ public class MuseumServlet extends HttpServlet {
 		Action ac = ActionFactory.getInstance().getAction(command);
 		if (ac == null) {
 			System.out.println("Action not found : " + command);
+			request.getRequestDispatcher("util/404.jsp").forward(request, response);
 			return;
 		}
 
