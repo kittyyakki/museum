@@ -3,57 +3,63 @@ package com.team4.museum.controller.action.notice;
 import java.io.IOException;
 import java.util.List;
 
-
 import com.team4.museum.controller.action.Action;
 import com.team4.museum.dao.NoticeDAO;
-import com.team4.museum.util.Paging;
+import com.team4.museum.util.ArtworkCategory;
+import com.team4.museum.util.NoticeCategory;
+import com.team4.museum.util.Pagination;
+import com.team4.museum.vo.MemberVO;
 import com.team4.museum.vo.NoticeVO;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class NoticeListAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 게시판의 게시물을 모두 조회해서  request 에 담고 noticeList.jsp  로  포워딩합니다
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+
+		HttpSession session = request.getSession();
+		MemberVO mvo = (MemberVO) session.getAttribute("loginUser");
 		NoticeDAO ndao = NoticeDAO.getInstance();
-		//NoticeVO nvo = new NoticeVO();
-		
-		int totalCount = ndao.getNoticeAllCount();
-		
-		Paging paging = new Paging();
-		paging.setPage(getPage(request));
-		paging.setTotalCount(totalCount);
-		
-		/* List<NoticeVO> noticeList = ndao.selectNoticeList(paging); */
-		List<NoticeVO> noticeList = ndao.getAllnoitce(paging);
+		session.removeAttribute("category");
 
-		request.setAttribute("paging", paging);
-        request.setAttribute("noticeList", noticeList);
-        request.setAttribute("totalCount", totalCount);
+		String category = request.getParameter("category") == null ? NoticeCategory.전체.name()
+				: request.getParameter("category");
 
-		
-		RequestDispatcher rd = request.getRequestDispatcher("notice/noticeList.jsp");
-		rd.forward(request, response);
-		
-		//System.out.println("list ok : " + noticeList);
-		//System.out.println(nvo.getTitle());
+		Pagination pagination = Pagination
+				.fromRequest(request)
+				.setUrlTemplate("museum.do?command=noticeList&category=" + category + "&page=%d")
+				.setItemCount(ndao.getNoticeCount(category))
+				.setItemsPerPage(10);
+
+		List<NoticeVO> noticeList = ndao.getAllnoitce(pagination);
+		if (category.equals(NoticeCategory.전체.name())) {// 전체목록 조회
+			pagination.setItemCount(ndao.getNoticeAllCount());
+			noticeList = ndao.selectNoticeList(pagination);
+		}
+		else if (category.equals(NoticeCategory.매거진.name())) {
+			request.getRequestDispatcher("notice/noticeMagazine.jsp").forward(request, response);
+			return;
+		} else if (category.equals(NoticeCategory.신문.name())) {
+			request.getRequestDispatcher("notice/noticeNewpaper.jsp").forward(request, response);
+			return;
+		} else { // 카테고리 조회
+			noticeList = ndao.selectCategoryNotice(category, pagination);
+		}
+
+		request.setAttribute("categoryName", category);
+		session.setAttribute("category", category);
+		request.setAttribute("pagination", pagination);
+		request.setAttribute("noticeList", noticeList);
+
+		request.setAttribute("noticeCategory", NoticeCategory.values());
+		request.getRequestDispatcher("notice/noticeList.jsp").forward(request, response);
 
 	}
-	private int getPage(HttpServletRequest request) {
-        if (request.getParameter("page") != null) {
-            int page = Integer.parseInt(request.getParameter("page"));
-            request.getSession().setAttribute("page", page);
-            return page;
-        } else if (request.getSession().getAttribute("page") != null) {
-            return (int) request.getSession().getAttribute("page");
-        }
-        return 1;
-    
-	}
-	
 
 }

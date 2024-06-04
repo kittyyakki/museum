@@ -24,15 +24,15 @@ public class UpdateNoticeAction implements Action {
 
 		NoticeDAO ndao = NoticeDAO.getInstance();
 		NoticeVO nvo = new NoticeVO();
+		
 
 		MemberDao mdao = MemberDao.getInstance();
 		MemberVO mvo = (MemberVO) request.getSession().getAttribute("loginUser");
 		//세션에 있는 로그인 유저를 가져오는데 형변환을 해야한다(MemberVO)
 
 		if (mvo == null) { //조건을 달아준다.
-			request.setAttribute("message", "아이디가 없습니다");
-		} else {	//로그인으로 보낸다.
-			response.sendRedirect("museum.do?command=index");
+			response.sendRedirect("museum.do?command=loginForm");
+			return;
 		}
 
 		nvo.setNseq(Integer.parseInt(request.getParameter("nseq")));
@@ -40,8 +40,10 @@ public class UpdateNoticeAction implements Action {
 		 * mvo.setId( request.getParameter("id") ) ; mvo.setPwd(
 		 * request.getParameter("pwd") );
 		 */
+		nvo.setAuthor(mvo.getId());
 		nvo.setTitle(request.getParameter("title"));
 		nvo.setContent(request.getParameter("content"));
+		nvo.setCategory(request.getParameter("category"));
 
 		HttpSession session = request.getSession();
 		ServletContext context = session.getServletContext();

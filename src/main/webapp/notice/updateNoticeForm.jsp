@@ -14,17 +14,21 @@
 				<label>작성자</label>
 				<input type="text" name="id" value="${noticeUpdate.author}" readonly/>
 			</div>
-			<div class="notice_update_field">
+<!-- 			<div class="notice_update_field">
 				<label>비밀번호</label>
 				<input style="flex:2" type="password" name="pass" />
 				<div  style="flex:2; margin-left:20px;">게시물 작성시 입력한 비밀번호 입력</div>
-			</div>
+			</div> -->
 			<div class="notice_update_field">
 				<label>제목</label><input type="text" name="title" value="${noticeUpdate.title}"/>
 			</div>
 			<div class="notice_update_field">
 				<label>내용</label>
 				<textarea name="content"rows="10" cols="100">${noticeUpdate.content}</textarea>
+			</div>
+			<div class="notice_update_field">
+				<label>카테고리</label>
+				<textarea name="category"rows="10" cols="100">${noticeUpdate.category}</textarea>
 			</div>
 			
 			<div class="notice_update_field">
@@ -46,9 +50,8 @@
 			<input type="hidden" name="oldsavefilename" value="${noticeUpdate.savefilename}" />
 			
 			<div class="notice_update_field">
-				<input type="submit" value="수정완료" onClick="return updateNoticeCheck('${notice.pass}')" />
-				<input type="button" value="되돌아가기" onClick="" />
-			</div>
+				<input type="submit" value="수정완료" onClick="return updateNoticeCheck('${member.pass}')" />
+				<input type="button" value="되돌아가기" onClick="location.href='museum.do?command=noticeList'" />
 			<input type="hidden" name="command" value="updateNotice" />
 			<input type="hidden" name="nseq" value="${noticeUpdate.nseq}" />
 		</form>

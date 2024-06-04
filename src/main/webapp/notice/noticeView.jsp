@@ -6,7 +6,7 @@
 </jsp:include>
 
 
-<div id="noticeView_container">
+<div class="noticeView_container">
 	<h2>상세 보기</h2>
 	<div class="noticeView_box">
 		<div class="noticeView_field">
@@ -17,17 +17,17 @@
 			<div class="noticeView_label">제목</div>
 			<div class="noticeView_text">${noticeView.title}</div>
 		</div>
-		<%-- <div class="noticeView_label" style="flex: 0.5;">이미지</div>
-		<div class=noticeView_text style="flex: 2;">
+		<div class="noticeView_label" style="flex: 0.5;">이미지</div>
+		 <div class=noticeView_text style="flex: 2;">
 			<c:choose>
 				<c:when test="${empty  noticeView.savefilename}">
-					<img src="images/noname.jpg" width="250" />
+					<img  width="100%" />
 				</c:when>
 				<c:otherwise>
-					<img src="images/${noticeView.savefilename}" width="350" />
+					<img src="images/${noticeView.savefilename}" width="100%" />
 				</c:otherwise>
 			</c:choose>
-		</div> --%>
+		</div>
 		<div class="noticeView_field">
 			<div class="noticeView_label">내용</div>
 			<div class="noticeView_text">
@@ -49,7 +49,9 @@
 			</div>
 		</div>
 		<div class="noticeView-button">
-			<input type="button" class="btn-noticeView" value="수정" onClick="location.href='museum.do?command=updateNoticeForm&nseq=${noticeView.nseq}'" /> <input type="button" class="btn-noticeView" value="삭제" onClick="deleteNotice('${loginUser.id}')" /> <input type="button" class="btn-noticeView" value="목록" onClick="location.href='museum.do?command=noticeList'" />
+			<input type="button" class="btn-noticeView" value="수정" onClick="location.href='museum.do?command=updateNoticeForm&nseq=${noticeView.nseq}'" /> 
+			<input type="button" class="btn-noticeView" value="삭제" onClick="deleteNotice('${loginUser.pwd}', '${noticeView.nseq}')"/>
+			<input type="button" class="btn-noticeView" value="목록" onClick="location.href='museum.do?command=noticeList'" />
 		</div>
 	</div>
 </div>

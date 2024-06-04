@@ -95,3 +95,7 @@ footer a:hover::after {
 		font-size: 0.75rem;
 	}
 }
+
+.footer-clear {
+	clear: both;
+}
