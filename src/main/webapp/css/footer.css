@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
-li{
+li {
 	list-style: none;
+}
+
+.footer-clear {
+    clear: both;
 }
