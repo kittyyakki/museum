@@ -6,7 +6,7 @@
 <section>
 	<article class="login_Form">
 		<div class="login_Form_inner">
-			<form name="loginForm" method="post" action="museum.do?command=login">
+			<form name="loginForm" method="post" action="museum.do?command=login&returnUrl=${returnUrl}">
 				<div class="login_icon_box">
 					<div>
 						<img src="images/ico_login_img.png" style="width: 80px; height: 80px;">

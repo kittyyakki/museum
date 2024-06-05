@@ -9,6 +9,7 @@ import java.io.IOException;
 import com.team4.museum.controller.action.Action;
 import com.team4.museum.dao.MemberDao;
 import com.team4.museum.util.AjaxResult;
+import com.team4.museum.util.UrlUtil;
 import com.team4.museum.vo.MemberVO;
 
 import jakarta.servlet.ServletException;
@@ -52,13 +53,11 @@ public class LoginAction implements Action {
 		HttpSession session = request.getSession();
 		session.setAttribute("loginUser", mvo);
 
-		// 세션에 저장된 돌아갈 페이지 정보를 확인하고, 없으면 index 페이지로 이동
-		String returnUrl = (String) session.getAttribute("returnUrl");
-		if (returnUrl == null) {
-			returnUrl = "museum.do?command=index";
-		} else {
-			// 세션에 저장된 돌아갈 페이지 정보를 삭제 (한 번만 사용)
-			session.removeAttribute("returnUrl");
+		// 돌아갈 페이지 정보를 확인하고, 없으면 index 페이지로 이동
+		String returnUrl = "museum.do?command=index";
+		String returnUrlParam = (String) request.getParameter("returnUrl");
+		if (returnUrlParam != null && !returnUrlParam.isEmpty()) {
+			returnUrl = UrlUtil.decode(returnUrlParam);
 		}
 
 		// 돌아갈 페이지 정보와 함께 OK 를 반환
@@ -97,8 +96,7 @@ public class LoginAction implements Action {
 		HttpSession session = request.getSession();
 		MemberVO mvo = (MemberVO) session.getAttribute("loginUser");
 		if (mvo == null) {
-			session.setAttribute("returnUrl", returnUrl);
-			response.sendRedirect("museum.do?command=loginForm");
+			response.sendRedirect("museum.do?command=loginForm&returnUrl=" + UrlUtil.encode(returnUrl));
 			return null;
 		}
 
