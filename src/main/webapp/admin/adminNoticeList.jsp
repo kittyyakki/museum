@@ -1,18 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import= "com.team4.museum.util.NoticeCategory" %>
 <jsp:include page="/header.jsp">
 	<jsp:param name="stylesheet" value="css/admin.css" />
 	<jsp:param name="script" value="script/admin.js" />
 </jsp:include>
 <%@ include file="/admin/sub_menu.jsp"%>
-
 <section class="admin-list">
 	<form method="post" name="adminForm">
 		<div class="admin-list-btn">
 			<!-- 체크된 id들이 배열값으로 들어오고 String 변환되어 넘어감 -->
 			<input type="hidden" name="memberIds">
 			<input type="button" value="게시글 등록" onclick="location.href='museum.do?command=insertNoticeForm'">
-			<input type="button" value="수정" onclick="">
+			<input type="button" value="수정" onclick="updateNotice()">
 			<input type="button" value="삭제" onclick="">
 			<input type="text" placeholder="검색어를 입력하세요" name="searchWord" value="${searchWord}">
 			<input type="button" value="검색" onclick="searchAdmin('adminNoticeList')">
@@ -22,7 +22,23 @@
 				<input type="checkbox" onclick="checkAll()" class="select-all-box">
 			</li>
 			<li>번호</li>
-			<li>분류</li>
+			<li>
+				<select onchange="categoryFilter('adminNoticeList', 'noticeCategory', event)" name="selectFilter" class="admin-select">
+					<option value="state">분류</option>
+					<c:forEach items="${NoticeCategory.values()}" var="c">
+						<c:if test="${!c.name().equals('전체')}">
+							<c:choose>
+								<c:when test="${c.name().equals(selectedCategory)}">
+									<option value="${c.name()}" selected>${c.name()}</option>
+								</c:when>
+								<c:otherwise>
+									<option value="${c.name()}">${c.name()}</option>
+								</c:otherwise>
+							</c:choose>
+						</c:if>
+					</c:forEach>
+				</select>
+			</li>
 			<li>제목</li>
 			<li>내용</li>
 			<li>작성일</li>
@@ -52,5 +68,5 @@
 		</c:forEach>
 	</form>
 </section>
-
+<%@ include file="/util/pagination.jsp"%>
 <%@ include file="/footer.jsp" %>
