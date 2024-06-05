@@ -1,25 +1,47 @@
-function ajax(requestUrl, requestBody, callback) {
-	if (callback === undefined) {
-		callback = defaultAjaxHandler;
+/**
+ * AJAX 요청을 전송하는 함수
+ */
+function ajax(requestUrl, requestBody, ajaxHandler) {
+	// requestUrl이 유효하지 않으면 `location.pathname`를 사용
+	if (!requestUrl) {
+		requestUrl = location.pathname;
 	}
 
-	const xhr = new XMLHttpRequest();
-	xhr.open("POST", requestUrl, true);
-	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState !== 4) {
-			return;
-		}
+	// ajaxHandler이 유효하지 않으면 `defaultAjaxHandler`를 사용
+	if (!ajaxHandler) {
+		ajaxHandler = defaultAjaxHandler;
+	}
 
-		callback(xhr.status, JSON.parse(xhr.responseText));
-	};
+	// requestBody가 유효하고, requestUrl에 '?'가 포함되지 않으면 뒤에 '?' 추가
+	if (requestBody && !requestUrl.includes('?')) {
+		requestUrl += '?';
+	}
 
+	// requestBody가 리터럴 객체인 경우 문자열로 변환
 	if (typeof requestBody === 'object') {
 		requestBody = Object
 			.entries(requestBody)
 			.filter(([, value]) => value !== null && value !== undefined)
 			.map(([key, value]) => `${key}=${value}`).join('&');
 	}
+
+	// requestUrl로 POST 요청 객체 생성
+	const xhr = new XMLHttpRequest();
+	xhr.open("POST", requestUrl, true);
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+	// POST 응답 이벤트 핸들러 등록
+	xhr.onreadystatechange = function() {
+		// 완료 전까지 무시
+		if (xhr.readyState !== 4) {
+			return;
+		}
+
+		// 응답 완료 시 ajaxHandler() 실행
+		ajaxHandler(xhr.status, JSON.parse(xhr.responseText));
+	};
+
+	// requestBody로 POST 요청 전송
 	xhr.send(requestBody);
 }
 
