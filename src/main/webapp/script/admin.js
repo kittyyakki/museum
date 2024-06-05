@@ -103,15 +103,20 @@ function searchAdmin(command) {
 	}
 }
 
-function displayFilter() {
+function displayFilter(command, param) {
 	const form = document.adminForm;
-	const selectValue = form.displayState.value;
-	let url = "museum.do?command=adminArtworkList";
-	if (selectValue === "displayState") {
+	const selectValue = form.selectFilter.value;
+	let url = `museum.do?command=${command}`;
+	if (selectValue === "state") {
 		location.href = url;
 	} else if (selectValue === "Y") {
-		location.href = url + "&displayState=Y";
+		location.href = `${url}&${param}=Y`;
 	} else {
-		location.href = url + "&displayState=N";
+		location.href = `${url}&${param}=N`;
 	}
+}
+
+function previewImg(id){
+	const preview = document.getElementById(id);
+	preview.classList.toggle("hidden");
 }
