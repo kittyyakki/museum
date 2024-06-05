@@ -37,6 +37,27 @@ public class QnaDao {
 				},
 				QnaDao::extractQnaVO);
 	}
+	
+	public List<QnaVO> selectQna(Pagination pagination, String isReply) {
+
+		if(isReply.equals("Y")) {
+			return executeSelect(
+					"SELECT * FROM qna WHERE reply IS NOT NULL ORDER BY qseq DESC LIMIT ? OFFSET ?",
+					pstmt -> {
+						pstmt.setInt(1, pagination.getLimit());
+						pstmt.setInt(2, pagination.getOffset());
+					},
+					QnaDao::extractQnaVO);			
+		}else {
+			return executeSelect(
+					"SELECT * FROM qna WHERE reply IS NULL ORDER BY qseq DESC LIMIT ? OFFSET ?",
+					pstmt -> {
+						pstmt.setInt(1, pagination.getLimit());
+						pstmt.setInt(2, pagination.getOffset());
+					},
+					QnaDao::extractQnaVO);
+		}
+	}
 
 	public QnaVO getQna(int qseq) {
 		return executeSelectOne(

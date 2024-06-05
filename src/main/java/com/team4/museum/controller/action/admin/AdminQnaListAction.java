@@ -17,6 +17,7 @@ public class AdminQnaListAction implements Action{
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		QnaDao qdao = QnaDao.getInstance();
+		String isReply = request.getParameter("isReply");
 
 		Pagination pagination = Pagination
 				.fromRequest(request)
@@ -24,8 +25,13 @@ public class AdminQnaListAction implements Action{
 				.setItemCount(qdao.getAllCount())
 				.setItemsPerPage(10);
 
+		if(isReply != null) {
+			request.setAttribute("qnaList", qdao.selectQna(pagination, isReply));
+			request.setAttribute("isReply", isReply);
+		}else {
+			request.setAttribute("qnaList", qdao.selectQna(pagination));			
+		}
 		request.setAttribute("pagination", pagination);
-		request.setAttribute("qnaList", qdao.selectQna(pagination));
 		request.getRequestDispatcher("admin/adminQnaList.jsp").forward(request, response);
 	}
 
