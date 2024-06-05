@@ -33,7 +33,7 @@ public class LoginAction implements Action {
 
 		// 파라미터에 'pwd'가 없으면 BAD_REQUEST 를 반환
 		String pwd = request.getParameter("pwd");
-		if (pwd == null || id.equals("")) {
+		if (pwd == null || pwd.equals("")) {
 			return new AjaxResult(BAD_REQUEST, "'pwd'를 입력해주세요");
 		}
 
