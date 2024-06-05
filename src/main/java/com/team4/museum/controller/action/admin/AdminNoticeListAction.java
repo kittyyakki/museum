@@ -18,6 +18,7 @@ public class AdminNoticeListAction implements Action{
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		NoticeDAO ndao = NoticeDAO.getInstance();
 		String searchWord = request.getParameter("searchWord");
+		String noticeCategory = request.getParameter("noticeCategory");
 		
 		Pagination pagination = Pagination
 				.fromRequest(request)
@@ -29,6 +30,9 @@ public class AdminNoticeListAction implements Action{
 		
 		if(searchWord != null) {
 			noticeList = ndao.searchNoticeList(pagination, searchWord);
+		}else if(noticeCategory != null){
+			noticeList = ndao.selectCategoryNotice(noticeCategory, pagination);
+			request.setAttribute("selectedCategory", noticeCategory);
 		}else {
 			noticeList = ndao.selectNoticeList(pagination);
 		}
