@@ -200,21 +200,27 @@
 	font-size: 14px;
 }
 
-.notice_insert_field input[type="submit"] {
-	background-color: #0066cc;
-	color: #fff;
-	border: none;
+.notice_insert_button {
+	width: 50%;
+	margin: 0 auto;
+}
+
+.notice_insert_button input[type="submit"] {
+	background-color: #fff;
+	color: #000;
+	border: 1px solid #000;
 	padding: 12px;
 	font-size: 16px;
 	cursor: pointer;
-	border-radius: 4px;
 	align-self: center;
 	width: 150px;
 	margin-top: 20px;
 }
 
-.notice_insert_field input[type="submit"]:hover {
-	background-color: #004c99;
+.notice_insert_button input[type="submit"]:hover {
+	background-color: #000;
+	color: #fff;
+	transition: all 0.3s ease 0s;
 }
 
 /* 전체 컨테이너 스타일 */
@@ -355,8 +361,9 @@ h2 {
 	margin-top: 40px;
 	margin-bottom: 40px;
 }
-.noticeMagazine-button{
-	float:right;
+
+.noticeMagazine-button {
+	float: right;
 	text-align: center;
 }
 
@@ -369,6 +376,7 @@ h2 {
 	cursor: pointer;
 	transition: color 0.3s ease, background-color 0.3s ease;
 }
+
 .btn-noticeMagazine:hover {
 	background-color: #000;
 	color: #fff;
@@ -456,7 +464,7 @@ h2 {
 	background-color: #f8f8f8;
 	height: 650px;
 	overflow: auto;
-	margin-bottom:40px;
+	margin-bottom: 40px;
 }
 
 /* Magazine- newpaper */
@@ -483,22 +491,23 @@ h2 {
 	margin-bottom: 40px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
 }
-.noticeNewpaper_info{
+
+.noticeNewpaper_info {
 	margin-bottom: 40px;
 }
 
-.noticeNewpaper_info>p:nth-child(1){
+.noticeNewpaper_info>p:nth-child(1) {
 	font-size: 1.3rem;
-	margin-bottom:20px;
+	margin-bottom: 20px;
 	font-weight: bold;
 }
-.noticeNewpaper_info>p:nth-child(2){
+
+.noticeNewpaper_info>p:nth-child(2) {
 	font-size: 0.8rem;
-	margin-bottom:20px;
+	margin-bottom: 20px;
 }
 
 /* newspaper- btn */
-
 .noticeNewpaper_info .btn {
 	display: inline-block;
 	padding: 10px 20px;
@@ -530,8 +539,6 @@ h2 {
 	background-size: 20px;
 }
 
-
-
 .noticeNewpaper_info .btn:hover {
 	background-color: #000;
 	color: #fff;
@@ -555,10 +562,10 @@ h2 {
 	color: #fff;
 }
 
-.noticeNewpaper-button{
-	position:relative;
-	top:561px;
-	float:right;
+.noticeNewpaper-button {
+	position: relative;
+	top: 561px;
+	float: right;
 	text-align: center;
 }
 
@@ -571,14 +578,16 @@ h2 {
 	cursor: pointer;
 	transition: color 0.3s ease, background-color 0.3s ease;
 }
+
 .btn-noticeNewspaper:hover {
 	background-color: #000;
 	color: #fff;
 }
-.notice_insert_field{
-	display:flex;
-}
-.notice_insert_field select{
-	height: 30px;
+
+.notice_insert_field {
+	
 }
 
+.notice_insert_field select {
+	height: 30px;
+}

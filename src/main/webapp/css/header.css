@@ -1,17 +1,19 @@
 @charset "UTF-8";
 
 .header_util {
+	margin: 0 auto;
 	position: relative;
 	width: 100%;
-	height: 80px;
+	height: 50px;
 	border-bottom: 1px solid #ccc;
 	margin-bottom: 20px;
+	position: relative;
 }
 
 .util-link {
 	position: absolute;
 	top: 0;
-	left: 54%;
+	left: 68%;
 	font-size: 0.5rem;
 	display: flex;
 	width: 46%;
@@ -26,9 +28,9 @@
 }
 
 header {
+	margin-bottom: 80px;
 	box-sizing: border-box;
 	width: 100%;
-	margin: 0 auto;
 	padding: 1.5rem;
 	font-weight: 400;
 	font-size: 1rem;
@@ -38,7 +40,7 @@ header {
 	line-height: 1.5;
 	color: #1D1D1D;
 	background-color: #F8F8F8;
-	border-bottom: 1px solid #C6C6C6;
+	border-bottom: 1px solid #ccc;
 }
 
 header nav h1 {
@@ -51,14 +53,26 @@ header nav {
 }
 
 .header_gnb {
-	font-size:1.1rem;
+	display: flex;
+	position: relative;
+	align-items: center;
+	font-size: 1.1rem;
 	margin-left: 40px;
-	width: 40%;
+	width: 100%;
 	font-weight: bold;
 }
 
 .header_gnb a {
 	margin-right: 20px;
+}
+
+.header_gnb a:nth-child(1):hover, .header_gnb a:nth-child(2):hover {
+	
+}
+.header_logo{
+	width:208px;
+	height:55px;
+	background: url(/images/header/header_logo.png)no-repeat center/cover;
 }
 
 header a {
@@ -92,48 +106,42 @@ header a:hover::after {
 	transform-origin: left;
 }
 
-.header_gnb {
-	margin-top: 1rem;
-}
-
 .header_search {
-	margin-top: 0.7rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 40%;
-    height: 40px;
-    color: #1D1D1D;
-    border-bottom: 1px solid #ccc;
-    padding: 5px;
-    border-radius: 5px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 40%;
+	height: 40px;
+	margin-left: 30px;
+	color: #1D1D1D;
+	border-bottom: 1px solid #ccc;
+	padding: 5px;
+	border-radius: 5px;
 }
 
 .header_search input[type="text"] {
-    flex: 1;
-    padding: 8px;
-    border: none;
-    border-radius: 5px;
-    outline: none;
+	flex: 1;
+	padding: 8px;
+	border: none;
+	border-radius: 5px;
+	outline: none;
 }
 
 .header_search .btn_icon {
-    width: 30px; /* 버튼의 고정된 너비 */
-    height: 30px; /* 버튼의 고정된 높이 */
-    background-color: transparent; /* 배경 투명으로 설정 */
-    background-size: cover;
-    background-position: center;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+	width: 30px; /* 버튼의 고정된 너비 */
+	height: 30px; /* 버튼의 고정된 높이 */
+	background-color: transparent; /* 배경 투명으로 설정 */
+	background-size: cover;
+	background-position: center;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
 }
-
-
 
 .login_join_box {
 	position: absolute;
-	top: 50px;
-	right: 0px;
+	top: 20px;
+	right: 20px;
 	margin-left: auto;
 }
 
@@ -143,4 +151,68 @@ header a:hover::after {
 
 .sub-menu a {
 	margin-right: 1rem;
+}
+
+/* 하위 컨테이너  */
+/* .header_gnb > a:nth-child(1):hover + .header_gnb_list_container {
+    display: block;
+} */
+
+.header_gnb >a:nth-child(1):hover + .header_gnb_list_containner{
+	display:block;
+}
+.header_gnb_list_containner {
+	border-top: 1px solid #ccc;
+ 	display: none !important;
+	position: absolute;
+	top: 87px;
+	left: 0px;
+	display: block;
+	width: 100%;
+	height: 60px;
+	font-size: 1.1rem;
+	font-weight: bold;
+	background-color: #F8F8F8;
+	/* 	border: 1px solid red; */
+	font-size: 1.1rem;
+}
+
+.header_gnb_list_containner>div {
+	width: 40%;
+	height: 100%;
+	margin-left: 14%;
+	/* border: 1px solid blue; */
+	margin-top: 10px;
+}
+
+.header_gnb_list_containner a {
+	margin-right: 20px;
+	font-family: 'notokr-medium';
+	position: relative;
+	display: inline-block;
+	color: #1D1D1D;
+	text-decoration: none;
+	transition: 0.3s ease-in-out;
+}
+
+.header_gnb_list_containner a:hover {
+	color: #4D4D4D;
+}
+
+.header_gnb_list_containner a::after {
+	position: absolute;
+	content: "";
+	top: 100%;
+	left: 0;
+	width: 100%;
+	height: 3px;
+	background: #1D1D1D;
+	transform: scaleX(0);
+	transform-origin: right;
+	transition: transform 0.3s ease-in-out;
+}
+
+.header_gnb_list_containner a:hover::after {
+	transform: scaleX(1);
+	transform-origin: left;
 }

@@ -34,7 +34,7 @@
 			<!-- 			<div class="notice_insert_field">
 				<label>이미지</label> <input type="file" name="image" />
 			</div> -->
-			<div class="notice_insert_field">
+			<div class="notice_insert_button">
 				<input type="submit" value="작성완료" onClick="return noticeCheck()" /> 
 				<input type="submit" value="취소" onclick="window.location.href = 'museum.do?command=noticeList';">
 			</div>
