@@ -41,7 +41,7 @@ public class MuseumServlet extends HttpServlet {
 
 		// URL Path 정보를 'urlPath'에 저장
 		String urlPath = UrlUtil.getUrlPath(request);
-		session.setAttribute("urlPath", urlPath);
+		session.setAttribute("urlPath", UrlUtil.encode(urlPath));
 
 		// 'command' 파라미터로 요청된 'Action'을 찾아 실행
 		String command = request.getParameter("command");
