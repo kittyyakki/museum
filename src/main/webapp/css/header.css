@@ -53,11 +53,12 @@ header nav {
 }
 
 .header_gnb {
+	display: flex;
 	position: relative;
-	margin-top: 1rem;
+	align-items: center;
 	font-size: 1.1rem;
 	margin-left: 40px;
-	width: 30%;
+	width: 100%;
 	font-weight: bold;
 }
 
@@ -67,6 +68,11 @@ header nav {
 
 .header_gnb a:nth-child(1):hover, .header_gnb a:nth-child(2):hover {
 	
+}
+.header_logo{
+	width:208px;
+	height:55px;
+	background: url(/images/header/header_logo.png)no-repeat center/cover;
 }
 
 header a {
@@ -101,12 +107,12 @@ header a:hover::after {
 }
 
 .header_search {
-	margin-top: 0.7rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	width: 40%;
 	height: 40px;
+	margin-left: 30px;
 	color: #1D1D1D;
 	border-bottom: 1px solid #ccc;
 	padding: 5px;
@@ -135,7 +141,7 @@ header a:hover::after {
 .login_join_box {
 	position: absolute;
 	top: 20px;
-	right: 0px;
+	right: 20px;
 	margin-left: auto;
 }
 
@@ -151,11 +157,15 @@ header a:hover::after {
 /* .header_gnb > a:nth-child(1):hover + .header_gnb_list_container {
     display: block;
 } */
+
+.header_gnb >a:nth-child(1):hover + .header_gnb_list_containner{
+	display:block;
+}
 .header_gnb_list_containner {
 	border-top: 1px solid #ccc;
- 	display: block;
+ 	display: none !important;
 	position: absolute;
-	top: 180px;
+	top: 87px;
 	left: 0px;
 	display: block;
 	width: 100%;
