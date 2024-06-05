@@ -45,6 +45,21 @@ public class MemberDao {
 				},
 				MemberDao::extractMemberVO);
 	}
+	
+	public List<MemberVO> searchMemberList(Pagination pagination, String searchWord) {
+		return executeSelect(
+				"SELECT * FROM member "
+						+ " WHERE id LIKE CONCAT('%', ?, '%') OR name LIKE CONCAT('%', ?, '%') OR email LIKE CONCAT('%', ?, '%') "
+						+ " ORDER BY id DESC LIMIT ? OFFSET ?",
+				pstmt -> {
+					pstmt.setString(1, searchWord);
+					pstmt.setString(2, searchWord);
+					pstmt.setString(3, searchWord);
+					pstmt.setInt(4, pagination.getLimit());
+					pstmt.setInt(5, pagination.getOffset());
+				},
+				MemberDao::extractMemberVO);
+	}
 
 	public int insertMember(MemberVO mvo) {
 		return executeUpdate(
@@ -98,4 +113,5 @@ public class MemberDao {
 					pstmt.setString(2, memberId);
 				});
 	}
+
 }

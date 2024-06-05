@@ -6,7 +6,6 @@
 	height: 600px;
 	margin: 0 auto;
 	border: 1px dashed black;
-	overflow: hidden;
 }
 
 #main-center-imgs {
@@ -18,7 +17,7 @@
 	border: 1px dashed red;
 }
 
-#main-center-imgs img {
+img {
 	width: 1440px;
 	height: 600px;
 }
@@ -45,10 +44,6 @@
 	text-align: center;
 	line-height: 17px;
 	font-weight: bold;
-	cursor: pointer;
+	
 }
 
-#main-center-remote .selected {
-	background: #3f0b9f;
-	border: 1px solid #3f0b9f;
-}

@@ -8,12 +8,12 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class EditMemberFormAction  implements Action {
+public class EditMemberFormAction implements Action {
 
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		request.getRequestDispatcher("member/editMember.jsp").forward(request, response);
-	
+		if (LoginAction.isLogined(request, response)) {
+			request.getRequestDispatcher("member/editMember.jsp").forward(request, response);
+		}
 	}
 
 }

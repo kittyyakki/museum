@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Calendar;
 
 import com.team4.museum.controller.action.Action;
-import com.team4.museum.dao.MemberDao;
+import com.team4.museum.controller.action.member.LoginAction;
 import com.team4.museum.dao.NoticeDAO;
 import com.team4.museum.vo.MemberVO;
 import com.team4.museum.vo.NoticeVO;
@@ -26,9 +26,8 @@ public class InsertNoticeAction implements Action {
 		NoticeVO nvo = new NoticeVO();
 
 		HttpSession session = request.getSession();
-		MemberVO mvo = (MemberVO) session.getAttribute("loginUser");
+		MemberVO mvo = LoginAction.getLoginUser(request, response);
 	    if(mvo==null) {
-	    	response.sendRedirect("museum.do?command=loginForm");
 	    	return;
 	    }
 
