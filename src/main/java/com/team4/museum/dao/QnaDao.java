@@ -131,4 +131,18 @@ public class QnaDao {
 		qvo.setPublicyn(rs.getString("publicyn"));
 		return qvo;
 	}
+
+	public Object searchQna(Pagination pagination, String searchWord) {
+		return executeSelect(
+				"SELECT * FROM qna "
+						+ " WHERE title LIKE CONCAT('%', ?, '%') OR content LIKE CONCAT('%', ?, '%') "
+						+ " ORDER BY qseq DESC LIMIT ? OFFSET ?",
+				pstmt -> {
+					pstmt.setString(1, searchWord);
+					pstmt.setString(2, searchWord);
+					pstmt.setInt(3, pagination.getLimit());
+					pstmt.setInt(4, pagination.getOffset());
+				},
+				QnaDao::extractQnaVO);
+	}
 }
