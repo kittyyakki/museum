@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpSession;
 public class Pagination {
 
 	private int itemCount;
-	private int itemsPerPage = 5;
+	private int itemsPerPage = 10;
 	private int pageRange = 5;
 	private int currentPage;
 	private String urlTemplate = "museum.do?command=example&page=%d";
@@ -182,6 +182,26 @@ public class Pagination {
 	}
 
 	/**
+	 * 페이지가 숨겨질 수 있는지 여부를 반환합니다.
+	 * 
+	 * 
+	 * 
+	 * @param page
+	 * @return 숨겨질 수 있는 경우 true
+	 */
+	public boolean isHidable(int page) {
+		if (getMaxPage() < pageRange + 2) { // 말 줄임표가 없는 경우 숨김 처리 불필요
+			return false;
+		}
+
+		// 앞 말줄임표가 필요한 경우, 페이지 범위의 시작을 숨기고, 아니면 페이지 범위의 끝의 이전 페이지를 숨김
+		// 뒷 말줄임표가 필요한 경우, 페이지 범위의 끝을 숨기고, 아니면 페이지 범위의 시작의 다음 페이지를 숨김
+		// 결과적으로 총 2개의 페이지가 숨겨짐
+		return page == (needPrevSkip() ? getBegin() : getEnd() - 1)
+				|| page == (needNextSkip() ? getEnd() : getBegin() + 1);
+	}
+
+	/**
 	 * 페이지 범위의 시작의 이전 페이지를 반환합니다.
 	 * 
 	 * @return 이전 페이지
@@ -243,15 +263,11 @@ public class Pagination {
 	 */
 	public static Pagination fromRequest(HttpServletRequest request) {
 		int page = 1;
-		HttpSession session = request.getSession();
 
-		String pageStr = request.getParameter("page");
-		if (pageStr != null) {
-			page = Integer.parseInt(pageStr);
-		} else if (session.getAttribute("page") != null) {
-			page = (int) session.getAttribute("page");
+		String pageParam = request.getParameter("page");
+		if (pageParam != null) {
+			page = Integer.parseInt(pageParam);
 		}
-		session.setAttribute("page", page);
 
 		return new Pagination().setCurrentPage(page);
 	}

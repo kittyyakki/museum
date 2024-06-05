@@ -8,7 +8,8 @@
 }
 
 .pagination * {
-	transition: 0.2s ease-in-out;
+	transition: background-color 0.2s ease-in-out, width 0.2s ease-in-out;
+	overflow: hidden;
 }
 
 .pagination .page-navi {
@@ -17,6 +18,7 @@
 	color: #555;
 	height: 2rem;
 	border-radius: 0.5rem;
+	text-wrap: nowrap;
 }
 
 .pagination .page-navi:hover {
@@ -66,10 +68,10 @@
 	color: #555;
 	width: 2rem;
 	height: 2rem;
+	border-radius: .6rem;
 }
 
 .pagination .page-links .page-link:hover {
-	border-radius: .6rem;
 	background-color: #E0E0E0;
 }
 
@@ -93,25 +95,19 @@
 .pagination .page-links .page-link.active {
 	font-weight: bold;
 	color: white;
-	border-radius: 6px;
 	background-color: #223;
-	border-radius: 6px;
 }
 
 @media ( max-width : 768px) {
 	.pagination {
 		flex-wrap: wrap;
-	}
-	.pagination .page-navi.prev {
-		flex: 1 1 50%;
-		order: 1;
-	}
-	.pagination .page-navi.next {
-		flex: 1 1 50%;
-		order: 2;
+		column-gap: 2rem;
 	}
 	.pagination .page-links {
 		flex: 1 1 100%;
-		order: 3;
+		order: 4;
+	}
+	.pagination .page-links .page-link.hidable {
+		width: 0;
 	}
 }

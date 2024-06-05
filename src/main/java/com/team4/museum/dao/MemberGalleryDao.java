@@ -9,9 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.team4.museum.util.Db;
-import com.team4.museum.util.Paging;
+import com.team4.museum.util.Pagination;
 import com.team4.museum.vo.MemberGalleryVO;
-import com.team4.museum.vo.NoticeVO;
 
 public class MemberGalleryDao {
 
@@ -80,15 +79,15 @@ public class MemberGalleryDao {
 				rs -> rs.getInt("cnt"));
 	}
 	
-	public ArrayList<MemberGalleryVO> getAllgallery(Paging paging) {
+	public ArrayList<MemberGalleryVO> getAllgallery(Pagination pagination) {
 		ArrayList<MemberGalleryVO> list = new ArrayList<MemberGalleryVO>();
 		con = Db.getConnection();
 		
 		String sql = "select * from notice order by nseq desc limit ? offset ?";
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, paging.getDisplayRow());
-			pstmt.setInt(2, paging.getStartNum() - 1);
+			pstmt.setInt(1, pagination.getLimit());
+			pstmt.setInt(2, pagination.getOffset());
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				MemberGalleryVO mgdto = new MemberGalleryVO();
