@@ -42,6 +42,43 @@
 				<li><a href="https://audioclip.naver.com/channels/2320" target="_blank" title="국립중앙박물관 네이버 오디오클립 새 창으로 열림" class="audioclip"> <img src="images/header/ico_header_item6.png" alt="오디오클립">
 				</a></li>
 			</ul>
+
+		</div>
+		<nav>
+			<h1>
+				<img class="header_logo" src="images/header/header_logo.png" alt="로고" id="header_logo" style="width: 208px; height: 55px;" onclick="window.location.href = 'museum.do?command=index';">
+			</h1>
+			<div class="header_gnb">
+				<a href="museum.do?command=artworkList">예술품</a>
+				<div class="header_gnb_list_containner">
+					<div>
+						<a href="museum.do?command=artworkList">전체</a> 
+						<a href="museum.do?command=noticeList">회화</a> 
+						<a href="museum.do?command=galleryList">드로잉</a> 
+						<a href="museum.do?command=qnaList">판화</a> 
+						<a href="museum.do?command=myPage">조각/설치</a> 
+						<a href="museum.do?command=myPage">사진</a> 
+						<a href="museum.do?command=myPage">공예</a> 
+						<a href="museum.do?command=myPage">디자인</a> 
+						<a href="museum.do?command=myPage">서예</a>
+					</div>
+				</div>
+				<a href="museum.do?command=noticeList">소식지</a> 
+				<a href="museum.do?command=galleryList">이용자 갤러리</a> 
+				<a href="museum.do?command=qnaList">고객센터</a> 
+				<a href="museum.do?command=myPage">마이페이지</a>
+			</div>
+
+
+			<div class="header_search">
+				<div>
+					<input type="text" placeholder="검색어를 입력하세요">
+				</div>
+				<div>
+					<a class="btn_icon" href="#" title="검색"> <img src="images/header/btn_search_open.png" alt="검색">
+					</a>
+				</div>
+			</div>
 			<div class="login_join_box">
 				<c:choose>
 					<c:when test="${empty loginUser}">
@@ -57,26 +94,8 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
-		</div>
-		<nav>
-			<h1>
-				<img class="header_logo" src="images/header/header_logo.png" alt="로고" id="header_logo" style="width: 208px; height: 55px;" onclick="window.location.href = 'museum.do?command=index';">
-			</h1>
-			<div class="header_gnb">
-				<a href="museum.do?command=artworkList">예술품</a> <a href="museum.do?command=noticeList">소식지</a> <a href="museum.do?command=galleryList">이용자 갤러리</a> <a href="museum.do?command=qnaList">고객센터</a> <a href="museum.do?command=myPage">마이페이지</a>
-			</div>
-			<div class="header_search">
-				<div>
-					<input type="text" placeholder="검색어를 입력하세요">
-				</div>
-				<div>
-					<a class="btn_icon" href="#" title="검색">
-					<img src="images/header/btn_search_open.png" alt="검색">
-					</a>
-				</div>
-			</div>
 
-			<div class="artwork sub-menu">
+			<%-- 			<div class="artwork sub-menu">
 				<!-- request.setAttribute("kindList", ArtworkKind.values()); -->
 				<c:forEach items="${artworkCategory}" var="category" varStatus="status">
 					<a href="museum.do?command=artwork&category=${status.index}">${category.name()}</a>
@@ -86,7 +105,10 @@
 				<c:forEach items="${noticeCategory}" var="category" varStatus="status">
 					<a href="museum.do?command=notice&category=${status.index}">${category.name()}</a>
 				</c:forEach>
-			</div>
+			</div>  --%>
 		</nav>
+
 	</header>
+
+
 	<div class="content-wrap">
