@@ -65,7 +65,7 @@
 	</div>
 	<div class="main-section_text">
 			<ul class="main-info-area">
-				<li class="main_info"><strong class="main_info-tit"><i></i> 관람시간</strong>
+				<li class="main_info"><strong class="main_info-tit"><i></i>관람시간</strong>
 					<div class="main_info-txt info-time">
 						<ul>
 							<li><strong>월/화/목/금/일</strong> <span>10:00 ~ 18:00</span></li>
