@@ -18,11 +18,7 @@ public class AdminQnaListAction implements Action {
 		String isReply = request.getParameter("isReply");
 		String searchWord = request.getParameter("searchWord");
 
-		Pagination pagination = Pagination
-				.fromRequest(request)
-				.setUrlTemplate("museum.do?command=adminQnaList&page=%d")
-				.setItemCount(qdao.getAllCount());
-
+		Pagination pagination = Pagination.with(request, qdao.getAllCount(), "command=adminQnaList");
 		if (searchWord != null) {
 			request.setAttribute("qnaList", qdao.searchQna(pagination, searchWord));
 
@@ -33,7 +29,6 @@ public class AdminQnaListAction implements Action {
 			request.setAttribute("qnaList", qdao.selectQna(pagination));
 		}
 
-		request.setAttribute("pagination", pagination);
 		request.getRequestDispatcher("admin/adminQnaList.jsp").forward(request, response);
 	}
 

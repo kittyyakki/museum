@@ -68,8 +68,7 @@ public class ArtworkDao {
 				pstmt -> {
 					pstmt.setString(1, searchWord);
 					pstmt.setString(2, searchWord);
-					pstmt.setInt(3, pagination.getLimit());
-					pstmt.setInt(4, pagination.getOffset());
+					pagination.applyTo(pstmt, 3, 4);
 				},
 				ArtworkDao::extractArtworkVO);
 	}
@@ -123,8 +122,7 @@ public class ArtworkDao {
 				"SELECT * FROM artwork WHERE displayyn=? ORDER BY aseq DESC LIMIT ? OFFSET ?",
 				pstmt -> {
 					pstmt.setString(1, displayState);
-					pstmt.setInt(2, pagination.getLimit());
-					pstmt.setInt(3, pagination.getOffset());
+					pagination.applyTo(pstmt, 2, 3);
 				},
 				ArtworkDao::extractArtworkVO);
 	}
@@ -160,10 +158,7 @@ public class ArtworkDao {
 	public List<ArtworkVO> selectArtwork(Pagination pagination) {
 		return executeSelect(
 				"SELECT * FROM artwork ORDER BY aseq DESC LIMIT ? OFFSET ?",
-				pstmt -> {
-					pstmt.setInt(1, pagination.getLimit());
-					pstmt.setInt(2, pagination.getOffset());
-				},
+				pagination::applyTo,
 				ArtworkDao::extractArtworkVO);
 	}
 

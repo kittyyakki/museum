@@ -1,5 +1,8 @@
 package com.team4.museum.util;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 import jakarta.servlet.http.HttpServletRequest;
 
 public class Pagination {
@@ -255,7 +258,52 @@ public class Pagination {
 	}
 
 	/**
-	 * 페이지네이션 정보를 요청에서 가져와서 Pagination 객체를 생성합니다.
+	 * Pagination 객체를 요청의 `pagination` 속성으로 설정합니다.
+	 * 
+	 * @param request 요청
+	 * @return Pagination 객체
+	 */
+	public Pagination applyTo(HttpServletRequest request) {
+		return applyTo(request, "pagination");
+	}
+
+	/**
+	 * Pagination 객체를 요청의 속성으로 설정합니다.
+	 * 
+	 * @param request       요청
+	 * @param attributeName 속성 이름
+	 * @return Pagination 객체
+	 */
+	public Pagination applyTo(HttpServletRequest request, String attributeName) {
+		request.setAttribute(attributeName, this);
+		return this;
+	}
+
+	/**
+	 * SQL 쿼리 문의 1, 2번 파라미터에 LIMIT과 OFFSET을 설정합니다.
+	 * 
+	 * @param pstmt SQL 쿼리 문 객체
+	 * @throws SQLException
+	 */
+	public void applyTo(PreparedStatement pstmt) throws SQLException {
+		applyTo(pstmt, 1, 2);
+	}
+
+	/**
+	 * SQL 쿼리 문의 파라미터에 LIMIT과 OFFSET을 설정합니다.
+	 * 
+	 * @param pstmt       SQL 쿼리 문 객체
+	 * @param limitIndex  LIMIT 파라미터 인덱스
+	 * @param offsetIndex OFFSET 파라미터 인덱스
+	 * @throws SQLException
+	 */
+	public void applyTo(PreparedStatement pstmt, int limitIndex, int offsetIndex) throws SQLException {
+		pstmt.setInt(limitIndex, getLimit());
+		pstmt.setInt(offsetIndex, getOffset());
+	}
+
+	/**
+	 * 요청의 `page` 파라미터로 부터 Pagination 객체를 생성합니다.
 	 * 
 	 * @param request 요청
 	 * @return Pagination 객체
@@ -269,6 +317,21 @@ public class Pagination {
 		}
 
 		return new Pagination().setCurrentPage(page);
+	}
+
+	/**
+	 * 요청의 `page` 파라미터로 부터 Pagination 객체를 생성하고 아이템의 총 갯수와 URL 템플릿을 설정합니다.
+	 * 
+	 * @param request     요청
+	 * @param itemCount   아이템의 총 갯수
+	 * @param urlTemplate URL 템플릿
+	 * @return Pagination 객체
+	 */
+	public static Pagination with(HttpServletRequest request, int itemCount, String urlParams) {
+		return fromRequest(request)
+				.setItemCount(itemCount)
+				.setUrlTemplate("museum.do?" + urlParams + "&page=%d")
+				.applyTo(request);
 	}
 
 }

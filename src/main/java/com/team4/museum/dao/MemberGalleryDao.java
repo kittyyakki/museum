@@ -74,10 +74,7 @@ public class MemberGalleryDao {
 	public List<MemberGalleryVO> getAllGallery(Pagination pagination) {
 		return executeSelect(
 				"SELECT * FROM member_gallery ORDER BY mseq DESC LIMIT ? OFFSET ?",
-				pstmt -> {
-					pstmt.setInt(1, pagination.getLimit());
-					pstmt.setInt(2, pagination.getOffset());
-				},
+				pagination::applyTo,
 				MemberGalleryDao::extractMemberGalleryVO);
 	}
 

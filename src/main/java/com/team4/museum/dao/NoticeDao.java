@@ -29,13 +29,10 @@ final public class NoticeDao {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 
-	public List<NoticeVO> selectNoticeList(Pagination paging) {
+	public List<NoticeVO> selectNoticeList(Pagination pagination) {
 		return executeSelect(
 				"SELECT * FROM notice LIMIT ? OFFSET ? ",
-				pstmt -> {
-					pstmt.setInt(1, paging.getLimit());
-					pstmt.setInt(2, paging.getOffset());
-				},
+				pagination::applyTo,
 				NoticeDao::extractNoticeVO);
 	}
 
@@ -46,13 +43,12 @@ final public class NoticeDao {
 	 * NoticeDAO::extractNoticeVO); }
 	 */
 
-	public List<NoticeVO> selectCategoryNotice(String category, Pagination paging) {
+	public List<NoticeVO> selectCategoryNotice(String category, Pagination pagination) {
 		return executeSelect(
 				"SELECT * FROM notice WHERE category = ? ORDER BY nseq DESC LIMIT ? OFFSET ?",
 				pstmt -> {
 					pstmt.setString(1, category);
-					pstmt.setInt(2, paging.getLimit());
-					pstmt.setInt(3, paging.getOffset());
+					pagination.applyTo(pstmt, 2, 3);
 				},
 				NoticeDao::extractNoticeVO);
 	}
@@ -155,8 +151,7 @@ final public class NoticeDao {
 				pstmt -> {
 					pstmt.setString(1, searchWord);
 					pstmt.setString(2, searchWord);
-					pstmt.setInt(3, pagination.getLimit());
-					pstmt.setInt(4, pagination.getOffset());
+					pagination.applyTo(pstmt, 3, 4);
 				},
 				NoticeDao::extractNoticeVO);
 	}

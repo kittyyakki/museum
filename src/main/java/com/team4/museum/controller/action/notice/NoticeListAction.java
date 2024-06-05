@@ -28,11 +28,7 @@ public class NoticeListAction implements Action {
 		String category = request.getParameter("category") == null ? NoticeCategory.전체.name()
 				: request.getParameter("category");
 
-		Pagination pagination = Pagination
-				.fromRequest(request)
-				.setUrlTemplate("museum.do?command=noticeList&category=" + category + "&page=%d")
-				.setItemCount(ndao.getNoticeCount(category));
-
+		Pagination pagination = Pagination.with(request, 0, "command=noticeList&category=" + category);
 		List<NoticeVO> noticeList = ndao.selectNoticeList(pagination);
 		if (category.equals(NoticeCategory.전체.name())) {// 전체목록 조회
 			pagination.setItemCount(ndao.getNoticeCount());
@@ -44,14 +40,12 @@ public class NoticeListAction implements Action {
 			request.getRequestDispatcher("notice/noticeNewpaper.jsp").forward(request, response);
 			return;
 		} else { // 카테고리 조회
+			pagination.setItemCount(ndao.getNoticeCount(category));
 			noticeList = ndao.selectCategoryNotice(category, pagination);
 		}
 
-		System.out.println(pagination.getItemCount());
-
 		request.setAttribute("categoryName", category);
 		session.setAttribute("category", category);
-		request.setAttribute("pagination", pagination);
 		request.setAttribute("noticeList", noticeList);
 
 		request.setAttribute("noticeCategory", NoticeCategory.values());

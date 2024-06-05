@@ -28,8 +28,7 @@ public class FavoriteDao {
 				"SELECT * FROM favorite_view WHERE member_id = ? ORDER BY aseq DESC LIMIT ? OFFSET ?",
 				pstmt -> {
 					pstmt.setString(1, memberId);
-					pstmt.setInt(2, pagination.getLimit());
-					pstmt.setInt(3, pagination.getOffset());
+					pagination.applyTo(pstmt, 2, 3);
 				},
 				FavoriteDao::extractFavoriteVO);
 	}

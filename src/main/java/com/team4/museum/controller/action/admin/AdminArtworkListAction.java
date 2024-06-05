@@ -18,13 +18,7 @@ public class AdminArtworkListAction implements Action {
 		String searchWord = request.getParameter("searchWord");
 		String displayState = request.getParameter("displayState");
 
-		Pagination pagination = Pagination
-				.fromRequest(request)
-				.setUrlTemplate("museum.do?command=adminArtworkList&page=%d")
-				.setItemCount(adao.getAllCount());
-
-		request.setAttribute("pagination", pagination);
-
+		Pagination pagination = Pagination.with(request, adao.getAllCount(), "command=adminArtworkList");
 		if (searchWord != null) {
 			request.setAttribute("artworkList", adao.searchArtworkAdmin(pagination, searchWord));
 			request.setAttribute("searchWord", searchWord);

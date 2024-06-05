@@ -31,10 +31,7 @@ public class QnaDao {
 	public List<QnaVO> selectQna(Pagination pagination) {
 		return executeSelect(
 				"SELECT * FROM qna ORDER BY qseq DESC LIMIT ? OFFSET ?",
-				pstmt -> {
-					pstmt.setInt(1, pagination.getLimit());
-					pstmt.setInt(2, pagination.getOffset());
-				},
+				pagination::applyTo,
 				QnaDao::extractQnaVO);
 	}
 
@@ -45,13 +42,7 @@ public class QnaDao {
 		} else {
 			query = "SELECT * FROM qna WHERE reply IS NULL ORDER BY qseq DESC LIMIT ? OFFSET ?";
 		}
-		return executeSelect(
-				query,
-				pstmt -> {
-					pstmt.setInt(1, pagination.getLimit());
-					pstmt.setInt(2, pagination.getOffset());
-				},
-				QnaDao::extractQnaVO);
+		return executeSelect(query, pagination::applyTo, QnaDao::extractQnaVO);
 	}
 
 	public QnaVO getQna(int qseq) {
@@ -123,8 +114,7 @@ public class QnaDao {
 				pstmt -> {
 					pstmt.setString(1, searchWord);
 					pstmt.setString(2, searchWord);
-					pstmt.setInt(3, pagination.getLimit());
-					pstmt.setInt(4, pagination.getOffset());
+					pagination.applyTo(pstmt, 3, 4);
 				},
 				QnaDao::extractQnaVO);
 	}

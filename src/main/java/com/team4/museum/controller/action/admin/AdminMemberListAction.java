@@ -18,11 +18,7 @@ public class AdminMemberListAction implements Action {
 		MemberDao mdao = MemberDao.getInstance();
 		String searchWord = request.getParameter("searchWord");
 
-		Pagination pagination = Pagination
-				.fromRequest(request)
-				.setUrlTemplate("museum.do?command=adminMemberList&page=%d")
-				.setItemCount(mdao.getAllCount());
-
+		Pagination pagination = Pagination.with(request, mdao.getAllCount(), "command=adminMemberList");
 		if (searchWord != null) {
 			request.setAttribute("memberList", mdao.searchMemberList(pagination, searchWord));
 			request.setAttribute("searchWord", searchWord);
@@ -30,7 +26,6 @@ public class AdminMemberListAction implements Action {
 			request.setAttribute("memberList", mdao.getMemberList(pagination));
 		}
 
-		request.setAttribute("pagination", pagination);
 		request.getRequestDispatcher("admin/adminMemberList.jsp").forward(request, response);
 	}
 

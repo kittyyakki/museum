@@ -32,10 +32,7 @@ public class MemberDao {
 	public List<MemberVO> getMemberList(Pagination pagination) {
 		return executeSelect(
 				"SELECT * FROM member ORDER BY id DESC LIMIT ? OFFSET ?",
-				pstmt -> {
-					pstmt.setInt(1, pagination.getLimit());
-					pstmt.setInt(2, pagination.getOffset());
-				},
+				pagination::applyTo,
 				MemberDao::extractMemberVO);
 	}
 
@@ -48,8 +45,7 @@ public class MemberDao {
 					pstmt.setString(1, searchWord);
 					pstmt.setString(2, searchWord);
 					pstmt.setString(3, searchWord);
-					pstmt.setInt(4, pagination.getLimit());
-					pstmt.setInt(5, pagination.getOffset());
+					pagination.applyTo(pstmt, 4, 5);
 				},
 				MemberDao::extractMemberVO);
 	}

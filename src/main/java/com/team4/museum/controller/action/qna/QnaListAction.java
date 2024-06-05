@@ -15,12 +15,7 @@ public class QnaListAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		QnaDao qdao = QnaDao.getInstance();
 
-		Pagination pagination = Pagination
-				.fromRequest(request)
-				.setUrlTemplate("museum.do?command=qnaList&page=%d")
-				.setItemCount(qdao.getAllCount());
-
-		request.setAttribute("pagination", pagination);
+		Pagination pagination = Pagination.with(request, qdao.getAllCount(), "command=qnaList");
 		request.setAttribute("qnaList", qdao.selectQna(pagination));
 
 		request.getRequestDispatcher("qna/qnaList.jsp").forward(request, response);

@@ -20,13 +20,8 @@ public class AdminNoticeListAction implements Action {
 		String searchWord = request.getParameter("searchWord");
 		String noticeCategory = request.getParameter("noticeCategory");
 
-		Pagination pagination = Pagination
-				.fromRequest(request)
-				.setUrlTemplate("museum.do?command=adminNoticeList&page=%d")
-				.setItemCount(ndao.getNoticeCount());
-
-		List<NoticeVO> noticeList = null;
-
+		Pagination pagination = Pagination.with(request, ndao.getNoticeCount(), "command=adminNoticeList");
+		List<NoticeVO> noticeList;
 		if (searchWord != null) {
 			noticeList = ndao.searchNoticeList(pagination, searchWord);
 		} else if (noticeCategory != null) {
@@ -37,7 +32,6 @@ public class AdminNoticeListAction implements Action {
 		}
 
 		request.setAttribute("noticeList", noticeList);
-		request.setAttribute("pagination", pagination);
 
 		request.getRequestDispatcher("admin/adminNoticeList.jsp").forward(request, response);
 	}
