@@ -63,7 +63,7 @@
 				<img class="header_logo" src="images/header/header_logo.png" alt="로고" id="header_logo" style="width: 208px; height: 55px;" onclick="window.location.href = 'museum.do?command=index';">
 			</h1>
 			<div class="header_gnb">
-				<a href="museum.do?command=artworkList">예술품</a> <a href="museum.do?command=noticeList">소식지</a> <a href="museum.do?command=galleryList">이용자 갤러리</a> <a href="museum.do?command=qnaList">고객센터</a> <a href="museum.do?command=myPage">마이페이지</a>
+				<a href="museum.do?command=artworkList">예술품</a> <a href="museum.do?command=noticeList">소식지</a> <a href="museum.do?command=galleryList">이용자 갤러리</a> <a href="museum.do?command=qnaList">고객센터</a> <a href="museum.do?command=mypage">마이페이지</a>
 			</div>
 			<div class="header_search">
 				<div>

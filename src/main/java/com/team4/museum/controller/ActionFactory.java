@@ -18,12 +18,9 @@ import com.team4.museum.controller.action.artwork.ArtworkUpdateFormAction;
 import com.team4.museum.controller.action.artwork.ArtworkViewAction;
 import com.team4.museum.controller.action.artwork.ArtworkWriteAction;
 import com.team4.museum.controller.action.artwork.ArtworkWriteFormAction;
-import com.team4.museum.controller.action.artwork.MypageFavoriteAction;
 import com.team4.museum.controller.action.gallery.GalleryListAction;
 import com.team4.museum.controller.action.gallery.GalleryWriteAction;
 import com.team4.museum.controller.action.gallery.GalleryWriteFormAction;
-import com.team4.museum.controller.action.member.EditMemberAction;
-import com.team4.museum.controller.action.member.EditMemberFormAction;
 import com.team4.museum.controller.action.member.IdcheckFormAction;
 import com.team4.museum.controller.action.member.JoinAction;
 import com.team4.museum.controller.action.member.JoinFormAction;
@@ -31,6 +28,9 @@ import com.team4.museum.controller.action.member.LoginAction;
 import com.team4.museum.controller.action.member.LoginFormAction;
 import com.team4.museum.controller.action.member.LogoutAction;
 import com.team4.museum.controller.action.member.MyPageAction;
+import com.team4.museum.controller.action.member.MyPageEditAction;
+import com.team4.museum.controller.action.member.MyPageEditFormAction;
+import com.team4.museum.controller.action.member.MyPageFavoriteAction;
 import com.team4.museum.controller.action.notice.DeleteNoticeAction;
 import com.team4.museum.controller.action.notice.InsertNoticeAction;
 import com.team4.museum.controller.action.notice.InsertNoticeFormAction;
@@ -70,9 +70,10 @@ public class ActionFactory {
 		case "join" -> new JoinAction();
 		case "joinForm" -> new JoinFormAction();
 		case "idcheckForm" -> new IdcheckFormAction();
-		case "editMemberForm" -> new EditMemberFormAction();
-		case "editMember" -> new EditMemberAction();
-		case "myPage" -> new MyPageAction();
+		case "mypage" -> new MyPageAction();
+		case "mypageEditMemberForm" -> new MyPageEditFormAction();
+		case "mypageEditMember" -> new MyPageEditAction();
+		case "mypageFavorite" -> new MyPageFavoriteAction();
 
 		// artwork actions
 		case "artworkList" -> new ArtworkListAction();
@@ -83,7 +84,6 @@ public class ActionFactory {
 		case "artworkUpdateForm" -> new ArtworkUpdateFormAction();
 		case "artworkDelete" -> new ArtworkDeleteAction();
 		case "artworkDisplaySet" -> new ArtworkDisplaySetAction();
-		case "mypageFavorite" -> new MypageFavoriteAction();
 
 		// QnA actions
 		case "qnaList" -> new QnaListAction();
@@ -117,7 +117,7 @@ public class ActionFactory {
 		case "adminDeleteMember" -> new AdminDeleteMemberAction();
 		case "adminDeleteArtwork" -> new AdminDeleteArtworkAction();
 		case "adminQnaDelete" -> new AdminQnaDeleteAction();
-		
+
 		// default
 		default -> null;
 

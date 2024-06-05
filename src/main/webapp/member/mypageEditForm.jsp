@@ -38,7 +38,7 @@
 			</div>
 		</div>
 			<div class="btn">
-				<input type="button" value="이전" onclick="location.href='museum.do?command=myPage'"> 
+				<input type="button" value="이전" onclick="location.href='museum.do?command=mypage'"> 
 				<input type="button" value="저장" onClick="go_editMember()">
 			</div>
 		</form>
