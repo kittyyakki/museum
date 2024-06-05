@@ -77,20 +77,11 @@
 	text-align: left;
 }
 
-.qna-list_table>ul:not(.header)>li>span {
+.qna-list_table>ul:not(.header) {
 	cursor: pointer;
 }
 
 .qna-list_table>ul.header {
 	font-weight: bold;
 	border-bottom: 1px solid #ccc;
-}
-
-.qna-list>.paging {
-	font-size: 1.75rem;
-	margin: 0 auto;
-}
-
-#qnaPwdCheckForm {
-	display: none;
 }

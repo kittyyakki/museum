@@ -23,13 +23,13 @@
 			<li>작성일</li>
 		</ul>
 		<c:forEach items="${qnaList}" var="qnaVO">
-			<ul>
+			<ul onclick="qnaPwdCheck(${qnaVO.qseq}, 'view')">
 				<li>${qnaVO.qseq}</li>
 				<li><c:choose>
 						<c:when test="${empty qnaVO.reply}">NO</c:when>
 						<c:otherwise>YES</c:otherwise>
 					</c:choose></li>
-				<li><span onclick="qnaPwdCheck(${qnaVO.qseq}, 'view')"> <c:if test="${!qnaVO.isPublic()}">
+				<li><span> <c:if test="${!qnaVO.isPublic()}">
 							<span>🔒</span>
 						</c:if>${qnaVO.title}</span></li>
 				<li><fmt:formatDate value="${qnaVO.writedate}" pattern="yyyy-MM-dd" /></li>
