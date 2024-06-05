@@ -54,7 +54,7 @@
 						<c:if test="${isAdmin}">
 							<a href="museum.do?command=admin">관리자 페이지</a>
 						</c:if>
-						<a href="museum.do?command=logout">로그아웃</a>
+						<span onclick="ajax({command:'logout',returnUrl:'${urlPath}'})">로그아웃</span>
 					</c:otherwise>
 				</c:choose>
 			</div>
