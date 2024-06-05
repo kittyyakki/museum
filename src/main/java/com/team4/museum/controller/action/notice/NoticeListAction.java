@@ -7,7 +7,6 @@ import com.team4.museum.controller.action.Action;
 import com.team4.museum.dao.NoticeDAO;
 import com.team4.museum.util.NoticeCategory;
 import com.team4.museum.util.Pagination;
-import com.team4.museum.vo.MemberVO;
 import com.team4.museum.vo.NoticeVO;
 
 import jakarta.servlet.ServletException;
@@ -23,7 +22,6 @@ public class NoticeListAction implements Action {
 		response.setCharacterEncoding("utf-8");
 
 		HttpSession session = request.getSession();
-		MemberVO mvo = (MemberVO) session.getAttribute("loginUser");
 		NoticeDAO ndao = NoticeDAO.getInstance();
 		session.removeAttribute("category");
 

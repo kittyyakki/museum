@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Calendar;
 
 import com.team4.museum.controller.action.Action;
+import com.team4.museum.controller.action.member.LoginAction;
 import com.team4.museum.dao.MemberDao;
 import com.team4.museum.dao.NoticeDAO;
 import com.team4.museum.vo.MemberVO;
@@ -27,11 +28,8 @@ public class UpdateNoticeAction implements Action {
 		
 
 		MemberDao mdao = MemberDao.getInstance();
-		MemberVO mvo = (MemberVO) request.getSession().getAttribute("loginUser");
-		//세션에 있는 로그인 유저를 가져오는데 형변환을 해야한다(MemberVO)
-
+		MemberVO mvo = LoginAction.getLoginUser(request, response);
 		if (mvo == null) { //조건을 달아준다.
-			response.sendRedirect("museum.do?command=loginForm");
 			return;
 		}
 
