@@ -53,3 +53,117 @@
     background: #ccc;
     border: 1px solid #ccc;
 }
+
+
+/* 관람시간 관람료 오시는길 예약하기 */
+/* Main Section Text */
+.main-section_text {
+    display: flex;
+    flex-wrap: wrap;
+    width: 70%;
+    margin: 0 auto;
+}
+
+/* Main Info Area */
+.main-info-area {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-right: 20px; /* 각 요소 사이의 간격 조정을 위해 추가 */
+}
+.main_info{
+	display: flex;
+}
+
+/* Main Info */
+.main_info, .main_admission {
+    margin-bottom: 20px;
+}
+.main_admission{
+	display:flex;
+}
+.main_info-tit {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 24px;
+    color: #000;
+    margin-right: 20px;
+}
+.main_info-tit01{
+	font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 24px;
+    color: #000;
+	margin-right:48px;
+}
+
+.main_info-tit i {
+    width: 10px;
+    height: 10px;
+    background-color: #333;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.main_info-txt ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display:flex;
+}
+
+.main_info-txt ul li {
+    margin-bottom: 5px;
+}
+
+.main_info-txt ul li strong {
+    font-weight: bold;
+}
+
+.main_info-txt ul li span {
+    color: #666;
+}
+
+/* Info Link */
+.info-link {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.info-link ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display:flex;
+}
+
+.info-link ul li {
+    margin-bottom: 10px;
+    margin-right: 20px;
+}
+
+.info-link .main_btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.info-link .main_btn:hover {
+    background-color: #555;
+}
+
