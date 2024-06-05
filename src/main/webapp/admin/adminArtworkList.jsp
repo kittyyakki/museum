@@ -5,7 +5,9 @@
 	<jsp:param name="script" value="script/admin.js" />
 </jsp:include>
 <%@ include file="/admin/sub_menu.jsp"%>
-
+<%
+String displayState = request.getParameter("displayState") != null ? request.getParameter("displayState") : "";
+%>
 <section class="admin-list">
 	<form method="post" name="adminForm">
 		<div class="admin-list-btn">
@@ -15,14 +17,34 @@
 			<input type="button" value="삭제" onclick="deleteArtwork()">
 			<div>
 				<input type="text" placeholder="작품명 또는 작가명을 검색하세요" name="searchWord" value="${searchWord}">
-				<input type="button" value="검색" onclick="searchAdminArtwork()">
+				<input type="button" value="검색" onclick="searchAdmin('adminArtworkList')">
 			</div>
 		</div>
 		<ul class="admin-list-header">
 			<li>
 				<input type="checkbox" onclick="checkAll()" class="select-all-box">
 			</li>
-			<li>전시상태</li>
+			<li>
+				<select onchange="displayFilter()" name="displayState" class="admin-select">
+					<option value="displayState">전시 상태</option>
+					<%-- <c:choose>
+						<c:when test="${displayState.equals('Y')}">
+							<option value="Y" selected>Y</option>
+							<option value="N">N</option>
+						</c:when>
+						<c:when test="${displayState.equals('N')}">
+							<option value="Y">Y</option>
+							<option value="N" selected>N</option>
+						</c:when>
+						<c:otherwise>
+							<option value="Y">Y</option>
+							<option value="N">N</option>
+						</c:otherwise>
+					</c:choose> --%>
+					<option value="Y" <%=displayState.equals("Y") ? "selected" : ""%>>Y</option>
+					<option value="N" <%=displayState.equals("N") ? "selected" : ""%>>N</option>
+				</select>
+			</li>
 			<li>번호</li>
 			<li>작품명</li>
 			<li>작가명</li>
@@ -36,7 +58,7 @@
 		<c:forEach items="${artworkList}" var="avo">
 			<ul class="admin-list-main" onclick="go_check(event)">
 				<li>
-					<input type="checkbox" onclick="" class="check-box">
+					<input type="checkbox" class="check-box">
 				</li>
 				<li>${avo.displayyn}</li>
 				<li>${avo.aseq}</li>

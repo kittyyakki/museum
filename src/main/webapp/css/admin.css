@@ -185,10 +185,24 @@
 	cursor: pointer;
 }
 
-.admin-list-main:hover{
+.admin-list-main:hover,
+.admin-list-main.checked{
 	background-color: #faedcd;
 }
 
 .view-link:hover{
 	text-decoration: underline;
 }
+
+
+.admin-select {
+    padding: 0.5rem 0.3rem;
+    text-align: center;
+    border: 1px solid #888;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+}
+
+
+
