@@ -3,7 +3,6 @@
 <jsp:include page="/header.jsp">
 	<jsp:param name="stylesheet" value="css/artwork.css" />
 	<jsp:param name="script" value="script/artwork.js" />
-	<jsp:param name="script" value="script/ajax.js" />
 </jsp:include>
 
 <section class="artwork-view">

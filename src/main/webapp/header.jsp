@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="${css}">
 </c:forEach>
 <script src="script/header.js"></script>
+<script src="script/ajax.js"></script>
 <c:forEach items="${paramValues.script}" var="js">
 	<script src="${js}"></script>
 </c:forEach>
