@@ -13,6 +13,8 @@ String isReply = request.getParameter("isReply") != null ? request.getParameter(
 		<div class="admin-list-btn">
 			<input type="hidden" name="memberIds">
 			<input type="button" value="글 삭제" onclick="deleteQna()">
+			<input type="text" placeholder="검색어를 입력하세요" name="searchWord" value="${searchWord}">
+			<input type="button" value="검색" onclick="searchAdmin('adminQnaList')">
 		</div>
 		<ul class="admin-list-header admin-qna-list">
 			<li>
@@ -27,6 +29,7 @@ String isReply = request.getParameter("isReply") != null ? request.getParameter(
 			</li>
 			<li>번호</li>
 			<li>제목</li>
+			<li>내용</li>
 			<li>작성일</li>
 		</ul>
 		<c:forEach items="${qnaList}" var="qvo">
@@ -42,6 +45,7 @@ String isReply = request.getParameter("isReply") != null ? request.getParameter(
 				</li>
 				<li>${qvo.qseq}</li>
 				<li class="view-link" onclick="location.href='museum.do?command=qnaView&qseq=${qvo.qseq}'">${qvo.title}</li>
+				<li>${qvo.content}</li>
 				<li>${qvo.writedate}</li>
 			</ul>
 		</c:forEach>
