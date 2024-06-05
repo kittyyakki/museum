@@ -1,15 +1,13 @@
 package com.team4.museum.controller.action.artwork;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-import com.team4.museum.util.ArtworkCategory;
-import com.team4.museum.util.Paging;
-import com.team4.museum.vo.ArtworkVO;
-import com.team4.museum.vo.MemberVO;
 import com.team4.museum.controller.action.Action;
+import com.team4.museum.controller.action.member.LoginAction;
 import com.team4.museum.dao.ArtworkDao;
+import com.team4.museum.util.ArtworkCategory;
+import com.team4.museum.vo.ArtworkVO;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,7 +22,6 @@ public class ArtworkListAction implements Action {
 		response.setCharacterEncoding("utf-8");
 		
 		HttpSession session = request.getSession();
-		MemberVO mvo = (MemberVO)session.getAttribute("loginUser");
 		ArtworkDao adao = ArtworkDao.getInstance();
 		session.removeAttribute("category");
 		
@@ -40,7 +37,7 @@ public class ArtworkListAction implements Action {
 		List<ArtworkVO> list = null;
 
 		// 관리자 계정으로 로그인한 경우
-		if(mvo != null && mvo.getAdminyn().equals("Y")) {
+		if(LoginAction.isAdmin(request)) {
 			if (searchWord != null) { // 검색어로 조회
 				list = adao.searchArtworkAdmin(searchWord);
 				category = null;

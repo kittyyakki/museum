@@ -8,6 +8,7 @@ import static com.team4.museum.util.AjaxResult.UNAUTHORIZED;
 import java.io.IOException;
 
 import com.team4.museum.controller.action.Action;
+import com.team4.museum.controller.action.member.LoginAction;
 import com.team4.museum.dao.QnaDao;
 import com.team4.museum.util.AjaxResult;
 import com.team4.museum.vo.QnaVO;
@@ -53,7 +54,7 @@ public class QnaPwdCheckAction implements Action {
 			}
 
 			// 관리자 일 경우 OK 를 반환
-			if (session.getAttribute("isAdmin") != null) {
+			if (LoginAction.isAdmin(request)) {
 				return new AjaxResult(OK, "관리자로 확인되었습니다", url);
 			}
 			break;
