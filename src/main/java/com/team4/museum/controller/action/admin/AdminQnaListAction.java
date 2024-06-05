@@ -1,12 +1,10 @@
 package com.team4.museum.controller.action.admin;
 
 import java.io.IOException;
-import java.util.List;
 
 import com.team4.museum.controller.action.Action;
 import com.team4.museum.dao.QnaDao;
 import com.team4.museum.util.Pagination;
-import com.team4.museum.vo.QnaVO;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,6 +16,7 @@ public class AdminQnaListAction implements Action{
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		QnaDao qdao = QnaDao.getInstance();
 		String isReply = request.getParameter("isReply");
+		String searchWord = request.getParameter("searchWord");
 
 		Pagination pagination = Pagination
 				.fromRequest(request)
@@ -25,12 +24,16 @@ public class AdminQnaListAction implements Action{
 				.setItemCount(qdao.getAllCount())
 				.setItemsPerPage(10);
 
-		if(isReply != null) {
+		if(searchWord != null) {
+			request.setAttribute("qnaList", qdao.searchQna(pagination, searchWord));
+			
+		}else if(isReply != null) {
 			request.setAttribute("qnaList", qdao.selectQna(pagination, isReply));
 			request.setAttribute("isReply", isReply);
 		}else {
 			request.setAttribute("qnaList", qdao.selectQna(pagination));			
 		}
+		
 		request.setAttribute("pagination", pagination);
 		request.getRequestDispatcher("admin/adminQnaList.jsp").forward(request, response);
 	}
