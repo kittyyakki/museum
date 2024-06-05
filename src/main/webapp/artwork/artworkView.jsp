@@ -28,7 +28,7 @@
 					<input type="button" value="삭제" onclick="go_deleteArtwork('${artwork.aseq}')" />
 				</c:when>
 				<c:otherwise>
-					<input type="button" value="관심 예술품 +" onclick="ajax('',{command:'mypageFavorite',aseq:${artwork.aseq}})" />
+					<input type="button" value="관심 예술품 +" onclick="ajax({command:'mypageFavorite', aseq:${artwork.aseq}})" />
 				</c:otherwise>
 			</c:choose>
 			<input type="button" value="목록으로" onclick="location.href='museum.do?command=artworkList&category=${category}'"/>

@@ -6,7 +6,7 @@ function onReplySubmit() {
 }
 
 function qnaPwdCheck(qseq, mode, pwd) {
-	ajax('', { command: 'qnaPwdCheck', qseq, mode, pwd }, function(status, response) {
+	ajax({ command: 'qnaPwdCheck', qseq, mode, pwd }, function(status, response) {
 		if (status === 401) { // Unauthorized
 			var pwd = prompt(qseq + "번 QnA 글의 비밀번호를 입력하세요:");
 			if (pwd !== null && pwd !== undefined && pwd !== "") {

@@ -1,7 +1,15 @@
 /**
  * AJAX 요청을 전송하는 함수
+ * 
  */
 function ajax(requestUrl, requestBody, ajaxHandler) {
+	// ajax(requestBody, ajaxHandler) 형식의 호출을 지원
+	if (typeof requestUrl === 'object') {
+		ajaxHandler = requestBody;
+		requestBody = requestUrl;
+		requestUrl = null;
+	}
+
 	// requestUrl이 유효하지 않으면 `location.pathname`를 사용
 	if (!requestUrl) {
 		requestUrl = location.pathname;
