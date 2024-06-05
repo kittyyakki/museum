@@ -2,51 +2,10 @@
 <jsp:include page="/header.jsp">
 <jsp:param name="stylesheet" value="css/main.css"/>
 <jsp:param name="script" value="script/jquery-3.7.1.min.js"/>
+<jsp:param name="script" value="script/main.js"/>
 </jsp:include> 
-<script type="text/javascript">
-	$(function() {
-		var imgNum = 0
-		var timer;
-		var state = false;
-		$('#main-center-remote div').click(
-				function() {
-					var idx = $(this).index();
-					var dist;
-					if (idx == 8) { // 자동 버튼
-						if (state == false) { // 자동동작 멈춤상태
-							state = true;
-							$('#main-center-remote div:eq(8)').html('■')
-							timer = window.setInterval(function() {
-								imgNum++;
-								if (imgNum > 7)
-									imgNum = 0;
-								dist = -1440 * imgNum;
-								$('#main-center-imgs').animate({
-									left : dist
-								}, 1000);
-								$('#main-center-remote div').removeClass(
-										'selected');
-								$('#main-center-remote div').eq(imgNum)
-										.addClass('selected');
-							}, 3500);
-						} else { // 자동동작 상태
-							state = false;
-							$('#main-center-remote div:eq(8)').html('▶');
-							window.clearInterval(timer);
-						}
-					} else {
-						imgNum = idx;
-						dist = -1440 * imgNum;
-						$('#main-center-imgs').animate({
-							left : dist
-						}, 1000);
-					}
-					$('#main-center-remote div').removeClass('selected');
-					$('#main-center-remote div').eq(imgNum)
-							.addClass('selected');
-				});
-	});
-</script>
+
+<!------------------------------------------- 메인 상단 옆으로 넘어가는 슬라이드  -------------------------------------------->
 
 <div id="main-center">
 	<div id="main-center-imgs">
@@ -62,11 +21,101 @@
 		<div></div>
 		<div></div>
 		<div></div>
-		<div>▶</div>
+		<div style="border-radius:0; width:40px; height:35px;bottom:10px;">▶</div>
 	</div>
 </div>
 
+<!----------------------------------------- 좌우로 이동하는 슬라이드 --------------------------------------->
 
+<div class="main-middle-container">
+        <div class="container-box">
+            <div class="image-list" id="container1">
+                <div class="imagelist">
+                <img src="main_images/main_image1.png">
+                </div>
+                <div class="imagelist">
+                <img src="main_images/main_image2.jpg">
+                </div>
+                <div class="imagelist">
+                <img src="main_images/main_image3.jpg">
+                </div>
+                <div class="imagelist">
+                <img src="main_images/main_image4.jpg">
+                </div>
+                <div class="imagelist">
+                <img src="main_images/main_image5.jpg">
+                </div>
+                <div class="imagelist">
+                <img src="main_images/main_image6.jpg">
+                </div>
+            </div>
+            
+            <div class="image-list" id="container2">
+                <div class="imagelist">
+                <img src="main_images/main_image1.png">
+                </div>
+                <div class="imagelist">
+                <img src="main_images/main_image2.jpg">
+                </div>
+                <div class="imagelist">
+                <img src="main_images/main_image3.jpg">
+                </div>
+                <div class="imagelist">
+                <img src="main_images/main_image4.jpg">
+                </div>
+                <div class="imagelist">
+                <img src="main_images/main_image5.jpg">
+                </div>
+                <div class="imagelist">
+                <img src="main_images/main_image6.jpg">
+                </div>
+            </div>
+        </div>
+        
+        <div class="container-box">
+            <div class="image-list" id="container3">
+                <div class="imagelist">
+               <img src="main_images/main_image1.png">
+                </div>
+                <div class="imagelist">
+                <img src="main_images/main_image2.jpg">
+                </div>
+                <div class="imagelist">
+                <img src="main_images/main_image3.jpg">
+                </div>
+                <div class="imagelist">
+                <img src="main_images/main_image4.jpg">
+                </div>
+                <div class="imagelist">
+                <img src="main_images/main_image5.jpg">
+                </div>
+                <div class="imagelist">
+                <img src="main_images/main_image6.jpg">
+                </div>
+            </div>
+            
+            <div class="image-list" id="container4">
+            	<div class="imagelist">
+                <img src="main_images/main_image1.png">
+                </div>
+                <div class="imagelist">
+                <img src="main_images/main_image2.jpg">
+                </div>
+                <div class="imagelist">
+                <img src="main_images/main_image3.jpg">
+                </div>
+                <div class="imagelist">
+                <img src="main_images/main_image4.jpg">
+                </div>
+                <div class="imagelist">
+                <img src="main_images/main_image5.jpg">
+                </div>
+                <div class="imagelist">
+                <img src="main_images/main_image6.jpg">
+                </div>
+            </div>
+        </div>
+     </div>
 
 
 
