@@ -3,6 +3,7 @@ package com.team4.museum.controller;
 import java.io.IOException;
 
 import com.team4.museum.controller.action.Action;
+import com.team4.museum.util.UrlUtil;
 import com.team4.museum.vo.MemberVO;
 
 import jakarta.servlet.ServletException;
@@ -41,7 +42,7 @@ public class MuseumServlet extends HttpServlet {
 		// 'command' 파라미터로 요청된 'Action'을 찾아 실행
 		String command = request.getParameter("command");
 
-		System.out.print("Request : " + request.getQueryString() + " -> ");
+		System.out.print("Request : " + UrlUtil.getUrlPath(request) + " -> ");
 		Action ac = ActionFactory.getInstance().getAction(command);
 		if (ac == null) {
 			System.out.println("Action not found : " + command);

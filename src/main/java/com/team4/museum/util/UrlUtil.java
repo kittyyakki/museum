@@ -4,6 +4,8 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 final public class UrlUtil {
 	/**
 	 * URL 인코딩 처리
@@ -35,5 +37,19 @@ final public class UrlUtil {
 		} catch (Exception e) {
 			return url;
 		}
+	}
+
+	/**
+	 * 현재 페이지 URL 경로 반환
+	 * 
+	 * 현재 페이지의 URL 경로를 반환한다.
+	 * 
+	 * @param request
+	 * @return
+	 */
+	public static String getUrlPath(HttpServletRequest request) {
+		String uri = request.getRequestURI();
+		String query = request.getQueryString();
+		return uri + (query == null ? "" : "?" + query);
 	}
 }

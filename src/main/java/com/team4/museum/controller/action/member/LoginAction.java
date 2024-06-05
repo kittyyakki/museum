@@ -76,7 +76,7 @@ public class LoginAction implements Action {
 	 */
 	public static MemberVO getLoginUser(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
-		return getLoginUser(request, response, "museum.do?" + request.getQueryString());
+		return getLoginUser(request, response, UrlUtil.getUrlPath(request));
 	}
 
 	/**
