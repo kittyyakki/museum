@@ -65,6 +65,17 @@ public class LoginAction implements Action {
 	}
 
 	/**
+	 * 세션에서 관리자 여부를 확인한다.
+	 * 
+	 * @param request
+	 * 
+	 * @return 관리자면 true, 아니면 false
+	 */
+	public static boolean isAdmin(HttpServletRequest request) {
+		return request.getSession().getAttribute("isAdmin") != null;
+	}
+
+	/**
 	 * 세션에서 로그인한 사용자의 정보를 가져온다.
 	 * 
 	 * @param request
