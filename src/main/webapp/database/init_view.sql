@@ -27,8 +27,7 @@ ORDER BY review.writedate;
 
 
 CREATE OR REPLACE VIEW favorite_view AS
-SELECT artwork.*,
-       writedate
+SELECT id AS member_id, artwork.*
 FROM favorite_artwork
          INNER JOIN artwork ON favorite_artwork.id = artwork.aseq
 ORDER BY favorite_artwork.writedate;

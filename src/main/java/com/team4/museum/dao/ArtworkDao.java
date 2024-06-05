@@ -149,7 +149,7 @@ public class ArtworkDao {
 		}, ArtworkDao::extractArtworkVO);
 	}
 
-	private static ArtworkVO extractArtworkVO(ResultSet rs) throws SQLException {
+	public static ArtworkVO extractArtworkVO(ResultSet rs) throws SQLException {
 
 		ArtworkVO avo = new ArtworkVO();
 		avo.setAseq(rs.getInt("aseq"));
