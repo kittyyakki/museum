@@ -120,4 +120,7 @@ public class ArtworkVO {
 		this.displayyn = displayyn;
 	}
 
+	public boolean isDisplay() {
+		return displayyn.equals("Y");
+	}
 }
