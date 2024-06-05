@@ -1,14 +1,16 @@
 package com.team4.museum.util;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 
 public class Db {
 
@@ -112,6 +114,25 @@ public class Db {
 		return result;
 	}
 
+	public static <T> T executeCall(String query, CallStatementPreparer preparer, CallOutExtractor<T> extractor) {
+		T result = null;
+		try {
+			Connection con = getConnection();
+			CallableStatement pstmt = con.prepareCall(query);
+
+			preparer.prepare(pstmt);
+			pstmt.execute();
+
+			result = extractor.extract(pstmt);
+
+			close(con, pstmt, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
 	@FunctionalInterface
 	public interface StatementPreparer {
 		void prepare(PreparedStatement pstmt) throws SQLException;
@@ -120,6 +141,16 @@ public class Db {
 	@FunctionalInterface
 	public interface ResultSetExtractor<T> {
 		T extract(ResultSet rs) throws SQLException;
+	}
+
+	@FunctionalInterface
+	public interface CallStatementPreparer {
+		void prepare(CallableStatement cstmt) throws SQLException;
+	}
+
+	@FunctionalInterface
+	public interface CallOutExtractor<T> {
+		T extract(CallableStatement cstmt) throws SQLException;
 	}
 
 }
