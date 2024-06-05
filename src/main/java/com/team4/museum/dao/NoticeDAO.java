@@ -4,11 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import com.team4.museum.util.Db;
 import com.team4.museum.util.Pagination;
-import com.team4.museum.util.Paging;
 import com.team4.museum.vo.NoticeVO;
 
 import static com.team4.museum.util.Db.*;
@@ -172,6 +170,19 @@ final public class NoticeDAO {
 			Db.close(con, pstmt, rs);
 		}
 		return nvo;
+	}
+
+	public List<NoticeVO> searchNoticeList(Pagination pagination, String searchWord) {
+		return executeSelect("SELECT * FROM notice "
+				+ " WHERE title LIKE CONCAT('%', ?, '%') OR content LIKE CONCAT('%', ?, '%') "
+				+ " ORDER BY nseq DESC LIMIT ? OFFSET ?",
+				pstmt -> {
+					pstmt.setString(1, searchWord);
+					pstmt.setString(2, searchWord);
+					pstmt.setInt(3, pagination.getLimit());
+					pstmt.setInt(4, pagination.getOffset());
+				},
+				NoticeDAO::extractNoticeVO);
 	}
 
 }

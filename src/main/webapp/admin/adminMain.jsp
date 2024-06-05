@@ -10,7 +10,7 @@
 		<a href="museum.do?command=adminArtworkList">예술품 목록</a>
 	</li>
 	<li>
-		<a href="museum.do?command=">소식지 목록</a>
+		<a href="museum.do?command=adminNoticeList">소식지 목록</a>
 	</li>
 	<li>
 		<a href="museum.do?command=adminUserGalleryList">이용자 갤러리 목록</a>
