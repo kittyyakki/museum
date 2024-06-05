@@ -13,7 +13,7 @@ public class MyPageAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (LoginAction.isLogined(request, response)) {
-			request.getRequestDispatcher("member/myPage.jsp").forward(request, response);
+			request.getRequestDispatcher("member/mypage.jsp").forward(request, response);
 		}
 	}
 }

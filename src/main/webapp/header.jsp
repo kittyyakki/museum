@@ -17,6 +17,7 @@
 	<link rel="stylesheet" href="${css}">
 </c:forEach>
 <script src="script/header.js"></script>
+<script src="script/ajax.js"></script>
 <c:forEach items="${paramValues.script}" var="js">
 	<script src="${js}"></script>
 </c:forEach>
@@ -89,17 +90,35 @@
 			<div class="login_join_box">
 				<c:choose>
 					<c:when test="${empty loginUser}">
-						<a href="museum.do?command=loginForm">로그인</a>
-						<a href="museum.do?command=joinForm">회원가입</a>
+						<a href="museum.do?command=loginForm&returnUrl=${urlPath}">로그인</a>
+						<a href="museum.do?command=joinForm&returnUrl=${urlPath}">회원가입</a>
 					</c:when>
 					<c:otherwise>
 						<a href="#">${loginUser.name}(${loginUser.id})</a>
-						<c:if test="${loginUser.adminyn.equals('Y')}">
+						<c:if test="${isAdmin}">
 							<a href="museum.do?command=admin">관리자 페이지</a>
 						</c:if>
-						<a href="museum.do?command=logout">로그아웃</a>
+						<span onclick="ajax({command:'logout',returnUrl:'${urlPath}'})">로그아웃</span>
 					</c:otherwise>
 				</c:choose>
+			</div>
+		</div>
+		<nav>
+			<h1>
+				<img class="header_logo" src="images/header/header_logo.png" alt="로고" id="header_logo" style="width: 208px; height: 55px;" onclick="window.location.href = 'museum.do?command=index';">
+			</h1>
+			<div class="header_gnb">
+				<a href="museum.do?command=artworkList">예술품</a> <a href="museum.do?command=noticeList">소식지</a> <a href="museum.do?command=galleryList">이용자 갤러리</a> <a href="museum.do?command=qnaList">고객센터</a> <a href="museum.do?command=mypage">마이페이지</a>
+			</div>
+			<div class="header_search">
+				<div>
+					<input type="text" placeholder="검색어를 입력하세요">
+				</div>
+				<div>
+					<a class="btn_icon" href="#" title="검색">
+					<img src="images/header/btn_search_open.png" alt="검색">
+					</a>
+				</div>
 			</div>
 
 

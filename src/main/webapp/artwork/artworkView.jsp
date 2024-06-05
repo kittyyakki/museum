@@ -14,7 +14,7 @@
 		</div>
 		<div class="artwork-view_btn">
 			<c:choose>
-				<c:when test="${loginUser.adminyn.equals('Y')}">
+				<c:when test="${isAdmin}">
 					<c:choose>
 						<c:when test="${artwork.displayyn.equals('Y')}">
 							<input type="button" value="비공개로 전환" onclick="location.href='museum.do?command=artworkDisplaySet&aseq=${artwork.aseq}'">
@@ -27,7 +27,7 @@
 					<input type="button" value="삭제" onclick="go_deleteArtwork('${artwork.aseq}')" />
 				</c:when>
 				<c:otherwise>
-					<input type="button" value="나의 갤러리 +" onclick="location.href='museum.do?command=mypageFavorite&aseq=${artwork.aseq}'" />
+					<input type="button" value="관심 예술품 +" onclick="ajax({command:'mypageFavorite', aseq:${artwork.aseq}})" />
 				</c:otherwise>
 			</c:choose>
 			<input type="button" value="목록으로" onclick="location.href='museum.do?command=artworkList&category=${category}'"/>
@@ -64,7 +64,7 @@
 				<span>부문</span>
 				<span>${artwork.category}</span>
 			</li>
-			<c:if test="${loginUser.adminyn.equals('Y')}">
+			<c:if test="${isAdmin}">
 				<li>
 					<span>전시상태</span>
 					<c:choose>

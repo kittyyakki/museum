@@ -3,6 +3,7 @@ package com.team4.museum.controller.action.qna;
 import java.io.IOException;
 
 import com.team4.museum.controller.action.Action;
+import com.team4.museum.controller.action.member.LoginAction;
 import com.team4.museum.dao.QnaDao;
 import com.team4.museum.vo.QnaVO;
 
@@ -19,10 +20,8 @@ public class QnaReplyAction implements Action {
 	}
 
 	private boolean updateReply(HttpServletRequest request, HttpServletResponse response) {
-		HttpSession session = request.getSession();
-
 		// 어드민이 아니면 false 를 반환
-		if (session.getAttribute("isAdmin") == null) {
+		if (!LoginAction.isAdmin(request)) {
 			return false;
 		}
 

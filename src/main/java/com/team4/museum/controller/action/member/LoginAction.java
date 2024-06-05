@@ -9,6 +9,7 @@ import java.io.IOException;
 import com.team4.museum.controller.action.Action;
 import com.team4.museum.dao.MemberDao;
 import com.team4.museum.util.AjaxResult;
+import com.team4.museum.util.UrlUtil;
 import com.team4.museum.vo.MemberVO;
 
 import jakarta.servlet.ServletException;
@@ -32,7 +33,7 @@ public class LoginAction implements Action {
 
 		// 파라미터에 'pwd'가 없으면 BAD_REQUEST 를 반환
 		String pwd = request.getParameter("pwd");
-		if (pwd == null || id.equals("")) {
+		if (pwd == null || pwd.equals("")) {
 			return new AjaxResult(BAD_REQUEST, "'pwd'를 입력해주세요");
 		}
 
@@ -52,17 +53,40 @@ public class LoginAction implements Action {
 		HttpSession session = request.getSession();
 		session.setAttribute("loginUser", mvo);
 
-		// 세션에 저장된 돌아갈 페이지 정보를 확인하고, 없으면 index 페이지로 이동
-		String returnUrl = (String) session.getAttribute("returnUrl");
-		if (returnUrl == null) {
-			returnUrl = "museum.do?command=index";
-		} else {
-			// 세션에 저장된 돌아갈 페이지 정보를 삭제 (한 번만 사용)
-			session.removeAttribute("returnUrl");
+		// 돌아갈 페이지 정보를 확인하고, 없으면 index 페이지로 이동
+		String returnUrl = "museum.do?command=index";
+		String returnUrlParam = (String) request.getParameter("returnUrl");
+		if (returnUrlParam != null && !returnUrlParam.isEmpty()) {
+			returnUrl = UrlUtil.decode(returnUrlParam);
 		}
 
 		// 돌아갈 페이지 정보와 함께 OK 를 반환
 		return new AjaxResult(OK, "로그인에 성공하였습니다", returnUrl);
+	}
+
+	/**
+	 * 세션에서 관리자 여부를 확인한다.
+	 * 
+	 * @param request
+	 * 
+	 * @return 관리자면 true, 아니면 false
+	 */
+	public static boolean isAdmin(HttpServletRequest request) {
+		return request.getSession().getAttribute("isAdmin") != null;
+	}
+
+	/**
+	 * 세션에서 로그인한 사용자의 정보를 가져온다.
+	 * 
+	 * @param request
+	 * 
+	 * @return 로그인한 사용자의 정보 (MemberVO), 로그인이 안되어 있으면 null
+	 * 
+	 * @throws IOException
+	 */
+	public static MemberVO getLoginUserFrom(HttpServletRequest request) throws IOException {
+		HttpSession session = request.getSession();
+		return (MemberVO) session.getAttribute("loginUser");
 	}
 
 	/**
@@ -77,7 +101,7 @@ public class LoginAction implements Action {
 	 */
 	public static MemberVO getLoginUser(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
-		return getLoginUser(request, response, "museum.do?" + request.getQueryString());
+		return getLoginUser(request, response, UrlUtil.getUrlPath(request));
 	}
 
 	/**
@@ -94,11 +118,9 @@ public class LoginAction implements Action {
 	public static MemberVO getLoginUser(HttpServletRequest request, HttpServletResponse response, String returnUrl)
 			throws IOException {
 
-		HttpSession session = request.getSession();
-		MemberVO mvo = (MemberVO) session.getAttribute("loginUser");
+		MemberVO mvo = getLoginUserFrom(request);
 		if (mvo == null) {
-			session.setAttribute("returnUrl", returnUrl);
-			response.sendRedirect("museum.do?command=loginForm");
+			response.sendRedirect(getLoginUrl(returnUrl));
 			return null;
 		}
 
@@ -133,5 +155,16 @@ public class LoginAction implements Action {
 	public static boolean isLogined(HttpServletRequest request, HttpServletResponse response, String returnUrl)
 			throws IOException {
 		return getLoginUser(request, response, returnUrl) != null;
+	}
+
+	/**
+	 * 로그인 페이지 URL을 생성한다.
+	 * 
+	 * @param returnUrl 로그인 후 돌아갈 페이지
+	 * 
+	 * @return 로그인 페이지 URL
+	 */
+	public static String getLoginUrl(String returnUrl) {
+		return "museum.do?command=loginForm&returnUrl=" + UrlUtil.encode(returnUrl);
 	}
 }

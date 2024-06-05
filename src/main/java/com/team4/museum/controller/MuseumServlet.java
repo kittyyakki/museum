@@ -3,6 +3,7 @@ package com.team4.museum.controller;
 import java.io.IOException;
 
 import com.team4.museum.controller.action.Action;
+import com.team4.museum.util.UrlUtil;
 import com.team4.museum.vo.MemberVO;
 
 import jakarta.servlet.ServletException;
@@ -28,20 +29,22 @@ public class MuseumServlet extends HttpServlet {
 		// 세션에 로그인 정보가 있으면 관리자인지 확인 후 'isAdmin'을 설정
 		HttpSession session = request.getSession();
 		MemberVO mvo = (MemberVO) session.getAttribute("loginUser");
-		session.removeAttribute("isAdmin");
-		session.removeAttribute("userId");
 		if (mvo != null) {
 			if (mvo.isAdmin()) {
-				session.setAttribute("isAdmin", true);
+				request.setAttribute("isAdmin", true);
 			}
 
-			session.setAttribute("userId", mvo.getId());
+			request.setAttribute("userId", mvo.getId());
 		}
+
+		// URL Path 정보를 'urlPath'에 저장
+		String urlPath = UrlUtil.getUrlPath(request);
+		request.setAttribute("urlPath", UrlUtil.encode(urlPath));
 
 		// 'command' 파라미터로 요청된 'Action'을 찾아 실행
 		String command = request.getParameter("command");
 
-		System.out.print("Request : " + request.getQueryString() + " -> ");
+		System.out.print("Request : " + urlPath + " -> ");
 		Action ac = ActionFactory.getInstance().getAction(command);
 		if (ac == null) {
 			System.out.println("Action not found : " + command);

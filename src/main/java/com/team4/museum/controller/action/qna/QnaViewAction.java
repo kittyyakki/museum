@@ -3,6 +3,7 @@ package com.team4.museum.controller.action.qna;
 import java.io.IOException;
 
 import com.team4.museum.controller.action.Action;
+import com.team4.museum.controller.action.member.LoginAction;
 import com.team4.museum.dao.QnaDao;
 import com.team4.museum.vo.QnaVO;
 
@@ -40,7 +41,7 @@ public class QnaViewAction implements Action {
 
 		// 'qseq' 파라미터에 해당하는 'QnaVO'가 있고, 세션에 비밀번호 확인 기록이 있거나 관리자이거나 문의글이 공개 상태인 경우
 		if (qnaVO != null && (session.getAttribute("qnaPass" + qseq) != null
-				|| session.getAttribute("isAdmin") != null
+				|| LoginAction.isAdmin(request)
 				|| qnaVO.isPublic())) {
 			// qnaVO 를 반환
 			return qnaVO;

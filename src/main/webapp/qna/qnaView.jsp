@@ -3,7 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/header.jsp">
 	<jsp:param name="stylesheet" value="css/qna_view.css" />
-	<jsp:param name="script" value="script/ajax.js" />
 	<jsp:param name="script" value="script/qna.js" />
 </jsp:include>
 <section class="qna-view">

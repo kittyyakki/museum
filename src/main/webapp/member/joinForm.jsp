@@ -5,7 +5,7 @@
 </jsp:include>
 <section>
 	<article>
-		<form action="museum.do?command=join" method="post" name="joinForm" class="joinForm">
+		<form name="joinForm" class="joinForm" method="post" action="museum.do?command=join&returnUrl=${returnUrl}" onsubmit="ajaxForm(this); return false;">
 			<h2>회원가입</h2>
 
 		<div class="middle">
@@ -144,7 +144,7 @@
 		</div>
 			<div class="btn">
 				<input type="button" value="이전" onclick="location.href='museum.do?command=index'"> 
-				<input type="button" value="다음" onClick="go_save()">
+				<input type="submit" value="가입">
 			</div>
 		</form>
 	</article>
