@@ -3,6 +3,7 @@
 <jsp:include page="/header.jsp">
 	<jsp:param name="stylesheet" value="css/artwork.css" />
 	<jsp:param name="script" value="script/artwork.js" />
+	<jsp:param name="script" value="script/ajax.js" />
 </jsp:include>
 
 <section class="artwork-view">
@@ -27,7 +28,7 @@
 					<input type="button" value="삭제" onclick="go_deleteArtwork('${artwork.aseq}')" />
 				</c:when>
 				<c:otherwise>
-					<input type="button" value="나의 갤러리 +" onclick="location.href='museum.do?command=mypageFavorite&aseq=${artwork.aseq}'" />
+					<input type="button" value="관심 예술품 +" onclick="ajax('museum.do?command=mypageFavorite',{aseq:${artwork.aseq}})" />
 				</c:otherwise>
 			</c:choose>
 			<input type="button" value="목록으로" onclick="location.href='museum.do?command=artworkList&category=${category}'"/>
