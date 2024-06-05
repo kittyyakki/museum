@@ -74,6 +74,19 @@ function updateArtwork() {
 	location.href = "museum.do?command=artworkUpdate&aseq=" + aseq;
 }
 
+function updateNotice() {
+	const checkBoxes = document.querySelectorAll('.check-box:checked');
+
+	if (checkBoxes.length > 1) {
+		alert("한 개만 선택하세요");
+		return;
+	}
+	const memberRow = checkBoxes[0].closest('ul');
+	const nseq = memberRow.querySelector('li:nth-child(2)').textContent.trim();
+
+	location.href = "museum.do?command=updateNoticeForm&nseq=" + nseq;
+}
+
 function deleteArtwork() {
 	let ans = confirm("정말 삭제하시겠습니까?");
 	if (ans) {
@@ -86,7 +99,7 @@ function deleteArtwork() {
 function deleteQna() {
 	let ans = confirm("정말 삭제하시겠습니까?");
 	if (ans) {
-		selectCheckedList("museum.do?command=adminQnaDelete", 'li:nth-child(2)')
+		selectCheckedList("museum.do?command=adminQnaDelete", 'li:nth-child(3)')
 	} else {
 		return;
 	}
@@ -113,6 +126,17 @@ function displayFilter(command, param) {
 		location.href = `${url}&${param}=Y`;
 	} else {
 		location.href = `${url}&${param}=N`;
+	}
+}
+
+function categoryFilter(command, param, event){
+	const form = document.adminForm;
+	const selectValue = form.selectFilter.value;
+	let url = `museum.do?command=${command}`;
+	if (selectValue === "state") {
+		location.href = url;
+	} else if(selectValue === event.target.value) {
+		location.href = `${url}&${param}=${event.target.value}`;
 	}
 }
 
