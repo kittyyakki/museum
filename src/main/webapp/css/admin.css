@@ -134,36 +134,34 @@
 /* adminQnaList.jsp 테이블 스타일 ==============> */
 .admin-qna-list>li:nth-of-type(2),
 .admin-qna-list>li:nth-of-type(3){
-	flex: 1;
+	flex: 0.5;
 }
 .admin-qna-list>li:nth-of-type(4){
 	flex: 2;
 }
 .admin-qna-list>li:nth-of-type(5){
-	flex: 2;
+	flex: 3;
+}
+.admin-qna-list>li:nth-of-type(6){
+	flex: 1;
 }
 /* adminNoticeList.jsp 테이블 스타일 =============> */
-.admin-notice-list>li:nth-of-type(2){
-	flex:0.5;
-}
-.admin-notice-list>li:nth-of-type(3){
-	flex:0.5;
-}
-.admin-notice-list>li:nth-of-type(4){
-	flex:1.5;
-}
-.admin-notice-list>li:nth-of-type(5){
-	flex:3;
-}
-.admin-notice-list>li:nth-of-type(6){
-	flex:0.5;
-}
-.admin-notice-list>li:nth-of-type(7){
-	flex:0.5;
-}
+.admin-notice-list>li:nth-of-type(2),
+.admin-notice-list>li:nth-of-type(3),
+.admin-notice-list>li:nth-of-type(6),
+.admin-notice-list>li:nth-of-type(7),
 .admin-notice-list>li:nth-of-type(8){
 	flex:0.5;
 }
+
+.admin-notice-list>li:nth-of-type(4){
+	flex:1.5;
+}
+
+.admin-notice-list>li:nth-of-type(5){
+	flex:3;
+}
+
 .admin-list-btn {
 	display: flex;
 	margin: 1rem 0;
