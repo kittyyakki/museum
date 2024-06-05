@@ -65,6 +65,20 @@ public class LoginAction implements Action {
 	}
 
 	/**
+	 * 세션에서 로그인한 사용자의 정보를 가져온다.
+	 * 
+	 * @param request
+	 * 
+	 * @return 로그인한 사용자의 정보 (MemberVO), 로그인이 안되어 있으면 null
+	 * 
+	 * @throws IOException
+	 */
+	public static MemberVO getLoginUserFrom(HttpServletRequest request) throws IOException {
+		HttpSession session = request.getSession();
+		return (MemberVO) session.getAttribute("loginUser");
+	}
+
+	/**
 	 * 로그인이 필요한 페이지에서 세션에서 로그인한 사용자의 정보를 가져온다. 로그인이 안되어 있으면 자동으로 로그인 페이지로 이동한다.
 	 * 
 	 * @param request
@@ -93,8 +107,7 @@ public class LoginAction implements Action {
 	public static MemberVO getLoginUser(HttpServletRequest request, HttpServletResponse response, String returnUrl)
 			throws IOException {
 
-		HttpSession session = request.getSession();
-		MemberVO mvo = (MemberVO) session.getAttribute("loginUser");
+		MemberVO mvo = getLoginUserFrom(request);
 		if (mvo == null) {
 			response.sendRedirect(getLoginUrl(returnUrl));
 			return null;
