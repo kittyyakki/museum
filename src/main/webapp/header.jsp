@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Museum</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-gov-dynamic-subset.min.css" />
 <link rel="stylesheet" href="css/reset01.css">
 <link rel="stylesheet" href="css/pagination.css">
 <link rel="stylesheet" href="css/header.css">
