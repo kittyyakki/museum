@@ -46,8 +46,8 @@
 			<div class="login_join_box">
 				<c:choose>
 					<c:when test="${empty loginUser}">
-						<a href="museum.do?command=loginForm">로그인</a>
-						<a href="museum.do?command=joinForm">회원가입</a>
+						<a href="museum.do?command=loginForm&returnUrl=${urlPath}">로그인</a>
+						<a href="museum.do?command=joinForm&returnUrl=${urlPath}">회원가입</a>
 					</c:when>
 					<c:otherwise>
 						<a href="#">${loginUser.name}(${loginUser.id})</a>
