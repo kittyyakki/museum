@@ -31,7 +31,7 @@
 				<textarea name="category"rows="10" cols="100">${noticeUpdate.category}</textarea>
 			</div>
 			
-			<div class="notice_update_field">
+<%-- 			<div class="notice_update_field">
 				<label>이미지</label>
 				<input type="file" name="image"/>
 			</div>
@@ -45,7 +45,7 @@
 									<img src="images/${noticeUpdate.savefilename}" height="80" style="text-align: left;">
 								</c:otherwise>
 					</c:choose>&nbsp;&nbsp;
-			</div>
+			</div> --%>
 			<input type="hidden" name="oldimage" value="${noticeUpdate.image}" />
 			<input type="hidden" name="oldsavefilename" value="${noticeUpdate.savefilename}" />
 			
