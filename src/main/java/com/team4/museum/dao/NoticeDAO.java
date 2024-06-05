@@ -1,17 +1,18 @@
 package com.team4.museum.dao;
 
+import static com.team4.museum.util.Db.executeSelect;
+import static com.team4.museum.util.Db.executeSelectOne;
+import static com.team4.museum.util.Db.executeUpdate;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
+
 import com.team4.museum.util.Db;
 import com.team4.museum.util.Pagination;
-import com.team4.museum.util.Paging;
 import com.team4.museum.vo.NoticeVO;
-
-import static com.team4.museum.util.Db.*;
 
 final public class NoticeDAO {
 

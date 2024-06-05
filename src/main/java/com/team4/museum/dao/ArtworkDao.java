@@ -1,15 +1,15 @@
 package com.team4.museum.dao;
 
+import static com.team4.museum.util.Db.executeSelect;
+import static com.team4.museum.util.Db.executeSelectOne;
+import static com.team4.museum.util.Db.executeUpdate;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import com.team4.museum.util.Pagination;
-import com.team4.museum.util.Paging;
 import com.team4.museum.vo.ArtworkVO;
-import com.team4.museum.vo.QnaVO;
-
-import static com.team4.museum.util.Db.*;
 
 public class ArtworkDao {
 
