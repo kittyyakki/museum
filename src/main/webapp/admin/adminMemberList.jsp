@@ -41,7 +41,7 @@
 				</li>
 				<li>
 					<span>${mvo.id}</span>
-					<c:if test="${mvo.adminyn == 'Y'}">
+					<c:if test="${mvo.isAdmin()}">
 						<span style="color: red;">[admin]</span>
 					</c:if>
 				</li>

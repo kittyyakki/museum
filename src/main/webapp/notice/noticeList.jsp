@@ -18,7 +18,7 @@
 			</c:choose>
 		</c:forEach>
 		<div class="writebutton">
-		<c:if test="${loginUser.adminyn.equals('Y')}">
+		<c:if test="${isAdmin}">
 			<input type="button" value="게시글 등록" onClick="location.href='museum.do?command=insertNoticeForm'" />
 		</c:if>
 		</div>

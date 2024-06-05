@@ -15,7 +15,7 @@
 		</div>
 		<div class="artwork-view_btn">
 			<c:choose>
-				<c:when test="${loginUser.adminyn.equals('Y')}">
+				<c:when test="${isAdmin}">
 					<c:choose>
 						<c:when test="${artwork.displayyn.equals('Y')}">
 							<input type="button" value="비공개로 전환" onclick="location.href='museum.do?command=artworkDisplaySet&aseq=${artwork.aseq}'">
@@ -65,7 +65,7 @@
 				<span>부문</span>
 				<span>${artwork.category}</span>
 			</li>
-			<c:if test="${loginUser.adminyn.equals('Y')}">
+			<c:if test="${isAdmin}">
 				<li>
 					<span>전시상태</span>
 					<c:choose>
