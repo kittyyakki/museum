@@ -1,11 +1,9 @@
 package com.team4.museum.controller.action.artwork;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.team4.museum.util.ArtworkCategory;
-import com.team4.museum.util.Paging;
 import com.team4.museum.vo.ArtworkVO;
 import com.team4.museum.vo.MemberVO;
 import com.team4.museum.controller.action.Action;

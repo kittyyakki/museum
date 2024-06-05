@@ -1,15 +1,15 @@
 package com.team4.museum.dao;
 
+import static com.team4.museum.util.Db.executeSelect;
+import static com.team4.museum.util.Db.executeSelectOne;
+import static com.team4.museum.util.Db.executeUpdate;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import com.team4.museum.util.Pagination;
-import com.team4.museum.util.Paging;
 import com.team4.museum.vo.ArtworkVO;
-import com.team4.museum.vo.QnaVO;
-
-import static com.team4.museum.util.Db.*;
 
 public class ArtworkDao {
 
@@ -71,13 +71,13 @@ public class ArtworkDao {
 				}, ArtworkDao::extractArtworkVO);
 	}
 
-	// 카테고리를 기준으로 전체 조회
+	/**카테고리를 기준으로 전체 조회*/
 	public List<ArtworkVO> selectCategoryArtworkAdmin(String category) {
 		return executeSelect("SELECT * FROM artwork WHERE category=?", pstmt -> pstmt.setString(1, category),
 				ArtworkDao::extractArtworkVO);
 	}
 
-	// 관리자용 예술품 삭제
+	/** 관리자용 예술품 삭제 */
 	public void deleteArtwork(Integer aseq) {
 		executeUpdate("DELETE FROM artwork WHERE aseq = ?", pstmt -> pstmt.setInt(1, aseq));
 
