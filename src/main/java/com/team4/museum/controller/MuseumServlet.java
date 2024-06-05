@@ -39,10 +39,14 @@ public class MuseumServlet extends HttpServlet {
 			session.setAttribute("userId", mvo.getId());
 		}
 
+		// URL Path 정보를 'urlPath'에 저장
+		String urlPath = UrlUtil.getUrlPath(request);
+		session.setAttribute("urlPath", urlPath);
+
 		// 'command' 파라미터로 요청된 'Action'을 찾아 실행
 		String command = request.getParameter("command");
 
-		System.out.print("Request : " + UrlUtil.getUrlPath(request) + " -> ");
+		System.out.print("Request : " + urlPath + " -> ");
 		Action ac = ActionFactory.getInstance().getAction(command);
 		if (ac == null) {
 			System.out.println("Action not found : " + command);
