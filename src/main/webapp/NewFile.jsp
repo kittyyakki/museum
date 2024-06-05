@@ -15,12 +15,10 @@ $(function(){
         function(){ 
             timer = window.setInterval(function(){
                 imgNum++;
-                if(imgNum>8) imgNum=0;
                 dist=-1440 * imgNum;
                 $('#main-center-imgs').animate({left:dist}, 4000);
             });
-        }
-    );
+        });
 },1);
 </script>
 
