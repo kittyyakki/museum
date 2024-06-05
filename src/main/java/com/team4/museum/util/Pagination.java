@@ -1,7 +1,6 @@
 package com.team4.museum.util;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 
 public class Pagination {
 

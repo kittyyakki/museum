@@ -6,7 +6,6 @@ import java.util.Calendar;
 
 import com.team4.museum.controller.action.Action;
 import com.team4.museum.controller.action.member.LoginAction;
-import com.team4.museum.dao.MemberDao;
 import com.team4.museum.dao.NoticeDAO;
 import com.team4.museum.vo.MemberVO;
 import com.team4.museum.vo.NoticeVO;
@@ -26,18 +25,12 @@ public class UpdateNoticeAction implements Action {
 		NoticeDAO ndao = NoticeDAO.getInstance();
 		NoticeVO nvo = new NoticeVO();
 		
-
-		MemberDao mdao = MemberDao.getInstance();
 		MemberVO mvo = LoginAction.getLoginUser(request, response);
 		if (mvo == null) { //조건을 달아준다.
 			return;
 		}
 
 		nvo.setNseq(Integer.parseInt(request.getParameter("nseq")));
-		/*
-		 * mvo.setId( request.getParameter("id") ) ; mvo.setPwd(
-		 * request.getParameter("pwd") );
-		 */
 		nvo.setAuthor(mvo.getId());
 		nvo.setTitle(request.getParameter("title"));
 		nvo.setContent(request.getParameter("content"));
@@ -70,7 +63,6 @@ public class UpdateNoticeAction implements Action {
 						nvo.setSavefilename(saveFilename);
 					} else {
 						nvo.setImage(request.getParameter("oldimage"));
-						nvo.setSavefilename(request.getParameter("oldsavefilename"));
 					}
 				}
 			}

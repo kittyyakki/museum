@@ -1,7 +1,6 @@
 package com.team4.museum.controller.action.notice;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import com.team4.museum.controller.action.Action;
 import com.team4.museum.dao.NoticeDAO;
