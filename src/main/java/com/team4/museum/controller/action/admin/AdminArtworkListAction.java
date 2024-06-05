@@ -10,33 +10,31 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class AdminArtworkListAction implements Action{
+public class AdminArtworkListAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArtworkDao adao = ArtworkDao.getInstance();
 		String searchWord = request.getParameter("searchWord");
 		String displayState = request.getParameter("displayState");
-		
-		
+
 		Pagination pagination = Pagination
 				.fromRequest(request)
 				.setUrlTemplate("museum.do?command=adminArtworkList&page=%d")
-				.setItemCount(adao.getAllCount())
-				.setItemsPerPage(10);
+				.setItemCount(adao.getAllCount());
 
 		request.setAttribute("pagination", pagination);
 
-		if(searchWord != null) {
+		if (searchWord != null) {
 			request.setAttribute("artworkList", adao.searchArtworkAdmin(pagination, searchWord));
 			request.setAttribute("searchWord", searchWord);
-		}else if(displayState != null){
+		} else if (displayState != null) {
 			request.setAttribute("artworkList", adao.selectArtworkAsDisplayyn(pagination, displayState));
 			request.setAttribute("displayState", displayState);
-		}else {
+		} else {
 			request.setAttribute("artworkList", adao.selectArtwork(pagination));
 		}
-		
+
 		request.getRequestDispatcher("admin/adminArtworkList.jsp").forward(request, response);
 	}
 

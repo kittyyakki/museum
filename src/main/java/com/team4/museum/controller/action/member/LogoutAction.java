@@ -32,4 +32,5 @@ public class LogoutAction implements Action {
 		// 돌아갈 페이지 정보와 함께 OK 를 반환
 		return new AjaxResult(OK, "로그아웃 되었습니다", returnUrl);
 	}
+
 }

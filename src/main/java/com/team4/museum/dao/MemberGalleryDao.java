@@ -1,14 +1,15 @@
 package com.team4.museum.dao;
 
+import static com.team4.museum.util.Db.executeSelect;
 import static com.team4.museum.util.Db.executeSelectOne;
+import static com.team4.museum.util.Db.executeUpdate;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
-import com.team4.museum.util.Db;
 import com.team4.museum.util.Pagination;
 import com.team4.museum.vo.MemberGalleryVO;
 
@@ -16,38 +17,27 @@ public class MemberGalleryDao {
 
 	private MemberGalleryDao() {
 	}
+
 	Connection con = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
-	
-	private static MemberGalleryDao mgdao = new MemberGalleryDao();
+
+	private static MemberGalleryDao instance = new MemberGalleryDao();
 
 	public static MemberGalleryDao getInstance() {
-		return mgdao;
+		return instance;
 	}
 
 	public MemberGalleryVO getMemberGalleryOne(int mseq) {
-		return Db.executeSelectOne("select * from member_gallery_view where mseq=?",
+		return executeSelectOne(
+				"SELECT * FROM member_gallery_view WHERE mseq=?",
 				pstmt -> pstmt.setInt(1, mseq),
-				rs -> {
-					MemberGalleryVO mgvo = new MemberGalleryVO();
-					mgvo.setMseq(mseq);
-					mgvo.setAuthorId(rs.getString("author_id"));
-					mgvo.setAuthorName(rs.getString("author_name"));
-					mgvo.setTitle(rs.getString("title"));
-					mgvo.setWritedate(rs.getDate("writedate"));
-					mgvo.setContent(rs.getString("content"));
-					mgvo.setReadcount(rs.getInt("readcount"));
-					mgvo.setImage(rs.getString("image"));
-					mgvo.setSavefilename(rs.getString("savefilename"));
-					mgvo.setLikecount(rs.getInt("likecount"));
-					return mgvo;
-				});
+				MemberGalleryDao::extractMemberGalleryVO);
 	}
 
 	public int insertMemberGallery(MemberGalleryVO mgvo) {
-		return Db.executeUpdate(
-				"insert into member_gallery(author, title, content, image, savefilename) values(?, ?, ?, ?, ?)",
+		return executeUpdate(
+				"INSERT INTO member_gallery (author, title, content, image, savefilename) VALUES (?, ?, ?, ?, ?)",
 				pstmt -> {
 					pstmt.setString(1, mgvo.getAuthorId());
 					pstmt.setString(2, mgvo.getTitle());
@@ -58,7 +48,8 @@ public class MemberGalleryDao {
 	}
 
 	public void updateMemberGallery(MemberGalleryVO mgvo) {
-		Db.executeUpdate("update member_gallery set title=?, content=?, image=?, savefilename=? where mseq=?",
+		executeUpdate(
+				"UPDATE member_gallery SET title=?, content=?, image=?, savefilename=? WHERE mseq=?",
 				pstmt -> {
 					pstmt.setString(1, mgvo.getTitle());
 					pstmt.setString(2, mgvo.getContent());
@@ -67,9 +58,10 @@ public class MemberGalleryDao {
 					pstmt.setInt(5, mgvo.getMseq());
 				});
 	}
-	
+
 	public void deleteMemberGallery(int mseq) {
-		Db.executeUpdate("delete from member_gallery where mseq=?",
+		executeUpdate(
+				"DELETE FROM member_gallery WHERE mseq=?",
 				pstmt -> pstmt.setInt(1, mseq));
 	}
 
@@ -78,34 +70,30 @@ public class MemberGalleryDao {
 				"SELECT COUNT(*) AS cnt FROM member_gallery",
 				rs -> rs.getInt("cnt"));
 	}
-	
-	public ArrayList<MemberGalleryVO> getAllgallery(Pagination pagination) {
-		ArrayList<MemberGalleryVO> list = new ArrayList<MemberGalleryVO>();
-		con = Db.getConnection();
-		
-		String sql = "select * from notice order by nseq desc limit ? offset ?";
-		try {
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, pagination.getLimit());
-			pstmt.setInt(2, pagination.getOffset());
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				MemberGalleryVO mgdto = new MemberGalleryVO();
-				mgdto.setMseq(rs.getInt("mseq"));
-				mgdto.setTitle(rs.getString("title"));
-				mgdto.setAuthorId(rs.getString("author"));
-				mgdto.setWritedate(rs.getDate("writedate"));
-				mgdto.setContent(rs.getString("content"));
-				mgdto.setReadcount(rs.getInt("readcount"));
-				mgdto.setImage(rs.getString("Image"));
-				
-				list.add(mgdto);
-			}
-			}catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				Db.close(con, pstmt, rs);}
-			return list;
-		}
-}
 
+	public List<MemberGalleryVO> getAllGallery(Pagination pagination) {
+		return executeSelect(
+				"SELECT * FROM member_gallery ORDER BY mseq DESC LIMIT ? OFFSET ?",
+				pstmt -> {
+					pstmt.setInt(1, pagination.getLimit());
+					pstmt.setInt(2, pagination.getOffset());
+				},
+				MemberGalleryDao::extractMemberGalleryVO);
+	}
+
+	private static MemberGalleryVO extractMemberGalleryVO(ResultSet rs) throws SQLException {
+		MemberGalleryVO mgvo = new MemberGalleryVO();
+		mgvo.setMseq(rs.getInt("mseq"));
+		mgvo.setAuthorId(rs.getString("author_id"));
+		mgvo.setAuthorName(rs.getString("author_name"));
+		mgvo.setTitle(rs.getString("title"));
+		mgvo.setWritedate(rs.getDate("writedate"));
+		mgvo.setContent(rs.getString("content"));
+		mgvo.setReadcount(rs.getInt("readcount"));
+		mgvo.setImage(rs.getString("image"));
+		mgvo.setSavefilename(rs.getString("savefilename"));
+		mgvo.setLikecount(rs.getInt("likecount"));
+		return mgvo;
+	}
+
+}

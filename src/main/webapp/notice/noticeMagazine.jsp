@@ -5,7 +5,6 @@
 	<jsp:param name="stylesheet" value="css/notice.css" />
 	<jsp:param name="script" value="script/notice.js" />
 </jsp:include>
-
 <%-- <div class="notice_header_box">
 		<c:forEach items="${noticeCategory}" var="category" varStatus="status">
 			<c:choose>
@@ -18,15 +17,16 @@
 			</c:choose>
 		</c:forEach>
 	</div> --%>
-
 <div class="noticeMagazine_container">
-
 	<div class="mu-news_left">
 		<div class="l-img"></div>
-		<span> <a href="https://www.museum.go.kr/site/main/filedown/TkJZT7dmTTl9Xp7oqHMCHg==" title="PDF 내려받기" class="btn btn-m-line bk2 pdf-down">PDF <i></i></a> <a href="https://webzine.museum.go.kr/eng/sub_archive/archive_vol.html?vmIdx=1827" target="_blank" title="바로가기 새창 열림" class="btn btn-m-line bk2 btn-link">바로가기 <i></i></a>
+		<span> <a href="https://www.museum.go.kr/site/main/filedown/TkJZT7dmTTl9Xp7oqHMCHg==" title="PDF 내려받기" class="btn btn-m-line bk2 pdf-down">
+				PDF <i></i>
+			</a> <a href="https://webzine.museum.go.kr/eng/sub_archive/archive_vol.html?vmIdx=1827" target="_blank" title="바로가기 새창 열림" class="btn btn-m-line bk2 btn-link">
+				바로가기 <i></i>
+			</a>
 		</span>
 	</div>
-
 	<div class="txt-area_right">
 		<div class="chapter-info">
 			<div class="chapter-wrap">
@@ -147,13 +147,5 @@
 			<input type="button" class="btn-noticeMagazine" value="목록" onClick="location.href='museum.do?command=noticeList'" />
 		</div>
 	</div>
-
-
-
-
 </div>
-
-
-
-
 <%@ include file="/footer.jsp"%>

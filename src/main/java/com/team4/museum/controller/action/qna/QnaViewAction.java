@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 public class QnaViewAction implements Action {
+
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		QnaVO qnaVO = getQnaVO(request, response);
 
@@ -50,4 +51,5 @@ public class QnaViewAction implements Action {
 		// 아니면 null 을 반환
 		return null;
 	}
+
 }

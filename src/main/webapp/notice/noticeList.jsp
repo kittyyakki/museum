@@ -18,9 +18,9 @@
 			</c:choose>
 		</c:forEach>
 		<div class="writebutton">
-		<c:if test="${isAdmin}">
-			<input type="button" value="게시글 등록" onClick="location.href='museum.do?command=insertNoticeForm'" />
-		</c:if>
+			<c:if test="${isAdmin}">
+				<input type="button" value="게시글 등록" onClick="location.href='museum.do?command=insertNoticeForm'" />
+			</c:if>
 		</div>
 	</div>
 	<div class="notice_title_box">
@@ -37,10 +37,12 @@
 			<div class="row">
 				<div class="col col_number">${noticeList.nseq}</div>
 				<div class="col col_title">
-					<a href="museum.do?command=noticeView&nseq=${noticeList.nseq}"> ${noticeList.title} </a>&nbsp;
+					<a href="museum.do?command=noticeView&nseq=${noticeList.nseq}"> ${noticeList.title} </a>
+					&nbsp;
 				</div>
 				<div class="col col_title">
-					<a href="museum.do?command=noticeView&nseq=${noticeList.nseq}"> ${noticeList.content} </a>&nbsp;
+					<a href="museum.do?command=noticeView&nseq=${noticeList.nseq}"> ${noticeList.content} </a>
+					&nbsp;
 				</div>
 				<%-- <div class="col col_content">${noticeList.content}</div> --%>
 				<div class="col col_date">
@@ -52,10 +54,6 @@
 			</div>
 		</c:forEach>
 	</div>
-
-
 	<%@ include file="/util/pagination.jsp"%>
-
 </div>
-
 <%@ include file="/footer.jsp"%>

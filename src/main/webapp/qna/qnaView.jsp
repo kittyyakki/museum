@@ -13,19 +13,13 @@
 	<div class="qna-view_header">
 		<h1>${qnaVO.title}</h1>
 		<ul>
-			<li>
-				<strong>작성일</strong>:
-				<fmt:formatDate value="${qnaVO.writedate}" pattern="yyyy-MM-dd" />
-			</li>
-			<li>
-				<strong>작성자</strong>:
-				<c:choose>
+			<li><strong>작성일</strong>: <fmt:formatDate value="${qnaVO.writedate}" pattern="yyyy-MM-dd" /></li>
+			<li><strong>작성자</strong>: <c:choose>
 					<c:when test="${isAdmin}">
 					 ${qnaVO.email} (${qnaVO.phone})
 				</c:when>
 					<c:otherwise>${qnaVO.email.substring(0, 3)}**** (010-****-****)</c:otherwise>
-				</c:choose>
-			</li>
+				</c:choose></li>
 		</ul>
 	</div>
 	<div class="qna-view_content">

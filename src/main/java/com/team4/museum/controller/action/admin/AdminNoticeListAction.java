@@ -12,34 +12,33 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class AdminNoticeListAction implements Action{
+public class AdminNoticeListAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		NoticeDAO ndao = NoticeDAO.getInstance();
 		String searchWord = request.getParameter("searchWord");
 		String noticeCategory = request.getParameter("noticeCategory");
-		
+
 		Pagination pagination = Pagination
 				.fromRequest(request)
 				.setUrlTemplate("museum.do?command=adminNoticeList&page=%d")
-				.setItemCount(ndao.getNoticeCount())
-				.setItemsPerPage(10);
+				.setItemCount(ndao.getNoticeCount());
 
 		List<NoticeVO> noticeList = null;
-		
-		if(searchWord != null) {
+
+		if (searchWord != null) {
 			noticeList = ndao.searchNoticeList(pagination, searchWord);
-		}else if(noticeCategory != null){
+		} else if (noticeCategory != null) {
 			noticeList = ndao.selectCategoryNotice(noticeCategory, pagination);
 			request.setAttribute("selectedCategory", noticeCategory);
-		}else {
+		} else {
 			noticeList = ndao.selectNoticeList(pagination);
 		}
-		
+
 		request.setAttribute("noticeList", noticeList);
 		request.setAttribute("pagination", pagination);
-		
+
 		request.getRequestDispatcher("admin/adminNoticeList.jsp").forward(request, response);
 	}
 

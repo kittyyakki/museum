@@ -10,7 +10,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class AdminQnaListAction implements Action{
+public class AdminQnaListAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -21,19 +21,18 @@ public class AdminQnaListAction implements Action{
 		Pagination pagination = Pagination
 				.fromRequest(request)
 				.setUrlTemplate("museum.do?command=adminQnaList&page=%d")
-				.setItemCount(qdao.getAllCount())
-				.setItemsPerPage(10);
+				.setItemCount(qdao.getAllCount());
 
-		if(searchWord != null) {
+		if (searchWord != null) {
 			request.setAttribute("qnaList", qdao.searchQna(pagination, searchWord));
-			
-		}else if(isReply != null) {
+
+		} else if (isReply != null) {
 			request.setAttribute("qnaList", qdao.selectQna(pagination, isReply));
 			request.setAttribute("isReply", isReply);
-		}else {
-			request.setAttribute("qnaList", qdao.selectQna(pagination));			
+		} else {
+			request.setAttribute("qnaList", qdao.selectQna(pagination));
 		}
-		
+
 		request.setAttribute("pagination", pagination);
 		request.getRequestDispatcher("admin/adminQnaList.jsp").forward(request, response);
 	}

@@ -21,7 +21,7 @@ public class QnaDao {
 	public static QnaDao getInstance() {
 		return instance;
 	}
-	
+
 	public List<QnaVO> selectQna() {
 		return executeSelect(
 				"SELECT * FROM qna",
@@ -37,26 +37,21 @@ public class QnaDao {
 				},
 				QnaDao::extractQnaVO);
 	}
-	
-	public List<QnaVO> selectQna(Pagination pagination, String isReply) {
 
-		if(isReply.equals("Y")) {
-			return executeSelect(
-					"SELECT * FROM qna WHERE reply IS NOT NULL ORDER BY qseq DESC LIMIT ? OFFSET ?",
-					pstmt -> {
-						pstmt.setInt(1, pagination.getLimit());
-						pstmt.setInt(2, pagination.getOffset());
-					},
-					QnaDao::extractQnaVO);			
-		}else {
-			return executeSelect(
-					"SELECT * FROM qna WHERE reply IS NULL ORDER BY qseq DESC LIMIT ? OFFSET ?",
-					pstmt -> {
-						pstmt.setInt(1, pagination.getLimit());
-						pstmt.setInt(2, pagination.getOffset());
-					},
-					QnaDao::extractQnaVO);
+	public List<QnaVO> selectQna(Pagination pagination, String isReply) {
+		String query;
+		if (isReply.equals("Y")) {
+			query = "SELECT * FROM qna WHERE reply IS NOT NULL ORDER BY qseq DESC LIMIT ? OFFSET ?";
+		} else {
+			query = "SELECT * FROM qna WHERE reply IS NULL ORDER BY qseq DESC LIMIT ? OFFSET ?";
 		}
+		return executeSelect(
+				query,
+				pstmt -> {
+					pstmt.setInt(1, pagination.getLimit());
+					pstmt.setInt(2, pagination.getOffset());
+				},
+				QnaDao::extractQnaVO);
 	}
 
 	public QnaVO getQna(int qseq) {
@@ -78,7 +73,9 @@ public class QnaDao {
 					pstmt.setString(6, qvo.getPwd());
 				});
 
-		return executeSelectOne("SELECT LAST_INSERT_ID() AS qseq", rs -> rs.getInt("qseq"));
+		return executeSelectOne(
+				"SELECT LAST_INSERT_ID() AS qseq",
+				rs -> rs.getInt("qseq"));
 	}
 
 	public int updateQna(QnaVO qvo) {
@@ -118,6 +115,20 @@ public class QnaDao {
 				rs -> rs.getInt("cnt"));
 	}
 
+	public Object searchQna(Pagination pagination, String searchWord) {
+		return executeSelect(
+				"SELECT * FROM qna "
+						+ " WHERE title LIKE CONCAT('%', ?, '%') OR content LIKE CONCAT('%', ?, '%') "
+						+ " ORDER BY qseq DESC LIMIT ? OFFSET ?",
+				pstmt -> {
+					pstmt.setString(1, searchWord);
+					pstmt.setString(2, searchWord);
+					pstmt.setInt(3, pagination.getLimit());
+					pstmt.setInt(4, pagination.getOffset());
+				},
+				QnaDao::extractQnaVO);
+	}
+
 	private static QnaVO extractQnaVO(ResultSet rs) throws SQLException {
 		QnaVO qvo = new QnaVO();
 		qvo.setQseq(rs.getInt("qseq"));
@@ -132,17 +143,4 @@ public class QnaDao {
 		return qvo;
 	}
 
-	public Object searchQna(Pagination pagination, String searchWord) {
-		return executeSelect(
-				"SELECT * FROM qna "
-						+ " WHERE title LIKE CONCAT('%', ?, '%') OR content LIKE CONCAT('%', ?, '%') "
-						+ " ORDER BY qseq DESC LIMIT ? OFFSET ?",
-				pstmt -> {
-					pstmt.setString(1, searchWord);
-					pstmt.setString(2, searchWord);
-					pstmt.setInt(3, pagination.getLimit());
-					pstmt.setInt(4, pagination.getOffset());
-				},
-				QnaDao::extractQnaVO);
-	}
 }

@@ -10,15 +10,15 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class ArtworkViewAction implements Action{
+public class ArtworkViewAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int aseq = Integer.parseInt(request.getParameter("aseq"));
-		
+
 		ArtworkDao adao = ArtworkDao.getInstance();
 		ArtworkVO avo = adao.selectArtworkOne(aseq);
-		
+
 		request.setAttribute("artwork", avo);
 		request.getRequestDispatcher("artwork/artworkView.jsp").forward(request, response);
 	}

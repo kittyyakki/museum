@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import jakarta.servlet.http.HttpServletRequest;
 
 final public class UrlUtil {
+
 	/**
 	 * URL 인코딩 처리
 	 * 
@@ -52,4 +53,5 @@ final public class UrlUtil {
 		String query = request.getQueryString();
 		return uri + (query == null ? "" : "?" + query);
 	}
+
 }

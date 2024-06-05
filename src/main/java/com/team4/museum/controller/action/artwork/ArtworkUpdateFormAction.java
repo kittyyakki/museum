@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 
-public class ArtworkUpdateFormAction implements Action{
+public class ArtworkUpdateFormAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,35 +30,37 @@ public class ArtworkUpdateFormAction implements Action{
 		avo.setCategory(request.getParameter("category"));
 		avo.setDisplayyn(request.getParameter("displayYn"));
 		avo.setContent(request.getParameter("content"));
-		
+
 		HttpSession session = request.getSession();
 		ServletContext context = session.getServletContext();
 		String uploadFilePath = context.getRealPath("images/artwork");
-		
+
 		File uploadDir = new File(uploadFilePath);
-		if(!uploadDir.exists()) uploadDir.mkdir();
-		
-		String fileName="";
-		for( Part p: request.getParts() ) {
+		if (!uploadDir.exists())
+			uploadDir.mkdir();
+
+		String fileName = "";
+		for (Part p : request.getParts()) {
 			fileName = "";
 			for (String content : p.getHeader("content-disposition").split(";")) {
-			      if(content.trim().startsWith("filename")) 
-			    	  fileName = content.substring(content.indexOf("=")+2, content.length()-1);
+				if (content.trim().startsWith("filename"))
+					fileName = content.substring(content.indexOf("=") + 2, content.length() - 1);
 			}
 			String saveFilename = "";
-			if(!fileName.equals("") ) {
+			if (!fileName.equals("")) {
 				Calendar today = Calendar.getInstance();
 				long dt = today.getTimeInMillis();
-				String fn1 = fileName.substring(0, fileName.indexOf(".")  );
-				String fn2 = fileName.substring( fileName.indexOf(".") );
-				saveFilename =  fn1 + dt + fn2;
+				String fn1 = fileName.substring(0, fileName.indexOf("."));
+				String fn2 = fileName.substring(fileName.indexOf("."));
+				saveFilename = fn1 + dt + fn2;
 				p.write(uploadFilePath + File.separator + saveFilename); // 파일 저장
 				avo.setImage(fileName);
 				avo.setSavefilename(saveFilename);
 			}
 		}
-		
+
 		ArtworkDao.getInstance().updateArtwork(avo);
 		request.getRequestDispatcher("museum.do?command=artworkView&aseq=" + aseq).forward(request, response);
 	}
+
 }

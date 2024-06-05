@@ -5,7 +5,6 @@
 	<jsp:param name="script" value="script/admin.js" />
 </jsp:include>
 <%@ include file="/admin/sub_menu.jsp"%>
-
 <section class="admin-list">
 	<form method="post" name="adminForm">
 		<div class="admin-list-btn">
@@ -25,9 +24,7 @@
 			<input type="button" value="검색" onclick="searchAdmin('adminMemberList')">
 		</div>
 		<ul class="admin-list-header admin-member-list">
-			<li>
-				<input type="checkbox" onclick="checkAll()" class="select-all-box">
-			</li>
+			<li><input type="checkbox" onclick="checkAll()" class="select-all-box"></li>
 			<li>ID</li>
 			<li>이름</li>
 			<li>Email</li>
@@ -36,15 +33,10 @@
 		</ul>
 		<c:forEach items="${memberList}" var="mvo">
 			<ul class="admin-list-main admin-member-list" onclick="go_check(event)">
-				<li>
-					<input type="checkbox" class="check-box">
-				</li>
-				<li>
-					<span>${mvo.id}</span>
-					<c:if test="${mvo.isAdmin()}">
+				<li><input type="checkbox" class="check-box"></li>
+				<li><span>${mvo.id}</span> <c:if test="${mvo.isAdmin()}">
 						<span style="color: red;">[admin]</span>
-					</c:if>
-				</li>
+					</c:if></li>
 				<li>${mvo.name}</li>
 				<li>${mvo.email}</li>
 				<li>${mvo.indate}</li>
@@ -53,7 +45,5 @@
 		</c:forEach>
 	</form>
 </section>
-
-
 <%@ include file="/util/pagination.jsp"%>
 <%@ include file="/footer.jsp"%>

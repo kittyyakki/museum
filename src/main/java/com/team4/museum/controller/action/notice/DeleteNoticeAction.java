@@ -13,10 +13,8 @@ public class DeleteNoticeAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int nseq = Integer.parseInt( request.getParameter("nseq") );
-		NoticeDAO ndao = NoticeDAO.getInstance();
-		ndao.deleteNotice(nseq);
+		int nseq = Integer.parseInt(request.getParameter("nseq"));
+		NoticeDAO.getInstance().deleteNotice(nseq);
 
 		request.getRequestDispatcher("notice/noticeDeleteOk.jsp").forward(request, response);
 	}

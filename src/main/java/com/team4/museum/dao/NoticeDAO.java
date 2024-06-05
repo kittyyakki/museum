@@ -29,12 +29,6 @@ final public class NoticeDAO {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 
-	/* paging 파라미터 추가 */
-	/*
-	 * public List<NoticeVO> selectNoticeList() { return executeSelect(
-	 * "SELECT * FROM notice", NoticeDAO::extractNoticeVO); }
-	 */
-
 	public List<NoticeVO> selectNoticeList(Pagination paging) {
 		return executeSelect(
 				"SELECT * FROM notice LIMIT ? OFFSET ? ",
@@ -45,7 +39,7 @@ final public class NoticeDAO {
 				NoticeDAO::extractNoticeVO);
 	}
 
-	//ORDER BY nseq DESC
+	// ORDER BY nseq DESC
 	/*
 	 * public NoticeVO selectNotice(int nseq) { return executeSelectOne(
 	 * "SELECT * FROM notice WHERE nseq = ?", pstmt -> pstmt.setInt(1, nseq),
@@ -53,7 +47,8 @@ final public class NoticeDAO {
 	 */
 
 	public List<NoticeVO> selectCategoryNotice(String category, Pagination paging) {
-		return executeSelect("SELECT * FROM notice WHERE category = ? ORDER BY nseq DESC LIMIT ? OFFSET ?",
+		return executeSelect(
+				"SELECT * FROM notice WHERE category = ? ORDER BY nseq DESC LIMIT ? OFFSET ?",
 				pstmt -> {
 					pstmt.setString(1, category);
 					pstmt.setInt(2, paging.getLimit());
@@ -94,10 +89,9 @@ final public class NoticeDAO {
 	public int getNoticeCount() {
 		return executeSelectOne(
 				"SELECT COUNT(*) AS cnt FROM notice",
-
 				rs -> rs.getInt("cnt"));
 	}
-	
+
 	public int getNoticeCount(String category) {
 		return executeSelectOne(
 				"SELECT COUNT(*) AS cnt FROM notice WHERE category = ?",
@@ -105,22 +99,10 @@ final public class NoticeDAO {
 				rs -> rs.getInt("cnt"));
 	}
 
-	private static NoticeVO extractNoticeVO(ResultSet rs) throws SQLException {
-		NoticeVO notice = new NoticeVO();
-		notice.setNseq(rs.getInt("nseq"));
-		notice.setTitle(rs.getString("title"));
-		notice.setAuthor(rs.getString("author"));
-		notice.setWritedate(rs.getDate("writedate"));
-		notice.setContent(rs.getString("content"));
-		notice.setReadcount(rs.getInt("readcount"));
-		notice.setCategory(rs.getString("category"));
-		return notice;
-	}
-
 	public int getReplyCount(int nseq) {
 		int count = 0;
 		con = Db.getConnection();
-		String sql = "select count(*) as cnt from reply where nseq=?";
+		String sql = "SELECT COUNT(*) AS cnt FROM reply WHERE nseq=?";
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, nseq);
@@ -135,7 +117,7 @@ final public class NoticeDAO {
 
 	public void plusReadCount(int nseq) {
 		con = Db.getConnection();
-		String sql = "update notice set readcount=readcount+1 where nseq=?";
+		String sql = "UPDATE notice SET readcount=readcount+1 WHERE nseq=?";
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, nseq);
@@ -150,22 +132,13 @@ final public class NoticeDAO {
 	public NoticeVO getNotice(int nseq) {
 		NoticeVO nvo = null;
 		con = Db.getConnection();
-		String sql = "select * from notice where nseq=?";
+		String sql = "SELECT * FROM notice WHERE nseq=?";
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, nseq);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-
-				nvo = new NoticeVO();
-				nvo.setNseq(rs.getInt("nseq"));
-				nvo.setTitle(rs.getString("title"));
-				nvo.setAuthor(rs.getString("author"));
-				nvo.setWritedate(rs.getDate("writedate"));
-				nvo.setContent(rs.getString("content"));
-				nvo.setReadcount(rs.getInt("readcount"));
-				nvo.setCategory(rs.getString("category"));
-
+				nvo = extractNoticeVO(rs);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -186,6 +159,18 @@ final public class NoticeDAO {
 					pstmt.setInt(4, pagination.getOffset());
 				},
 				NoticeDAO::extractNoticeVO);
+	}
+
+	private static NoticeVO extractNoticeVO(ResultSet rs) throws SQLException {
+		NoticeVO notice = new NoticeVO();
+		notice.setNseq(rs.getInt("nseq"));
+		notice.setTitle(rs.getString("title"));
+		notice.setAuthor(rs.getString("author"));
+		notice.setWritedate(rs.getDate("writedate"));
+		notice.setContent(rs.getString("content"));
+		notice.setReadcount(rs.getInt("readcount"));
+		notice.setCategory(rs.getString("category"));
+		return notice;
 	}
 
 }

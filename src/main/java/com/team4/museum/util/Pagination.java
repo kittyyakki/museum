@@ -270,4 +270,5 @@ public class Pagination {
 
 		return new Pagination().setCurrentPage(page);
 	}
+
 }

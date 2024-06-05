@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class MyPageEditAction implements Action {
+
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MemberVO mvo = LoginAction.getLoginUser(request, response);
 		if (mvo == null) {
@@ -25,4 +26,5 @@ public class MyPageEditAction implements Action {
 
 		response.sendRedirect("museum.do?command=index");
 	}
+
 }

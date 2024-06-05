@@ -9,13 +9,12 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class InsertNoticeFormAction implements Action{
+public class InsertNoticeFormAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("noticeCategory",  NoticeCategory.values());
+		request.setAttribute("noticeCategory", NoticeCategory.values());
 		request.getRequestDispatcher("notice/insertNoticeForm.jsp").forward(request, response);
-
 	}
 
 }

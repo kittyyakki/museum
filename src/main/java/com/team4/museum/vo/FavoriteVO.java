@@ -27,4 +27,5 @@ public class FavoriteVO extends ArtworkVO {
 		favorite.setSavefilename(artwork.getSavefilename());
 		return favorite;
 	}
+
 }

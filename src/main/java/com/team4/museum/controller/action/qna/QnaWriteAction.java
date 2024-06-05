@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class QnaWriteAction extends QnaWriteFormAction {
+
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		QnaVO qnaVO = getQnaVO(request, response);
 
@@ -49,4 +50,5 @@ public class QnaWriteAction extends QnaWriteFormAction {
 		// 문의글 페이지로 이동
 		response.sendRedirect("museum.do?command=qnaView&qseq=" + qseq);
 	}
+
 }

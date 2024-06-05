@@ -4,7 +4,6 @@
 	<jsp:param name="script" value="script/jquery-3.7.1.min.js" />
 	<jsp:param name="script" value="script/main.js" />
 </jsp:include>
-
 <!------------------------------------------- 메인 상단 옆으로 넘어가는 슬라이드  -------------------------------------------->
 <div id="main-center">
 	<div class="main_inner_center">
@@ -31,48 +30,29 @@
 		</div>
 		<div class="main-section_text">
 			<ul class="main-info-area">
-				<li class="main_info">
-					<strong class="main_info-tit"><i></i>관람시간</strong>
+				<li class="main_info"><strong class="main_info-tit"><i></i>관람시간</strong>
 					<div class="main_info-txt info-time">
 						<ul>
-							<li>
-								<strong>월/화/목/금/일</strong> <span>10:00 ~ 18:00</span>
-							</li>
-							<li>
-								<strong>수/토</strong> <span>10:00 ~ 21:00</span>
-							</li>
-							<li>
-								<span>&nbsp;&nbsp;&nbsp;* 입장 마감은 폐관30분 전까지</span>
-							</li>
+							<li><strong>월/화/목/금/일</strong> <span>10:00 ~ 18:00</span></li>
+							<li><strong>수/토</strong> <span>10:00 ~ 21:00</span></li>
+							<li><span>&nbsp;&nbsp;&nbsp;* 입장 마감은 폐관30분 전까지</span></li>
 						</ul>
-					</div>
-				</li>
-				<li class="main_admission">
-					<strong class="main_info-tit01"><i></i> 관람료</strong>
+					</div></li>
+				<li class="main_admission"><strong class="main_info-tit01"><i></i> 관람료</strong>
 					<div class="main_info-txt info-admission">
 						<ul>
-							<li>
-								<strong>무료</strong> <span>특별전시는 유료</span>
-							</li>
+							<li><strong>무료</strong> <span>특별전시는 유료</span></li>
 						</ul>
-					</div>
-				</li>
+					</div></li>
 			</ul>
-
 			<div class="main_info info-link">
 				<ul>
-					<li>
-						<a href="/site/main/content/subway" class="main_btn btn-over">오시는길</a>
-					</li>
-					<li>
-						<a href="/site/main/content/tour_reservation" class="main_btn btn-over">예약하기</a>
-					</li>
+					<li><a href="/site/main/content/subway" class="main_btn btn-over">오시는길</a></li>
+					<li><a href="/site/main/content/tour_reservation" class="main_btn btn-over">예약하기</a></li>
 				</ul>
 			</div>
 		</div>
-
 		<!----------------------------------------- 좌우로 이동하는 슬라이드 --------------------------------------->
-
 		<div class="main-middle-container">
 			<div class="container-box">
 				<div class="image-list" id="container1">
@@ -95,7 +75,6 @@
 						<img src="main_images/main_image6.jpg">
 					</div>
 				</div>
-
 				<div class="image-list" id="container2">
 					<div class="imagelist">
 						<img src="main_images/main_image1.png">
@@ -117,7 +96,6 @@
 					</div>
 				</div>
 			</div>
-
 			<div class="container-box">
 				<div class="image-list" id="container3">
 					<div class="imagelist">
@@ -139,7 +117,6 @@
 						<img src="main_images/main_image6.jpg">
 					</div>
 				</div>
-
 				<div class="image-list" id="container4">
 					<div class="imagelist">
 						<img src="main_images/main_image1.png">
@@ -164,5 +141,4 @@
 		</div>
 	</div>
 </div>
-
 <%@ include file="footer.jsp"%>

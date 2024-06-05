@@ -31,15 +31,13 @@ public class NoticeListAction implements Action {
 		Pagination pagination = Pagination
 				.fromRequest(request)
 				.setUrlTemplate("museum.do?command=noticeList&category=" + category + "&page=%d")
-				.setItemCount(ndao.getNoticeCount(category))
-				.setItemsPerPage(10);
+				.setItemCount(ndao.getNoticeCount(category));
 
 		List<NoticeVO> noticeList = ndao.selectNoticeList(pagination);
 		if (category.equals(NoticeCategory.전체.name())) {// 전체목록 조회
 			pagination.setItemCount(ndao.getNoticeCount());
 			noticeList = ndao.selectNoticeList(pagination);
-		}
-		else if (category.equals(NoticeCategory.매거진.name())) {
+		} else if (category.equals(NoticeCategory.매거진.name())) {
 			request.getRequestDispatcher("notice/noticeMagazine.jsp").forward(request, response);
 			return;
 		} else if (category.equals(NoticeCategory.신문.name())) {
@@ -48,7 +46,7 @@ public class NoticeListAction implements Action {
 		} else { // 카테고리 조회
 			noticeList = ndao.selectCategoryNotice(category, pagination);
 		}
-		
+
 		System.out.println(pagination.getItemCount());
 
 		request.setAttribute("categoryName", category);

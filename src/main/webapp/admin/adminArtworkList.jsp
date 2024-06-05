@@ -19,16 +19,12 @@ String displayState = request.getParameter("displayState") != null ? request.get
 			<input type="button" value="검색" onclick="searchAdmin('adminArtworkList')">
 		</div>
 		<ul class="admin-list-header admin-artwork-list">
-			<li>
-				<input type="checkbox" onclick="checkAll()" class="select-all-box">
-			</li>
-			<li>
-				<select onchange="displayFilter('adminArtworkList', 'displayState')" name="selectFilter" class="admin-select">
+			<li><input type="checkbox" onclick="checkAll()" class="select-all-box"></li>
+			<li><select onchange="displayFilter('adminArtworkList', 'displayState')" name="selectFilter" class="admin-select">
 					<option value="state">전시 상태</option>
 					<option value="Y" <%=displayState.equals("Y") ? "selected" : ""%>>Y</option>
 					<option value="N" <%=displayState.equals("N") ? "selected" : ""%>>N</option>
-				</select>
-			</li>
+			</select></li>
 			<li>번호</li>
 			<li>작품명</li>
 			<li>작가명</li>
@@ -41,9 +37,7 @@ String displayState = request.getParameter("displayState") != null ? request.get
 		</ul>
 		<c:forEach items="${artworkList}" var="avo" varStatus="index">
 			<ul class="admin-list-main admin-artwork-list" onclick="go_check(event)">
-				<li>
-					<input type="checkbox" class="check-box">
-				</li>
+				<li><input type="checkbox" class="check-box"></li>
 				<li>${avo.displayyn}</li>
 				<li>${avo.aseq}</li>
 				<li class="view-link" onclick="location.href='museum.do?command=artworkView&aseq=${avo.aseq}'">${avo.name}</li>
@@ -53,9 +47,7 @@ String displayState = request.getParameter("displayState") != null ? request.get
 				<li>${avo.material}</li>
 				<li>${avo.size}</li>
 				<li>${avo.indate}</li>
-				<li>
-					<img alt="artwork-img" src="${avo.fullSavefilename}" onmouseover="previewImg('artwork-${avo.aseq}-${index}')" onmouseleave="previewImg('artwork-${avo.aseq}-${index}')">
-				</li>
+				<li><img alt="artwork-img" src="${avo.fullSavefilename}" onmouseover="previewImg('artwork-${avo.aseq}-${index}')" onmouseleave="previewImg('artwork-${avo.aseq}-${index}')"></li>
 			</ul>
 			<div id="artwork-${avo.aseq}-${index}" class="preview hidden">
 				<img alt="artwork-img" src="${avo.fullSavefilename}">

@@ -167,4 +167,5 @@ public class LoginAction implements Action {
 	public static String getLoginUrl(String returnUrl) {
 		return "museum.do?command=loginForm&returnUrl=" + UrlUtil.encode(returnUrl);
 	}
+
 }

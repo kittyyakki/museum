@@ -129,18 +129,18 @@ function displayFilter(command, param) {
 	}
 }
 
-function categoryFilter(command, param, event){
+function categoryFilter(command, param, event) {
 	const form = document.adminForm;
 	const selectValue = form.selectFilter.value;
 	let url = `museum.do?command=${command}`;
 	if (selectValue === "state") {
 		location.href = url;
-	} else if(selectValue === event.target.value) {
+	} else if (selectValue === event.target.value) {
 		location.href = `${url}&${param}=${event.target.value}`;
 	}
 }
 
-function previewImg(id){
+function previewImg(id) {
 	const preview = document.getElementById(id);
 	preview.classList.toggle("hidden");
 }

@@ -65,7 +65,7 @@ function artistUnknown() {
 
 function yearUnknown() {
 	let form = document.artworkWriteForm;
-	
+
 	if (form.unknownYear.checked)
 		form.year.value = "연도미상";
 	else
@@ -82,18 +82,18 @@ function previewImage(input) {
 	reader.readAsDataURL(event.target.files[0]); // 선택한 파일을 읽어들임
 }
 
-function go_deleteArtwork(aseq){
+function go_deleteArtwork(aseq) {
 	let ans = confirm("정말 삭제하시겠습니까?")
-	if(ans){
-		location.href="museum.do?command=artworkDelete&aseq=" + aseq;
+	if (ans) {
+		location.href = "museum.do?command=artworkDelete&aseq=" + aseq;
 		alert("예술품 정보가 삭제되었습니다");
-	}else{
+	} else {
 		return
 	}
 }
 
-function changeValue(type){
+function changeValue(type) {
 	let form = document.artworkWriteForm;
-	if(type == "unknownYear") form.unknownYear.checked = false;
-	else if(type == "unknownArtist") form.unknownArtist.checked = false;
+	if (type == "unknownYear") form.unknownYear.checked = false;
+	else if (type == "unknownArtist") form.unknownArtist.checked = false;
 }

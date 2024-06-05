@@ -16,24 +16,17 @@ public class MemberDao {
 	private MemberDao() {
 	}
 
-	private static final MemberDao itc = new MemberDao();
+	private static final MemberDao instance = new MemberDao();
 
 	public static MemberDao getInstance() {
-		return itc;
+		return instance;
 	}
 
 	public MemberVO getMember(String id) {
-		return executeSelectOne("SELECT * FROM member WHERE id = ?", pstmt -> pstmt.setString(1, id), rs -> {
-			MemberVO mvo = new MemberVO();
-			mvo.setId(rs.getString("id"));
-			mvo.setName(rs.getString("name"));
-			mvo.setPwd(rs.getString("pwd"));
-			mvo.setEmail(rs.getString("email"));
-			mvo.setIndate(rs.getDate("indate"));
-			mvo.setPhone(rs.getString("phone"));
-			mvo.setAdminyn(rs.getString("adminyn"));
-			return mvo;
-		});
+		return executeSelectOne(
+				"SELECT * FROM member WHERE id = ?",
+				pstmt -> pstmt.setString(1, id),
+				MemberDao::extractMemberVO);
 	}
 
 	public List<MemberVO> getMemberList(Pagination pagination) {
@@ -45,7 +38,7 @@ public class MemberDao {
 				},
 				MemberDao::extractMemberVO);
 	}
-	
+
 	public List<MemberVO> searchMemberList(Pagination pagination, String searchWord) {
 		return executeSelect(
 				"SELECT * FROM member "
@@ -74,44 +67,47 @@ public class MemberDao {
 	}
 
 	public void updateMember(MemberVO mvo) {
-		executeUpdate("UPDATE member SET pwd = ?, name = ?, email = ?, phone = ?, adminyn = ? WHERE id = ?", pstmt -> {
-			pstmt.setString(1, mvo.getPwd());
-			pstmt.setString(2, mvo.getName());
-			pstmt.setString(3, mvo.getEmail());
-			pstmt.setString(4, mvo.getPhone());
-			pstmt.setString(5, mvo.getAdminyn());
-			pstmt.setString(6, mvo.getId());
-		});
+		executeUpdate(
+				"UPDATE member SET pwd = ?, name = ?, email = ?, phone = ?, adminyn = ? WHERE id = ?",
+				pstmt -> {
+					pstmt.setString(1, mvo.getPwd());
+					pstmt.setString(2, mvo.getName());
+					pstmt.setString(3, mvo.getEmail());
+					pstmt.setString(4, mvo.getPhone());
+					pstmt.setString(5, mvo.getAdminyn());
+					pstmt.setString(6, mvo.getId());
+				});
 	}
 
 	public void deleteMember(String id) {
 		executeUpdate("DELETE FROM member WHERE id = ?", pstmt -> pstmt.setString(1, id));
 	}
 
-	private static MemberVO extractMemberVO(ResultSet rs) throws SQLException {
+	public int getAllCount() {
+		return executeSelectOne(
+				"SELECT COUNT(*) as cnt FROM member",
+				rs -> rs.getInt("cnt"));
+	}
 
+	public void adminRightsAction(String memberId, String action) {
+		executeUpdate(
+				"UPDATE member SET adminyn=? WHERE id=?",
+				pstmt -> {
+					pstmt.setString(1, action.equals("grant") ? "Y" : "N");
+					pstmt.setString(2, memberId);
+				});
+	}
+
+	private static MemberVO extractMemberVO(ResultSet rs) throws SQLException {
 		MemberVO mvo = new MemberVO();
 		mvo.setId(rs.getString("id"));
 		mvo.setName(rs.getString("name"));
+		mvo.setPwd(rs.getString("pwd"));
 		mvo.setEmail(rs.getString("email"));
 		mvo.setIndate(rs.getDate("indate"));
 		mvo.setPhone(rs.getString("phone"));
 		mvo.setAdminyn(rs.getString("adminyn"));
 		return mvo;
-
-	}
-
-	public int getAllCount() {
-		return executeSelectOne("SELECT COUNT(*) as cnt FROM member",
-				rs -> rs.getInt("cnt"));
-	}
-
-	public void adminRightsAction(String memberId, String action) {
-		executeUpdate("UPDATE member SET adminyn=? WHERE id=?",
-				pstmt -> {
-					pstmt.setString(1, action.equals("grant") ? "Y" : "N");
-					pstmt.setString(2, memberId);
-				});
 	}
 
 }

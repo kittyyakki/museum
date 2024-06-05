@@ -3,6 +3,7 @@ package com.team4.museum.vo;
 import java.sql.Date;
 
 public class ArtworkVO {
+
 	private Integer aseq;
 	private String name;
 	private String category;
@@ -123,4 +124,5 @@ public class ArtworkVO {
 	public boolean isDisplay() {
 		return displayyn.equals("Y");
 	}
+
 }

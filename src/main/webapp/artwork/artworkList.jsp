@@ -5,7 +5,6 @@
 	<jsp:param name="script" value="script/artwork.js" />
 </jsp:include>
 <!-- museum.do?command=artworkList 의 목적지 -->
-
 <section class="artwork-list-header">
 	<form action="museum.do?command=artworkList" method="post" name="searchForm" class="artwork-search-form">
 		<h2>예술품 검색</h2>
@@ -27,7 +26,6 @@
 		</c:forEach>
 	</div>
 </section>
-
 <main class="artwork-list-main">
 	<div class="artwork-list-head">
 		<h4>검색결과가 총 ${artworkList.size()}건 입니다</h4>
@@ -48,5 +46,4 @@
 		</c:forEach>
 	</div>
 </main>
-
 <%@ include file="/footer.jsp"%>

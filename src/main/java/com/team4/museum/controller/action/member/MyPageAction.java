@@ -16,4 +16,5 @@ public class MyPageAction implements Action {
 			request.getRequestDispatcher("member/mypage.jsp").forward(request, response);
 		}
 	}
+
 }

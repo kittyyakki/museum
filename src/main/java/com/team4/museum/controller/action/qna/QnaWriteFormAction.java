@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 public class QnaWriteFormAction implements Action {
+
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("qnaVO", getQnaVO(request, response));
 		request.getRequestDispatcher("qna/qnaWriteForm.jsp").forward(request, response);
@@ -38,4 +39,5 @@ public class QnaWriteFormAction implements Action {
 		// 아니면 null 을 반환
 		return null;
 	}
+
 }

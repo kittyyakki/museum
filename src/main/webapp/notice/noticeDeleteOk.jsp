@@ -3,15 +3,8 @@
 	<jsp:param name="stylesheet" value="css/notice.css" />
 	<jsp:param name="script" value="script/notice.js" />
 </jsp:include>
-
-
 <script type="text/javascript">
-alert("게시물 삭제가 완료되었습니다");
-location.href='museum.do?command=noticeList';
+	alert("게시물 삭제가 완료되었습니다");
+	location.href = 'museum.do?command=noticeList';
 </script>
-
-
-
-
-
-<%@ include file="/footer.jsp" %>
+<%@ include file="/footer.jsp"%>

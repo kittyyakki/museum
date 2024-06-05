@@ -5,6 +5,7 @@ import java.io.IOException;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class AjaxResult {
+
 	public static final int OK = 200;
 	public static final int CREATED = 201;
 	public static final int ACCEPTED = 202;
@@ -45,4 +46,5 @@ public class AjaxResult {
 			e.printStackTrace();
 		}
 	}
+
 }

@@ -11,18 +11,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class QnaListAction implements Action {
+
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		QnaDao qdao = QnaDao.getInstance();
 
 		Pagination pagination = Pagination
 				.fromRequest(request)
 				.setUrlTemplate("museum.do?command=qnaList&page=%d")
-				.setItemCount(qdao.getAllCount())
-				.setItemsPerPage(10);
+				.setItemCount(qdao.getAllCount());
 
 		request.setAttribute("pagination", pagination);
 		request.setAttribute("qnaList", qdao.selectQna(pagination));
 
 		request.getRequestDispatcher("qna/qnaList.jsp").forward(request, response);
 	}
+
 }

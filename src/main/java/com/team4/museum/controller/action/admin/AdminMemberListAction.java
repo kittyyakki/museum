@@ -10,28 +10,26 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class AdminMemberListAction implements Action{
+public class AdminMemberListAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		MemberDao mdao = MemberDao.getInstance();
 		String searchWord = request.getParameter("searchWord");
-		
+
 		Pagination pagination = Pagination
 				.fromRequest(request)
 				.setUrlTemplate("museum.do?command=adminMemberList&page=%d")
-				.setItemCount(mdao.getAllCount())
-				.setItemsPerPage(10);
+				.setItemCount(mdao.getAllCount());
 
-		
-		if(searchWord != null) {
+		if (searchWord != null) {
 			request.setAttribute("memberList", mdao.searchMemberList(pagination, searchWord));
 			request.setAttribute("searchWord", searchWord);
-		}else {
-			request.setAttribute("memberList",mdao.getMemberList(pagination));
+		} else {
+			request.setAttribute("memberList", mdao.getMemberList(pagination));
 		}
-		
+
 		request.setAttribute("pagination", pagination);
 		request.getRequestDispatcher("admin/adminMemberList.jsp").forward(request, response);
 	}

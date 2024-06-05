@@ -21,12 +21,11 @@ public class UpdateNoticeAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		NoticeDAO ndao = NoticeDAO.getInstance();
 		NoticeVO nvo = new NoticeVO();
-		
+
 		MemberVO mvo = LoginAction.getLoginUser(request, response);
-		if (mvo == null) { //조건을 달아준다.
+		if (mvo == null) { // 조건을 달아준다.
 			return;
 		}
 
@@ -70,7 +69,6 @@ public class UpdateNoticeAction implements Action {
 		ndao.updateNotice(nvo);
 
 		response.sendRedirect("museum.do?command=noticeViewWithoutCnt&nseq=" + nvo.getNseq());
-
 	}
 
 }

@@ -1,6 +1,5 @@
 /**
  * AJAX 요청을 전송하는 함수
- * 
  */
 function ajax(requestUrl, requestBody, ajaxHandler) {
 	// ajax(requestBody, ajaxHandler) 형식의 호출을 지원

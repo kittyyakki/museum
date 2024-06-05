@@ -69,10 +69,11 @@ header nav {
 .header_gnb a:nth-child(1):hover, .header_gnb a:nth-child(2):hover {
 	
 }
-.header_logo{
-	width:208px;
-	height:55px;
-	background: url(/images/header/header_logo.png)no-repeat center/cover;
+
+.header_logo {
+	width: 208px;
+	height: 55px;
+	background: url(/images/header/header_logo.png) no-repeat center/cover;
 }
 
 header a {
@@ -156,13 +157,13 @@ header a:hover::after {
 /* .header_gnb > a:nth-child(1):hover + .header_gnb_list_container {
     display: block;
 } */
-
-.header_gnb >a:nth-child(1):hover + .header_gnb_list_containner{
-	display:block;
+.header_gnb>a:nth-child(1):hover+.header_gnb_list_containner {
+	display: block;
 }
+
 .header_gnb_list_containner {
 	border-top: 1px solid #ccc;
- 	display: none !important;
+	display: none !important;
 	position: absolute;
 	top: 87px;
 	left: 0px;

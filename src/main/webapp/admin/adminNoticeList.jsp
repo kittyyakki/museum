@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import= "com.team4.museum.util.NoticeCategory" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.team4.museum.util.NoticeCategory"%>
 <jsp:include page="/header.jsp">
 	<jsp:param name="stylesheet" value="css/admin.css" />
 	<jsp:param name="script" value="script/admin.js" />
@@ -18,12 +18,9 @@
 			<input type="button" value="검색" onclick="searchAdmin('adminNoticeList')">
 		</div>
 		<ul class="admin-list-header admin-notice-list">
-			<li>
-				<input type="checkbox" onclick="checkAll()" class="select-all-box">
-			</li>
+			<li><input type="checkbox" onclick="checkAll()" class="select-all-box"></li>
 			<li>번호</li>
-			<li>
-				<select onchange="categoryFilter('adminNoticeList', 'noticeCategory', event)" name="selectFilter" class="admin-select">
+			<li><select onchange="categoryFilter('adminNoticeList', 'noticeCategory', event)" name="selectFilter" class="admin-select">
 					<option value="state">분류</option>
 					<c:forEach items="${NoticeCategory.values()}" var="c">
 						<c:if test="${!c.name().equals('전체')}">
@@ -37,8 +34,7 @@
 							</c:choose>
 						</c:if>
 					</c:forEach>
-				</select>
-			</li>
+			</select></li>
 			<li>제목</li>
 			<li>내용</li>
 			<li>작성일</li>
@@ -47,9 +43,7 @@
 		</ul>
 		<c:forEach items="${noticeList}" var="nvo">
 			<ul class="admin-list-main admin-notice-list" onclick="go_check(event)">
-				<li>
-					<input type="checkbox" class="check-box">
-				</li>
+				<li><input type="checkbox" class="check-box"></li>
 				<li>${nvo.nseq}</li>
 				<li>${nvo.category}</li>
 				<li onclick="location.href='museum.do?command=noticeView&nseq=${nvo.nseq}'" class="view-link">${nvo.title}</li>
@@ -69,4 +63,4 @@
 	</form>
 </section>
 <%@ include file="/util/pagination.jsp"%>
-<%@ include file="/footer.jsp" %>
+<%@ include file="/footer.jsp"%>

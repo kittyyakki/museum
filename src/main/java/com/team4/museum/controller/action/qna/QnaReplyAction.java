@@ -10,7 +10,6 @@ import com.team4.museum.vo.QnaVO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 public class QnaReplyAction implements Action {
 
@@ -40,7 +39,6 @@ public class QnaReplyAction implements Action {
 		if (qnaVO == null) {
 			return false;
 		}
-		request.setAttribute("qnaContent", qnaVO.getContent());
 		request.setAttribute("qnaVO", qnaVO);
 
 		try {

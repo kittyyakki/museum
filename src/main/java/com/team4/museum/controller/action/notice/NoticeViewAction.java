@@ -10,23 +10,21 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class NoticeViewAction implements Action{
+public class NoticeViewAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int nseq = Integer.parseInt( request.getParameter("nseq") );
+		int nseq = Integer.parseInt(request.getParameter("nseq"));
 		NoticeDAO ndao = NoticeDAO.getInstance();
-		
+
 		// 조회수 증가
-		ndao.plusReadCount( nseq );
+		ndao.plusReadCount(nseq);
+
 		// 게시물 상세 조회
-		NoticeVO nvo = ndao.getNotice( nseq );
-		
-		
+		NoticeVO nvo = ndao.getNotice(nseq);
+
 		request.setAttribute("noticeView", nvo);
 		request.getRequestDispatcher("notice/noticeView.jsp").forward(request, response);
-		
 	}
 
 }

@@ -9,16 +9,16 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class AdminQnaDeleteAction implements Action{
+public class AdminQnaDeleteAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String[] memberIds = request.getParameter("memberIds").split(",");
-		
+
 		for (String id : memberIds) {
 			QnaDao.getInstance().deleteQna(Integer.parseInt(id));
 		}
-		
+
 		request.getRequestDispatcher("museum.do?command=adminQnaList").forward(request, response);
 	}
 

@@ -17,4 +17,5 @@ public class GalleryWriteAction implements Action {
 			request.getRequestDispatcher("gallery/galleryWriteForm.jsp").forward(request, response);
 		}
 	}
+
 }

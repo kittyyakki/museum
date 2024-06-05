@@ -56,4 +56,5 @@ public class FavoriteDao {
 		fvo.setMemberId(rs.getString("member_id"));
 		return fvo;
 	}
+
 }

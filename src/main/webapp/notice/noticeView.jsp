@@ -5,8 +5,6 @@
 	<jsp:param name="stylesheet" value="css/notice.css" />
 	<jsp:param name="script" value="script/notice.js" />
 </jsp:include>
-
-
 <div class="noticeView_container">
 	<h2>상세 보기</h2>
 	<div class="noticeView_box">
@@ -43,8 +41,4 @@
 		</div>
 	</div>
 </div>
-
-
-
-
 <%@ include file="/footer.jsp"%>
