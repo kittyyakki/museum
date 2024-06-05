@@ -35,14 +35,14 @@ public class FavoriteDao {
 	}
 
 	public Boolean toggleFavorite(String memberId, int aseq) {
-		return "added".equals(executeCall(
+		return executeCall(
 				"{CALL toggle_favorite_artwork(?, ?, ?)}",
-				pstmt -> {
-					pstmt.setString(1, memberId);
-					pstmt.setInt(2, aseq);
+				cstmt -> {
+					cstmt.setString(1, memberId);
+					cstmt.setInt(2, aseq);
+					cstmt.registerOutParameter(3, Types.BOOLEAN);
 				},
-				3,
-				Types.VARCHAR));
+				cstmt -> cstmt.getBoolean(3));
 	}
 
 	public int getCount(String memberId) {
