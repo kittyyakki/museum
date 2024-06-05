@@ -6,7 +6,7 @@
 <section>
 	<article class="login_Form">
 		<div class="login_Form_inner">
-			<form name="loginForm" method="post" action="museum.do?command=login&returnUrl=${returnUrl}">
+			<form name="loginForm" method="post" action="museum.do?command=login&returnUrl=${returnUrl}" onsubmit="ajaxForm(this); return false;">
 				<div class="login_icon_box">
 					<div>
 						<img src="images/ico_login_img.png" style="width: 80px; height: 80px;">
@@ -25,7 +25,7 @@
 					</span>
 				</div>
 				<div class="btn">
-					<input type="button" value="로그인" onclick="ajaxForm(this.form);" required>
+					<input type="submit" value="로그인" required>
 					<input type="button" value="회원가입" onclick="location.href='museum.do?command=joinForm'" required>
 					<input type="button" value="아이디 찾기" onclick="" required>
 				</div>
