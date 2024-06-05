@@ -14,14 +14,14 @@ import com.team4.museum.util.Db;
 import com.team4.museum.util.Pagination;
 import com.team4.museum.vo.NoticeVO;
 
-final public class NoticeDAO {
+final public class NoticeDao {
 
-	private NoticeDAO() {
+	private NoticeDao() {
 	}
 
-	private static final NoticeDAO instance = new NoticeDAO();
+	private static final NoticeDao instance = new NoticeDao();
 
-	public static NoticeDAO getInstance() {
+	public static NoticeDao getInstance() {
 		return instance;
 	}
 
@@ -36,7 +36,7 @@ final public class NoticeDAO {
 					pstmt.setInt(1, paging.getLimit());
 					pstmt.setInt(2, paging.getOffset());
 				},
-				NoticeDAO::extractNoticeVO);
+				NoticeDao::extractNoticeVO);
 	}
 
 	// ORDER BY nseq DESC
@@ -54,7 +54,7 @@ final public class NoticeDAO {
 					pstmt.setInt(2, paging.getLimit());
 					pstmt.setInt(3, paging.getOffset());
 				},
-				NoticeDAO::extractNoticeVO);
+				NoticeDao::extractNoticeVO);
 	}
 
 	public int insertNotice(NoticeVO nvo) {
@@ -158,7 +158,7 @@ final public class NoticeDAO {
 					pstmt.setInt(3, pagination.getLimit());
 					pstmt.setInt(4, pagination.getOffset());
 				},
-				NoticeDAO::extractNoticeVO);
+				NoticeDao::extractNoticeVO);
 	}
 
 	private static NoticeVO extractNoticeVO(ResultSet rs) throws SQLException {

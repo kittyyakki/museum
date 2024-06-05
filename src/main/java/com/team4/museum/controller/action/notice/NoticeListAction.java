@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.team4.museum.controller.action.Action;
-import com.team4.museum.dao.NoticeDAO;
+import com.team4.museum.dao.NoticeDao;
 import com.team4.museum.util.NoticeCategory;
 import com.team4.museum.util.Pagination;
 import com.team4.museum.vo.NoticeVO;
@@ -22,7 +22,7 @@ public class NoticeListAction implements Action {
 		response.setCharacterEncoding("utf-8");
 
 		HttpSession session = request.getSession();
-		NoticeDAO ndao = NoticeDAO.getInstance();
+		NoticeDao ndao = NoticeDao.getInstance();
 		session.removeAttribute("category");
 
 		String category = request.getParameter("category") == null ? NoticeCategory.전체.name()

@@ -10,34 +10,34 @@ import java.util.List;
 
 import com.team4.museum.vo.ReviewVO;
 
-final public class ReviewDAO {
+final public class ReviewDao {
 
-	private ReviewDAO() {
+	private ReviewDao() {
 	}
 
-	private static final ReviewDAO instance = new ReviewDAO();
+	private static final ReviewDao instance = new ReviewDao();
 
-	public static ReviewDAO getInstance() {
+	public static ReviewDao getInstance() {
 		return instance;
 	}
 
 	public List<ReviewVO> selectReviewList() {
 		return executeSelect(
 				"SELECT * FROM review",
-				ReviewDAO::extractReviewVO);
+				ReviewDao::extractReviewVO);
 	}
 
 	public List<ReviewVO> selectReviewList(int aseq) {
 		return executeSelect(
 				"SELECT * FROM review WHERE aseq = ?",
 				pstmt -> pstmt.setInt(1, aseq),
-				ReviewDAO::extractReviewVO);
+				ReviewDao::extractReviewVO);
 	}
 
 	public ReviewVO selectReview(int rseq) {
 		return executeSelectOne(
 				"SELECT * FROM review WHERE rseq = ?",
-				pstmt -> pstmt.setInt(1, rseq), ReviewDAO::extractReviewVO);
+				pstmt -> pstmt.setInt(1, rseq), ReviewDao::extractReviewVO);
 	}
 
 	public int insertReview(ReviewVO review) {

@@ -6,7 +6,7 @@ import java.util.Calendar;
 
 import com.team4.museum.controller.action.Action;
 import com.team4.museum.controller.action.member.LoginAction;
-import com.team4.museum.dao.NoticeDAO;
+import com.team4.museum.dao.NoticeDao;
 import com.team4.museum.vo.MemberVO;
 import com.team4.museum.vo.NoticeVO;
 
@@ -21,7 +21,7 @@ public class UpdateNoticeAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		NoticeDAO ndao = NoticeDAO.getInstance();
+		NoticeDao ndao = NoticeDao.getInstance();
 		NoticeVO nvo = new NoticeVO();
 
 		MemberVO mvo = LoginAction.getLoginUser(request, response);

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.team4.museum.controller.action.Action;
-import com.team4.museum.dao.NoticeDAO;
+import com.team4.museum.dao.NoticeDao;
 import com.team4.museum.util.Pagination;
 import com.team4.museum.vo.NoticeVO;
 
@@ -16,7 +16,7 @@ public class AdminNoticeListAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		NoticeDAO ndao = NoticeDAO.getInstance();
+		NoticeDao ndao = NoticeDao.getInstance();
 		String searchWord = request.getParameter("searchWord");
 		String noticeCategory = request.getParameter("noticeCategory");
 
