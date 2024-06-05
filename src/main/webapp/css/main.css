@@ -108,11 +108,13 @@
 }
 
 .main_info-tit i {
-    width: 10px;
-    height: 10px;
-    background-color: #333;
-    border-radius: 50%;
-    margin-right: 5px;
+   display: inline-block;
+	width: 26px;
+	height: 26px;
+	margin-right: 8px;
+	vertical-align: sub;
+	background: url(images/ico_main_cont_img_1.png) no-repeat left center;
+	background-size: 26px;
 }
 
 .main_info-txt ul {
