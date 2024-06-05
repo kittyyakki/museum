@@ -96,7 +96,7 @@ public class LoginAction implements Action {
 		HttpSession session = request.getSession();
 		MemberVO mvo = (MemberVO) session.getAttribute("loginUser");
 		if (mvo == null) {
-			response.sendRedirect("museum.do?command=loginForm&returnUrl=" + UrlUtil.encode(returnUrl));
+			response.sendRedirect(getLoginUrl(returnUrl));
 			return null;
 		}
 
@@ -131,5 +131,16 @@ public class LoginAction implements Action {
 	public static boolean isLogined(HttpServletRequest request, HttpServletResponse response, String returnUrl)
 			throws IOException {
 		return getLoginUser(request, response, returnUrl) != null;
+	}
+
+	/**
+	 * 로그인 페이지 URL을 생성한다.
+	 * 
+	 * @param returnUrl 로그인 후 돌아갈 페이지
+	 * 
+	 * @return 로그인 페이지 URL
+	 */
+	public static String getLoginUrl(String returnUrl) {
+		return "museum.do?command=loginForm&returnUrl=" + UrlUtil.encode(returnUrl);
 	}
 }
