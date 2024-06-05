@@ -24,7 +24,7 @@
 			<input type="text" placeholder="검색어를 입력하세요" name="searchWord" value="${searchWord}">
 			<input type="button" value="검색" onclick="searchAdmin('adminMemberList')">
 		</div>
-		<ul class="admin-list-header">
+		<ul class="admin-list-header admin-member-list">
 			<li>
 				<input type="checkbox" onclick="checkAll()" class="select-all-box">
 			</li>
@@ -35,7 +35,7 @@
 			<li>전화번호</li>
 		</ul>
 		<c:forEach items="${memberList}" var="mvo">
-			<ul class="admin-list-main" onclick="go_check(event)">
+			<ul class="admin-list-main admin-member-list" onclick="go_check(event)">
 				<li>
 					<input type="checkbox" class="check-box">
 				</li>

@@ -15,32 +15,16 @@ String displayState = request.getParameter("displayState") != null ? request.get
 			<input type="button" value="추가" onclick="location.href='museum.do?command=artworkWrite'">
 			<input type="button" value="수정" onclick="updateArtwork()">
 			<input type="button" value="삭제" onclick="deleteArtwork()">
-			<div>
-				<input type="text" placeholder="작품명 또는 작가명을 검색하세요" name="searchWord" value="${searchWord}">
-				<input type="button" value="검색" onclick="searchAdmin('adminArtworkList')">
-			</div>
+			<input type="text" placeholder="작품명 또는 작가명을 검색하세요" name="searchWord" value="${searchWord}">
+			<input type="button" value="검색" onclick="searchAdmin('adminArtworkList')">
 		</div>
-		<ul class="admin-list-header">
+		<ul class="admin-list-header admin-artwork-list">
 			<li>
 				<input type="checkbox" onclick="checkAll()" class="select-all-box">
 			</li>
 			<li>
-				<select onchange="displayFilter()" name="displayState" class="admin-select">
-					<option value="displayState">전시 상태</option>
-					<%-- <c:choose>
-						<c:when test="${displayState.equals('Y')}">
-							<option value="Y" selected>Y</option>
-							<option value="N">N</option>
-						</c:when>
-						<c:when test="${displayState.equals('N')}">
-							<option value="Y">Y</option>
-							<option value="N" selected>N</option>
-						</c:when>
-						<c:otherwise>
-							<option value="Y">Y</option>
-							<option value="N">N</option>
-						</c:otherwise>
-					</c:choose> --%>
+				<select onchange="displayFilter('adminArtworkList', 'displayState')" name="selectFilter" class="admin-select">
+					<option value="state">전시 상태</option>
 					<option value="Y" <%=displayState.equals("Y") ? "selected" : ""%>>Y</option>
 					<option value="N" <%=displayState.equals("N") ? "selected" : ""%>>N</option>
 				</select>
@@ -55,8 +39,8 @@ String displayState = request.getParameter("displayState") != null ? request.get
 			<li>등록일</li>
 			<li>미리보기</li>
 		</ul>
-		<c:forEach items="${artworkList}" var="avo">
-			<ul class="admin-list-main" onclick="go_check(event)">
+		<c:forEach items="${artworkList}" var="avo" varStatus="index">
+			<ul class="admin-list-main admin-artwork-list" onclick="go_check(event)">
 				<li>
 					<input type="checkbox" class="check-box">
 				</li>
@@ -70,9 +54,12 @@ String displayState = request.getParameter("displayState") != null ? request.get
 				<li>${avo.size}</li>
 				<li>${avo.indate}</li>
 				<li>
-					<img alt="artwork-img" src="images/artwork/${avo.fullSavefilename}">
+					<img alt="artwork-img" src="${avo.fullSavefilename}" onmouseover="previewImg('artwork-${avo.aseq}-${index}')" onmouseleave="previewImg('artwork-${avo.aseq}-${index}')">
 				</li>
 			</ul>
+			<div id="artwork-${avo.aseq}-${index}" class="preview hidden">
+				<img alt="artwork-img" src="${avo.fullSavefilename}">
+			</div>
 		</c:forEach>
 	</form>
 </section>
