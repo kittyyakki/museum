@@ -73,7 +73,7 @@ public class MemberGalleryDao {
 
 	public List<MemberGalleryVO> getAllGallery(Pagination pagination) {
 		return executeSelect(
-				"SELECT * FROM member_gallery ORDER BY mseq DESC LIMIT ? OFFSET ?",
+				"SELECT * FROM member_gallery_view ORDER BY mseq DESC LIMIT ? OFFSET ?",
 				pagination::applyTo,
 				MemberGalleryDao::extractMemberGalleryVO);
 	}
