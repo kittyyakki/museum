@@ -4,7 +4,6 @@
 	<jsp:param name="stylesheet" value="css/artwork.css" />
 	<jsp:param name="script" value="script/artwork.js" />
 </jsp:include>
-<!-- museum.do?command=artworkList 의 목적지 -->
 <section class="artwork-list-header">
 	<form action="museum.do?command=artworkList" method="post" name="searchForm" class="artwork-search-form">
 		<h2>예술품 검색</h2>
@@ -14,13 +13,13 @@
 		</div>
 	</form>
 	<div class="category-btn-container">
-		<c:forEach items="${artworkCategory}" var="category" varStatus="status">
+		<c:forEach items="${artworkCategory}" var="c" varStatus="status">
 			<c:choose>
-				<c:when test="${categoryName.equals(category.name())}">
-					<a href="museum.do?command=artworkList&category=${category.name()}" class="artwork-list_btn artwork-list_selected-btn">${category.name()}</a>
+				<c:when test="${categoryName.equals(c.name())}">
+					<a href="museum.do?command=artworkList&category=${c.name()}" class="artwork-list_btn artwork-list_selected-btn">${c.name()}</a>
 				</c:when>
 				<c:otherwise>
-					<a href="museum.do?command=artworkList&category=${category.name()}" class="artwork-list_btn">${category.name()}</a>
+					<a href="museum.do?command=artworkList&category=${c.name()}" class="artwork-list_btn">${c.name()}</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
@@ -28,7 +27,7 @@
 </section>
 <main class="artwork-list-main">
 	<div class="artwork-list-head">
-		<h4>검색결과가 총 ${artworkList.size()}건 입니다</h4>
+		<h4>검색결과가 총 ${pagination.itemCount}건 입니다</h4>
 		<c:if test="${isAdmin}">
 			<a href="museum.do?command=artworkWrite" class="artwork-list_btn">예술품 등록</a>
 		</c:if>
@@ -45,5 +44,6 @@
 			</div>
 		</c:forEach>
 	</div>
+<%@ include file="/util/pagination.jsp"%>
 </main>
 <%@ include file="/footer.jsp"%>
