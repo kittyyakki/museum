@@ -1,5 +1,5 @@
 $(function() {
-	var imgNum = 0
+	var imgNum = 0;
 	var timer;
 	var state = false;
 	$('#main-center-remote div').click(
@@ -9,19 +9,17 @@ $(function() {
 			if (idx == 8) { // 자동 버튼
 				if (state == false) { // 자동동작 멈춤상태
 					state = true;
-					$('#main-center-remote div:eq(8)').html('||')
+					$('#main-center-remote div:eq(8)').html('||');
 					timer = window.setInterval(function() {
 						imgNum++;
 						if (imgNum > 7)
 							imgNum = 0;
-						dist = -1440 * imgNum;
+						dist = -100 * imgNum; // 너비 비율을 100%로 설정
 						$('#main-center-imgs').animate({
-							left: dist
+							left: dist + '%'
 						}, 1000);
-						$('#main-center-remote div').removeClass(
-							'selected');
-						$('#main-center-remote div').eq(imgNum)
-							.addClass('selected');
+						$('#main-center-remote div').removeClass('selected');
+						$('#main-center-remote div').eq(imgNum).addClass('selected');
 					}, 3500);
 				} else { // 자동동작 상태
 					state = false;
@@ -30,16 +28,16 @@ $(function() {
 				}
 			} else {
 				imgNum = idx;
-				dist = -1440 * imgNum;
+				dist = -100 * imgNum; // 너비 비율을 100%로 설정
 				$('#main-center-imgs').animate({
-					left: dist
+					left: dist + '%'
 				}, 1000);
 			}
 			$('#main-center-remote div').removeClass('selected');
-			$('#main-center-remote div').eq(imgNum)
-				.addClass('selected');
+			$('#main-center-remote div').eq(imgNum).addClass('selected');
 		});
 });
+
 
 let container = document.querySelector('.image-list');
 container.id = 'container1';
