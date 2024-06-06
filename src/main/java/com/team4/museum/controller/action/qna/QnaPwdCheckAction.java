@@ -79,7 +79,7 @@ public class QnaPwdCheckAction implements Action {
 
 		// 'pwd'가 비밀번호와 같으면 세션에 비밀번호 확인 기록을 남기고 OK 를 반환
 		if (qnaVO.getPwd().equals(pwd)) {
-			session.setAttribute("qnaPass" + qseq, qseq);
+			session.setAttribute("qnaPass" + qseq, true);
 			return new AjaxResult(OK, "비밀번호가 확인되었습니다", url);
 		}
 
