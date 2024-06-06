@@ -37,7 +37,7 @@ public class ArtworkListAction implements Action {
 		pagination.setItemsPerPage(8);
 		if (searchWord != null) { // 검색어로 조회
 			pagination.setItemCount(adao.getSearchCount(searchWord));
-			pagination.setUrlTemplate("museum.do?command=artworkList&page=%d");
+			 pagination.setUrlTemplate("museum.do?command=artworkList&page=%d&searchWord=" + searchWord); 
 			list = adao.searchPublicArtwork(searchWord, pagination); 
 			category = null;
 		} else if (category.equals(ArtworkCategory.전체.name())) { // 전체목록 조회
