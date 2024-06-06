@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/header.jsp">
-	<jsp:param name="stylesheet" value="css/qna_view.css" />
+	<jsp:param name="stylesheet" value="qna/stylesheet/qna_view.css" />
 </jsp:include>
 <section class="qna-view">
 	<form action="museum.do?command=qnaWrite" method="post">

@@ -164,13 +164,13 @@
 }
 
 .qna-list_table i.private {
-	background-image: url(../images/ico_qna_private.svg);
+	background-image: url(../image/ico_qna_private.svg);
 }
 
 .qna-list_table i.admin {
-	background-image: url(../images/ico_qna_admin.svg);
+	background-image: url(../image/ico_qna_admin.svg);
 }
 
 .qna-list_table i.owner {
-	background-image: url(../images/ico_qna_owner.svg);
+	background-image: url(../image/ico_qna_owner.svg);
 }
