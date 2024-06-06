@@ -1,4 +1,4 @@
---회원 입력 --
+-- 회원 입력 --
 INSERT INTO member(id, name, pwd, email, phone)
 VALUES ('one','김나리','1111','abc@naver.com','010-3333-4444');
 
@@ -45,6 +45,6 @@ INSERT INTO member (id, name, pwd, email, indate, phone, adminyn) VALUES
 ('m040', '서현진', 'seohy123', 'seohy@example.com', '2024-06-05 16:00:00', '010-1234-5678', 'N');
 UPDATE member SET pwd='1111';
 
---관리자 입력--
+-- 관리자 입력--
 INSERT INTO member(id, name, pwd, email, phone, adminyn)
 VALUES ('admin', '관리자', '1111', 'def@naver.com', '010-5555-6666', 'Y');
