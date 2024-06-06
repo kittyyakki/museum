@@ -3,85 +3,174 @@
 .qna-list {
 	display: flex;
 	flex-direction: column;
-	margin: 0 10rem;
+	margin: 0 auto;
+	padding: 0 1rem;
+	max-width: 1600px;
+	font-size: 1rem;
 }
 
-.qna-list a {
-	text-decoration: none;
-	color: inherit;
-}
-
-.qna-list>h1 {
-	margin: 2rem 0 1rem 1rem;
-}
-
-.qna-list_subheader {
+/* -- .qna-list_header  -------------- */
+.qna-list_header, .qna-list_header_title {
 	display: flex;
-	width: 100%;
-	justify-content: space-between;
-	align-items: center;
-	margin: 0 0 1rem 1rem;
+	flex-direction: column;
+	align-items: end;
+	margin-bottom: 1rem;
 }
 
-.qna-list_submit {
-	background: transparent;
+.qna-list_header h1 {
+	font-size: 2rem;
+	margin: 0rem 0 1rem 1rem;
+}
+
+.qna-list_header p span {
+	font-weight: bold;
+}
+
+.qna-list_header .qna-list_write-button {
 	padding: 0.25rem 2em;
 	border-radius: 0.25rem;
-	margin-right: 2rem;
-	border: 0;
 	font-size: 1rem;
-	box-shadow: 0.125rem 0.125rem 0.5rem 0.2rem rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0 0.5rem 0.2rem #0002;
 	transition: box-shadow 0.3s;
 }
 
-.qna-list_submit:hover {
-	box-shadow: 0.125rem 0.125rem 0.5rem 0.5rem rgba(52, 234, 19, 0.2);
+.qna-list_header .qna-list_write-button:hover {
+	box-shadow: 0 0 0.5rem 0.2rem #0804;
 }
 
+@media only screen and (min-width: 768px) {
+	.qna-list_header {
+		flex-direction: row;
+		justify-content: space-between;
+	}
+	.qna-list_header_title {
+		margin-bottom: 0;
+		align-items: start;
+	}
+}
+
+/* -- .qna-list_body  -------------- */
+.qna-list_body {
+	width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+	.qna-list_body {
+		margin-bottom: 2rem;
+		box-shadow: 0 .1rem .5rem .1rem rgba(0, 0, 0, 0.2);
+	}
+	.qna-list_body .pagination {
+		padding: 0.5rem;
+		border-top: 1px solid #D1D1D1;
+	}
+}
+
+/* -- .qna-list_table  -------------- */
 .qna-list_table {
-	border-top: 1px solid #202020;
-	border-bottom: 1px solid #202020;
-	margin-bottom: 1.5rem;
-}
-
-.qna-list_table>ul {
-	display: flex;
-	justify-content: space-between;
-	font-size: 1rem;
-	padding: 1rem 1rem;
-	margin: 0;
-}
-
-.qna-list_table>ul>li {
-	flex: 1;
-	text-align: center;
-}
-
-.qna-list_table>ul>li:nth-child(1) {
-	flex: 1;
-}
-
-.qna-list_table>ul>li:nth-child(2) {
-	flex: 1;
-}
-
-.qna-list_table>ul>li:nth-child(3) {
-	flex: 7;
-}
-
-.qna-list_table>ul>li:nth-child(4) {
-	flex: 2;
-}
-
-.qna-list_table>ul:not(.header)>li:nth-child(3) {
+	width: 100%;
 	text-align: left;
+	font-size: 1rem;
+	border: none;
+	border-radius: 0.25rem;
 }
 
-.qna-list_table>ul:not(.header) {
+.qna-list_table thead {
+	display: none;
+}
+
+.qna-list_table tbody tr {
+	display: block;
 	cursor: pointer;
+	margin-bottom: 1.6rem;
+	box-shadow: 0 .1rem .5rem .1rem rgba(0, 0, 0, 0.2);
+	border-radius: 0.1rem;
+	gap: 1rem;
+	font-weight: 400;
+	transition: all 0.3s ease-in-out;
 }
 
-.qna-list_table>ul.header {
+.qna-list_table tbody tr:hover {
+	background-color: #F5F5F5;
+	font-weight: 500;
+}
+
+.qna-list_table tbody tr td {
+	display: block;
+	vertical-align: middle;
+	text-align: right;
+	padding: 0.6rem;
+}
+
+.qna-list_table tbody tr td div {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: end;
+	align-items: center;
+}
+
+.qna-list_table i {
+	display: inline-block;
+	width: 1rem;
+	height: 1rem;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+@media only screen and (min-width: 768px) {
+	.qna-list_table {
+		border-spacing: 0;
+		font-size: 1rem;
+		text-align: center;
+	}
+	.qna-list_table thead {
+		display: table-header-group;
+		font-size: 1.125rem;
+		color: #6F6F6F;
+		font-weight: bold;
+		box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+	}
+	.qna-list_table thead tr th {
+		padding: 1rem;
+	}
+	.qna-list_table tbody tr {
+		display: table-row;
+		margin-bottom: 0;
+		border-radius: 0.25rem;
+		box-shadow: none;
+	}
+	.qna-list_table tbody tr td {
+		display: table-cell;
+		text-align: center;
+		padding: 0.8rem;
+	}
+	.qna-list_table tbody tr td:before {
+		display: none;
+	}
+	.qna-list_table tbody tr td div {
+		justify-content: center;
+	}
+}
+
+/* -- .qna-list_table i -------------- */
+.qna-list_table tbody tr td[data-title]:before {
+	content: attr(data-title);
+	float: left;
+	color: #6F6F6F;
 	font-weight: bold;
-	border-bottom: 1px solid #ccc;
+}
+
+.qna-list_table i.public {
+	display: none;
+}
+
+.qna-list_table i.private {
+	background-image: url(../images/ico_qna_private.svg);
+}
+
+.qna-list_table i.admin {
+	background-image: url(../images/ico_qna_admin.svg);
+}
+
+.qna-list_table i.owner {
+	background-image: url(../images/ico_qna_owner.svg);
 }

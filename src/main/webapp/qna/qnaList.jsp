@@ -5,37 +5,59 @@
 	<jsp:param name="stylesheet" value="css/qna_list.css" />
 	<jsp:param name="script" value="script/qna.js" />
 </jsp:include>
-<section class="qna-list">
-	<h1>Q &amp; A</h1>
-	<div class="qna-list_subheader">
-		<p>
-			총 <span>${pagination.itemCount}</span> 건이 검색되었습니다.
-		</p>
+<main class="qna-list">
+	<div class="qna-list_header">
+		<div class="qna-list_header_title">
+			<h1>고객센터</h1>
+			<p>
+				총 <span>${pagination.itemCount}</span> 건이 검색되었습니다
+			</p>
+		</div>
 		<a href="museum.do?command=qnaWriteForm">
-			<button class="qna-list_submit">질문하기</button>
+			<button class="qna-list_write-button">문의하기</button>
 		</a>
 	</div>
-	<div class="qna-list_table">
-		<ul class="header">
-			<li>번호</li>
-			<li>답변여부</li>
-			<li>제목</li>
-			<li>작성일</li>
-		</ul>
-		<c:forEach items="${qnaList}" var="qnaVO">
-			<ul onclick="qnaPwdCheck(${qnaVO.qseq}, 'view')">
-				<li>${qnaVO.qseq}</li>
-				<li><c:choose>
-						<c:when test="${empty qnaVO.reply}">NO</c:when>
-						<c:otherwise>YES</c:otherwise>
-					</c:choose></li>
-				<li><span> <c:if test="${!qnaVO.isPublic()}">
-							<span>🔒</span>
-						</c:if>${qnaVO.title}</span></li>
-				<li><fmt:formatDate value="${qnaVO.writedate}" pattern="yyyy-MM-dd" /></li>
-			</ul>
-		</c:forEach>
+	<div class="qna-list_body">
+		<table class="qna-list_table">
+			<thead>
+				<tr>
+					<th data-title="번호">번호</th>
+					<th data-title="제목">제목</th>
+					<th data-title="날짜">날짜</th>
+					<th data-title="상태">상태</th>
+			</thead>
+			<tbody>
+				<c:forEach items="${qnaList}" var="qnaVO">
+					<c:set var="qnaPassKey" value="qnaPass${qnaVO.qseq}" />
+					<tr onclick="qnaPwdCheck(${qnaVO.qseq}, 'view')">
+						<td data-title="번호">${qnaVO.qseq}</td>
+						<td data-title="제목"><div>
+								<c:choose>
+									<c:when test="${sessionScope[qnaPassKey]}">
+										<i class="owner"></i>
+									</c:when>
+									<c:when test="${qnaVO.isPublic()}">
+										<i class="public"></i>
+									</c:when>
+									<c:when test="${isAdmin}">
+										<i class="admin"></i>
+									</c:when>
+									<c:otherwise>
+										<i class="private"></i>
+									</c:otherwise>
+								</c:choose>
+								<span> ${qnaVO.title}</span>
+							</div></td>
+						<td data-title="날짜"><fmt:formatDate value="${qnaVO.writedate}" pattern="yyyy-MM-dd" /></td>
+						<td data-title="상태"><c:choose>
+								<c:when test="${empty qnaVO.reply}">대기중</c:when>
+								<c:otherwise>완료</c:otherwise>
+							</c:choose></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<%@ include file="/util/pagination.jsp"%>
 	</div>
-	<%@ include file="/util/pagination.jsp"%>
-</section>
+</main>
 <%@ include file="/footer.jsp"%>
