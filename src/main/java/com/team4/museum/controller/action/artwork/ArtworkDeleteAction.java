@@ -13,8 +13,7 @@ public class ArtworkDeleteAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArtworkDao adao = ArtworkDao.getInstance();
-		adao.deleteArtwork(Integer.parseInt(request.getParameter("aseq")));
+		ArtworkDao.getInstance().deleteArtwork(Integer.parseInt(request.getParameter("aseq")));
 		request.getRequestDispatcher("museum.do?command=artworkList").forward(request, response);
 	}
 
