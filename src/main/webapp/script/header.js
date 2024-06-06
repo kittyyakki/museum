@@ -16,8 +16,8 @@ jQuery(document).ready(function($) {
             new Vivus("header_logo_v", {
                 type: "delayed",
                 start: "autostart",
-                delay: 250,
-                duration: 300,
+                delay: 150,
+                duration: 200,
             }, function(){
                 $('#logo_outline01').stop().animate({'fill-opacity':1},500);
                 $('#logo_outline02').stop().animate({'fill-opacity':1},500);
