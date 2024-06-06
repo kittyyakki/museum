@@ -43,8 +43,28 @@ header {
 	border-bottom: 1px solid #ccc;
 }
 
+
+
 header nav h1 {
 	cursor: pointer;
+}
+.logo02{
+	transform: translate(32px, 0px);
+}
+.logo03{
+	transform: translate(62px, 0px);
+}
+.logo04{
+	transform: translate(92px, 0px);
+}
+.logo05{
+	transform: translate(122px, 0px);
+}
+.logo06{
+	transform: translate(152px, 0px);
+}
+.logo07{
+	transform: translate(182px, 0px);
 }
 
 header nav {
