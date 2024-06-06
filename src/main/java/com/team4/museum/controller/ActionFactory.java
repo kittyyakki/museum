@@ -20,6 +20,7 @@ import com.team4.museum.controller.action.artwork.ArtworkViewAction;
 import com.team4.museum.controller.action.artwork.ArtworkWriteAction;
 import com.team4.museum.controller.action.artwork.ArtworkWriteFormAction;
 import com.team4.museum.controller.action.gallery.GalleryListAction;
+import com.team4.museum.controller.action.gallery.GalleryViewAction;
 import com.team4.museum.controller.action.gallery.GalleryWriteAction;
 import com.team4.museum.controller.action.gallery.GalleryWriteFormAction;
 import com.team4.museum.controller.action.member.IdcheckFormAction;
@@ -98,6 +99,7 @@ public class ActionFactory {
 		case "galleryList" -> new GalleryListAction();
 		case "galleryWriteForm" -> new GalleryWriteFormAction();
 		case "galleryWrite" -> new GalleryWriteAction();
+		case "galleryView" -> new GalleryViewAction();
 
 		// notice
 		case "noticeList" -> new NoticeListAction();
