@@ -12,6 +12,7 @@ jQuery(document).ready(function($) {
             $('#logo_outline05').stop().animate({'fill-opacity':0},500);
             $('#logo_outline06').stop().animate({'fill-opacity':0},500);
             $('#logo_outline07').stop().animate({'fill-opacity':0},500);
+            $('#logo_outline08').stop().animate({'fill-opacity':0},500);
             
             new Vivus("header_logo_v", {
                 type: "delayed",
@@ -26,6 +27,7 @@ jQuery(document).ready(function($) {
                 $('#logo_outline05').stop().animate({'fill-opacity':1},500);
                 $('#logo_outline06').stop().animate({'fill-opacity':1},500);
                 $('#logo_outline07').stop().animate({'fill-opacity':1},500);
+                $('#logo_outline08').stop().animate({'fill-opacity':1},500);
             });
             
             this.playing = true;
