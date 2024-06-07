@@ -40,8 +40,8 @@
 			</ul>
 			<div class="main_info info-link">
 				<ul>
-					<li><a href="/site/main/content/subway" class="main_btn btn-over">오시는길</a></li>
-					<li><a href="/site/main/content/tour_reservation" class="main_btn btn-over">예약하기</a></li>
+					<li><a href="#" class="main_btn btn-over">오시는길</a></li>
+					<li><a href="#" class="main_btn btn-over">예약하기</a></li>
 				</ul>
 			</div>
 		</div>

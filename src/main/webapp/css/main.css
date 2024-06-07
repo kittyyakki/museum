@@ -96,8 +96,8 @@
 	vertical-align: middle;
 	font-size: 24px;
 	color: #000;
-	margin-right: 20px;
 	float: left;
+	margin-left: 30px;
 }
 
 .main_info-tit01 {
@@ -110,10 +110,11 @@
 	vertical-align: middle;
 	font-size: 24px;
 	color: #000;
-	margin-right: 48px;
+	margin-right: 20px;
+	margin-left: 30px;
 }
 
-.main_info-tit i {
+/* .main_info-tit i {
 	display: inline-block;
 	width: 26px;
 	height: 26px;
@@ -131,7 +132,7 @@
 	vertical-align: sub;
 	background: url(images/ico_main_cont_img_1.png) no-repeat left center;
 	background-size: 26px;
-}
+} */
 
 .main_info-txt ul {
 	list-style: none;
@@ -142,6 +143,7 @@
 
 .main_info-txt ul li {
 	margin-bottom: 5px;
+	margin-left:40px;
 }
 
 .main_info-txt ul li strong {
@@ -211,9 +213,10 @@
 }
 
 .main-middle-container {
-	width: 100%;
+	width: 70%;
 	height: 600px;
 	overflow: hidden;
+	margin: 0 auto;
 }
 
 .container-box {
