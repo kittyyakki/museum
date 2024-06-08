@@ -51,15 +51,6 @@
 				<i class="qna-icon upload"></i>
 			</label>
 		</div>
-		<c:if test="${not empty qnaVO}">
-			<div class="qna-write_button-wrapper">
-				<input type="hidden" name="qseq" value="${qnaVO.qseq}" />
-				<input class="qna-write_button" type="submit" value="삭제" formaction="museum.do?command=qnaWrite&delete=1" />
-				<label for="content">
-					<i class="qna-icon delete"></i>
-				</label>
-			</div>
-		</c:if>
 		<div class="qna-write_button-wrapper">
 			<input class="qna-write_button " type="button" value="취소" onclick="history.back();" />
 			<label for="content">

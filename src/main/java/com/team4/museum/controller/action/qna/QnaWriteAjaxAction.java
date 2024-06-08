@@ -18,15 +18,6 @@ public class QnaWriteAjaxAction extends AjaxAction {
 		// 'PERSONAL' 접근 조건을 만족하는 문의글 정보를 가져옴
 		QnaVO qnaVO = getValidatedQna(request, PERSONAL);
 
-		// 삭제 버튼을 누른 경우
-		if (request.getParameter("delete") != null) {
-			if (qnaVO != null) {
-				QnaDao.getInstance().deleteQna(qnaVO.getQseq());
-			}
-			return created("문의글이 삭제되었습니다", "museum.do?command=qnaList");
-		}
-
-		// 등록 버튼을 누른 경우
 		// 새로운 문의글인지 확인
 		boolean isNew = qnaVO == null;
 		if (isNew) {

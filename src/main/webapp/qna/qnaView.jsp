@@ -10,6 +10,7 @@
 	<div class="qna-view_title">
 		<h1>Q &amp; A</h1>
 		<button class="qna-view_submit" onclick="qnaPwdCheck(${qnaVO.qseq}, 'edit')">수정하기</button>
+		<button class="qna-view_submit" onclick="qnaPwdCheck(${qnaVO.qseq}, 'delete')">삭제하기</button>
 	</div>
 	<div class="qna-view_header">
 		<h1>${qnaVO.title}</h1>

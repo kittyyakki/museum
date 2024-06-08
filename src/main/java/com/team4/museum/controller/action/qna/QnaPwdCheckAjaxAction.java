@@ -1,18 +1,50 @@
 package com.team4.museum.controller.action.qna;
 
-import static com.team4.museum.controller.action.member.LoginAjaxAction.isAdmin;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.team4.museum.controller.action.AjaxAction;
 import com.team4.museum.dao.QnaDao;
 import com.team4.museum.util.AjaxResult;
 import com.team4.museum.vo.QnaVO;
 
+import jakarta.annotation.Nonnull;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class QnaPwdCheckAjaxAction extends AjaxAction {
 
+	private final Map<String, SubAjaxAction> subActions = new HashMap<>();
+
+	public QnaPwdCheckAjaxAction() {
+		super();
+
+		// 서브 액션들을 등록
+		subActions.put("view", new SubAjaxAction(QnaAccessValidator.RESTRICT,
+				(v, r) -> ok("접근이 허용되었습니다", "museum.do?command=qnaView&qseq=" + v.getQseq())));
+
+		subActions.put("edit", new SubAjaxAction(QnaAccessValidator.PERSONAL,
+				(v, r) -> ok("접근이 허용되었습니다", "museum.do?command=qnaWriteForm&qseq=" + v.getQseq())));
+
+		subActions.put("delete", new SubAjaxAction(QnaAccessValidator.PRIVILEGE,
+				(v, r) -> {
+					try {
+						QnaDao.getInstance().deleteQna(v.getQseq());
+					} catch (Exception e) {
+						e.printStackTrace();
+						return internalServerError("문의글 삭제에 실패했습니다");
+					}
+					return created("문의글이 삭제되었습니다", "museum.do?command=qnaList");
+				}));
+	}
+
 	protected AjaxResult handleAjaxRequest(HttpServletRequest request, HttpServletResponse response) {
+		String mode = request.getParameter("mode");
+		if (mode == null || subActions.get(mode) == null) {
+			return requireParameter("mode");
+		}
+		SubAjaxAction subAction = subActions.get(mode);
+
 		// 'qseq' 파라미터가 없는 경우
 		String qseqStr = request.getParameter("qseq");
 		if (qseqStr == null || qseqStr.equals("") || !qseqStr.matches("^[0-9]*$")) {
@@ -22,55 +54,31 @@ public class QnaPwdCheckAjaxAction extends AjaxAction {
 		int qseq = Integer.parseInt(qseqStr);
 		QnaDao qdao = QnaDao.getInstance();
 		QnaVO qnaVO = qdao.getQna(qseq);
-		request.setAttribute("qseq", qseq);
 
 		// 입력된 'qseq'에 해당하는 문의글이 없는 경우
 		if (qnaVO == null) {
 			return noContent("해당 문의가 존재하지 않습니다");
 		}
 
-		String url, mode = request.getParameter("mode");
-		switch (mode) {
-		case "view":
-			url = "museum.do?command=qnaView&qseq=" + qseqStr;
-
-			// 'qnaVO'가 공개 상태인 경우
-			if (qnaVO.isPublic()) {
-				return ok("공개된 문의입니다", url);
+		// subAction의 접근 조건을 만족하지 않는 경우
+		if (!subAction.validate(qnaVO, request)) {
+			// 'pwd' 파라미터가 없는 경우
+			String pwd = request.getParameter("pwd");
+			if (pwd == null || pwd.trim().equals("")) {
+				return unauthorized("비밀번호를 입력해주세요");
 			}
 
-			// 사용자가 관리자인 경우
-			if (isAdmin(request)) {
-				return ok("관리자로 확인되었습니다", url);
+			// 비밀번호가 일치하지 않는 경우
+			if (!qnaVO.getPwd().equals(pwd)) {
+				return badRequest("비밀번호가 일치하지 않습니다");
 			}
-			break;
-		case "edit":
-			url = "museum.do?command=qnaWriteForm&qseq=" + qseqStr;
-			break;
-		default:
-			// 'mode'가 'view'나 'edit'가 아니면 SC_BAD_REQUEST 를 반환
-			return badRequest("'mode' 파라미터가 'view'나 'edit'가 아닙니다");
+
+			// 세션에 비밀번호 확인 기록 저장
+			savePwdCheckLog(request, qseq);
 		}
 
-		// 세션에 비밀번호 확인 기록이 있는 경우
-		if (isAlreadyPwdChecked(request, qseq)) {
-			return ok("비밀번호 확인 기록이 존재합니다", url);
-		}
-
-		// 'pwd' 파라미터가 없는 경우
-		String pwd = request.getParameter("pwd");
-		if (pwd == null || pwd.trim().equals("")) {
-			return unauthorized("비밀번호를 입력해주세요");
-		}
-
-		// 비밀번호가 일치하지 않는 경우
-		if (!qnaVO.getPwd().equals(pwd)) {
-			return badRequest("비밀번호가 일치하지 않습니다");
-		}
-
-		// 비밀번호가 일치하는 경우 세션에 비밀번호 확인 기록을 남기고 'url'로 리다이렉트
-		savePwdCheckLog(request, qseq);
-		return ok("비밀번호가 확인되었습니다", url);
+		// ResultMapper로 결과를 생성해 반환
+		return subAction.execute(qnaVO, request);
 	}
 
 	/**
@@ -92,5 +100,28 @@ public class QnaPwdCheckAjaxAction extends AjaxAction {
 	 */
 	public static void savePwdCheckLog(HttpServletRequest request, int qseq) {
 		request.getSession().setAttribute("qnaPass" + qseq, true);
+	}
+
+	private class SubAjaxAction {
+		public QnaAccessValidator validator;
+		public RequestMapper mapper;
+
+		public SubAjaxAction(QnaAccessValidator validator, RequestMapper mapper) {
+			this.validator = validator;
+			this.mapper = mapper;
+		}
+
+		public boolean validate(@Nonnull QnaVO qnaVO, HttpServletRequest request) {
+			return validator.validate(qnaVO, request);
+		}
+
+		public AjaxResult execute(@Nonnull QnaVO qnaVO, HttpServletRequest request) {
+			return mapper.execute(qnaVO, request);
+		}
+
+		@FunctionalInterface
+		private interface RequestMapper {
+			public AjaxResult execute(@Nonnull QnaVO qnaVO, HttpServletRequest request);
+		}
 	}
 }
