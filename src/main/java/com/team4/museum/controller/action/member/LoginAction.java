@@ -72,7 +72,7 @@ public class LoginAction implements Action {
 	 * @return 관리자면 true, 아니면 false
 	 */
 	public static boolean isAdmin(HttpServletRequest request) {
-		return request.getSession().getAttribute("isAdmin") != null;
+		return request.getAttribute("isAdmin") != null;
 	}
 
 	/**
@@ -85,8 +85,7 @@ public class LoginAction implements Action {
 	 * @throws IOException
 	 */
 	public static MemberVO getLoginUserFrom(HttpServletRequest request) throws IOException {
-		HttpSession session = request.getSession();
-		return (MemberVO) session.getAttribute("loginUser");
+		return (MemberVO) request.getSession().getAttribute("loginUser");
 	}
 
 	/**

@@ -11,7 +11,6 @@ import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 public class MuseumServlet extends HttpServlet {
@@ -28,8 +27,7 @@ public class MuseumServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 
 		// 세션에 로그인 정보가 있으면 관리자인지 확인 후 'isAdmin'을 설정
-		HttpSession session = request.getSession();
-		MemberVO mvo = (MemberVO) session.getAttribute("loginUser");
+		MemberVO mvo = (MemberVO) request.getSession().getAttribute("loginUser");
 		if (mvo != null) {
 			String userId = mvo.getId();
 			if (mvo.isAdmin()) {
