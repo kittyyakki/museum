@@ -45,7 +45,7 @@
 				</div>
 			</div>
 			<div class="btn">
-				<input type="button" value="이전" onclick="location.href='museum.do?command=index'">
+				<input type="button" value="이전" onclick="history.back();">
 				<input type="submit" value="가입">
 			</div>
 		</form>
