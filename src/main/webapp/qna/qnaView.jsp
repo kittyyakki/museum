@@ -30,7 +30,7 @@
 		<h2>답변</h2>
 		<c:choose>
 			<c:when test="${isAdmin}">
-				<form id="qnaReplyForm" action="museum.do?command=qnaReply" method="post" onsubmit="ajaxForm(this); return false;">
+				<form id="qnaReplyForm" action="museum.do?command=qnaReply" method="post" onsubmit="ajaxSubmit(event)">
 					<input type="hidden" name="qseq" value="${qnaVO.qseq}" />
 					<textarea name="reply" placeholder="답변을 입력하세요"><c:out value="${qnaVO.reply}" /></textarea>
 					<input type="submit" value="답변 등록" />
