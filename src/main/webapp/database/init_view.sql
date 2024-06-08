@@ -29,7 +29,7 @@ ORDER BY review.writedate;
 CREATE OR REPLACE VIEW favorite_view AS
 SELECT id AS member_id, artwork.*
 FROM favorite_artwork
-         INNER JOIN artwork ON favorite_artwork.id = artwork.aseq
+         INNER JOIN artwork ON favorite_artwork.aseq = artwork.aseq
 ORDER BY favorite_artwork.writedate;
 
 -- START TOGGLE_FAVORITE_ARTWORK PROCEDURE
