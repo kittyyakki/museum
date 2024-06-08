@@ -82,6 +82,16 @@ function ajaxSubmit(event) {
 			input.focus();
 			return;
 		}
+
+		var requireEquals = input.dataset.requireEquals;
+		if (requireEquals) {
+			var target = form.elements[requireEquals];
+			if (target && input.value != target.value) {
+				alert(getInputName(target) + "와(과) " + getInputName(input) + "이(가) 일치하지 않습니다.");
+				input.focus();
+				return;
+			}
+		}
 	}
 
 	// form 요소로부터 requestBody 객체 생성
@@ -148,3 +158,7 @@ var defaultAjaxHandler = function(status, response) {
 		location.href = url;
 	}
 };
+
+function getInputName(input) {
+	return (input.labels[0] && input.labels[0].innerText) || input.name || input.id;
+}
