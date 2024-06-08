@@ -1,55 +1,44 @@
 package com.team4.museum.controller.action.member;
 
-import static com.team4.museum.util.AjaxResult.BAD_REQUEST;
-import static com.team4.museum.util.AjaxResult.NOT_FOUND;
-import static com.team4.museum.util.AjaxResult.OK;
-
 import java.io.IOException;
 
-import com.team4.museum.controller.action.Action;
+import com.team4.museum.controller.action.AjaxAction;
 import com.team4.museum.dao.MemberDao;
 import com.team4.museum.util.AjaxResult;
 import com.team4.museum.util.UrlUtil;
 import com.team4.museum.vo.MemberVO;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-public class LoginAction implements Action {
+public class LoginAjaxAction extends AjaxAction {
 
-	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		getResult(request, response).applyToResponse(response);
-	}
-
-	private AjaxResult getResult(HttpServletRequest request, HttpServletResponse response) {
-		// 파라미터에 'id'가 없으면 BAD_REQUEST 를 반환
+	protected AjaxResult handleAjaxRequest(HttpServletRequest request, HttpServletResponse response) {
+		// 'id' 파라미터가 없는 경우
 		String id = request.getParameter("id");
 		if (id == null || id.equals("")) {
-			return new AjaxResult(BAD_REQUEST, "'id'를 입력해주세요");
+			return requireParameter("id");
 		}
 
-		// 파라미터에 'pwd'가 없으면 BAD_REQUEST 를 반환
+		// 'pwd' 파라미터가 없는 경우
 		String pwd = request.getParameter("pwd");
 		if (pwd == null || pwd.equals("")) {
-			return new AjaxResult(BAD_REQUEST, "'pwd'를 입력해주세요");
+			return requireParameter("pwd");
 		}
 
-		// 'id'에 해당하는 'MemberVO'가 없으면 NOT_FOUND 를 반환
+		// 입력된 'id'에 해당하는 사용자 계정이 없는 경우
 		MemberVO mvo = MemberDao.getInstance().getMember(id);
 		if (mvo == null) {
-			return new AjaxResult(NOT_FOUND, "존재하지 않는 아이디입니다");
+			return notFound("존재하지 않는 아이디입니다");
 		}
 
-		// 'pwd'가 비밀번호와 다르면 BAD_REQUEST 를 반환
+		// 입력된 'pwd'가 사용자 계정의 비밀번호와 일치하지 않는 경우
 		if (!mvo.getPwd().equals(pwd)) {
-			return new AjaxResult(BAD_REQUEST, "잘못된 비밀번호입니다");
+			return badRequest("비밀번호가 일치하지 않습니다");
 		}
 
-		// 로그인 성공 시
-		// 세션에 로그인 정보를 저장
+		// 로그인 성공 시 세션에 로그인 정보를 저장
 		HttpSession session = request.getSession();
 		session.setAttribute("loginUser", mvo);
 
@@ -60,8 +49,8 @@ public class LoginAction implements Action {
 			returnUrl = UrlUtil.decode(returnUrlParam);
 		}
 
-		// 돌아갈 페이지 정보와 함께 OK 를 반환
-		return new AjaxResult(OK, "로그인에 성공하였습니다", returnUrl);
+		// 돌아갈 페이지 정보와 함께 성공 메시지를 반환
+		return ok("로그인에 성공하였습니다", returnUrl);
 	}
 
 	/**
