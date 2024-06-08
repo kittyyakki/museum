@@ -1,10 +1,6 @@
 package com.team4.museum.controller.action.qna;
 
 import static com.team4.museum.controller.action.member.LoginAjaxAction.isAdmin;
-import static jakarta.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
-import static jakarta.servlet.http.HttpServletResponse.SC_NO_CONTENT;
-import static jakarta.servlet.http.HttpServletResponse.SC_OK;
-import static jakarta.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
 
 import com.team4.museum.controller.action.AjaxAction;
 import com.team4.museum.dao.QnaDao;
@@ -18,10 +14,10 @@ import jakarta.servlet.http.HttpSession;
 public class QnaPwdCheckAjaxAction extends AjaxAction {
 
 	protected AjaxResult handleAjaxRequest(HttpServletRequest request, HttpServletResponse response) {
-		// 파라미터에 'qseq'가 없으면 SC_BAD_REQUEST 를 반환
+		// 'qseq' 파라미터가 없는 경우
 		String qseqStr = request.getParameter("qseq");
 		if (qseqStr == null || qseqStr.equals("") || !qseqStr.matches("^[0-9]*$")) {
-			return new AjaxResult(SC_BAD_REQUEST, "'qseq'를 입력해주세요");
+			return AjaxResult.requireParameter("qseq");
 		}
 
 		int qseq = Integer.parseInt(qseqStr);
@@ -29,9 +25,9 @@ public class QnaPwdCheckAjaxAction extends AjaxAction {
 		QnaVO qnaVO = qdao.getQna(qseq);
 		request.setAttribute("qseq", qseq);
 
-		// 'qseq' 파라미터에 해당하는 'QnaVO'가 없으면 SC_NO_CONTENT 를 반환
+		// 입력된 'qseq'에 해당하는 문의글이 없는 경우
 		if (qnaVO == null) {
-			return new AjaxResult(SC_NO_CONTENT, "존재하지 않는 문의입니다");
+			return AjaxResult.noContent("해당 문의가 존재하지 않습니다");
 		}
 
 		HttpSession session = request.getSession();
@@ -40,14 +36,14 @@ public class QnaPwdCheckAjaxAction extends AjaxAction {
 		case "view":
 			url = "museum.do?command=qnaView&qseq=" + qseqStr;
 
-			// 'qnaVO'가 공개 상태면 SC_OK 를 반환
+			// 'qnaVO'가 공개 상태인 경우
 			if (qnaVO.isPublic()) {
-				return new AjaxResult(SC_OK, "공개된 문의입니다", url);
+				return AjaxResult.success("공개된 문의입니다", url);
 			}
 
-			// 관리자 일 경우 SC_OK 를 반환
+			// 사용자가 관리자인 경우
 			if (isAdmin(request)) {
-				return new AjaxResult(SC_OK, "관리자로 확인되었습니다", url);
+				return AjaxResult.success("관리자로 확인되었습니다", url);
 			}
 			break;
 		case "edit":
@@ -55,28 +51,28 @@ public class QnaPwdCheckAjaxAction extends AjaxAction {
 			break;
 		default:
 			// 'mode'가 'view'나 'edit'가 아니면 SC_BAD_REQUEST 를 반환
-			return new AjaxResult(SC_BAD_REQUEST, "'mode' 파라미터가 'view'나 'edit'가 아닙니다");
+			return AjaxResult.badRequest("'mode' 파라미터가 'view'나 'edit'가 아닙니다");
 		}
 
-		// 세션에 비밀번호 확인 기록이 있는 경우 SC_OK 를 반환
+		// 세션에 비밀번호 확인 기록이 있는 경우
 		if (session.getAttribute("qnaPass" + qseq) != null) {
-			return new AjaxResult(SC_OK, "비밀번호 확인 기록이 존재합니다", url);
+			return AjaxResult.success("비밀번호 확인 기록이 존재합니다", url);
 		}
 
 		// 'pwd' 파라미터가 없으면 SC_UNAUTHORIZED 를 반환
 		String pwd = request.getParameter("pwd");
 		if (pwd == null || pwd.trim().equals("")) {
-			return new AjaxResult(SC_UNAUTHORIZED, "'pwd'를 입력해주세요");
+			return AjaxResult.unauthorized("비밀번호를 입력해주세요");
 		}
 
 		// 'pwd'가 비밀번호와 같으면 세션에 비밀번호 확인 기록을 남기고 SC_OK 를 반환
 		if (qnaVO.getPwd().equals(pwd)) {
 			session.setAttribute("qnaPass" + qseq, qseq);
-			return new AjaxResult(SC_OK, "비밀번호가 확인되었습니다", url);
+			return AjaxResult.success("비밀번호가 확인되었습니다", url);
 		}
 
 		// 비밀번호가 틀리면 SC_BAD_REQUEST 를 반환
-		return new AjaxResult(SC_BAD_REQUEST, "잘못된 비밀번호입니다");
+		return AjaxResult.badRequest("비밀번호가 일치하지 않습니다");
 	}
 
 }

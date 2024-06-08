@@ -1,9 +1,5 @@
 package com.team4.museum.controller.action.member;
 
-import static jakarta.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
-import static jakarta.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
-import static jakarta.servlet.http.HttpServletResponse.SC_OK;
-
 import com.team4.museum.controller.action.AjaxAction;
 import com.team4.museum.dao.MemberDao;
 import com.team4.museum.util.AjaxResult;
@@ -18,44 +14,44 @@ public class JoinAjaxAction extends AjaxAction {
 	protected AjaxResult handleAjaxRequest(HttpServletRequest request, HttpServletResponse response) {
 		MemberVO mvo = new MemberVO();
 
-		// 파라미터에 'name'가 없으면 SC_BAD_REQUEST 를 반환
+		// 'name' 파라미터가 없는 경우
 		String name = request.getParameter("name");
 		if (name == null || name.equals("")) {
-			return new AjaxResult(SC_BAD_REQUEST, "'name'를 입력해주세요");
+			return AjaxResult.requireParameter("name");
 		}
 		mvo.setName(name);
 
-		// 파라미터에 'id'가 없으면 SC_BAD_REQUEST 를 반환
+		// 'id' 파라미터가 없는 경우
 		String id = request.getParameter("id");
 		if (id == null || id.equals("")) {
-			return new AjaxResult(SC_BAD_REQUEST, "'id'를 입력해주세요");
+			return AjaxResult.requireParameter("id");
 		}
 		mvo.setId(id);
 
-		// 파라미터에 'pwd'가 없으면 SC_BAD_REQUEST 를 반환
+		// 'pwd' 파라미터가 없는 경우
 		String pwd = request.getParameter("pwd");
 		if (pwd == null || pwd.equals("")) {
-			return new AjaxResult(SC_BAD_REQUEST, "'pwd'를 입력해주세요");
+			return AjaxResult.requireParameter("pwd");
 		}
 		mvo.setPwd(pwd);
 
-		// 파라미터에 'email'가 없으면 SC_BAD_REQUEST 를 반환
+		// 'email' 파라미터가 없는 경우
 		String email = request.getParameter("email");
 		if (email == null || email.equals("")) {
-			return new AjaxResult(SC_BAD_REQUEST, "'email'를 입력해주세요");
+			return AjaxResult.requireParameter("email");
 		}
 		mvo.setEmail(email);
 
-		// 파라미터에 'pwd'가 없으면 SC_BAD_REQUEST 를 반환
+		// 'phone' 파라미터가 없는 경우
 		String phone = request.getParameter("phone");
 		if (phone == null || phone.equals("")) {
-			return new AjaxResult(SC_BAD_REQUEST, "'phone'를 입력해주세요");
+			return AjaxResult.requireParameter("phone");
 		}
 		mvo.setPhone(phone);
 
-		// 회원가입 실패 시 SC_INTERNAL_SERVER_ERROR 를 반환
+		// 회원가입에 실패한 경우
 		if (MemberDao.getInstance().insertMember(mvo) == 0) {
-			return new AjaxResult(SC_INTERNAL_SERVER_ERROR, "회원가입 실패\n관리자에게 문의하세요");
+			return AjaxResult.fail("회원가입에 실패하였습니다");
 		}
 
 		// 돌아갈 페이지 정보를 확인하고, 없으면 index 페이지로 이동
@@ -65,8 +61,8 @@ public class JoinAjaxAction extends AjaxAction {
 			returnUrl = UrlUtil.decode(returnUrlParam);
 		}
 
-		// 돌아갈 페이지 정보와 함께 SC_OK 를 반환
-		return new AjaxResult(SC_OK, "회원가입에 성공하였습니다", returnUrl);
+		// 돌아갈 페이지 정보와 함께 성공 메시지를 반환
+		return AjaxResult.success("회원가입이 완료되었습니다", returnUrl);
 	}
 
 }

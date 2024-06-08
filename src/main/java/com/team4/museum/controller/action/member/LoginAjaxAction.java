@@ -1,9 +1,5 @@
 package com.team4.museum.controller.action.member;
 
-import static jakarta.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
-import static jakarta.servlet.http.HttpServletResponse.SC_NOT_FOUND;
-import static jakarta.servlet.http.HttpServletResponse.SC_OK;
-
 import java.io.IOException;
 
 import com.team4.museum.controller.action.AjaxAction;
@@ -19,31 +15,30 @@ import jakarta.servlet.http.HttpSession;
 public class LoginAjaxAction extends AjaxAction {
 
 	protected AjaxResult handleAjaxRequest(HttpServletRequest request, HttpServletResponse response) {
-		// 파라미터에 'id'가 없으면 SC_BAD_REQUEST 를 반환
+		// 'id' 파라미터가 없는 경우
 		String id = request.getParameter("id");
 		if (id == null || id.equals("")) {
-			return new AjaxResult(SC_BAD_REQUEST, "'id'를 입력해주세요");
+			return AjaxResult.requireParameter("id");
 		}
 
-		// 파라미터에 'pwd'가 없으면 SC_BAD_REQUEST 를 반환
+		// 'pwd' 파라미터가 없는 경우
 		String pwd = request.getParameter("pwd");
 		if (pwd == null || pwd.equals("")) {
-			return new AjaxResult(SC_BAD_REQUEST, "'pwd'를 입력해주세요");
+			return AjaxResult.requireParameter("pwd");
 		}
 
-		// 'id'에 해당하는 'MemberVO'가 없으면 SC_NOT_FOUND 를 반환
+		// 입력된 'id'에 해당하는 사용자 계정이 없는 경우
 		MemberVO mvo = MemberDao.getInstance().getMember(id);
 		if (mvo == null) {
-			return new AjaxResult(SC_NOT_FOUND, "존재하지 않는 아이디입니다");
+			return AjaxResult.notFound("존재하지 않는 아이디입니다");
 		}
 
-		// 'pwd'가 비밀번호와 다르면 SC_BAD_REQUEST 를 반환
+		// 입력된 'pwd'가 사용자 계정의 비밀번호와 일치하지 않는 경우
 		if (!mvo.getPwd().equals(pwd)) {
-			return new AjaxResult(SC_BAD_REQUEST, "잘못된 비밀번호입니다");
+			return AjaxResult.badRequest("비밀번호가 일치하지 않습니다");
 		}
 
-		// 로그인 성공 시
-		// 세션에 로그인 정보를 저장
+		// 로그인 성공 시 세션에 로그인 정보를 저장
 		HttpSession session = request.getSession();
 		session.setAttribute("loginUser", mvo);
 
@@ -54,8 +49,8 @@ public class LoginAjaxAction extends AjaxAction {
 			returnUrl = UrlUtil.decode(returnUrlParam);
 		}
 
-		// 돌아갈 페이지 정보와 함께 SC_OK 를 반환
-		return new AjaxResult(SC_OK, "로그인에 성공하였습니다", returnUrl);
+		// 돌아갈 페이지 정보와 함께 성공 메시지를 반환
+		return AjaxResult.success("로그인에 성공하였습니다", returnUrl);
 	}
 
 	/**
