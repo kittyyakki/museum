@@ -5,7 +5,7 @@
 </jsp:include>
 <section>
 	<article>
-		<form name="joinForm" class="joinForm" method="post" action="museum.do?command=join&returnUrl=${returnUrl}" onsubmit="ajaxForm(this); return false;">
+		<form name="joinForm" class="joinForm" method="post" action="museum.do?command=join&returnUrl=${returnUrl}" onsubmit="ajaxSubmit(event)">
 			<h2>회원가입</h2>
 			<div class="middle">
 				<div class="field">

@@ -50,9 +50,9 @@ function ajax(requestUrl, requestBody, ajaxHandler) {
 		if (xhr.readyState !== 4) {
 			return;
 		}
-		
+
 		// abort()로 취소된 요청은 무시
-		if(xhr.status === 0){
+		if (xhr.status === 0) {
 			return;
 		}
 
@@ -65,30 +65,38 @@ function ajax(requestUrl, requestBody, ajaxHandler) {
 	lastAjaxRequest = xhr;
 }
 
-function ajaxForm(form, callback) {
-	if (!checkForm(form)) {
-		return;
+/**
+ * HTML Form 요소를 AJAX 요청으로 전송하는 함수
+ * onSubmit 이벤트 핸들러로 사용
+ */
+function ajaxSubmit(event) {
+	// 기본 이벤트 취소
+	event.preventDefault();
+
+	var form = event.target;
+
+	// form 요소 유효성 검사
+	for (var input of form.elements) {
+		if (input.required && input.value == "") {
+			alert("모든 항목을 입력해 주세요.");
+			input.focus();
+			return;
+		}
 	}
 
+	// form 요소로부터 requestBody 객체 생성
 	const requestBody = {};
 	for (var input of form.elements) {
 		if (input.name) {
 			requestBody[input.name] = input.value;
 		}
 	}
-	ajax(form.action, requestBody, callback);
-}
 
-function checkForm(form) {
-	for (var input of form.elements) {
-		if (input.required && input.value == "") {
-			alert("모든 항목을 입력해 주세요.");
-			input.focus();
-			return false;
-		}
-	}
+	// submitter 버튼의 formaction 속성 또는 form 요소의 action 속성으로 요청 URL 결정
+	var action = event.submitter.getAttribute("formaction") || form.action;
 
-	return true;
+	// ajax 요청 전송
+	ajax(action, requestBody);
 }
 
 var defaultAjaxHandler = function(status, response) {

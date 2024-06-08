@@ -42,9 +42,9 @@ import com.team4.museum.controller.action.notice.UpdateNoticeAction;
 import com.team4.museum.controller.action.notice.UpdateNoticeFormAction;
 import com.team4.museum.controller.action.qna.QnaListAction;
 import com.team4.museum.controller.action.qna.QnaPwdCheckAjaxAction;
-import com.team4.museum.controller.action.qna.QnaReplyAction;
+import com.team4.museum.controller.action.qna.QnaReplyAjaxAction;
 import com.team4.museum.controller.action.qna.QnaViewAction;
-import com.team4.museum.controller.action.qna.QnaWriteAction;
+import com.team4.museum.controller.action.qna.QnaWriteAjaxAction;
 import com.team4.museum.controller.action.qna.QnaWriteFormAction;
 
 public class ActionFactory {
@@ -90,9 +90,9 @@ public class ActionFactory {
 		case "qnaList" -> new QnaListAction();
 		case "qnaPwdCheck" -> new QnaPwdCheckAjaxAction();
 		case "qnaView" -> new QnaViewAction();
-		case "qnaReply" -> new QnaReplyAction();
+		case "qnaReply" -> new QnaReplyAjaxAction();
 		case "qnaWriteForm" -> new QnaWriteFormAction();
-		case "qnaWrite" -> new QnaWriteAction();
+		case "qnaWrite" -> new QnaWriteAjaxAction();
 
 		// user gallery
 		case "galleryList" -> new GalleryListAction();

@@ -1,51 +1,62 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/header.jsp">
-	<jsp:param name="stylesheet" value="css/qna_view.css" />
+	<jsp:param name="stylesheet" value="css/qna/qna_icon.css" />
+	<jsp:param name="stylesheet" value="css/qna/qna_write.css" />
 </jsp:include>
-<section class="qna-view">
-	<form action="museum.do?command=qnaWrite" method="post">
-		<h1>
-			Q &amp; A &nbsp;&nbsp;
-			<c:choose>
-				<c:when test="${empty qnaVO}">새로운 문의 작성</c:when>
-				<c:otherwise>${qnaVO.qseq}번 문의 수정</c:otherwise>
-			</c:choose>
-		</h1>
-		<div class="qna-view_header">
+<main class="qna-write">
+	<div class="qna-write_header">
+		<div class="qna-write_header_title">
 			<h1>
-				<label>
-					제목:
-					<input type="text" name="title" value="${qnaVO.title}" placeholder="제목을 입력하세요" required />
-				</label>
+				<c:choose>
+					<c:when test="${empty qnaVO}">새로운 문의 작성</c:when>
+					<c:otherwise>${qnaVO.qseq}번 문의 수정</c:otherwise>
+				</c:choose>
 			</h1>
-			<ul>
-				<li><label>
-						이메일:
-						<input type="email" name="email" value="${qnaVO.email}" placeholder="이메일을 입력하세요" required />
-					</label></li>
-				<li><label>
-						전화번호
-						<input type="tel" name="phone" value="${qnaVO.phone}" placeholder="전화번호를 입력하세요" required />
-					</label></li>
-				<li><label>
-						공개여부:
-						<input type="checkbox" name="publicyn" <c:if test="${qnaVO.isPublic()}">checked</c:if> />
-					</label></li>
-				<li><label>
-						비밀번호:
-						<input type="password" name="pwd" value="${qnaVO.pwd}" placeholder="비밀번호를 입력하세요" required />
-					</label></li>
-			</ul>
 		</div>
-		<div class="qna-view_content">
-			<textarea name="content" placeholder="내용을 입력하세요" required>${qnaVO.content}</textarea>
+	</div>
+	<form class="qna-write_body" action="museum.do?command=qnaWrite" method="post" onsubmit="ajaxSubmit(event)">
+		<div class="qna-write_input-wrapper">
+			<i class="qna-icon title"></i>
+			<input name="title" type="text" maxlength="100" autocomplete="off" value="${qnaVO.title}" placeholder=" " required />
+			<label for="title">문의 제목</label>
 		</div>
-		<input type="submit" value="등록" />
-		<c:if test="${not empty qnaVO}">
-			<input type="hidden" name="qseq" value="${qnaVO.qseq}" />
-			<input type="submit" value="삭제" formaction="museum.do?command=qnaWrite&delete=1" />
-		</c:if>
+		<div class="qna-write_input-wrapper">
+			<input name="publicyn" type="checkbox" <c:if test="${qnaVO.isPublic()}">checked</c:if> />
+			<label for="publicyn">전체 공개 여부</label>
+		</div>
+		<div class="qna-write_input-wrapper">
+			<i class="qna-icon pwd"></i>
+			<input name="pwd" type="password" maxlength="45" autocomplete="off" value="${qnaVO.pwd}" placeholder=" " required />
+			<label for="pwd">글 비밀번호</label>
+		</div>
+		<div class="qna-write_input-wrapper">
+			<i class="qna-icon email"></i>
+			<input name="email" type="email" maxlength="45" autocomplete="email" value="${qnaVO.email}" placeholder=" " required />
+			<label for="email">작성자 이메일</label>
+		</div>
+		<div class="qna-write_input-wrapper">
+			<i class="qna-icon phone"></i>
+			<input name="phone" type="tel" maxlength="45" autocomplete="tel" value="${qnaVO.phone}" placeholder=" " required />
+			<label for="phone">작성자 휴대폰</label>
+		</div>
+		<div class="qna-write_input-wrapper">
+			<i class="qna-icon content"></i>
+			<textarea name="content" placeholder=" " required oninput="this.parentNode.dataset.textareaInput = this.value">${qnaVO.content}</textarea>
+			<label for="content">문의 내용</label>
+		</div>
+		<div class="qna-write_button-wrapper">
+			<input class="qna-write_button " type="submit" value="등록" />
+			<label for="content">
+				<i class="qna-icon upload"></i>
+			</label>
+		</div>
+		<div class="qna-write_button-wrapper">
+			<input class="qna-write_button " type="button" value="취소" onclick="history.back();" />
+			<label for="content">
+				<i class="qna-icon cancel"></i>
+			</label>
+		</div>
 	</form>
-</section>
+</main>
 <%@ include file="/footer.jsp"%>
