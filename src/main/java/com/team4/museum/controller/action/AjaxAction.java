@@ -31,7 +31,7 @@ abstract public class AjaxAction implements Action {
 			currentRequest = request;
 			result = handleAjaxRequest(request, response);
 		} catch (AjaxException e) {
-			result = badRequest(e.getMessage());
+			result = new AjaxResult(e.getStatusCode(), e.getMessage(), e.getUrl());
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = internalServerError();
