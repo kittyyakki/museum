@@ -104,6 +104,14 @@ var defaultAjaxHandler = function(status, response) {
 	var message = response.message;
 	switch (status) {
 		case 200: // OK
+			// 200 상태 코드는 url 값이 존재하면 메시지를 생략
+			if (url) {
+				location.href = url;
+			} else if (message) {
+				alert(message);
+			}
+			return;
+
 		case 201: // Created
 		case 202: // Accepted
 			break;
@@ -133,10 +141,10 @@ var defaultAjaxHandler = function(status, response) {
 			message = message || "알 수 없는 오류가 발생했습니다.";
 			break;
 	}
-
+	if (message) {
+		alert(message);
+	}
 	if (url) {
 		location.href = url;
-	} else if (message) {
-		alert(message);
 	}
 };
