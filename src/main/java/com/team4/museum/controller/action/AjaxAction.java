@@ -1,5 +1,8 @@
 package com.team4.museum.controller.action;
 
+import static com.team4.museum.controller.action.member.LoginAjaxAction.getLoginUrl;
+import static com.team4.museum.util.UrlUtil.getUrlPath;
+import static com.team4.museum.controller.action.member.LoginAjaxAction.getLoginUserFrom;
 import static jakarta.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
 import static jakarta.servlet.http.HttpServletResponse.SC_CREATED;
 import static jakarta.servlet.http.HttpServletResponse.SC_FORBIDDEN;
@@ -15,6 +18,7 @@ import java.io.IOException;
 import com.team4.museum.util.UrlUtil;
 import com.team4.museum.util.ajax.AjaxException;
 import com.team4.museum.util.ajax.AjaxResult;
+import com.team4.museum.vo.MemberVO;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -180,7 +184,7 @@ abstract public class AjaxAction implements Action {
 	}
 
 	/**
-	 * 요구되는 파라미터를 문자열로 반환합니다. 없을 경우 AjaxException을 발생합니다.
+	 * 요구되는 파라미터를 문자열로 반환합니다. 없을 경우 AjaxException을 발생시킵니다.
 	 * 
 	 * @param request
 	 * @param parameter
@@ -200,7 +204,7 @@ abstract public class AjaxAction implements Action {
 	}
 
 	/**
-	 * 요구되는 파라미터를 정수로 반환합니다. 없거나 정수가 아닐 경우 AjaxException을 발생합니다.
+	 * 요구되는 파라미터를 정수로 반환합니다. 없거나 정수가 아닐 경우 AjaxException을 발생시킵니다.
 	 * 
 	 * @param request
 	 * @param parameter
@@ -213,5 +217,18 @@ abstract public class AjaxAction implements Action {
 		} catch (NumberFormatException e) {
 			throw new AjaxException(SC_BAD_REQUEST, "'" + parameter + "'는 숫자로 입력해주세요");
 		}
+	}
+
+	/**
+	 * 로그인된 사용자 정보를 반환합니다. 로그인되어 있지 않을 경우 AjaxException을 발생시킵니다.
+	 * 
+	 * @return
+	 */
+	protected MemberVO mustGetLoginUser() throws AjaxException {
+		MemberVO mvo = getLoginUserFrom(currentRequest);
+		if (mvo == null) {
+			throw new AjaxException(SC_UNAUTHORIZED, "로그인이 필요합니다", getLoginUrl(getUrlPath(currentRequest)));
+		}
+		return mvo;
 	}
 }
