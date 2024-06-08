@@ -1,6 +1,7 @@
 package com.team4.museum.controller.action;
 
 import static jakarta.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
+import static jakarta.servlet.http.HttpServletResponse.SC_CREATED;
 import static jakarta.servlet.http.HttpServletResponse.SC_FORBIDDEN;
 import static jakarta.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 import static jakarta.servlet.http.HttpServletResponse.SC_NOT_FOUND;
@@ -45,6 +46,18 @@ abstract public class AjaxAction implements Action {
 
 	protected static AjaxResult ok(String message, String url) {
 		return new AjaxResult(SC_OK, message, url);
+	}
+
+	protected static AjaxResult created() {
+		return created("생성되었습니다");
+	}
+
+	protected static AjaxResult created(String message) {
+		return created(message, "");
+	}
+
+	protected static AjaxResult created(String message, String url) {
+		return new AjaxResult(SC_CREATED, message, url);
 	}
 
 	protected static AjaxResult internalServerError() {
