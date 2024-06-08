@@ -1,5 +1,7 @@
 package com.team4.museum.controller.action.member;
 
+import static com.team4.museum.controller.action.member.LoginAjaxAction.isLogined;
+
 import java.io.IOException;
 
 import com.team4.museum.controller.action.Action;
@@ -12,7 +14,7 @@ public class MyPageAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (LoginAction.isLogined(request, response)) {
+		if (isLogined(request, response)) {
 			request.getRequestDispatcher("member/mypage.jsp").forward(request, response);
 		}
 	}

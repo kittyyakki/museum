@@ -1,11 +1,12 @@
 package com.team4.museum.controller.action.notice;
 
+import static com.team4.museum.controller.action.member.LoginAjaxAction.getLoginUser;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 
 import com.team4.museum.controller.action.Action;
-import com.team4.museum.controller.action.member.LoginAction;
 import com.team4.museum.dao.NoticeDao;
 import com.team4.museum.vo.MemberVO;
 import com.team4.museum.vo.NoticeVO;
@@ -24,7 +25,7 @@ public class UpdateNoticeAction implements Action {
 		NoticeDao ndao = NoticeDao.getInstance();
 		NoticeVO nvo = new NoticeVO();
 
-		MemberVO mvo = LoginAction.getLoginUser(request, response);
+		MemberVO mvo = getLoginUser(request, response);
 		if (mvo == null) { // 조건을 달아준다.
 			return;
 		}

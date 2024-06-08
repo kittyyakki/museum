@@ -1,7 +1,14 @@
+var lastAjaxRequest = null;
+
 /**
  * AJAX 요청을 전송하는 함수
  */
 function ajax(requestUrl, requestBody, ajaxHandler) {
+	// 마지막 요청 취소
+	if (lastAjaxRequest) {
+		lastAjaxRequest.abort();
+	}
+
 	// ajax(requestBody, ajaxHandler) 형식의 호출을 지원
 	if (typeof requestUrl === 'object') {
 		ajaxHandler = requestBody;
@@ -43,6 +50,11 @@ function ajax(requestUrl, requestBody, ajaxHandler) {
 		if (xhr.readyState !== 4) {
 			return;
 		}
+		
+		// abort()로 취소된 요청은 무시
+		if(xhr.status === 0){
+			return;
+		}
 
 		// 응답 완료 시 ajaxHandler() 실행
 		ajaxHandler(xhr.status, JSON.parse(xhr.responseText));
@@ -50,6 +62,7 @@ function ajax(requestUrl, requestBody, ajaxHandler) {
 
 	// requestBody로 POST 요청 전송
 	xhr.send(requestBody);
+	lastAjaxRequest = xhr;
 }
 
 function ajaxForm(form, callback) {
