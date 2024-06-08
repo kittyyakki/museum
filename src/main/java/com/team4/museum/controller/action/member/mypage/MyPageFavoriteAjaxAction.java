@@ -1,4 +1,4 @@
-package com.team4.museum.controller.action.member;
+package com.team4.museum.controller.action.member.mypage;
 
 import static com.team4.museum.controller.action.member.LoginAjaxAction.getLoginUrl;
 import static com.team4.museum.controller.action.member.LoginAjaxAction.getLoginUserFrom;

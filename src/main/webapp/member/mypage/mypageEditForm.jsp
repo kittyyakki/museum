@@ -5,7 +5,7 @@
 </jsp:include>
 <section>
 	<article>
-		<form action="museum.do?command=editMember" method="post" name="joinForm" class="joinForm">
+		<form name="joinForm" class="joinForm" action="museum.do?command=mypageEdit" method="post">
 			<h2>회원정보 수정</h2>
 			<div class="middle">
 				<div class="field">

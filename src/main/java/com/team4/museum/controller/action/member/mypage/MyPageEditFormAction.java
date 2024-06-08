@@ -1,4 +1,4 @@
-package com.team4.museum.controller.action.member;
+package com.team4.museum.controller.action.member.mypage;
 
 import static com.team4.museum.controller.action.member.LoginAjaxAction.isLogined;
 
@@ -14,7 +14,7 @@ public class MyPageEditFormAction implements Action {
 
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (isLogined(request, response)) {
-			request.getRequestDispatcher("member/mypageEditForm.jsp").forward(request, response);
+			request.getRequestDispatcher("member/mypage/mypageEditForm.jsp").forward(request, response);
 		}
 	}
 

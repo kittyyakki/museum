@@ -11,7 +11,7 @@
 		<p class="infoEmail">${loginUser.email}</p>
 	</div>
 	<div class="infoBtnWrap">
-		<a class="btn" href="museum.do?command=mypageEdit">
+		<a class="btn" href="museum.do?command=mypageEditForm">
 			<button>개인정보수정</button>
 		</a>
 		<a class="btn" href="museum.do?command=memberWithdraw">
