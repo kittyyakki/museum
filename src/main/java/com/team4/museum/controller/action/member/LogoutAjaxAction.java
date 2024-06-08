@@ -1,6 +1,6 @@
 package com.team4.museum.controller.action.member;
 
-import static com.team4.museum.util.AjaxResult.OK;
+import static jakarta.servlet.http.HttpServletResponse.SC_OK;
 
 import com.team4.museum.controller.action.AjaxAction;
 import com.team4.museum.util.AjaxResult;
@@ -21,8 +21,8 @@ public class LogoutAjaxAction extends AjaxAction {
 			returnUrl = UrlUtil.decode(returnUrlParam);
 		}
 
-		// 돌아갈 페이지 정보와 함께 OK 를 반환
-		return new AjaxResult(OK, "로그아웃 되었습니다", returnUrl);
+		// 돌아갈 페이지 정보와 함께 SC_OK 를 반환
+		return new AjaxResult(SC_OK, "로그아웃 되었습니다", returnUrl);
 	}
 
 }
