@@ -23,15 +23,15 @@ import com.team4.museum.controller.action.gallery.GalleryListAction;
 import com.team4.museum.controller.action.gallery.GalleryWriteAction;
 import com.team4.museum.controller.action.gallery.GalleryWriteFormAction;
 import com.team4.museum.controller.action.member.IdcheckFormAction;
-import com.team4.museum.controller.action.member.JoinAction;
+import com.team4.museum.controller.action.member.JoinAjaxAction;
 import com.team4.museum.controller.action.member.JoinFormAction;
-import com.team4.museum.controller.action.member.LoginAction;
+import com.team4.museum.controller.action.member.LoginAjaxAction;
 import com.team4.museum.controller.action.member.LoginFormAction;
-import com.team4.museum.controller.action.member.LogoutAction;
+import com.team4.museum.controller.action.member.LogoutAjaxAction;
 import com.team4.museum.controller.action.member.MyPageAction;
 import com.team4.museum.controller.action.member.MyPageEditAction;
 import com.team4.museum.controller.action.member.MyPageEditFormAction;
-import com.team4.museum.controller.action.member.MyPageFavoriteAction;
+import com.team4.museum.controller.action.member.MyPageFavoriteAjaxAction;
 import com.team4.museum.controller.action.notice.DeleteNoticeAction;
 import com.team4.museum.controller.action.notice.InsertNoticeAction;
 import com.team4.museum.controller.action.notice.InsertNoticeFormAction;
@@ -41,7 +41,7 @@ import com.team4.museum.controller.action.notice.NoticeViewWithoutCntAction;
 import com.team4.museum.controller.action.notice.UpdateNoticeAction;
 import com.team4.museum.controller.action.notice.UpdateNoticeFormAction;
 import com.team4.museum.controller.action.qna.QnaListAction;
-import com.team4.museum.controller.action.qna.QnaPwdCheckAction;
+import com.team4.museum.controller.action.qna.QnaPwdCheckAjaxAction;
 import com.team4.museum.controller.action.qna.QnaReplyAction;
 import com.team4.museum.controller.action.qna.QnaViewAction;
 import com.team4.museum.controller.action.qna.QnaWriteAction;
@@ -66,15 +66,15 @@ public class ActionFactory {
 
 		// member actions
 		case "loginForm" -> new LoginFormAction();
-		case "login" -> new LoginAction();
-		case "logout" -> new LogoutAction();
-		case "join" -> new JoinAction();
+		case "login" -> new LoginAjaxAction();
+		case "logout" -> new LogoutAjaxAction();
+		case "join" -> new JoinAjaxAction();
 		case "joinForm" -> new JoinFormAction();
 		case "idcheckForm" -> new IdcheckFormAction();
 		case "mypage" -> new MyPageAction();
 		case "mypageEditMemberForm" -> new MyPageEditFormAction();
 		case "mypageEditMember" -> new MyPageEditAction();
-		case "mypageFavorite" -> new MyPageFavoriteAction();
+		case "mypageFavorite" -> new MyPageFavoriteAjaxAction();
 
 		// artwork actions
 		case "artworkList" -> new ArtworkListAction();
@@ -88,7 +88,7 @@ public class ActionFactory {
 
 		// QnA actions
 		case "qnaList" -> new QnaListAction();
-		case "qnaPwdCheck" -> new QnaPwdCheckAction();
+		case "qnaPwdCheck" -> new QnaPwdCheckAjaxAction();
 		case "qnaView" -> new QnaViewAction();
 		case "qnaReply" -> new QnaReplyAction();
 		case "qnaWriteForm" -> new QnaWriteFormAction();

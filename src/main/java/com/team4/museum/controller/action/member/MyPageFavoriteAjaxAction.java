@@ -1,7 +1,7 @@
 package com.team4.museum.controller.action.member;
 
-import static com.team4.museum.controller.action.member.LoginAction.getLoginUrl;
-import static com.team4.museum.controller.action.member.LoginAction.getLoginUserFrom;
+import static com.team4.museum.controller.action.member.LoginAjaxAction.getLoginUrl;
+import static com.team4.museum.controller.action.member.LoginAjaxAction.getLoginUserFrom;
 import static com.team4.museum.util.AjaxResult.BAD_REQUEST;
 import static com.team4.museum.util.AjaxResult.OK;
 import static com.team4.museum.util.AjaxResult.UNAUTHORIZED;
@@ -13,11 +13,10 @@ import com.team4.museum.dao.FavoriteDao;
 import com.team4.museum.util.AjaxResult;
 import com.team4.museum.vo.MemberVO;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class MyPageFavoriteAction extends AjaxAction {
+public class MyPageFavoriteAjaxAction extends AjaxAction {
 
 	protected AjaxResult handleAjaxRequest(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {

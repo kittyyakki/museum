@@ -9,7 +9,7 @@ import com.team4.museum.util.UrlUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class LogoutAction extends AjaxAction {
+public class LogoutAjaxAction extends AjaxAction {
 
 	protected AjaxResult handleAjaxRequest(HttpServletRequest request, HttpServletResponse response) {
 		request.getSession().removeAttribute("loginUser");

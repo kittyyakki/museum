@@ -1,5 +1,7 @@
 package com.team4.museum.controller.action.member;
 
+import static com.team4.museum.controller.action.member.LoginAjaxAction.getLoginUser;
+
 import java.io.IOException;
 
 import com.team4.museum.controller.action.Action;
@@ -13,7 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class MyPageEditAction implements Action {
 
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MemberVO mvo = LoginAction.getLoginUser(request, response);
+		MemberVO mvo = getLoginUser(request, response);
 		if (mvo == null) {
 			return;
 		}

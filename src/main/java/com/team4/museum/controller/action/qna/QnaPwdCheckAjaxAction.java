@@ -1,12 +1,12 @@
 package com.team4.museum.controller.action.qna;
 
+import static com.team4.museum.controller.action.member.LoginAjaxAction.isAdmin;
 import static com.team4.museum.util.AjaxResult.BAD_REQUEST;
 import static com.team4.museum.util.AjaxResult.NO_CONTENT;
 import static com.team4.museum.util.AjaxResult.OK;
 import static com.team4.museum.util.AjaxResult.UNAUTHORIZED;
 
 import com.team4.museum.controller.action.AjaxAction;
-import com.team4.museum.controller.action.member.LoginAction;
 import com.team4.museum.dao.QnaDao;
 import com.team4.museum.util.AjaxResult;
 import com.team4.museum.vo.QnaVO;
@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-public class QnaPwdCheckAction extends AjaxAction {
+public class QnaPwdCheckAjaxAction extends AjaxAction {
 
 	protected AjaxResult handleAjaxRequest(HttpServletRequest request, HttpServletResponse response) {
 		// 파라미터에 'qseq'가 없으면 BAD_REQUEST 를 반환
@@ -46,7 +46,7 @@ public class QnaPwdCheckAction extends AjaxAction {
 			}
 
 			// 관리자 일 경우 OK 를 반환
-			if (LoginAction.isAdmin(request)) {
+			if (isAdmin(request)) {
 				return new AjaxResult(OK, "관리자로 확인되었습니다", url);
 			}
 			break;

@@ -13,7 +13,7 @@ import com.team4.museum.vo.MemberVO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class JoinAction extends AjaxAction {
+public class JoinAjaxAction extends AjaxAction {
 
 	protected AjaxResult handleAjaxRequest(HttpServletRequest request, HttpServletResponse response) {
 		MemberVO mvo = new MemberVO();

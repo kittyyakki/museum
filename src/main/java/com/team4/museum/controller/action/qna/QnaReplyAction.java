@@ -1,9 +1,10 @@
 package com.team4.museum.controller.action.qna;
 
+import static com.team4.museum.controller.action.member.LoginAjaxAction.isAdmin;
+
 import java.io.IOException;
 
 import com.team4.museum.controller.action.Action;
-import com.team4.museum.controller.action.member.LoginAction;
 import com.team4.museum.dao.QnaDao;
 import com.team4.museum.vo.QnaVO;
 
@@ -20,7 +21,7 @@ public class QnaReplyAction implements Action {
 
 	private boolean updateReply(HttpServletRequest request, HttpServletResponse response) {
 		// 어드민이 아니면 false 를 반환
-		if (!LoginAction.isAdmin(request)) {
+		if (!isAdmin(request)) {
 			return false;
 		}
 
