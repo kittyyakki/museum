@@ -9,7 +9,6 @@ import com.team4.museum.vo.QnaVO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 public class QnaPwdCheckAjaxAction extends AjaxAction {
 
@@ -58,20 +57,20 @@ public class QnaPwdCheckAjaxAction extends AjaxAction {
 			return ok("비밀번호 확인 기록이 존재합니다", url);
 		}
 
-		// 'pwd' 파라미터가 없으면 SC_UNAUTHORIZED 를 반환
+		// 'pwd' 파라미터가 없는 경우
 		String pwd = request.getParameter("pwd");
 		if (pwd == null || pwd.trim().equals("")) {
 			return unauthorized("비밀번호를 입력해주세요");
 		}
 
-		// 'pwd'가 비밀번호와 같으면 세션에 비밀번호 확인 기록을 남기고 SC_OK 를 반환
-		if (qnaVO.getPwd().equals(pwd)) {
-			savePwdCheckLog(request, qseq);
-			return ok("비밀번호가 확인되었습니다", url);
+		// 비밀번호가 일치하지 않는 경우
+		if (!qnaVO.getPwd().equals(pwd)) {
+			return badRequest("비밀번호가 일치하지 않습니다");
 		}
 
-		// 비밀번호가 틀리면 SC_BAD_REQUEST 를 반환
-		return badRequest("비밀번호가 일치하지 않습니다");
+		// 비밀번호가 일치하는 경우 세션에 비밀번호 확인 기록을 남기고 'url'로 리다이렉트
+		savePwdCheckLog(request, qseq);
+		return ok("비밀번호가 확인되었습니다", url);
 	}
 
 	/**
