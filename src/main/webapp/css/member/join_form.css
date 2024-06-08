@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+.join-form-wrapper {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 4rem 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border-top: 2px solid black;
+	background-color: #f8f8f8;
+}
+
+.join-form-wrapper h2 {
+	line-height: nomal;
+	font-size: 2.75rem;
+	text-align: center;
+	padding-bottom: 1rem;
+}
+
+.join-form-wrapper .field {
+	display: flex;
+	margin: 0.75rem;
+}
+
+.join-form-wrapper .field input {
+	margin-left: 1rem;
+	padding: 0.2rem;
+	border-radius: 0.125rem;
+	border: 1px solid #AAA;
+}
