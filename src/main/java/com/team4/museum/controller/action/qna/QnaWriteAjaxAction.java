@@ -21,11 +21,12 @@ public class QnaWriteAjaxAction extends AjaxAction {
 			if (qnaVO != null) {
 				QnaDao.getInstance().deleteQna(qnaVO.getQseq());
 			}
-			return ok("문의글이 삭제되었습니다", "museum.do?command=qnaList");
+			return created("문의글이 삭제되었습니다", "museum.do?command=qnaList");
 		}
 
 		// 등록 버튼을 누른 경우
-		if (qnaVO == null) {
+		boolean isNew = qnaVO == null;
+		if (isNew) {
 			// 새로 작성하는 경우 qnaVO를 새로 생성
 			qnaVO = new QnaVO();
 		}
@@ -38,18 +39,13 @@ public class QnaWriteAjaxAction extends AjaxAction {
 		qnaVO.setPwd(request.getParameter("pwd"));
 
 		QnaDao dao = QnaDao.getInstance();
-		int qseq;
-		if (qnaVO.getQseq() == null) { // 새로 작성하는 경우
-			qseq = dao.insertQna(qnaVO);
-		} else { // 수정하는 경우
-			qseq = dao.updateQna(qnaVO);
-		}
+		int qseq = isNew ? dao.insertQna(qnaVO) : dao.updateQna(qnaVO);
 
 		// 세션에 비밀번호 확인 기록 저장
 		savePwdCheckLog(request, qseq);
 
 		// 문의글 페이지로 이동
-		return ok("문의글이 등록되었습니다", "museum.do?command=qnaView&qseq=" + qseq);
+		return created(isNew ? "문의글이 등록되었습니다" : "문의글이 수정되었습니다", "museum.do?command=qnaView&qseq=" + qseq);
 	}
 
 	protected QnaVO getQnaVO(HttpServletRequest request, HttpServletResponse response) {

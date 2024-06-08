@@ -43,7 +43,7 @@ public class QnaReplyAjaxAction extends AjaxAction {
 			return internalServerError("답변 업데이트에 실패했습니다");
 		}
 
-		return ok("답변이 업데이트되었습니다", "museum.do?command=qnaView&qseq=" + qseq);
+		return created("답변이 업데이트되었습니다", "museum.do?command=qnaView&qseq=" + qseq);
 	}
 
 }
