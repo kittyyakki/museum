@@ -1,6 +1,7 @@
 package com.team4.museum.controller.action.qna;
 
 import static com.team4.museum.controller.action.member.LoginAjaxAction.isAdmin;
+import static com.team4.museum.controller.action.qna.QnaPwdCheckAjaxAction.isAlreadyPwdChecked;
 
 import java.io.IOException;
 
@@ -11,7 +12,6 @@ import com.team4.museum.vo.QnaVO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 public class QnaViewAction implements Action {
 
@@ -30,8 +30,6 @@ public class QnaViewAction implements Action {
 	}
 
 	private QnaVO getQnaVO(HttpServletRequest request, HttpServletResponse response) {
-		HttpSession session = request.getSession();
-
 		// 파라미터에 'qseq'가 없으면 null 을 반환
 		String qseqStr = request.getParameter("qseq");
 		if (qseqStr == null || qseqStr.equals("") || !qseqStr.matches("^[0-9]*$")) {
@@ -42,9 +40,7 @@ public class QnaViewAction implements Action {
 		QnaVO qnaVO = QnaDao.getInstance().getQna(qseq);
 
 		// 'qseq' 파라미터에 해당하는 'QnaVO'가 있고, 세션에 비밀번호 확인 기록이 있거나 관리자이거나 문의글이 공개 상태인 경우
-		if (qnaVO != null && (session.getAttribute("qnaPass" + qseq) != null
-				|| isAdmin(request)
-				|| qnaVO.isPublic())) {
+		if (qnaVO != null && isAlreadyPwdChecked(request, qseq) || isAdmin(request) || qnaVO.isPublic()) {
 			// qnaVO 를 반환
 			return qnaVO;
 		}

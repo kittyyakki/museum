@@ -30,7 +30,6 @@ public class QnaPwdCheckAjaxAction extends AjaxAction {
 			return noContent("해당 문의가 존재하지 않습니다");
 		}
 
-		HttpSession session = request.getSession();
 		String url, mode = request.getParameter("mode");
 		switch (mode) {
 		case "view":
@@ -55,7 +54,7 @@ public class QnaPwdCheckAjaxAction extends AjaxAction {
 		}
 
 		// 세션에 비밀번호 확인 기록이 있는 경우
-		if (session.getAttribute("qnaPass" + qseq) != null) {
+		if (isAlreadyPwdChecked(request, qseq)) {
 			return ok("비밀번호 확인 기록이 존재합니다", url);
 		}
 
@@ -67,7 +66,7 @@ public class QnaPwdCheckAjaxAction extends AjaxAction {
 
 		// 'pwd'가 비밀번호와 같으면 세션에 비밀번호 확인 기록을 남기고 SC_OK 를 반환
 		if (qnaVO.getPwd().equals(pwd)) {
-			session.setAttribute("qnaPass" + qseq, qseq);
+			savePwdCheckLog(request, qseq);
 			return ok("비밀번호가 확인되었습니다", url);
 		}
 
@@ -75,4 +74,24 @@ public class QnaPwdCheckAjaxAction extends AjaxAction {
 		return badRequest("비밀번호가 일치하지 않습니다");
 	}
 
+	/**
+	 * 세션에 문의글 비밀번호 확인 기록이 있는지 확인합니다.
+	 * 
+	 * @param request
+	 * @param qseq
+	 * @return 비밀번호 확인 기록이 있으면 true, 없으면 false
+	 */
+	public static boolean isAlreadyPwdChecked(HttpServletRequest request, int qseq) {
+		return request.getSession().getAttribute("qnaPass" + qseq) != null;
+	}
+
+	/**
+	 * 세션에 문의글 비밀번호 확인 기록을 남깁니다.
+	 * 
+	 * @param request
+	 * @param qseq
+	 */
+	public static void savePwdCheckLog(HttpServletRequest request, int qseq) {
+		request.getSession().setAttribute("qnaPass" + qseq, true);
+	}
 }

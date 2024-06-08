@@ -1,5 +1,7 @@
 package com.team4.museum.controller.action.qna;
 
+import static com.team4.museum.controller.action.qna.QnaPwdCheckAjaxAction.savePwdCheckLog;
+
 import java.io.IOException;
 
 import com.team4.museum.dao.QnaDao;
@@ -45,7 +47,7 @@ public class QnaWriteAction extends QnaWriteFormAction {
 		}
 
 		// 세션에 비밀번호 확인 기록 저장
-		request.getSession().setAttribute("qnaPass" + qseq, true);
+		savePwdCheckLog(request, qseq);
 
 		// 문의글 페이지로 이동
 		response.sendRedirect("museum.do?command=qnaView&qseq=" + qseq);
