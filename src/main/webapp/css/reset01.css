@@ -1,22 +1,25 @@
 @charset "UTF-8";
 
-* {
+*, *:after, *:before {
 	margin: 0;
 	padding: 0;
-	box-sizing: border-box;
 	font-family: "Pretendard GOV Variable", "Pretendard GOV", -apple-system,
 		BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
 		"Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic",
 		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
 }
 
 html, body {
 	height: 100%;
-	margin: 0;
 }
 
 body {
-	font-size: 16px;
 	line-height: 1;
 	display: flex;
 	flex-direction: column;
@@ -42,63 +45,27 @@ li {
 	list-style: none;
 }
 
-.clearfix::after {
-	content: " ";
-	display: block;
-	clear: both;
-}
-
-.ir_pm {
-	text-indent: -9999em;
-	white-space: nowrap;
-	overflow: hidden;
+ul, ol {
+	list-style-type: none;
 }
 
 fieldset {
 	border: none;
 }
 
-.screen_out {
-	position: absolute;
-	top: -9999em;
-}
-
-ul, ol {
-	list-style-type: none;
-}
-
-.modal {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.7);
-	z-index: 99;
-	display: none;
-}
-
 input {
-	color: #222222;
+	position: relative;
+	color: #1D1D1D;
 	border: none;
 	border-bottom: solid #aaaaaa 1px;
 	padding-left: 10px;
-	position: relative;
 	background: none;
 	z-index: 5;
 	align-content: center;
 }
 
-/* label {
-  position: absolute;
-  color: #aaa;
-  left: 10px;
-  font-size: 20px;
-  bottom: 8px;
-  transition: all .2s;
-} */
 input::placeholder {
-	color: #aaaaaa;
+	color: #AAAAAA;
 }
 
 input:focus {
@@ -106,7 +73,6 @@ input:focus {
 }
 
 input:focus ~ label, input:valid ~ label {
-	bottom: 40px;
 	color: #666;
 	font-weight: bold;
 }
