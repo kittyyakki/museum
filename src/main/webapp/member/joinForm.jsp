@@ -19,7 +19,7 @@
 					<div>
 						<input type="text" name="id" size="12">
 						<input type="hidden" name="reid">
-						<input type="button" value="중복 체크" onclick="idcheck()">
+						<input type="button" value="중복 체크" onclick="ajax({command:'idCheck',id:document.joinForm.id.value})">
 					</div>
 				</div>
 				<p style="font-size: 13px;">아이디는 4자~12자 이내의 영문과 숫자로 공백 없이 입력하시면 됩니다. 영문 대소문자를 구분하지 않습니다.</p>

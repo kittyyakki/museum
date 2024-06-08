@@ -22,7 +22,7 @@ import com.team4.museum.controller.action.artwork.ArtworkWriteFormAction;
 import com.team4.museum.controller.action.gallery.GalleryListAction;
 import com.team4.museum.controller.action.gallery.GalleryWriteAction;
 import com.team4.museum.controller.action.gallery.GalleryWriteFormAction;
-import com.team4.museum.controller.action.member.IdcheckFormAction;
+import com.team4.museum.controller.action.member.IdCheckAjaxAction;
 import com.team4.museum.controller.action.member.JoinAjaxAction;
 import com.team4.museum.controller.action.member.JoinFormAction;
 import com.team4.museum.controller.action.member.LoginAjaxAction;
@@ -70,7 +70,7 @@ public class ActionFactory {
 		case "logout" -> new LogoutAjaxAction();
 		case "join" -> new JoinAjaxAction();
 		case "joinForm" -> new JoinFormAction();
-		case "idcheckForm" -> new IdcheckFormAction();
+		case "idCheck" -> new IdCheckAjaxAction();
 		case "mypage" -> new MyPageAction();
 		case "mypageEditMemberForm" -> new MyPageEditFormAction();
 		case "mypageEditMember" -> new MyPageEditAction();
