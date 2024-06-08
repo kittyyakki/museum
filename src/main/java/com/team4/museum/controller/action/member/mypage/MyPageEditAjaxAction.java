@@ -1,7 +1,5 @@
 package com.team4.museum.controller.action.member.mypage;
 
-import static com.team4.museum.controller.action.member.LoginAjaxAction.getLoginUserFrom;
-
 import com.team4.museum.controller.action.AjaxAction;
 import com.team4.museum.dao.MemberDao;
 import com.team4.museum.util.ajax.AjaxException;
@@ -15,13 +13,9 @@ public class MyPageEditAjaxAction extends AjaxAction {
 
 	protected AjaxResult handleAjaxRequest(HttpServletRequest request, HttpServletResponse response)
 			throws AjaxException {
-		MemberVO mvo = getLoginUserFrom(request);
-		if (mvo == null) {
-			return unauthorized("로그인이 필요합니다");
-		}
-
 		// 정보 수정에 필요한 정보를 받아옴 (name, id, pwd, email, phone)
 		// mustGetString() 호출 시 요청한 파라미터가 없으면 AjaxException을 던짐
+		MemberVO mvo = mustGetLoginUser();
 		mvo.setName(mustGetString("name"));
 		mvo.setId(mustGetString("id"));
 		mvo.setPwd(mustGetString("pwd"));
