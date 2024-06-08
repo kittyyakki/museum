@@ -1,6 +1,7 @@
 package com.team4.museum.controller.action.qna;
 
-import static com.team4.museum.controller.action.qna.QnaPwdCheckAjaxAction.isAlreadyPwdChecked;
+import static com.team4.museum.controller.action.qna.QnaAccessValidator.PERSONAL;
+import static com.team4.museum.controller.action.qna.QnaAccessValidator.getValidatedQna;
 import static com.team4.museum.controller.action.qna.QnaPwdCheckAjaxAction.savePwdCheckLog;
 
 import com.team4.museum.controller.action.AjaxAction;
@@ -14,7 +15,8 @@ import jakarta.servlet.http.HttpServletResponse;
 public class QnaWriteAjaxAction extends AjaxAction {
 
 	protected AjaxResult handleAjaxRequest(HttpServletRequest request, HttpServletResponse response) {
-		QnaVO qnaVO = getQnaVO(request, response);
+		// 'PERSONAL' 접근 조건을 만족하는 문의글 정보를 가져옴
+		QnaVO qnaVO = getValidatedQna(request, PERSONAL);
 
 		// 삭제 버튼을 누른 경우
 		if (request.getParameter("delete") != null) {
@@ -25,12 +27,14 @@ public class QnaWriteAjaxAction extends AjaxAction {
 		}
 
 		// 등록 버튼을 누른 경우
+		// 새로운 문의글인지 확인
 		boolean isNew = qnaVO == null;
 		if (isNew) {
-			// 새로 작성하는 경우 qnaVO를 새로 생성
+			// 새로운 문의글인 경우 새로운 'QnaVO' 객체를 생성
 			qnaVO = new QnaVO();
 		}
 
+		// 'QnaVO' 객체에 파라미터 값을 저장
 		qnaVO.setTitle(request.getParameter("title"));
 		qnaVO.setContent(request.getParameter("content"));
 		qnaVO.setEmail(request.getParameter("email"));
@@ -38,6 +42,7 @@ public class QnaWriteAjaxAction extends AjaxAction {
 		qnaVO.setPublic(request.getParameter("publicyn") != null && request.getParameter("publicyn").equals("on"));
 		qnaVO.setPwd(request.getParameter("pwd"));
 
+		// 새로운 문의글인 경우 'QnaDao' 객체를 이용해 문의글을 등록하고, 아니면 수정
 		QnaDao dao = QnaDao.getInstance();
 		int qseq = isNew ? dao.insertQna(qnaVO) : dao.updateQna(qnaVO);
 
@@ -46,26 +51,6 @@ public class QnaWriteAjaxAction extends AjaxAction {
 
 		// 문의글 페이지로 이동
 		return created(isNew ? "문의글이 등록되었습니다" : "문의글이 수정되었습니다", "museum.do?command=qnaView&qseq=" + qseq);
-	}
-
-	protected QnaVO getQnaVO(HttpServletRequest request, HttpServletResponse response) {
-		// 파라미터에 'qseq'가 없으면 null 을 반환
-		String qseqStr = request.getParameter("qseq");
-		if (qseqStr == null || qseqStr.equals("") || !qseqStr.matches("^[0-9]*$")) {
-			return null;
-		}
-
-		int qseq = Integer.parseInt(qseqStr);
-		QnaVO qnaVO = QnaDao.getInstance().getQna(qseq);
-
-		// 'qseq' 파라미터에 해당하는 'QnaVO'가 있고, 세션에 비밀번호 확인 기록이 있는 경우
-		if (qnaVO != null && isAlreadyPwdChecked(request, qseq)) {
-			// qnaVO 를 반환
-			return qnaVO;
-		}
-
-		// 아니면 null 을 반환
-		return null;
 	}
 
 }
