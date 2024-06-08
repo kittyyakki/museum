@@ -15,7 +15,7 @@
 			</h1>
 		</div>
 	</div>
-	<form class="qna-write_body" action="museum.do?command=qnaWrite" method="post">
+	<form class="qna-write_body" action="museum.do?command=qnaWrite" method="post" onsubmit="ajaxSubmit(event)">
 		<div class="qna-write_input-wrapper">
 			<i class="qna-icon title"></i>
 			<input name="title" type="text" maxlength="100" autocomplete="off" value="${qnaVO.title}" placeholder=" " required />
@@ -61,7 +61,7 @@
 			</div>
 		</c:if>
 		<div class="qna-write_button-wrapper">
-			<input class="qna-write_button " type="button" value="취소" onclick="history.back();"/>
+			<input class="qna-write_button " type="button" value="취소" onclick="history.back();" />
 			<label for="content">
 				<i class="qna-icon cancel"></i>
 			</label>
