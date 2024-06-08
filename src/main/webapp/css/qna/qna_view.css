@@ -3,64 +3,107 @@
 .qna-view {
 	display: flex;
 	flex-direction: column;
-	margin: 0 10rem;
+	margin: 0 auto;
+	padding: 0 1rem;
+	max-width: 768px;
+	font-size: 1rem;
 }
 
-.qna-view_title {
+/* -- .qna-view_header  -------------- */
+.qna-view_header, .qna-view_header_title {
 	display: flex;
-	justify-content: space-between;
+	flex-direction: column;
+	align-items: end;
 }
 
-.qna-view_title>h1 {
-	margin: 2rem 0 4rem 1rem;
+.qna-view_header h1 {
+	font-size: 2rem;
+	margin: 0rem 0 1rem 1rem;
 }
 
-.qna-view_title>a {
-	margin: 4.5rem 0 0 0;
+.qna-view_header_buttons {
+	display: flex;
+	flex-direction: row;
+	justify-content: right;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-bottom: 0.75rem;
 }
 
-.qna-view_submit {
+.qna-view_header_buttons .qna-view_submit {
 	background: transparent;
-	padding: 0.25rem 2em;
+	padding: 0.25rem 2rem;
 	border-radius: 0.25rem;
-	margin: auto 1rem 1rem 1rem;
 	border: 0;
 	font-size: 1rem;
 	box-shadow: 0.125rem 0.125rem 0.5rem 0.2rem rgba(0, 0, 0, 0.1);
 	transition: box-shadow 0.3s;
 }
 
-.qna-view_header {
-	border-top: 1px solid #222;
-	border-bottom: 1px solid #ccc;
-	margin-bottom: 1.5rem;
-	padding-bottom: 1rem;
+.qna-view_header_buttons .qna-view_submit:hover {
+	box-shadow: 0 0 0.5rem 0.2rem #0804;
 }
 
-.qna-view_header>h1 {
-	font-size: 2rem;
-	margin: 1rem 0 1rem 1rem;
+@media only screen and (min-width: 768px) {
+	.qna-view_header {
+		flex-direction: row;
+		justify-content: space-between;
+	}
+	.qna-view_header_title {
+		margin-bottom: 0;
+		align-items: start;
+	}
 }
 
-.qna-view_header>ul {
-	display: flex;
-	flex-wrap: wrap;
-	font-size: 1.1rem;
-	color: #444;
+/* -- .qna-view_body  -------------- */
+.qna-view_body {
+	width: 100%;
 }
 
-.qna-view_header>ul>li {
-	margin: 0.5rem 1rem;
+@media only screen and (min-width: 768px) {
+	.qna-view_body {
+		margin-bottom: 2rem;
+		box-shadow: 0 .1rem .5rem .1rem rgba(0, 0, 0, 0.2);
+	}
+	.qna-view_body .pagination {
+		padding: 0.5rem;
+		border-top: 1px solid #D1D1D1;
+	}
 }
 
+/* -- .qna-view_info  -------------- */
+.qna-view_info {
+	width: 100%;
+	text-align: left;
+	font-size: 1rem;
+	border: none;
+	border-radius: 0.25rem;
+	word-break: break-all;
+	padding: 1rem 0.5rem;
+}
+
+.qna-view_info>h1 {
+	font-size: 1.75rem;
+	margin-bottom: 0.75rem;
+}
+
+@media only screen and (min-width: 768px) {
+}
+
+/* -- .qna-view_content  -------------- */
 .qna-view_content {
-	padding: 2rem 1rem;
+	padding: 1rem 0.5rem;
 	border-bottom: 1px solid #ccc;
+	word-break: break-all;
 }
 
+@media only screen and (min-width: 768px) {
+}
+
+/* -- .qna-view_reply  -------------- */
 .qna-view_reply {
-	padding: 2rem 1rem;
-	margin-bottom: 3rem;
+	padding: 1rem 1rem;
+	word-break: break-all;
 }
 
 .qna-view_reply>h2 {
@@ -77,10 +120,10 @@
 	width: 100%;
 	height: 8rem;
 	font-size: 1rem;
-	padding: 0.25rem;
-	resize: none;
+	padding: 0.5rem;
 	border-color: #ccc;
 	border-radius: 0.5rem;
+	resize: vertical;
 }
 
 .qna-view_reply input[type=submit] {
@@ -94,19 +137,4 @@
 	color: #0A0;
 	border-color: #0A0;
 	transition: color 0.3s;
-}
-
-.qna-view_edit {
-	background: transparent;
-	padding: 0.25rem 2em;
-	border-radius: 0.25rem;
-	margin-right: 2rem;
-	border: 0;
-	font-size: 1rem;
-	box-shadow: 0.125rem 0.125rem 0.5rem 0.2rem rgba(0, 0, 0, 0.1);
-	transition: box-shadow 0.3s;
-}
-
-.qna-view_edit:hover {
-	box-shadow: 0.125rem 0.125rem 0.5rem 0.5rem rgba(52, 234, 19, 0.2);
 }

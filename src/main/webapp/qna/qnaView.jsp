@@ -6,26 +6,36 @@
 	<jsp:param name="stylesheet" value="css/qna/qna_view.css" />
 	<jsp:param name="script" value="script/qna/qna.js" />
 </jsp:include>
-<section class="qna-view">
-	<div class="qna-view_title">
-		<h1>Q &amp; A</h1>
-		<button class="qna-view_submit" onclick="qnaPwdCheck(${qnaVO.qseq}, 'edit')">수정하기</button>
-		<button class="qna-view_submit" onclick="qnaPwdCheck(${qnaVO.qseq}, 'delete')">삭제하기</button>
-	</div>
+<main class="qna-view">
 	<div class="qna-view_header">
-		<h1>${qnaVO.title}</h1>
-		<ul>
-			<li><strong>작성일</strong>: <fmt:formatDate value="${qnaVO.writedate}" pattern="yyyy-MM-dd" /></li>
-			<li><strong>작성자</strong>: <c:choose>
+		<div class="qna-view_header_title">
+			<h1>고객센터</h1>
+		</div>
+		<div class="qna-view_header_buttons">
+			<button class="qna-view_submit" onclick="qnaPwdCheck(${qnaVO.qseq}, 'edit')">수정하기</button>
+			<button class="qna-view_submit" onclick="qnaPwdCheck(${qnaVO.qseq}, 'delete')">삭제하기</button>
+		</div>
+	</div>
+	<div class="qna-view_body">
+		<div class="qna-view_info">
+			<h1>${qnaVO.title}</h1>
+			<p>
+				<strong>작성일</strong>:
+				<fmt:formatDate value="${qnaVO.writedate}" pattern="yyyy-MM-dd" />
+			</p>
+			<p>
+				<strong>작성자</strong>:
+				<c:choose>
 					<c:when test="${isAdmin}">
 					 ${qnaVO.email} (${qnaVO.phone})
 				</c:when>
 					<c:otherwise>${qnaVO.email.substring(0, 3)}**** (010-****-****)</c:otherwise>
-				</c:choose></li>
-		</ul>
-	</div>
-	<div class="qna-view_content">
-		<c:out value="${qnaVO.content}" />
+				</c:choose>
+			</p>
+		</div>
+		<div class="qna-view_content">
+			<c:out value="${qnaVO.content}" />
+		</div>
 	</div>
 	<div class="qna-view_reply">
 		<h2>답변</h2>
@@ -49,5 +59,5 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
-</section>
+</main>
 <%@ include file="/footer.jsp"%>
