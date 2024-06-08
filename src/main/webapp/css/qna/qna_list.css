@@ -115,6 +115,10 @@
 	font-weight: bold;
 }
 
+.qna-list_table tbody tr td[data-title] span {
+	padding-left: 4rem;
+}
+
 @media only screen and (min-width: 768px) {
 	.qna-list_table {
 		border-spacing: 0;
@@ -148,12 +152,24 @@
 	.qna-list_table tbody tr td div {
 		justify-content: center;
 	}
+	.qna-list_table tbody tr td[data-title] div {
+		padding-right: 4rem;
+	}
 }
 
 /* -- .qna-list_table i -------------- */
 .qna-list_table i {
-	width: 1rem;
-	height: 1rem;
-	min-width: 1rem;
-	min-height: 1rem;
+	width: 1.25rem;
+	height: 1.25rem;
+	min-width: 1.25rem;
+	min-height: 1.25rem;
+}
+
+@media only screen and (min-width: 768px) {
+	.qna-list_table i {
+		width: 1.5rem;
+		height: 1.5rem;
+		min-width: 1.5rem;
+		min-height: 1.5rem;
+	}
 }
