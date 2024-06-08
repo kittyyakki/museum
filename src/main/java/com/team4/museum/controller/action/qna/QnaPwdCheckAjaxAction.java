@@ -17,7 +17,7 @@ public class QnaPwdCheckAjaxAction extends AjaxAction {
 		// 'qseq' 파라미터가 없는 경우
 		String qseqStr = request.getParameter("qseq");
 		if (qseqStr == null || qseqStr.equals("") || !qseqStr.matches("^[0-9]*$")) {
-			return AjaxResult.requireParameter("qseq");
+			return requireParameter("qseq");
 		}
 
 		int qseq = Integer.parseInt(qseqStr);
@@ -27,7 +27,7 @@ public class QnaPwdCheckAjaxAction extends AjaxAction {
 
 		// 입력된 'qseq'에 해당하는 문의글이 없는 경우
 		if (qnaVO == null) {
-			return AjaxResult.noContent("해당 문의가 존재하지 않습니다");
+			return noContent("해당 문의가 존재하지 않습니다");
 		}
 
 		HttpSession session = request.getSession();
@@ -38,12 +38,12 @@ public class QnaPwdCheckAjaxAction extends AjaxAction {
 
 			// 'qnaVO'가 공개 상태인 경우
 			if (qnaVO.isPublic()) {
-				return AjaxResult.success("공개된 문의입니다", url);
+				return ok("공개된 문의입니다", url);
 			}
 
 			// 사용자가 관리자인 경우
 			if (isAdmin(request)) {
-				return AjaxResult.success("관리자로 확인되었습니다", url);
+				return ok("관리자로 확인되었습니다", url);
 			}
 			break;
 		case "edit":
@@ -51,28 +51,28 @@ public class QnaPwdCheckAjaxAction extends AjaxAction {
 			break;
 		default:
 			// 'mode'가 'view'나 'edit'가 아니면 SC_BAD_REQUEST 를 반환
-			return AjaxResult.badRequest("'mode' 파라미터가 'view'나 'edit'가 아닙니다");
+			return badRequest("'mode' 파라미터가 'view'나 'edit'가 아닙니다");
 		}
 
 		// 세션에 비밀번호 확인 기록이 있는 경우
 		if (session.getAttribute("qnaPass" + qseq) != null) {
-			return AjaxResult.success("비밀번호 확인 기록이 존재합니다", url);
+			return ok("비밀번호 확인 기록이 존재합니다", url);
 		}
 
 		// 'pwd' 파라미터가 없으면 SC_UNAUTHORIZED 를 반환
 		String pwd = request.getParameter("pwd");
 		if (pwd == null || pwd.trim().equals("")) {
-			return AjaxResult.unauthorized("비밀번호를 입력해주세요");
+			return unauthorized("비밀번호를 입력해주세요");
 		}
 
 		// 'pwd'가 비밀번호와 같으면 세션에 비밀번호 확인 기록을 남기고 SC_OK 를 반환
 		if (qnaVO.getPwd().equals(pwd)) {
 			session.setAttribute("qnaPass" + qseq, qseq);
-			return AjaxResult.success("비밀번호가 확인되었습니다", url);
+			return ok("비밀번호가 확인되었습니다", url);
 		}
 
 		// 비밀번호가 틀리면 SC_BAD_REQUEST 를 반환
-		return AjaxResult.badRequest("비밀번호가 일치하지 않습니다");
+		return badRequest("비밀번호가 일치하지 않습니다");
 	}
 
 }

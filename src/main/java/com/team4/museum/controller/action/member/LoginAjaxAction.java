@@ -18,24 +18,24 @@ public class LoginAjaxAction extends AjaxAction {
 		// 'id' 파라미터가 없는 경우
 		String id = request.getParameter("id");
 		if (id == null || id.equals("")) {
-			return AjaxResult.requireParameter("id");
+			return requireParameter("id");
 		}
 
 		// 'pwd' 파라미터가 없는 경우
 		String pwd = request.getParameter("pwd");
 		if (pwd == null || pwd.equals("")) {
-			return AjaxResult.requireParameter("pwd");
+			return requireParameter("pwd");
 		}
 
 		// 입력된 'id'에 해당하는 사용자 계정이 없는 경우
 		MemberVO mvo = MemberDao.getInstance().getMember(id);
 		if (mvo == null) {
-			return AjaxResult.notFound("존재하지 않는 아이디입니다");
+			return notFound("존재하지 않는 아이디입니다");
 		}
 
 		// 입력된 'pwd'가 사용자 계정의 비밀번호와 일치하지 않는 경우
 		if (!mvo.getPwd().equals(pwd)) {
-			return AjaxResult.badRequest("비밀번호가 일치하지 않습니다");
+			return badRequest("비밀번호가 일치하지 않습니다");
 		}
 
 		// 로그인 성공 시 세션에 로그인 정보를 저장
@@ -50,7 +50,7 @@ public class LoginAjaxAction extends AjaxAction {
 		}
 
 		// 돌아갈 페이지 정보와 함께 성공 메시지를 반환
-		return AjaxResult.success("로그인에 성공하였습니다", returnUrl);
+		return ok("로그인에 성공하였습니다", returnUrl);
 	}
 
 	/**

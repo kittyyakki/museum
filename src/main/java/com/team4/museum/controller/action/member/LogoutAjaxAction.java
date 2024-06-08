@@ -20,7 +20,7 @@ public class LogoutAjaxAction extends AjaxAction {
 		}
 
 		// 돌아갈 페이지 정보와 함께 성공 메시지를 반환
-		return AjaxResult.success("로그아웃 되었습니다", returnUrl);
+		return ok("로그아웃 되었습니다", returnUrl);
 	}
 
 }

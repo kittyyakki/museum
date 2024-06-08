@@ -21,21 +21,21 @@ public class MyPageFavoriteAjaxAction extends AjaxAction {
 		String aseq = request.getParameter("aseq");
 		if (aseq == null || aseq.equals("") || !aseq.matches("^[0-9]*$")) {
 			// 사용자 입력이 아니므로 어떤 요소가 잘못되었는지 알려줄 필요가 없음
-			return AjaxResult.badRequest();
+			return badRequest();
 		}
 
 		// 로그인이 되어있지 않으면 SC_UNAUTHORIZED 를 반환
 		MemberVO mvo = getLoginUserFrom(request);
 		if (mvo == null) {
 			String returnUrl = "museum.do?command=artworkView&aseq=" + aseq;
-			return AjaxResult.unauthorized("로그인이 필요합니다", getLoginUrl(returnUrl));
+			return unauthorized("로그인이 필요합니다", getLoginUrl(returnUrl));
 		}
 
 		FavoriteDao fdao = FavoriteDao.getInstance();
 		Boolean result = fdao.toggleFavorite(mvo.getId(), Integer.parseInt(aseq));
 
 		// 즐겨찾기 추가/삭제 결과에 따라 메시지와 함께 성공 메시지를 반환
-		return AjaxResult.success(result ? "즐겨찾기 목록에 추가되었습니다" : "즐겨찾기 목록에서 삭제되었습니다");
+		return ok(result ? "즐겨찾기 목록에 추가되었습니다" : "즐겨찾기 목록에서 삭제되었습니다");
 	}
 
 }
