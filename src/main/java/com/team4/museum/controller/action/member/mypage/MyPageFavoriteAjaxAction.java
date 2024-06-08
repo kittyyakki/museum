@@ -15,8 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class MyPageFavoriteAjaxAction extends AjaxAction {
 
-	protected AjaxResult handleAjaxRequest(HttpServletRequest request, HttpServletResponse response)
-			throws IOException {
+	protected AjaxResult handleAjaxRequest(HttpServletRequest request, HttpServletResponse response) {
 		// 파라미터에 'aseq'가 없거나 정수가 아니면 SC_BAD_REQUEST 를 반환
 		String aseq = request.getParameter("aseq");
 		if (aseq == null || aseq.equals("") || !aseq.matches("^[0-9]*$")) {
