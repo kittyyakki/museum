@@ -2,8 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/header.jsp">
-	<jsp:param name="stylesheet" value="qna/stylesheet/qna_list.css" />
-	<jsp:param name="script" value="qna/script/qna.js" />
+	<jsp:param name="stylesheet" value="css/qna/qna_icon.css" />
+	<jsp:param name="stylesheet" value="css/qna/qna_list.css" />
+	<jsp:param name="script" value="script/qna/qna.js" />
 </jsp:include>
 <main class="qna-list">
 	<div class="qna-list_header">
@@ -34,16 +35,16 @@
 						<td data-title="제목"><div>
 								<c:choose>
 									<c:when test="${sessionScope[qnaPassKey]}">
-										<i class="owner"></i>
+										<i class="qna-icon owner"></i>
 									</c:when>
 									<c:when test="${qnaVO.isPublic()}">
-										<i class="public"></i>
+										<i class="qna-icon public"></i>
 									</c:when>
 									<c:when test="${isAdmin}">
-										<i class="admin"></i>
+										<i class="qna-icon admin"></i>
 									</c:when>
 									<c:otherwise>
-										<i class="private"></i>
+										<i class="qna-icon private"></i>
 									</c:otherwise>
 								</c:choose>
 								<span> ${qnaVO.title}</span>

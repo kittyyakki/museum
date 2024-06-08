@@ -96,7 +96,6 @@
 
 .qna-list_table tbody tr td {
 	display: block;
-	vertical-align: middle;
 	text-align: right;
 	padding: 0.6rem;
 }
@@ -108,12 +107,11 @@
 	align-items: center;
 }
 
-.qna-list_table i {
-	display: inline-block;
-	width: 1rem;
-	height: 1rem;
-	background-size: contain;
-	background-repeat: no-repeat;
+.qna-list_table tbody tr td[data-title]:before {
+	content: attr(data-title);
+	float: left;
+	color: #6F6F6F;
+	font-weight: bold;
 }
 
 @media only screen and (min-width: 768px) {
@@ -152,25 +150,7 @@
 }
 
 /* -- .qna-list_table i -------------- */
-.qna-list_table tbody tr td[data-title]:before {
-	content: attr(data-title);
-	float: left;
-	color: #6F6F6F;
-	font-weight: bold;
-}
-
-.qna-list_table i.public {
-	display: none;
-}
-
-.qna-list_table i.private {
-	background-image: url(../image/ico_qna_private.svg);
-}
-
-.qna-list_table i.admin {
-	background-image: url(../image/ico_qna_admin.svg);
-}
-
-.qna-list_table i.owner {
-	background-image: url(../image/ico_qna_owner.svg);
+.qna-list_table i {
+	width: 1rem;
+	height: 1rem;
 }

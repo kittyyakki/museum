@@ -2,8 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/header.jsp">
-	<jsp:param name="stylesheet" value="qna/stylesheet/qna_view.css" />
-	<jsp:param name="script" value="qna/script/qna.js" />
+	<jsp:param name="stylesheet" value="css/qna/qna_icon.css" />
+	<jsp:param name="stylesheet" value="css/qna/qna_view.css" />
+	<jsp:param name="script" value="script/qna/qna.js" />
 </jsp:include>
 <section class="qna-view">
 	<div class="qna-view_title">
