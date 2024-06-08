@@ -4,8 +4,9 @@ import java.io.IOException;
 
 import com.team4.museum.controller.action.AjaxAction;
 import com.team4.museum.dao.MemberDao;
-import com.team4.museum.util.AjaxResult;
 import com.team4.museum.util.UrlUtil;
+import com.team4.museum.util.ajax.AjaxException;
+import com.team4.museum.util.ajax.AjaxResult;
 import com.team4.museum.vo.MemberVO;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,18 +15,12 @@ import jakarta.servlet.http.HttpSession;
 
 public class LoginAjaxAction extends AjaxAction {
 
-	protected AjaxResult handleAjaxRequest(HttpServletRequest request, HttpServletResponse response) {
-		// 'id' 파라미터가 없는 경우
-		String id = request.getParameter("id");
-		if (id == null || id.equals("")) {
-			return requireParameter("id");
-		}
-
-		// 'pwd' 파라미터가 없는 경우
-		String pwd = request.getParameter("pwd");
-		if (pwd == null || pwd.equals("")) {
-			return requireParameter("pwd");
-		}
+	protected AjaxResult handleAjaxRequest(HttpServletRequest request, HttpServletResponse response)
+			throws AjaxException {
+		// 로그인에 필요한 정보를 받아옴 (id, pwd)
+		// mustGetString() 호출 시 요청한 파라미터가 없으면 AjaxException을 던짐
+		String id = mustGetString("id");
+		String pwd = mustGetString("pwd");
 
 		// 입력된 'id'에 해당하는 사용자 계정이 없는 경우
 		MemberVO mvo = MemberDao.getInstance().getMember(id);
@@ -42,15 +37,8 @@ public class LoginAjaxAction extends AjaxAction {
 		HttpSession session = request.getSession();
 		session.setAttribute("loginUser", mvo);
 
-		// 돌아갈 페이지 정보를 확인하고, 없으면 index 페이지로 이동
-		String returnUrl = "museum.do?command=index";
-		String returnUrlParam = (String) request.getParameter("returnUrl");
-		if (returnUrlParam != null && !returnUrlParam.isEmpty()) {
-			returnUrl = UrlUtil.decode(returnUrlParam);
-		}
-
 		// 돌아갈 페이지 정보와 함께 성공 메시지를 반환
-		return ok("로그인에 성공하였습니다", returnUrl);
+		return ok("로그인에 성공하였습니다", getReturnUrl());
 	}
 
 	/**

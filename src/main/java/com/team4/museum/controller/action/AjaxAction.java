@@ -12,7 +12,9 @@ import static jakarta.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
 
 import java.io.IOException;
 
-import com.team4.museum.util.AjaxResult;
+import com.team4.museum.util.UrlUtil;
+import com.team4.museum.util.ajax.AjaxException;
+import com.team4.museum.util.ajax.AjaxResult;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,21 +22,30 @@ import jakarta.servlet.http.HttpServletResponse;
 
 abstract public class AjaxAction implements Action {
 
+	private HttpServletRequest currentRequest;
+
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AjaxResult result = handleAjaxRequest(request, response);
+		AjaxResult result;
+		try {
+			currentRequest = request;
+			result = handleAjaxRequest(request, response);
+		} catch (AjaxException e) {
+			result = badRequest(e.getMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = internalServerError();
+		} finally {
+			currentRequest = null;
+		}
 
 		response.setStatus(result.code);
 		response.setContentType("application/json");
-		try {
-			response.getWriter().write(result.toJson());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		response.getWriter().write(result.toJson());
 	}
 
 	abstract protected AjaxResult handleAjaxRequest(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException;
+			throws ServletException, IOException, AjaxException;
 
 	protected static AjaxResult ok() {
 		return ok("성공");
@@ -146,5 +157,61 @@ abstract public class AjaxAction implements Action {
 
 	protected static AjaxResult requireParameter(String parameter) {
 		return badRequest("'" + parameter + "'를 입력해주세요");
+	}
+
+	/**
+	 * 돌아갈 페이지 URL을 반환합니다. 없을 경우 기본값으로 index 페이지로 이동합니다.
+	 * 
+	 * @return
+	 * @throws AjaxException
+	 */
+	protected String getReturnUrl() throws AjaxException {
+		if (currentRequest == null) {
+			throw new AjaxException(SC_INTERNAL_SERVER_ERROR, "메소드는 반드시 handleAjaxRequest 메소드 내에서만 사용해주세요");
+		}
+
+		String returnUrl = "museum.do?command=index";
+		String returnUrlParam = (String) currentRequest.getParameter("returnUrl");
+		if (returnUrlParam != null && !returnUrlParam.isEmpty()) {
+			returnUrl = UrlUtil.decode(returnUrlParam);
+		}
+
+		return returnUrl;
+	}
+
+	/**
+	 * 요구되는 파라미터를 문자열로 반환합니다. 없을 경우 AjaxException을 발생합니다.
+	 * 
+	 * @param request
+	 * @param parameter
+	 * @return
+	 * @throws AjaxException
+	 */
+	protected String mustGetString(String parameter) throws AjaxException {
+		if (currentRequest == null) {
+			throw new AjaxException(SC_INTERNAL_SERVER_ERROR, "메소드는 반드시 handleAjaxRequest 메소드 내에서만 사용해주세요");
+		}
+
+		String str = currentRequest.getParameter(parameter);
+		if (str == null || str.equals("")) {
+			throw new AjaxException(SC_BAD_REQUEST, "'" + parameter + "'를 입력해주세요");
+		}
+		return str;
+	}
+
+	/**
+	 * 요구되는 파라미터를 정수로 반환합니다. 없거나 정수가 아닐 경우 AjaxException을 발생합니다.
+	 * 
+	 * @param request
+	 * @param parameter
+	 * @return 정수
+	 * @throws AjaxException
+	 */
+	protected int mustGetInt(String parameter) throws AjaxException {
+		try {
+			return Integer.parseInt(mustGetString(parameter));
+		} catch (NumberFormatException e) {
+			throw new AjaxException(SC_BAD_REQUEST, "'" + parameter + "'는 숫자로 입력해주세요");
+		}
 	}
 }

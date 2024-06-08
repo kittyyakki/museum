@@ -1,4 +1,4 @@
-package com.team4.museum.util;
+package com.team4.museum.util.ajax;
 
 public class AjaxResult {
 

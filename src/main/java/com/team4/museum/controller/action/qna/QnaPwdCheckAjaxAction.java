@@ -5,7 +5,8 @@ import java.util.Map;
 
 import com.team4.museum.controller.action.AjaxAction;
 import com.team4.museum.dao.QnaDao;
-import com.team4.museum.util.AjaxResult;
+import com.team4.museum.util.ajax.AjaxException;
+import com.team4.museum.util.ajax.AjaxResult;
 import com.team4.museum.vo.QnaVO;
 
 import jakarta.annotation.Nonnull;
@@ -38,24 +39,23 @@ public class QnaPwdCheckAjaxAction extends AjaxAction {
 				}));
 	}
 
-	protected AjaxResult handleAjaxRequest(HttpServletRequest request, HttpServletResponse response) {
-		String mode = request.getParameter("mode");
-		if (mode == null || subActions.get(mode) == null) {
-			return requireParameter("mode");
-		}
+	protected AjaxResult handleAjaxRequest(HttpServletRequest request, HttpServletResponse response)
+			throws AjaxException {
+		// 로그인에 필요한 정보를 받아옴 (mode, qseq)
+		// mustGetString() 호출 시 요청한 파라미터가 없으면 AjaxException을 던짐
+		String mode = mustGetString("mode");
+		int qseq = mustGetInt("qseq");
+
+		// 'mode'에 해당하는 서브 액션이 없는 경우
 		SubAjaxAction subAction = subActions.get(mode);
-
-		// 'qseq' 파라미터가 없는 경우
-		String qseqStr = request.getParameter("qseq");
-		if (qseqStr == null || qseqStr.equals("") || !qseqStr.matches("^[0-9]*$")) {
-			return requireParameter("qseq");
+		if (subAction == null) {
+			return badRequest("잘못된 요청입니다");
 		}
-
-		int qseq = Integer.parseInt(qseqStr);
-		QnaDao qdao = QnaDao.getInstance();
-		QnaVO qnaVO = qdao.getQna(qseq);
 
 		// 입력된 'qseq'에 해당하는 문의글이 없는 경우
+
+		QnaDao qdao = QnaDao.getInstance();
+		QnaVO qnaVO = qdao.getQna(qseq);
 		if (qnaVO == null) {
 			return noContent("해당 문의가 존재하지 않습니다");
 		}

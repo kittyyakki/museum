@@ -6,7 +6,7 @@ import static com.team4.museum.controller.action.qna.QnaPwdCheckAjaxAction.saveP
 
 import com.team4.museum.controller.action.AjaxAction;
 import com.team4.museum.dao.QnaDao;
-import com.team4.museum.util.AjaxResult;
+import com.team4.museum.util.ajax.AjaxResult;
 import com.team4.museum.vo.QnaVO;
 
 import jakarta.servlet.http.HttpServletRequest;
