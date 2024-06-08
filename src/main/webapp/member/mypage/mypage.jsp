@@ -14,8 +14,8 @@
 		<a class="btn" href="museum.do?command=mypageEditForm">
 			<button>개인정보수정</button>
 		</a>
-		<a class="btn" href="museum.do?command=memberWithdraw">
-			<button>회원탈퇴</button>
+		<a class="btn" href="museum.do?command=mypageFavoriteList">
+			<button>관심예술품</button>
 		</a>
 	</div>
 </main>

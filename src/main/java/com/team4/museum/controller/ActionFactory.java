@@ -32,6 +32,7 @@ import com.team4.museum.controller.action.member.mypage.MyPageAction;
 import com.team4.museum.controller.action.member.mypage.MyPageEditAjaxAction;
 import com.team4.museum.controller.action.member.mypage.MyPageEditFormAction;
 import com.team4.museum.controller.action.member.mypage.MyPageFavoriteAjaxAction;
+import com.team4.museum.controller.action.member.mypage.MyPageFavoriteListAction;
 import com.team4.museum.controller.action.notice.DeleteNoticeAction;
 import com.team4.museum.controller.action.notice.InsertNoticeAction;
 import com.team4.museum.controller.action.notice.InsertNoticeFormAction;
@@ -75,6 +76,7 @@ public class ActionFactory {
 		case "mypageEditForm" -> new MyPageEditFormAction();
 		case "mypageEdit" -> new MyPageEditAjaxAction();
 		case "mypageFavorite" -> new MyPageFavoriteAjaxAction();
+		case "mypageFavoriteList" -> new MyPageFavoriteListAction();
 
 		// artwork actions
 		case "artworkList" -> new ArtworkListAction();
