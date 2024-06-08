@@ -8,7 +8,7 @@ import static com.team4.museum.util.AjaxResult.UNAUTHORIZED;
 
 import java.io.IOException;
 
-import com.team4.museum.controller.action.Action;
+import com.team4.museum.controller.action.AjaxAction;
 import com.team4.museum.dao.FavoriteDao;
 import com.team4.museum.util.AjaxResult;
 import com.team4.museum.vo.MemberVO;
@@ -17,14 +17,10 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class MyPageFavoriteAction implements Action {
+public class MyPageFavoriteAction extends AjaxAction {
 
-	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		getResult(request, response).applyToResponse(response);
-	}
-
-	private AjaxResult getResult(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	protected AjaxResult handleAjaxRequest(HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
 		// 파라미터에 'aseq'가 없거나 정수가 아니면 BAD_REQUEST 를 반환
 		String aseq = request.getParameter("aseq");
 		if (aseq == null || aseq.equals("") || !aseq.matches("^[0-9]*$")) {

@@ -5,27 +5,19 @@ import static com.team4.museum.util.AjaxResult.NO_CONTENT;
 import static com.team4.museum.util.AjaxResult.OK;
 import static com.team4.museum.util.AjaxResult.UNAUTHORIZED;
 
-import java.io.IOException;
-
-import com.team4.museum.controller.action.Action;
+import com.team4.museum.controller.action.AjaxAction;
 import com.team4.museum.controller.action.member.LoginAction;
 import com.team4.museum.dao.QnaDao;
 import com.team4.museum.util.AjaxResult;
 import com.team4.museum.vo.QnaVO;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-public class QnaPwdCheckAction implements Action {
+public class QnaPwdCheckAction extends AjaxAction {
 
-	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		getResult(request, response).applyToResponse(response);
-	}
-
-	private AjaxResult getResult(HttpServletRequest request, HttpServletResponse response) {
+	protected AjaxResult handleAjaxRequest(HttpServletRequest request, HttpServletResponse response) {
 		// 파라미터에 'qseq'가 없으면 BAD_REQUEST 를 반환
 		String qseqStr = request.getParameter("qseq");
 		if (qseqStr == null || qseqStr.equals("") || !qseqStr.matches("^[0-9]*$")) {

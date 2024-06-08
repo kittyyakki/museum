@@ -1,9 +1,5 @@
 package com.team4.museum.util;
 
-import java.io.IOException;
-
-import jakarta.servlet.http.HttpServletResponse;
-
 public class AjaxResult {
 
 	public static final int OK = 200;
@@ -35,16 +31,6 @@ public class AjaxResult {
 				"\"message\":\"" + message + "\"," +
 				"\"url\":\"" + url + "\"" +
 				"}";
-	}
-
-	public void applyToResponse(HttpServletResponse response) {
-		response.setStatus(code);
-		response.setContentType("application/json");
-		try {
-			response.getWriter().write(toJson());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 }

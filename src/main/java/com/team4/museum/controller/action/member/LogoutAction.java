@@ -2,24 +2,16 @@ package com.team4.museum.controller.action.member;
 
 import static com.team4.museum.util.AjaxResult.OK;
 
-import java.io.IOException;
-
-import com.team4.museum.controller.action.Action;
+import com.team4.museum.controller.action.AjaxAction;
 import com.team4.museum.util.AjaxResult;
 import com.team4.museum.util.UrlUtil;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class LogoutAction implements Action {
+public class LogoutAction extends AjaxAction {
 
-	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		getResult(request, response).applyToResponse(response);
-	}
-
-	private AjaxResult getResult(HttpServletRequest request, HttpServletResponse response) {
+	protected AjaxResult handleAjaxRequest(HttpServletRequest request, HttpServletResponse response) {
 		request.getSession().removeAttribute("loginUser");
 
 		// 돌아갈 페이지 정보를 확인하고, 없으면 index 페이지로 이동

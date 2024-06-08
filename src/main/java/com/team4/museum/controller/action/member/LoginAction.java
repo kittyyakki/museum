@@ -6,25 +6,19 @@ import static com.team4.museum.util.AjaxResult.OK;
 
 import java.io.IOException;
 
-import com.team4.museum.controller.action.Action;
+import com.team4.museum.controller.action.AjaxAction;
 import com.team4.museum.dao.MemberDao;
 import com.team4.museum.util.AjaxResult;
 import com.team4.museum.util.UrlUtil;
 import com.team4.museum.vo.MemberVO;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-public class LoginAction implements Action {
+public class LoginAction extends AjaxAction {
 
-	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		getResult(request, response).applyToResponse(response);
-	}
-
-	private AjaxResult getResult(HttpServletRequest request, HttpServletResponse response) {
+	protected AjaxResult handleAjaxRequest(HttpServletRequest request, HttpServletResponse response) {
 		// 파라미터에 'id'가 없으면 BAD_REQUEST 를 반환
 		String id = request.getParameter("id");
 		if (id == null || id.equals("")) {

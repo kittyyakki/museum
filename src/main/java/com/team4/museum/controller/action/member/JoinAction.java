@@ -4,26 +4,18 @@ import static com.team4.museum.util.AjaxResult.BAD_REQUEST;
 import static com.team4.museum.util.AjaxResult.INTERNAL_SERVER_ERROR;
 import static com.team4.museum.util.AjaxResult.OK;
 
-import java.io.IOException;
-
-import com.team4.museum.controller.action.Action;
+import com.team4.museum.controller.action.AjaxAction;
 import com.team4.museum.dao.MemberDao;
 import com.team4.museum.util.AjaxResult;
 import com.team4.museum.util.UrlUtil;
 import com.team4.museum.vo.MemberVO;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class JoinAction implements Action {
+public class JoinAction extends AjaxAction {
 
-	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		getResult(request, response).applyToResponse(response);
-	}
-
-	private AjaxResult getResult(HttpServletRequest request, HttpServletResponse response) {
+	protected AjaxResult handleAjaxRequest(HttpServletRequest request, HttpServletResponse response) {
 		MemberVO mvo = new MemberVO();
 
 		// 파라미터에 'name'가 없으면 BAD_REQUEST 를 반환
