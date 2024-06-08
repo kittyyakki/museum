@@ -29,7 +29,7 @@ import com.team4.museum.controller.action.member.LoginAjaxAction;
 import com.team4.museum.controller.action.member.LoginFormAction;
 import com.team4.museum.controller.action.member.LogoutAjaxAction;
 import com.team4.museum.controller.action.member.mypage.MyPageAction;
-import com.team4.museum.controller.action.member.mypage.MyPageEditAction;
+import com.team4.museum.controller.action.member.mypage.MyPageEditAjaxAction;
 import com.team4.museum.controller.action.member.mypage.MyPageEditFormAction;
 import com.team4.museum.controller.action.member.mypage.MyPageFavoriteAjaxAction;
 import com.team4.museum.controller.action.notice.DeleteNoticeAction;
@@ -73,7 +73,7 @@ public class ActionFactory {
 		case "idCheck" -> new IdCheckAjaxAction();
 		case "mypage" -> new MyPageAction();
 		case "mypageEditForm" -> new MyPageEditFormAction();
-		case "mypageEdit" -> new MyPageEditAction();
+		case "mypageEdit" -> new MyPageEditAjaxAction();
 		case "mypageFavorite" -> new MyPageFavoriteAjaxAction();
 
 		// artwork actions
