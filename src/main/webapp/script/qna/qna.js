@@ -1,10 +1,3 @@
-function onReplySubmit() {
-	if (confirm("답변을 등록하시겠습니까?")) {
-		var form = document.getElementById("qnaReplyForm");
-		form.submit();
-	}
-}
-
 function qnaPwdCheck(qseq, mode, pwd) {
 	ajax({ command: 'qnaPwdCheck', qseq, mode, pwd }, function(status, response) {
 		if (status === 401) { // Unauthorized
