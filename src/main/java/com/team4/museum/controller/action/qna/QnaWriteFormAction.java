@@ -18,13 +18,6 @@ public class QnaWriteFormAction implements Action {
 		// 'PERSONAL' 접근 조건을 만족하는 문의글 정보를 가져옴
 		QnaVO qnaVO = getValidatedQna(request, PERSONAL);
 
-		// 'qnaVO'가 null 이면 잘못된 요청임을 표시하고 뒤로 가기 실행
-		if (qnaVO == null) {
-			response.setContentType("text/html; charset=UTF-8");
-			response.getWriter().write("<script>alert('잘못된 요청입니다.'); history.back();</script>");
-			return;
-		}
-
 		request.setAttribute("qnaVO", qnaVO);
 		request.getRequestDispatcher("qna/qnaWriteForm.jsp").forward(request, response);
 	}
