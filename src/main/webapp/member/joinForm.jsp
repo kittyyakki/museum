@@ -36,12 +36,12 @@
 				<div class="field">
 					<span>*</span>
 					<label>연락처</label>
-					<input type="text" name="phone">
+					<input type="tel" name="phone">
 				</div>
 				<div class="field">
 					<span>*</span>
 					<label>이메일</label>
-					<input type="text" name="email" />
+					<input type="email" name="email" />
 				</div>
 			</div>
 			<div class="btn">
