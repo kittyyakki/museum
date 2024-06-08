@@ -31,11 +31,17 @@ public class MuseumServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		MemberVO mvo = (MemberVO) session.getAttribute("loginUser");
 		if (mvo != null) {
+			String userId = mvo.getId();
 			if (mvo.isAdmin()) {
 				request.setAttribute("isAdmin", true);
+				System.out.print("[ADMIN:" + userId + "] ");
+			} else {
+				System.out.print("[MEMBER:" + userId + "] ");
 			}
 
-			request.setAttribute("userId", mvo.getId());
+			request.setAttribute("userId", userId);
+		} else {
+			System.out.print("[GEUST] ");
 		}
 
 		// URL Path 정보를 'urlPath'에 저장
