@@ -19,42 +19,44 @@ public class GalleryWriteFormAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
-			MemberGalleryDao mgdao = MemberGalleryDao.getInstance();
-			MemberGalleryVO mgvo = new MemberGalleryVO();
-			mgvo.setTitle(request.getParameter("title"));
-			mgvo.setContent(request.getParameter("content"));
-			
-			HttpSession session = request.getSession();
-			ServletContext context = session.getServletContext();
-			String uploadFilePath = context.getRealPath("images/gallery");
-			
-			File uploadDir = new File(uploadFilePath);
-			if(!uploadDir.exists()) uploadDir.mkdir();
-			
-			String fileName="";
-			for( Part p: request.getParts() ) {
-				fileName = "";
-				for (String content : p.getHeader("content-disposition").split(";")) {
-				      if(content.trim().startsWith("filename")) 
-				    	  fileName = content.substring(content.indexOf("=")+2, content.length()-1);
-				}
-				String saveFilename = "";
-				if(!fileName.equals("") ) {
-					Calendar today = Calendar.getInstance();
-					long dt = today.getTimeInMillis();
-					String fn1 = fileName.substring(0, fileName.indexOf(".")  );
-					String fn2 = fileName.substring( fileName.indexOf(".") );
-					saveFilename =  fn1 + dt + fn2;
-					p.write(uploadFilePath + File.separator + saveFilename); // 파일 저장
-					mgvo.setImage(fileName);
-					mgvo.setSavefilename(saveFilename);
-				}
+
+		MemberGalleryDao mgdao = MemberGalleryDao.getInstance();
+		MemberGalleryVO mgvo = new MemberGalleryVO();
+		mgvo.setTitle(request.getParameter("title"));
+		mgvo.setContent(request.getParameter("content"));
+		mgvo.setAuthorId(request.getParameter("authorid"));
+
+		HttpSession session = request.getSession();
+		ServletContext context = session.getServletContext();
+		String uploadFilePath = context.getRealPath("images/gallery");
+
+		File uploadDir = new File(uploadFilePath);
+		if (!uploadDir.exists())
+			uploadDir.mkdir();
+
+		String fileName = "";
+		for (Part p : request.getParts()) {
+			fileName = "";
+			for (String content : p.getHeader("content-disposition").split(";")) {
+				if (content.trim().startsWith("filename"))
+					fileName = content.substring(content.indexOf("=") + 2, content.length() - 1);
 			}
-			
-			mgdao.insertMemberGallery(mgvo);
-			request.getRequestDispatcher("museum.do?command=galleryList").forward(request, response);
-		
-		
+			String saveFilename = "";
+			if (!fileName.equals("")) {
+				Calendar today = Calendar.getInstance();
+				long dt = today.getTimeInMillis();
+				String fn1 = fileName.substring(0, fileName.indexOf("."));
+				String fn2 = fileName.substring(fileName.indexOf("."));
+				saveFilename = fn1 + dt + fn2;
+				p.write(uploadFilePath + File.separator + saveFilename); // 파일 저장
+				mgvo.setImage(fileName);
+				mgvo.setSavefilename(saveFilename);
+			}
+		}
+
+		mgdao.insertMemberGallery(mgvo);
+		request.getRequestDispatcher("museum.do?command=galleryList").forward(request, response);
+
 	}
+
 }

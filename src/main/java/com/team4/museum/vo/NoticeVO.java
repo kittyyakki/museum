@@ -84,7 +84,5 @@ public class NoticeVO {
 	public void setSavefilename(String savefilename) {
 		this.savefilename = savefilename;
 	}
-	
-	
 
 }

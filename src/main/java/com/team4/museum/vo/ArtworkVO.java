@@ -3,6 +3,7 @@ package com.team4.museum.vo;
 import java.sql.Date;
 
 public class ArtworkVO {
+
 	private Integer aseq;
 	private String name;
 	private String category;
@@ -96,6 +97,14 @@ public class ArtworkVO {
 		this.savefilename = savefilename;
 	}
 
+	public String getFullSavefilename() {
+		if (savefilename.startsWith("http")) {
+			return savefilename;
+		}
+
+		return "images/artwork/" + savefilename;
+	}
+
 	public Date getIndate() {
 		return indate;
 	}
@@ -110,6 +119,10 @@ public class ArtworkVO {
 
 	public void setDisplayyn(String displayyn) {
 		this.displayyn = displayyn;
+	}
+
+	public boolean isDisplay() {
+		return displayyn.equals("Y");
 	}
 
 }

@@ -1,12 +1,13 @@
 package com.team4.museum.controller.action.notice;
 
+import static com.team4.museum.controller.action.member.LoginAjaxAction.getLoginUser;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 
 import com.team4.museum.controller.action.Action;
-import com.team4.museum.dao.MemberDao;
-import com.team4.museum.dao.NoticeDAO;
+import com.team4.museum.dao.NoticeDao;
 import com.team4.museum.vo.MemberVO;
 import com.team4.museum.vo.NoticeVO;
 
@@ -21,22 +22,20 @@ public class InsertNoticeAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		NoticeDAO ndao = NoticeDAO.getInstance();
+		NoticeDao ndao = NoticeDao.getInstance();
 		NoticeVO nvo = new NoticeVO();
 
-		MemberDao mdao = MemberDao.getInstance();
-		MemberVO mvo = new MemberVO();
-
-		/* 소식지에 게시물을 올릴때 필요한 파라미터(관리자용) */
-		mvo.setId(request.getParameter("id"));
-		System.out.println("id : " + request.getParameter("id"));
-		mvo.setPwd(request.getParameter("pwd"));
-		nvo.setTitle(request.getParameter("title"));
-		nvo.setAuthor(request.getParameter("author"));
-		nvo.setContent(request.getParameter("content"));
-
 		HttpSession session = request.getSession();
+		MemberVO mvo = getLoginUser(request, response);
+		if (mvo == null) {
+			return;
+		}
+
+		nvo.setTitle(request.getParameter("title"));
+		nvo.setAuthor(mvo.getId());
+		nvo.setContent(request.getParameter("content"));
+		nvo.setCategory(request.getParameter("category"));
+
 		ServletContext context = session.getServletContext();
 		String uploadFilePath = context.getRealPath("images");
 
@@ -66,8 +65,11 @@ public class InsertNoticeAction implements Action {
 				nvo.setSavefilename(saveFilename);
 			}
 		}
+
 		ndao.insertNotice(nvo);
-		response.sendRedirect("museum.do?command=index");
+		// System.out.println(ndao.insertNotice(nvo));
+		response.sendRedirect("museum.do?command=noticeList");
+
 	}
 
 }

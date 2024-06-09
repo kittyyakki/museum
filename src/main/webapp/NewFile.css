@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+#main-center {
+	position: relative;
+	width: 1440px;
+	height: 600px;
+	margin: 0 auto;
+	border: 1px dashed black;
+}
+
+#main-center-imgs {
+	position: absolute;
+	width: 11600px;
+	height: 600px;
+	left: 0;
+	top: 0;
+	border: 1px dashed red;
+}
+
+img {
+	width: 1440px;
+	height: 600px;
+}
+
+#main-center-remote {
+	position: relative;
+	width: 330px;
+	height: 50px;
+	border: 1px solid white;
+	top: 550px;
+	left: 1100px;
+	margin-right: 0 auto;
+}
+
+#main-center-remote div {
+	position: relative;
+	width: 20px;
+	height: 20px;
+	background: white;
+	border-radius: 50%;
+	float: left;
+	margin: 15px 7px;
+	border: 1px solid black;
+	text-align: center;
+	line-height: 17px;
+	font-weight: bold;
+}

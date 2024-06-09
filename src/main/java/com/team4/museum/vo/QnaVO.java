@@ -1,7 +1,6 @@
 package com.team4.museum.vo;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
 public class QnaVO {
 

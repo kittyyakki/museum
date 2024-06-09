@@ -3,6 +3,7 @@ package com.team4.museum.vo;
 import java.sql.Date;
 
 public class ReviewVO {
+
 	private Integer rseq;
 	private String title;
 	private String author;
