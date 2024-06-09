@@ -16,6 +16,7 @@
 		</div>
 	</div>
 	<form class="qna-write_body" action="museum.do?command=qnaWrite" method="post" onsubmit="ajaxSubmit(event)">
+		<input type="hidden" name="qseq" value="${qnaVO.qseq}" />
 		<div class="qna-write_input-wrapper">
 			<i class="qna-icon title"></i>
 			<input name="title" type="text" maxlength="100" autocomplete="off" value="${qnaVO.title}" placeholder=" " required />
