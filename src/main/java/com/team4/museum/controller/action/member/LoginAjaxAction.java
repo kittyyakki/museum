@@ -61,7 +61,7 @@ public class LoginAjaxAction extends AjaxAction {
 	 * 
 	 * @throws IOException
 	 */
-	public static MemberVO getLoginUserFrom(HttpServletRequest request) throws IOException {
+	public static MemberVO getLoginUserFrom(HttpServletRequest request) {
 		return (MemberVO) request.getSession().getAttribute("loginUser");
 	}
 

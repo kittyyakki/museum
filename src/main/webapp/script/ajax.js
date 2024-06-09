@@ -77,10 +77,20 @@ function ajaxSubmit(event) {
 
 	// form 요소 유효성 검사
 	for (var input of form.elements) {
-		if (input.required && input.value == "") {
-			alert("모든 항목을 입력해 주세요.");
+		if (input.required && input.value.trim() == "") {
+			alert(getInputName(input) + "을(를) 입력해 주세요.");
 			input.focus();
 			return;
+		}
+
+		var requireEquals = input.dataset.requireEquals;
+		if (requireEquals) {
+			var target = form.elements[requireEquals];
+			if (target && input.value != target.value) {
+				alert(getInputName(target) + "와(과) " + getInputName(input) + "이(가) 일치하지 않습니다.");
+				input.focus();
+				return;
+			}
 		}
 	}
 
@@ -148,3 +158,7 @@ var defaultAjaxHandler = function(status, response) {
 		location.href = url;
 	}
 };
+
+function getInputName(input) {
+	return (input.labels[0] && input.labels[0].innerText) || input.name || input.id;
+}
