@@ -1,8 +1,5 @@
 package com.team4.museum.controller.action;
 
-import static com.team4.museum.controller.action.member.LoginAjaxAction.getLoginUrl;
-import static com.team4.museum.util.UrlUtil.getUrlPath;
-import static com.team4.museum.controller.action.member.LoginAjaxAction.getLoginUserFrom;
 import static jakarta.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
 import static jakarta.servlet.http.HttpServletResponse.SC_CREATED;
 import static jakarta.servlet.http.HttpServletResponse.SC_FORBIDDEN;
@@ -15,6 +12,7 @@ import static jakarta.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
 
 import java.io.IOException;
 
+import com.team4.museum.controller.action.member.LoginAjaxAction;
 import com.team4.museum.util.UrlUtil;
 import com.team4.museum.util.ajax.AjaxException;
 import com.team4.museum.util.ajax.AjaxResult;
@@ -221,9 +219,12 @@ abstract public class AjaxAction implements Action {
 	 * @return
 	 */
 	protected MemberVO mustGetLoginUser() throws AjaxException {
-		MemberVO mvo = getLoginUserFrom(currentRequest);
+		MemberVO mvo = LoginAjaxAction.getLoginUserFrom(currentRequest);
 		if (mvo == null) {
-			throw new AjaxException(SC_UNAUTHORIZED, "로그인이 필요합니다", getLoginUrl(getUrlPath(currentRequest)));
+			throw new AjaxException(
+					SC_UNAUTHORIZED,
+					"로그인이 필요합니다",
+					LoginAjaxAction.getLoginUrl(UrlUtil.getUrlPath(currentRequest)));
 		}
 		return mvo;
 	}
