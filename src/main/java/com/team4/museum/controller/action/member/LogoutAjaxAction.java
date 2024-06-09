@@ -15,7 +15,7 @@ public class LogoutAjaxAction extends AjaxAction {
 		request.getSession().removeAttribute("loginUser");
 
 		// 돌아갈 페이지 정보와 함께 성공 메시지를 반환
-		return ok("로그아웃 되었습니다", getReturnUrl());
+		return created("로그아웃 되었습니다", getReturnUrl());
 	}
 
 }
