@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.team4.museum.controller.action.Action;
 import com.team4.museum.controller.action.member.LoginAction;
+import com.team4.museum.vo.MemberVO;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,6 +15,8 @@ public class GalleryWriteAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (LoginAction.isLogined(request, response)) {
+			MemberVO mvo = LoginAction.getLoginUserFrom(request);
+			request.setAttribute("mvo", mvo);
 			request.getRequestDispatcher("gallery/galleryWriteForm.jsp").forward(request, response);
 		}
 	}

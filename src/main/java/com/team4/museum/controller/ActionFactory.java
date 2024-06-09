@@ -19,7 +19,10 @@ import com.team4.museum.controller.action.artwork.ArtworkUpdateFormAction;
 import com.team4.museum.controller.action.artwork.ArtworkViewAction;
 import com.team4.museum.controller.action.artwork.ArtworkWriteAction;
 import com.team4.museum.controller.action.artwork.ArtworkWriteFormAction;
+import com.team4.museum.controller.action.gallery.GalleryDeleteAction;
 import com.team4.museum.controller.action.gallery.GalleryListAction;
+import com.team4.museum.controller.action.gallery.GalleryUpdateAction;
+import com.team4.museum.controller.action.gallery.GalleryUpdateFormAction;
 import com.team4.museum.controller.action.gallery.GalleryViewAction;
 import com.team4.museum.controller.action.gallery.GalleryWriteAction;
 import com.team4.museum.controller.action.gallery.GalleryWriteFormAction;
@@ -100,6 +103,9 @@ public class ActionFactory {
 		case "galleryWriteForm" -> new GalleryWriteFormAction();
 		case "galleryWrite" -> new GalleryWriteAction();
 		case "galleryView" -> new GalleryViewAction();
+		case "galleryUpdate" -> new GalleryUpdateAction();
+		case "galleryUpdateForm" -> new GalleryUpdateFormAction();
+		case "galleryDelete" -> new GalleryDeleteAction();
 
 		// notice
 		case "noticeList" -> new NoticeListAction();

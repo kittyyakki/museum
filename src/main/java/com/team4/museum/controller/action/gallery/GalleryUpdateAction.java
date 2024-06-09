@@ -10,22 +10,15 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class GalleryViewAction implements Action{
+public class GalleryUpdateAction implements Action{
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int mseq = Integer.parseInt(request.getParameter("mseq"));
+		MemberGalleryVO mgvo = MemberGalleryDao.getInstance().getMemberGalleryOne(mseq);
 		
-		MemberGalleryDao mgdao = MemberGalleryDao.getInstance();
-		
-		// 조회수 1 증가
-		mgdao.increaseReadCount(mseq);
-		
-		
-		MemberGalleryVO mgvo = mgdao.getMemberGalleryOne(mseq);
-		request.setAttribute("galleryVO", mgvo);
-		
-		request.getRequestDispatcher("gallery/galleryView.jsp").forward(request, response);
+		request.setAttribute("mgvo", mgvo);
+		request.getRequestDispatcher("gallery/galleryUpdateForm.jsp").forward(request, response);
 	}
 
 }
