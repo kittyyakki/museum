@@ -5,10 +5,13 @@ import com.team4.museum.controller.action.IndexAction;
 import com.team4.museum.controller.action.admin.AdminAction;
 import com.team4.museum.controller.action.admin.AdminArtworkListAction;
 import com.team4.museum.controller.action.admin.AdminDeleteArtworkAction;
+import com.team4.museum.controller.action.admin.AdminDeleteGalleryAction;
 import com.team4.museum.controller.action.admin.AdminDeleteMemberAction;
+import com.team4.museum.controller.action.admin.AdminDeleteNoticeAction;
+import com.team4.museum.controller.action.admin.AdminDeleteQnaAction;
+import com.team4.museum.controller.action.admin.AdminGalleryListAction;
 import com.team4.museum.controller.action.admin.AdminMemberListAction;
 import com.team4.museum.controller.action.admin.AdminNoticeListAction;
-import com.team4.museum.controller.action.admin.AdminQnaDeleteAction;
 import com.team4.museum.controller.action.admin.AdminQnaListAction;
 import com.team4.museum.controller.action.admin.GrantAdminRightsAction;
 import com.team4.museum.controller.action.artwork.ArtworkDeleteAction;
@@ -100,11 +103,11 @@ public class ActionFactory {
 
 		// user gallery
 		case "galleryList" -> new GalleryListAction();
+		case "galleryView" -> new GalleryViewAction();
 		case "galleryWriteForm" -> new GalleryWriteFormAction();
 		case "galleryWrite" -> new GalleryWriteAction();
-		case "galleryView" -> new GalleryViewAction();
-		case "galleryUpdate" -> new GalleryUpdateAction();
 		case "galleryUpdateForm" -> new GalleryUpdateFormAction();
+		case "galleryUpdate" -> new GalleryUpdateAction();
 		case "galleryDelete" -> new GalleryDeleteAction();
 
 		// notice
@@ -119,14 +122,17 @@ public class ActionFactory {
 
 		// admin
 		case "admin" -> new AdminAction();
+		case "grantAdminRights" -> new GrantAdminRightsAction();
 		case "adminMemberList" -> new AdminMemberListAction();
 		case "adminArtworkList" -> new AdminArtworkListAction();
+		case "adminNoticeList" -> new AdminNoticeListAction();
+		case "adminGalleryList" -> new AdminGalleryListAction();
 		case "adminQnaList" -> new AdminQnaListAction();
-		case "grantAdminRights" -> new GrantAdminRightsAction();
 		case "adminDeleteMember" -> new AdminDeleteMemberAction();
 		case "adminDeleteArtwork" -> new AdminDeleteArtworkAction();
-		case "adminQnaDelete" -> new AdminQnaDeleteAction();
-		case "adminNoticeList" -> new AdminNoticeListAction();
+		case "adminDeleteNotice" -> new AdminDeleteNoticeAction();
+		case "adminDeleteGallery" -> new AdminDeleteGalleryAction();
+		case "adminDeleteQna" -> new AdminDeleteQnaAction();
 
 		// default
 		default -> null;
