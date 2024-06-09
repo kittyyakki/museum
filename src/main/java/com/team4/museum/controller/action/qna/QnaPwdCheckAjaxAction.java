@@ -53,7 +53,6 @@ public class QnaPwdCheckAjaxAction extends AjaxAction {
 		}
 
 		// 입력된 'qseq'에 해당하는 문의글이 없는 경우
-
 		QnaDao qdao = QnaDao.getInstance();
 		QnaVO qnaVO = qdao.getQna(qseq);
 		if (qnaVO == null) {
@@ -102,6 +101,16 @@ public class QnaPwdCheckAjaxAction extends AjaxAction {
 		request.getSession().setAttribute("qnaPass" + qseq, true);
 	}
 
+	/**
+	 * 서브 액션은 접근 조건 검사자와 요청 처리자를 가지고 있습니다. <br/>
+	 * 
+	 * 접근 조건 검사자는 주어진 문의글 정보와 요청 객체를 이용해 접근 가능 여부를 검사합니다. <br/>
+	 * 
+	 * 요청 처리자는 주어진 문의글 정보와 요청 객체를 이용해 요청을 처리하고 결과를 반환합니다.
+	 * 
+	 * @param request
+	 * @param qseq
+	 */
 	private class SubAjaxAction {
 		public QnaAccessValidator validator;
 		public RequestMapper mapper;

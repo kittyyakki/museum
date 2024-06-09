@@ -40,7 +40,7 @@ public class QnaWriteAjaxAction extends AjaxAction {
 		// 세션에 비밀번호 확인 기록 저장
 		savePwdCheckLog(request, qseq);
 
-		// 문의글 페이지로 이동
+		// 돌아갈 페이지 정보와 함께 성공 메시지를 반환
 		return created(isNew ? "문의글이 등록되었습니다" : "문의글이 수정되었습니다", "museum.do?command=qnaView&qseq=" + qseq);
 	}
 

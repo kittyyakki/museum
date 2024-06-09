@@ -52,6 +52,7 @@ interface QnaAccessValidator {
 			return null;
 		}
 
+		// 'qnaVO'를 반환
 		return qnaVO;
 	}
 }
