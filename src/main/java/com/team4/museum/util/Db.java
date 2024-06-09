@@ -33,6 +33,8 @@ public class Db {
 
 	/**
 	 * 주어진 Connection, PreparedStatement, ResultSet 객체를 닫습니다.
+	 * 
+	 * @deprecated try-with-resources를 사용하여 자동으로 자원을 반환하도록 하기 위해 사용되지 않습니다.
 	 */
 	public static void close(Connection conn, PreparedStatement pstmt, ResultSet rs) {
 		try {
@@ -66,14 +68,13 @@ public class Db {
 	public static int executeUpdate(String query, ParameterSetter paramSetter) {
 		int result = 0;
 
-		try {
-			Connection conn = getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(query);
+		try ( // try-with-resources
+				Connection conn = getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query)) {
 
 			paramSetter.accept(pstmt);
 			result = pstmt.executeUpdate();
 
-			close(conn, pstmt, null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -100,18 +101,15 @@ public class Db {
 	public static <T> List<T> executeSelect(String query, ParameterSetter paramSetter, ResultMapper<T> resultMapper) {
 		List<T> list = new ArrayList<>();
 
-		try {
-			Connection conn = getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(query);
-
-			paramSetter.accept(pstmt);
-			ResultSet rs = pstmt.executeQuery();
+		try ( // try-with-resources
+				Connection conn = getConnection();
+				PreparedStatement pstmt = prepareStatement(conn, query, paramSetter);
+				ResultSet rs = pstmt.executeQuery()) {
 
 			while (rs.next()) {
 				list.add(resultMapper.apply(rs));
 			}
 
-			close(conn, pstmt, rs);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -148,21 +146,33 @@ public class Db {
 	public static <T> T executeCall(String query, CallParameterSetter paramSetter, CallResultMapper<T> resultMapper) {
 		T result = null;
 
-		try {
-			Connection conn = getConnection();
-			CallableStatement pstmt = conn.prepareCall(query);
+		try ( // try-with-resources
+				Connection conn = getConnection();
+				CallableStatement pstmt = conn.prepareCall(query)) {
 
 			paramSetter.accept(pstmt);
 			pstmt.execute();
-
 			result = resultMapper.extract(pstmt);
 
-			close(conn, pstmt, null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		return result;
+	}
+
+	/**
+	 * Connection 객체와 query 문자열로 생성된 PreparedStatement 객체에 대해 파라미터 설정을 수행합니다.
+	 * 
+	 * @param paramSetter SQL 쿼리를 준비하는 람다식
+	 * @return 준비된 PreparedStatement 객체
+	 * @throws SQLException
+	 */
+	private static PreparedStatement prepareStatement(Connection conn, String query, ParameterSetter paramSetter)
+			throws SQLException {
+		PreparedStatement pstmt = conn.prepareStatement(query);
+		paramSetter.accept(pstmt);
+		return pstmt;
 	}
 
 	/**
