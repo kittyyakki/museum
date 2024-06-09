@@ -45,9 +45,9 @@ public class QnaDao {
 	public List<QnaVO> selectQna(Pagination pagination, String isReply) {
 		String query;
 		if (isReply.equals("Y")) {
-			query = "SELECT * FROM qna WHERE reply IS NOT NULL ORDER BY qseq DESC LIMIT ? OFFSET ?";
+			query = "SELECT * FROM qna WHERE COALESCE (reply, '') <> '' ORDER BY qseq DESC LIMIT ? OFFSET ?";
 		} else {
-			query = "SELECT * FROM qna WHERE reply IS NULL ORDER BY qseq DESC LIMIT ? OFFSET ?";
+			query = "SELECT * FROM qna WHERE COALESCE (reply, '') = '' ORDER BY qseq DESC LIMIT ? OFFSET ?";
 		}
 		return executeSelect(query, pagination::applyTo, QnaDao::extractQnaVO);
 	}
