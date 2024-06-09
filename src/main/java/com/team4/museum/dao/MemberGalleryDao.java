@@ -111,6 +111,13 @@ public class MemberGalleryDao {
 				pstmt -> pstmt.setInt(1, mseq));
 	}
 
+	
+	public int getAllCount() {
+		return executeSelectOne(
+				"SELECT COUNT(*) AS cnt FROM member_gallery",
+				rs -> rs.getInt("cnt"));
+	}
+
 
 
 }
