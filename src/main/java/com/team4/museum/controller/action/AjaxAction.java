@@ -51,111 +51,111 @@ abstract public class AjaxAction implements Action {
 	abstract protected AjaxResult handleAjaxRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, AjaxException;
 
-	protected static AjaxResult ok() {
+	protected AjaxResult ok() {
 		return ok("성공");
 	}
 
-	protected static AjaxResult ok(String message) {
+	protected AjaxResult ok(String message) {
 		return ok(message, "");
 	}
 
-	protected static AjaxResult ok(String message, String url) {
+	protected AjaxResult ok(String message, String url) {
 		return new AjaxResult(SC_OK, message, url);
 	}
 
-	protected static AjaxResult created() {
+	protected AjaxResult created() {
 		return created("생성되었습니다");
 	}
 
-	protected static AjaxResult created(String message) {
+	protected AjaxResult created(String message) {
 		return created(message, "");
 	}
 
-	protected static AjaxResult created(String message, String url) {
+	protected AjaxResult created(String message, String url) {
 		return new AjaxResult(SC_CREATED, message, url);
 	}
 
-	protected static AjaxResult internalServerError() {
+	protected AjaxResult internalServerError() {
 		return internalServerError("서버 오류가 발생했습니다");
 	}
 
-	protected static AjaxResult internalServerError(String message) {
+	protected AjaxResult internalServerError(String message) {
 		return internalServerError(message, "");
 	}
 
-	protected static AjaxResult internalServerError(String message, String url) {
+	protected AjaxResult internalServerError(String message, String url) {
 		return new AjaxResult(SC_INTERNAL_SERVER_ERROR, message, url);
 	}
 
-	protected static AjaxResult badRequest() {
+	protected AjaxResult badRequest() {
 		return badRequest("잘못된 요청입니다");
 	}
 
-	protected static AjaxResult badRequest(String message) {
+	protected AjaxResult badRequest(String message) {
 		return badRequest(message, "");
 	}
 
-	protected static AjaxResult badRequest(String message, String url) {
+	protected AjaxResult badRequest(String message, String url) {
 		return new AjaxResult(SC_BAD_REQUEST, message, url);
 	}
 
-	protected static AjaxResult unauthorized() {
+	protected AjaxResult unauthorized() {
 		return unauthorized("로그인이 필요합니다");
 	}
 
-	protected static AjaxResult unauthorized(String message) {
+	protected AjaxResult unauthorized(String message) {
 		return unauthorized(message, "");
 	}
 
-	protected static AjaxResult unauthorized(String message, String url) {
+	protected AjaxResult unauthorized(String message, String url) {
 		return new AjaxResult(SC_UNAUTHORIZED, message, url);
 	}
 
-	protected static AjaxResult forbidden() {
+	protected AjaxResult forbidden() {
 		return forbidden("접근 권한이 없습니다");
 	}
 
-	protected static AjaxResult forbidden(String message) {
+	protected AjaxResult forbidden(String message) {
 		return forbidden(message, "");
 	}
 
-	protected static AjaxResult forbidden(String message, String url) {
+	protected AjaxResult forbidden(String message, String url) {
 		return new AjaxResult(SC_FORBIDDEN, message, url);
 	}
 
-	protected static AjaxResult noContent() {
+	protected AjaxResult noContent() {
 		return noContent("내용이 없습니다");
 	}
 
-	protected static AjaxResult noContent(String message) {
+	protected AjaxResult noContent(String message) {
 		return noContent(message, "");
 	}
 
-	protected static AjaxResult noContent(String message, String url) {
+	protected AjaxResult noContent(String message, String url) {
 		return new AjaxResult(SC_NO_CONTENT, message, url);
 	}
 
-	protected static AjaxResult notFound() {
+	protected AjaxResult notFound() {
 		return notFound("찾을 수 없습니다");
 	}
 
-	protected static AjaxResult notFound(String message) {
+	protected AjaxResult notFound(String message) {
 		return notFound(message, "");
 	}
 
-	protected static AjaxResult notFound(String message, String url) {
+	protected AjaxResult notFound(String message, String url) {
 		return new AjaxResult(SC_NOT_FOUND, message, url);
 	}
 
-	protected static AjaxResult notImplemented() {
+	protected AjaxResult notImplemented() {
 		return notImplemented("구현되지 않은 요청입니다");
 	}
 
-	protected static AjaxResult notImplemented(String message) {
+	protected AjaxResult notImplemented(String message) {
 		return notImplemented(message, "");
 	}
 
-	protected static AjaxResult notImplemented(String message, String url) {
+	protected AjaxResult notImplemented(String message, String url) {
 		return new AjaxResult(SC_NOT_IMPLEMENTED, message, url);
 	}
 
