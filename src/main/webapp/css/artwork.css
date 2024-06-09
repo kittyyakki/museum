@@ -17,8 +17,7 @@
 	flex-direction: column;
 }
 
-.artwork-search-form>h2 {
-	font-size: 2rem;
+.artwork-search-form>h1 {
 	font-weight: bold;
 	margin-bottom: 1rem;
 }
