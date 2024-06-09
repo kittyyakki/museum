@@ -159,10 +159,6 @@ abstract public class AjaxAction implements Action {
 		return new AjaxResult(SC_NOT_IMPLEMENTED, message, url);
 	}
 
-	protected static AjaxResult requireParameter(String parameter) {
-		return badRequest("'" + parameter + "'를 입력해주세요");
-	}
-
 	/**
 	 * 돌아갈 페이지 URL을 반환합니다. 없을 경우 기본값으로 index 페이지로 이동합니다.
 	 * 
