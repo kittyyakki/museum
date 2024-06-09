@@ -200,100 +200,23 @@
 	margin: 0 6px;
 }
 
-@
-keyframes container1 { 0% {
-	transform: translateX(0);
+@keyframes container1 {
+0%{	transform: translateX(0);}
+50%{transform:translateX(100%);}
+100%{transform:translateX(0);}
 }
-
-50
-%
-{
-transform
-:
-translateX(
--100%
-);
+@keyframes container2 { 
+0% {	transform: translateX(0);}
+100%{transform:translateX(-200%);}
 }
-50
-.01 % {
-	transform: translateX(100%);
+@keyframes container3 {
+0% {transform: translateX(0);}
+50%{transform:translateX(-100%);}
+100%{transform:translateX(0);}
 }
-
-100
-%
-{
-transform
-:
-translateX(
-0
-);
-}
-}
-@
-keyframes container2 { 0% {
-	transform: translateX(0);
-}
-
-100
-%
-{
-transform
-:
-translateX(
--200%
-);
-}
-}
-@
-keyframes container3 { 0% {
-	transform: translateX(0);
-}
-
-50
-%
-{
-transform
-:
-translateX(
--100%
-);
-}
-50
-.01 % {
-	transform: translateX(100%);
-}
-
-100
-%
-{
-transform
-:
-translateX(
-0
-);
-}
-}
-@
-keyframes container4 { 0% {
-	transform: translateX(0);
-}
-
-100
-%
-{
-transform
-:
-translateX(
--200%
-);
-}
-}
-#container1 {
-	animation: container1 100s linear infinite;
-}
-
-#container2 {
-	animation: container2 100s linear infinite;
+@keyframes container4 { 
+0%{transform: translateX(0);}
+100%{transform:translateX(-200%);}
 }
 
 #container1 {
@@ -310,12 +233,4 @@ translateX(
 
 #container4 {
 	animation: container4 100s linear infinite;
-}
-
-#container3 {
-	animation: container3 100s linear infinite reverse;
-}
-
-#container4 {
-	animation: container4 100s linear infinite reverse;
 }
