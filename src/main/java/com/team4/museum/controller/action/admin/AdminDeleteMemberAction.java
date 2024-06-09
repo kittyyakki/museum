@@ -13,10 +13,10 @@ public class AdminDeleteMemberAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String[] memberIds = request.getParameter("memberIds").split(",");
+		String[] mseqList = request.getParameter("memberIds").split(",");
 
-		for (String Id : memberIds) {
-			MemberDao.getInstance().deleteMember(Id);
+		for (String mseq : mseqList) {
+			MemberDao.getInstance().deleteMember(mseq);
 		}
 
 		request.getRequestDispatcher("museum.do?command=adminMemberList").forward(request, response);
