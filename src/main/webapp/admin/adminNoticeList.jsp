@@ -12,15 +12,19 @@
 			<!-- 체크된 id들이 배열값으로 들어오고 String 변환되어 넘어감 -->
 			<input type="hidden" name="memberIds">
 			<input type="button" value="게시글 등록" onclick="location.href='museum.do?command=insertNoticeForm'">
-			<input type="button" value="수정" onclick="updateNotice()">
-			<input type="button" value="삭제" onclick="">
+			<input type="button" value="수정" onclick="updatePost('updateNoticeForm&nseq=', 'li:nth-child(2)')">
+			<input type="button" value="삭제" onclick="deletePost('adminDeleteNotice', 'li:nth-child(2)')">
 			<input type="text" placeholder="검색어를 입력하세요" name="searchWord" value="${searchWord}">
 			<input type="button" value="검색" onclick="searchAdmin('adminNoticeList')">
 		</div>
 		<ul class="admin-list-header admin-notice-list">
-			<li><input type="checkbox" onclick="checkAll()" class="select-all-box"></li>
+			<li>
+				<input type="checkbox" onclick="checkAll()" class="select-all-box">
+			</li>
 			<li>번호</li>
-			<li><select onchange="categoryFilter('adminNoticeList', 'noticeCategory', event)" name="selectFilter" class="admin-select">
+			<li>
+				<select onchange="categoryFilter('adminNoticeList', 'noticeCategory', event)" name="selectCategoryFilter"
+					class="admin-select">
 					<option value="state">분류</option>
 					<c:forEach items="${NoticeCategory.values()}" var="c">
 						<c:if test="${!c.name().equals('전체')}">
@@ -34,7 +38,8 @@
 							</c:choose>
 						</c:if>
 					</c:forEach>
-			</select></li>
+				</select>
+			</li>
 			<li>제목</li>
 			<li>내용</li>
 			<li>작성일</li>
@@ -43,7 +48,9 @@
 		</ul>
 		<c:forEach items="${noticeList}" var="nvo">
 			<ul class="admin-list-main admin-notice-list" onclick="go_check(event)">
-				<li><input type="checkbox" class="check-box"></li>
+				<li>
+					<input type="checkbox" class="check-box">
+				</li>
 				<li>${nvo.nseq}</li>
 				<li>${nvo.category}</li>
 				<li onclick="location.href='museum.do?command=noticeView&nseq=${nvo.nseq}'" class="view-link">${nvo.title}</li>
