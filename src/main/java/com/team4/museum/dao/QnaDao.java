@@ -142,9 +142,7 @@ public class QnaDao {
 	 * @return 문의글 총 개수
 	 */
 	public int getAllCount() {
-		return executeSelectOne(
-				"SELECT COUNT(*) AS cnt FROM qna",
-				rs -> rs.getInt("cnt"));
+		return executeSelectOne("SELECT COUNT(*) FROM qna", rs -> rs.getInt(1));
 	}
 
 	/**

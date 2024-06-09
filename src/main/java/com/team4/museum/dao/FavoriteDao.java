@@ -65,9 +65,9 @@ public class FavoriteDao {
 	 */
 	public int getCount(String memberId) {
 		return executeSelectOne(
-				"SELECT COUNT(*) AS cnt FROM favorite_view WHERE member_id = ?",
+				"SELECT COUNT(*) FROM favorite_view WHERE member_id = ?",
 				pstmt -> pstmt.setString(1, memberId),
-				rs -> rs.getInt("cnt"));
+				rs -> rs.getInt(1));
 	}
 
 	/**
