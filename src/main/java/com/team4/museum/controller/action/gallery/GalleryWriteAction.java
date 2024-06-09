@@ -1,10 +1,10 @@
 package com.team4.museum.controller.action.gallery;
 
-import static com.team4.museum.controller.action.member.LoginAjaxAction.isLogined;
-
 import java.io.IOException;
 
 import com.team4.museum.controller.action.Action;
+import com.team4.museum.controller.action.member.LoginAjaxAction;
+import com.team4.museum.vo.MemberVO;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,7 +14,9 @@ public class GalleryWriteAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (isLogined(request, response)) {
+		if (LoginAjaxAction.isLogined(request, response)) {
+			MemberVO mvo = LoginAjaxAction.getLoginUserFrom(request);
+			request.setAttribute("mvo", mvo);
 			request.getRequestDispatcher("gallery/galleryWriteForm.jsp").forward(request, response);
 		}
 	}
