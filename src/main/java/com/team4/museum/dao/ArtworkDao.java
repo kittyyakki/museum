@@ -12,6 +12,7 @@ import java.util.Map;
 
 import com.team4.museum.util.Pagination;
 import com.team4.museum.vo.ArtworkVO;
+import com.team4.museum.vo.NoticeVO;
 
 public class ArtworkDao {
 
@@ -99,6 +100,16 @@ public class ArtworkDao {
 			pstmt.setString(1, displayState);
 			pagination.applyTo(pstmt, 2, 3);
 		}, ArtworkDao::extractArtworkVO);
+	}
+	
+	public List<ArtworkVO> selectArtworkByCategory(String category, Pagination pagination) {
+		return executeSelect(
+				"SELECT * FROM artwork WHERE category = ? ORDER BY aseq DESC LIMIT ? OFFSET ?",
+				pstmt -> {
+					pstmt.setString(1, category);
+					pagination.applyTo(pstmt, 2, 3);
+				},
+				ArtworkDao::extractArtworkVO);
 	}
 	/* <========================================================================= */
 	public List<ArtworkVO> searchPublicArtwork(String searchWord, Pagination pagination) {
