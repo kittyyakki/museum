@@ -12,17 +12,21 @@ String isReply = request.getParameter("isReply") != null ? request.getParameter(
 	<form method="post" name="adminForm">
 		<div class="admin-list-btn">
 			<input type="hidden" name="memberIds">
-			<input type="button" value="글 삭제" onclick="deleteQna()">
+			<input type="button" value="글 삭제" onclick="deletePost('adminDeleteQna', 'li:nth-child(3)')">
 			<input type="text" placeholder="검색어를 입력하세요" name="searchWord" value="${searchWord}">
 			<input type="button" value="검색" onclick="searchAdmin('adminQnaList')">
 		</div>
 		<ul class="admin-list-header admin-qna-list">
-			<li><input type="checkbox" onclick="checkAll()" class="select-all-box"></li>
-			<li><select onchange="displayFilter('adminQnaList', 'isReply')" name="selectFilter" class="admin-select">
+			<li>
+				<input type="checkbox" onclick="checkAll()" class="select-all-box">
+			</li>
+			<li>
+				<select onchange="displayFilter('adminQnaList', 'isReply')" name="selectFilter" class="admin-select">
 					<option value="state">답변 여부</option>
 					<option value="Y" <%=isReply.equals("Y") ? "selected" : ""%>>YES</option>
 					<option value="N" <%=isReply.equals("N") ? "selected" : ""%>>NO</option>
-			</select></li>
+				</select>
+			</li>
 			<li>번호</li>
 			<li>제목</li>
 			<li>내용</li>
@@ -30,11 +34,15 @@ String isReply = request.getParameter("isReply") != null ? request.getParameter(
 		</ul>
 		<c:forEach items="${qnaList}" var="qvo">
 			<ul class="admin-list-main admin-qna-list" onclick="go_check(event)">
-				<li><input type="checkbox" onclick="" class="check-box"></li>
-				<li><c:choose>
+				<li>
+					<input type="checkbox" onclick="" class="check-box">
+				</li>
+				<li>
+					<c:choose>
 						<c:when test="${empty qvo.reply}">NO</c:when>
 						<c:otherwise>YES</c:otherwise>
-					</c:choose></li>
+					</c:choose>
+				</li>
 				<li>${qvo.qseq}</li>
 				<li class="view-link" onclick="location.href='museum.do?command=qnaView&qseq=${qvo.qseq}'">${qvo.title}</li>
 				<li>${qvo.content}</li>

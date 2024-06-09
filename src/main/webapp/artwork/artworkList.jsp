@@ -6,7 +6,7 @@
 </jsp:include>
 <section class="artwork-list-header">
 	<form action="museum.do?command=artworkList" method="post" name="searchForm" class="artwork-search-form">
-		<h2>예술품 검색</h2>
+		<h1>예술품 검색</h1>
 		<div>
 			<input type="text" placeholder="작품명 또는 작가명을 검색하세요" name="searchWord" class="artwork-search-form_input" value="${searchWord}">
 			<input type="submit" value="검색" onclick="return go_search_artwork()" class="artwork-search-form_btn">

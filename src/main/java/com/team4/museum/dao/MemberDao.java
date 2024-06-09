@@ -62,8 +62,8 @@ public class MemberDao {
 				});
 	}
 
-	public void updateMember(MemberVO mvo) {
-		executeUpdate(
+	public int updateMember(MemberVO mvo) {
+		return executeUpdate(
 				"UPDATE member SET pwd = ?, name = ?, email = ?, phone = ?, adminyn = ? WHERE id = ?",
 				pstmt -> {
 					pstmt.setString(1, mvo.getPwd());

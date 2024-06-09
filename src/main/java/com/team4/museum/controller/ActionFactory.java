@@ -5,10 +5,13 @@ import com.team4.museum.controller.action.IndexAction;
 import com.team4.museum.controller.action.admin.AdminAction;
 import com.team4.museum.controller.action.admin.AdminArtworkListAction;
 import com.team4.museum.controller.action.admin.AdminDeleteArtworkAction;
+import com.team4.museum.controller.action.admin.AdminDeleteGalleryAction;
 import com.team4.museum.controller.action.admin.AdminDeleteMemberAction;
+import com.team4.museum.controller.action.admin.AdminDeleteNoticeAction;
+import com.team4.museum.controller.action.admin.AdminDeleteQnaAction;
+import com.team4.museum.controller.action.admin.AdminGalleryListAction;
 import com.team4.museum.controller.action.admin.AdminMemberListAction;
 import com.team4.museum.controller.action.admin.AdminNoticeListAction;
-import com.team4.museum.controller.action.admin.AdminQnaDeleteAction;
 import com.team4.museum.controller.action.admin.AdminQnaListAction;
 import com.team4.museum.controller.action.admin.GrantAdminRightsAction;
 import com.team4.museum.controller.action.artwork.ArtworkDeleteAction;
@@ -19,19 +22,24 @@ import com.team4.museum.controller.action.artwork.ArtworkUpdateFormAction;
 import com.team4.museum.controller.action.artwork.ArtworkViewAction;
 import com.team4.museum.controller.action.artwork.ArtworkWriteAction;
 import com.team4.museum.controller.action.artwork.ArtworkWriteFormAction;
+import com.team4.museum.controller.action.gallery.GalleryDeleteAction;
 import com.team4.museum.controller.action.gallery.GalleryListAction;
+import com.team4.museum.controller.action.gallery.GalleryUpdateAction;
+import com.team4.museum.controller.action.gallery.GalleryUpdateFormAction;
+import com.team4.museum.controller.action.gallery.GalleryViewAction;
 import com.team4.museum.controller.action.gallery.GalleryWriteAction;
 import com.team4.museum.controller.action.gallery.GalleryWriteFormAction;
-import com.team4.museum.controller.action.member.IdcheckFormAction;
+import com.team4.museum.controller.action.member.IdCheckAjaxAction;
 import com.team4.museum.controller.action.member.JoinAjaxAction;
 import com.team4.museum.controller.action.member.JoinFormAction;
 import com.team4.museum.controller.action.member.LoginAjaxAction;
 import com.team4.museum.controller.action.member.LoginFormAction;
 import com.team4.museum.controller.action.member.LogoutAjaxAction;
-import com.team4.museum.controller.action.member.MyPageAction;
-import com.team4.museum.controller.action.member.MyPageEditAction;
-import com.team4.museum.controller.action.member.MyPageEditFormAction;
-import com.team4.museum.controller.action.member.MyPageFavoriteAjaxAction;
+import com.team4.museum.controller.action.member.mypage.MyPageAction;
+import com.team4.museum.controller.action.member.mypage.MyPageEditAjaxAction;
+import com.team4.museum.controller.action.member.mypage.MyPageEditFormAction;
+import com.team4.museum.controller.action.member.mypage.MyPageFavoriteAjaxAction;
+import com.team4.museum.controller.action.member.mypage.MyPageFavoriteListAction;
 import com.team4.museum.controller.action.notice.DeleteNoticeAction;
 import com.team4.museum.controller.action.notice.InsertNoticeAction;
 import com.team4.museum.controller.action.notice.InsertNoticeFormAction;
@@ -70,11 +78,12 @@ public class ActionFactory {
 		case "logout" -> new LogoutAjaxAction();
 		case "join" -> new JoinAjaxAction();
 		case "joinForm" -> new JoinFormAction();
-		case "idcheckForm" -> new IdcheckFormAction();
+		case "idCheck" -> new IdCheckAjaxAction();
 		case "mypage" -> new MyPageAction();
-		case "mypageEditMemberForm" -> new MyPageEditFormAction();
-		case "mypageEditMember" -> new MyPageEditAction();
+		case "mypageEditForm" -> new MyPageEditFormAction();
+		case "mypageEdit" -> new MyPageEditAjaxAction();
 		case "mypageFavorite" -> new MyPageFavoriteAjaxAction();
+		case "mypageFavoriteList" -> new MyPageFavoriteListAction();
 
 		// artwork actions
 		case "artworkList" -> new ArtworkListAction();
@@ -96,8 +105,12 @@ public class ActionFactory {
 
 		// user gallery
 		case "galleryList" -> new GalleryListAction();
+		case "galleryView" -> new GalleryViewAction();
 		case "galleryWriteForm" -> new GalleryWriteFormAction();
 		case "galleryWrite" -> new GalleryWriteAction();
+		case "galleryUpdateForm" -> new GalleryUpdateFormAction();
+		case "galleryUpdate" -> new GalleryUpdateAction();
+		case "galleryDelete" -> new GalleryDeleteAction();
 
 		// notice
 		case "noticeList" -> new NoticeListAction();
@@ -111,14 +124,17 @@ public class ActionFactory {
 
 		// admin
 		case "admin" -> new AdminAction();
+		case "grantAdminRights" -> new GrantAdminRightsAction();
 		case "adminMemberList" -> new AdminMemberListAction();
 		case "adminArtworkList" -> new AdminArtworkListAction();
+		case "adminNoticeList" -> new AdminNoticeListAction();
+		case "adminGalleryList" -> new AdminGalleryListAction();
 		case "adminQnaList" -> new AdminQnaListAction();
-		case "grantAdminRights" -> new GrantAdminRightsAction();
 		case "adminDeleteMember" -> new AdminDeleteMemberAction();
 		case "adminDeleteArtwork" -> new AdminDeleteArtworkAction();
-		case "adminQnaDelete" -> new AdminQnaDeleteAction();
-		case "adminNoticeList" -> new AdminNoticeListAction();
+		case "adminDeleteNotice" -> new AdminDeleteNoticeAction();
+		case "adminDeleteGallery" -> new AdminDeleteGalleryAction();
+		case "adminDeleteQna" -> new AdminDeleteQnaAction();
 
 		// default
 		default -> null;

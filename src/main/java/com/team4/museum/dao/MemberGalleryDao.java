@@ -28,6 +28,7 @@ public class MemberGalleryDao {
 		return instance;
 	}
 
+	
 	public MemberGalleryVO getMemberGalleryOne(int mseq) {
 		return executeSelectOne(
 				"SELECT * FROM member_gallery_view WHERE mseq=?",
@@ -58,6 +59,16 @@ public class MemberGalleryDao {
 					pstmt.setInt(5, mgvo.getMseq());
 				});
 	}
+	
+	public void updateMemberGalleryWithoutImg(MemberGalleryVO mgvo) {
+		executeUpdate(
+				"UPDATE member_gallery SET title=?, content=? WHERE mseq=?",
+				pstmt -> {
+					pstmt.setString(1, mgvo.getTitle());
+					pstmt.setString(2, mgvo.getContent());
+					pstmt.setInt(3, mgvo.getMseq());
+				});
+	}
 
 	public void deleteMemberGallery(int mseq) {
 		executeUpdate(
@@ -73,7 +84,7 @@ public class MemberGalleryDao {
 
 	public List<MemberGalleryVO> getAllGallery(Pagination pagination) {
 		return executeSelect(
-				"SELECT * FROM member_gallery ORDER BY mseq DESC LIMIT ? OFFSET ?",
+				"SELECT * FROM member_gallery_view ORDER BY mseq DESC LIMIT ? OFFSET ?",
 				pagination::applyTo,
 				MemberGalleryDao::extractMemberGalleryVO);
 	}
@@ -92,5 +103,21 @@ public class MemberGalleryDao {
 		mgvo.setLikecount(rs.getInt("likecount"));
 		return mgvo;
 	}
+
+	/** 조회수를 1 증가시킨다 */
+	public void increaseReadCount(int mseq) {
+		executeUpdate(
+				"UPDATE member_gallery SET readcount=readcount+1 WHERE mseq=?",
+				pstmt -> pstmt.setInt(1, mseq));
+	}
+
+	
+	public int getAllCount() {
+		return executeSelectOne(
+				"SELECT COUNT(*) AS cnt FROM member_gallery",
+				rs -> rs.getInt("cnt"));
+	}
+
+
 
 }
