@@ -111,14 +111,15 @@
 }
 
 .admin-artwork-list>li:nth-of-type(2), .admin-artwork-list>li:nth-of-type(3),
-	.admin-artwork-list>li:nth-of-type(7), .admin-artwork-list>li:nth-of-type(9),
-	.admin-artwork-list>li:nth-of-type(10) {
+	.admin-artwork-list>li:nth-of-type(4), .admin-artwork-list>li:nth-of-type(7),
+	.admin-artwork-list>li:nth-of-type(9), .admin-artwork-list>li:nth-of-type(10)
+	{
 	flex: 0.5;
 }
 
-.admin-artwork-list>li:nth-of-type(4), .admin-artwork-list>li:nth-of-type(5),
-	.admin-artwork-list>li:nth-of-type(6), .admin-artwork-list>li:nth-of-type(8),
-	.admin-artwork-list>li:nth-of-type(11) {
+.admin-artwork-list>li:nth-of-type(5), .admin-artwork-list>li:nth-of-type(6),
+	.admin-artwork-list>li:nth-of-type(8), .admin-artwork-list>li:nth-of-type(11)
+	{
 	flex: 1;
 }
 /* adminMemberList.jsp 테이블 스타일 ============>*/
