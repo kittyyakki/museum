@@ -44,15 +44,6 @@ function adminRightsAction(act) {
 	selectCheckedList("museum.do?command=grantAdminRights", 'li:nth-child(2)>span:first-child');
 }
 
-function deleteMember() {
-	let ans = confirm("정말 삭제하시겠습니까?");
-	if (ans) {
-		selectCheckedList("museum.do?command=adminDeleteMember", 'li:nth-child(2)>span:first-child');
-	} else {
-		return;
-	}
-}
-
 function go_check(event) {
 	// 클릭한 요소가 체크박스가 아닌 경우에만 체크박스를 체크/체크 해제
 	if (!event.target.classList.contains('check-box') && !event.target.classList.contains('view-link')) {
@@ -61,7 +52,7 @@ function go_check(event) {
 	}
 }
 
-function updateArtwork() {
+function updatePost(command, selector){
 	const checkBoxes = document.querySelectorAll('.check-box:checked');
 
 	if (checkBoxes.length > 1) {
@@ -69,38 +60,16 @@ function updateArtwork() {
 		return;
 	}
 	const memberRow = checkBoxes[0].closest('ul');
-	const aseq = memberRow.querySelector('li:nth-child(3)').textContent.trim();
+	const seq = memberRow.querySelector(selector).textContent.trim();
 
-	location.href = "museum.do?command=artworkUpdate&aseq=" + aseq;
+	location.href = `museum.do?command=${command}${seq}`;
 }
 
-function updateNotice() {
-	const checkBoxes = document.querySelectorAll('.check-box:checked');
-
-	if (checkBoxes.length > 1) {
-		alert("한 개만 선택하세요");
-		return;
-	}
-	const memberRow = checkBoxes[0].closest('ul');
-	const nseq = memberRow.querySelector('li:nth-child(2)').textContent.trim();
-
-	location.href = "museum.do?command=updateNoticeForm&nseq=" + nseq;
-}
-
-function deleteArtwork() {
+function deletePost(command, selector){
 	let ans = confirm("정말 삭제하시겠습니까?");
-	if (ans) {
-		selectCheckedList("museum.do?command=adminDeleteArtwork", 'li:nth-child(3)');
-	} else {
-		return;
-	}
-}
-
-function deleteQna() {
-	let ans = confirm("정말 삭제하시겠습니까?");
-	if (ans) {
-		selectCheckedList("museum.do?command=adminQnaDelete", 'li:nth-child(3)')
-	} else {
+	if(ans){
+		selectCheckedList("museum.do?command=" + command, selector);
+	}else{
 		return;
 	}
 }
@@ -118,7 +87,7 @@ function searchAdmin(command) {
 
 function displayFilter(command, param) {
 	const form = document.adminForm;
-	const selectValue = form.selectFilter.value;
+	const selectValue = form.selectDisplayFilter.value;
 	let url = `museum.do?command=${command}`;
 	if (selectValue === "state") {
 		location.href = url;
@@ -131,7 +100,7 @@ function displayFilter(command, param) {
 
 function categoryFilter(command, param, event) {
 	const form = document.adminForm;
-	const selectValue = form.selectFilter.value;
+	const selectValue = form.selectCategoryFilter.value;
 	let url = `museum.do?command=${command}`;
 	if (selectValue === "state") {
 		location.href = url;
