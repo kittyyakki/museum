@@ -169,11 +169,6 @@ public abstract class BaseDao<T> {
 		return Db.executeCall(query, paramSetter, resultMapper);
 	}
 
-	private static ParameterSetter prepareSetterFrom() {
-		return pstmt -> {
-		};
-	}
-
 	private static ParameterSetter prepareSetterFrom(Object param) {
 		if (param instanceof Object[] || param instanceof List<?>) {
 			return prepareSetterFrom((Object[]) param);

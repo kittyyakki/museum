@@ -1,9 +1,5 @@
 package com.team4.museum.dao;
 
-import static com.team4.museum.util.Db.executeCall;
-import static com.team4.museum.util.Db.executeSelect;
-import static com.team4.museum.util.Db.executeSelectOne;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
