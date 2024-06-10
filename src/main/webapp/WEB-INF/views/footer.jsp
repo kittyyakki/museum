@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 </div>
 <footer>
 	<div class="footer_top">
@@ -14,6 +15,11 @@
 			<li><a href="#">개인정보처리방침</a></li>
 			<li><a href="#">저작권정책</a></li>
 			<li><a href="#">웹 접근성 품질인증</a></li>
+			<c:if test="${isAdmin}">
+				<li>
+					<a href="museum.do?command=admin">관리자 페이지</a>
+				</li>
+			</c:if>
 		</ul>
 		<p class="footer_bottom_copyright">© Museum. All rights reserved.</p>
 	</div>

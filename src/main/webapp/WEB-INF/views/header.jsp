@@ -131,9 +131,6 @@
 					</c:when>
 					<c:otherwise>
 						<a href="#">${loginUser.name}(${loginUser.id})</a>
-						<c:if test="${isAdmin}">
-							<a href="museum.do?command=admin">관리자 페이지</a>
-						</c:if>
 						<span onclick="ajax({command:'logout',returnUrl:'${urlPath}'})">로그아웃</span>
 					</c:otherwise>
 				</c:choose>

@@ -11,7 +11,7 @@ import java.util.List;
 import com.team4.museum.util.Pagination;
 import com.team4.museum.vo.MemberGalleryVO;
 
-public class MemberGalleryDao {
+public class MemberGalleryDao extends BaseDao<MemberGalleryVO>{
 	
 	private MemberGalleryDao() {
 	}
@@ -111,24 +111,52 @@ public class MemberGalleryDao {
 	}
 
 	
+	/* 카운트 메서드 */
 	public int getAllCount() {
 		return executeSelectOne(
 				"SELECT COUNT(*) AS cnt FROM member_gallery",
 				rs -> rs.getInt("cnt"));
 	}
 
+	public int getSearchCount(String searchWord) {
+		return selectInt(
+				"SELECT COUNT(*) FROM member_gallery "
+						+ " WHERE title LIKE CONCAT('%', ?, '%') OR content LIKE CONCAT('%', ?, '%') ",
+				searchWord,
+				searchWord);
+	}
 
 	public List<MemberGalleryVO> searchGallery(Pagination pagination, String searchWord) {
 		
 		return executeSelect(
-				"SELECT * FROM member_gallery " + " WHERE (title LIKE CONCAT('%', ?, '%') OR content LIKE CONCAT('%', ?, '%')) "
-						+ " ORDER BY aseq DESC LIMIT ? OFFSET ?",
+				"SELECT * FROM member_gallery_view " 
+							+ " WHERE (title LIKE CONCAT('%', ?, '%') OR content LIKE CONCAT('%', ?, '%')) "
+							+ " ORDER BY mseq DESC LIMIT ? OFFSET ?",
 				pstmt -> {
 					pstmt.setString(1, searchWord);
 					pstmt.setString(2, searchWord);
 					pagination.applyTo(pstmt, 3, 4);
 				}, MemberGalleryDao::extractMemberGalleryVO);
 	}
+
+
+	@Override
+	protected MemberGalleryVO parseVO(ResultSet rs) throws SQLException {
+		MemberGalleryVO mgvo = new MemberGalleryVO();
+		mgvo.setMseq(rs.getInt("mseq"));
+		mgvo.setAuthorId(rs.getString("author_id"));
+		mgvo.setAuthorName(rs.getString("author_name"));
+		mgvo.setTitle(rs.getString("title"));
+		mgvo.setWritedate(rs.getDate("writedate"));
+		mgvo.setContent(rs.getString("content"));
+		mgvo.setReadcount(rs.getInt("readcount"));
+		mgvo.setImage(rs.getString("image"));
+		mgvo.setSavefilename(rs.getString("savefilename"));
+		mgvo.setLikecount(rs.getInt("likecount"));
+		return mgvo;
+	}
+
+
 
 
 
