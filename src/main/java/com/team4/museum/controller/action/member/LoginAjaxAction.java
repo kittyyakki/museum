@@ -66,6 +66,20 @@ public class LoginAjaxAction extends AjaxAction {
 	}
 
 	/**
+	 * 로그인이 필요한 페이지에서 로그인 여부를 확인한다.
+	 * 
+	 * @param request
+	 * @param response
+	 * 
+	 * @return 로그인이 되어 있으면 true, 아니면 false
+	 * 
+	 * @throws IOException
+	 */
+	public static boolean isLoginedFrom(HttpServletRequest request) throws IOException {
+		return getLoginUserFrom(request) != null;
+	}
+
+	/**
 	 * 로그인이 필요한 페이지에서 세션에서 로그인한 사용자의 정보를 가져온다. 로그인이 안되어 있으면 자동으로 로그인 페이지로 이동한다.
 	 * 
 	 * @param request
