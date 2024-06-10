@@ -168,4 +168,9 @@ final public class NoticeDao {
 				pstmt->	pstmt.setString(1, category),
 				rs -> rs.getInt("cnt"));
 	}
+	
+	public List<NoticeVO> getRecentNotice() {
+	      return executeSelect("SELECT * FROM notice ORDER BY writedate DESC LIMIT 6",
+	            NoticeDao::extractNoticeVO);
+	   }
 }

@@ -208,10 +208,224 @@
 }
 
 /* 알립니다 플러스 슬라이더 */
-.main_notice_wrap_alarm  {
+.main_notice_wrap_alarm{
 	width:70%;
-	margin: 70px auto;
-	border: 2px solid red;
+	padding: 0 15px;
+    position: relative;
+    margin: 70px auto;
+}
+
+.main_notice_wrap_alarm .notice-tit{
+	display: block;
+	font-size: 46px;
+	vertical-align: middle;
+	margin-bottom: 42px;
+}
+
+.main_notice_wrap_alarm .notice-tit i{
+	width: 27px;
+	height: 42px;
+	padding-right: 20px;
+	display: inline-block;
+	vertical-align: middle;
+	content: "";
+	background: url(../image/ico_main_notice.png) no-repeat left
+		center;
+	background-size: 27px 42px;
+	margin-right:10px;
+}
+
+.main_notice_wrap_alarm .notice-tit a{
+	color: #000;
+}
+
+.main_notice_wrap_alarm .notice-area{
+	display: block;
+	box-sizing: border-box;
+}
+
+main-section-3 .notice_content{
+	float: left;
+	width: calc(50% - 1.8%);
+}
+
+.main_notice_wrap_alarm .notice_content .notice_tabBtn{
+	font-size: 0;
+	display: block;
+	border-bottom: 1px solid  #c2c2c2;
+}
+
+.main_notice_wrap_alarm .notice_content .notice_tabBtn .btn.selected{
+	font-family: 'notokr-bold';
+	color: #222;
+	border-bottom: 4px solid  #222;
+}
+
+.main_notice_wrap_alarm .notice_content .notice_tabBtn .btn{
+	vertical-align: top;
+	width: 21.04%;
+	line-height: 1.2;
+	font-size: 24px;
+	font-family: 'notokr-regular';
+	cursor: pointer;
+	background-color: #fff;
+	color: #666;
+	padding-bottom: 15px;
+	border: none;
+}
+
+.main_notice_wrap_alarm .notice_content .notice_tabBtn .more_txt{
+	float: right;
+}
+
+.main_notice_wrap_alarm .notice_content .notice_tabBtn .more_txt{
+	float: right;
+}
+
+.main_notice_wrap_alarm .notice_content .notice_tabBtn:after{
+	content: '';
+	clear: both;
+	display: block;
+}
+
+.main_notice_wrap_alarm .notice_content .notice_tab ul{
+	padding-bottom: 35px;
+	border-bottom: 1px solid  #000;
+}
+
+.main_notice_wrap_alarm .notice_content .notice_tab ul li{
+	display: block;
+	font-size: 0;
+	padding-left: 10px;
+	margin-top: 32px;
+}
+
+.main_notice_wrap_alarm .notice_content .notice_tab ul li .tit{
+	display: inline-block;
+	vertical-align: middle;
+	width: calc(100% - 95px);
+	padding-left: 23px;
+	position: relative;
+	box-sizing: border-box;
+}
+
+.main_notice_wrap_alarm .notice_content .notice_tab ul li span{
+	display: inline-block;
+	vertical-align: middle;
+	width: 95px;
+	text-align: right;
+	font-size: 18px;
+	font-family: 'notokr-regular';
+	color: #7c7c7c;
+}
+
+.main_notice_wrap_alarm .notice_content .notice_tab ul li .tit::before{
+	content: '';
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background-color: #222;
+	position: absolute;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.main_notice_wrap_alarm .notice_content .notice_tab ul li .tit a{
+	display: inline-block;
+	font-size: 18px;
+	font-family: 'notokr-medium';
+	color: #222;
+	max-width: calc(100% - 10px);
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.main_notice_wrap_alarm .notice_banner{
+	float: right;
+	width: calc(50% - 1.8%);
+	position: relative;
+}
+
+.swiper-container{
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	overflow: hidden;
+	z-index: 1;
+}
+
+.main_notice_wrap_alarm .notice_banner .swiper-slide a{
+	display: block;
+	height: 0;
+	padding-bottom: 62.69%;
+	position: relative;
+	background-color: #F7F7F7;
+	text-indent: -9999em;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.notice_banner .notice-pagination{
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+	z-index: 10;
+	width: 100%;
+	height: 38px;
+	text-align: right;
+}
+
+.notice_banner .notice-pagination .swiper-pagination{
+	position: static;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.notice_banner .swiper-pagination-bullet{
+	width: 20px;
+	height: 20px;
+	background: #fff;
+	border-radius: 50%;
+	opacity: 1;
+	margin: 0 6px;
+	vertical-align: bottom;
+	border: 1px solid  #ddd;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 0;
+}
+
+.notice_banner .swiper-pagination-bullet-active{
+	background: #3f0b9f;
+	border-color: #3f0b9f;
+}
+
+.notice_banner .controller{
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 10px;
+}
+
+.notice_banner .controller .btn-pause{
+	display: inline-block;
+	width: 38px;
+	height: 38px;
+	line-height: 38px;
+	background: url(../images/common/btn/main_btn_stop.png) no-repeat left
+		center;
+	font-size: 0;
+	text-indent: -9999px;
+	background-size: 38px 38px;
+}
+
+.main_notice_wrap_alarm .notice-area:after{
+	clear: both;
+	display: block;
+	overflow: hidden;
+	content: "";
+	height: 0;
 }
 
 

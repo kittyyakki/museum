@@ -37,7 +37,7 @@ public class NoticeListAction implements Action {
 			request.getRequestDispatcher("/WEB-INF/views/notice/noticeMagazine.jsp").forward(request, response);
 			return;
 		} else if (category.equals(NoticeCategory.신문.name())) {
-			request.getRequestDispatcher("notice/noticeNewpaper.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/notice/noticeNewpaper.jsp").forward(request, response);
 			return;
 		} else { // 카테고리 조회
 			pagination.setItemCount(ndao.getNoticeCount(category));
