@@ -24,7 +24,6 @@
 			<li>내용</li>
 			<li>등록일</li>
 			<li>조회수</li>
-			<li>좋아요</li>
 			<li>미리보기</li>
 		</ul>
 		<c:forEach items="${galleryList}" var="mgvo" varStatus="index">
@@ -39,7 +38,6 @@
 				<li>${mgvo.content}</li>
 				<li>${mgvo.writedate}</li>
 				<li>${mgvo.readcount}</li>
-				<li>${mgvo.likecount}</li>
 				<li>
 					<img alt="artwork-img" src="static/image/gallery/${mgvo.savefilename}"
 						onmouseover="previewImg('artwork-${mgvo.mseq}-${index}')"
