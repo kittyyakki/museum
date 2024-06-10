@@ -54,6 +54,7 @@
 	<h3 class="notice-tit">
 		<i></i><a href="/site/main/archive/united/category/128">알립니다</a>
 	</h3>
+	<div class="main_notice_inner">
 	<div class="notice-area">
 		<div class="notice_content">
 			<div class="notice_tabBtn">
@@ -66,11 +67,11 @@
 				<ul>
 
 					<c:forEach items="${noticeList}" var="n">
-						<div class="row">
-							<div class="col col_title">
+						<div class="main_notice_inner_row">
+							<div class="col_col_title">
 								<a href="museum.do?command=noticeView&nseq=${n.nseq}"> ${n.content} </a>
 							</div>
-							<div class="col col_date">
+							<div class="col_col_date">
 								<fmt:formatDate value="${n.writedate}" pattern="yyyy-MM-dd" />
 							</div>
 						</div>
@@ -98,6 +99,7 @@
 	<div></div>
 	<div>▶</div>
 </div>
+	</div>
 	</div>
 <!----------------------------------------- 좌우로 이동하는 슬라이드 --------------------------------------->
 <div data-aos="fade-up" data-aos-offset="200" data-aos-delay="50" data-aos-duration="500" data-aos-easing="ease-in" class="main-middle-container">
