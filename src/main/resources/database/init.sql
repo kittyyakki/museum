@@ -3,7 +3,6 @@ SET SESSION FOREIGN_KEY_CHECKS=0;
 /* Drop Tables */
 
 DROP TABLE IF EXISTS favorite_artwork;
-DROP TABLE IF EXISTS review;
 DROP TABLE IF EXISTS artwork;
 DROP TABLE IF EXISTS member_gallery;
 DROP TABLE IF EXISTS notice;
@@ -64,7 +63,6 @@ CREATE TABLE member_gallery
 	readcount int unsigned DEFAULT 0 NOT NULL,
 	image varchar(100) NOT NULL,
 	savefilename varchar(200) NOT NULL,
-	likecount int unsigned DEFAULT 0 NOT NULL,
 	PRIMARY KEY (mseq)
 );
 
@@ -97,30 +95,10 @@ CREATE TABLE qna
 );
 
 
-CREATE TABLE review
-(
-	rseq int unsigned NOT NULL AUTO_INCREMENT,
-	title varchar(100) NOT NULL,
-	aseq int unsigned NOT NULL,
-	author varchar(45) NOT NULL,
-	writedate datetime DEFAULT NOW() NOT NULL,
-	content text NOT NULL,
-	PRIMARY KEY (rseq)
-);
-
-
 
 /* Create Foreign Keys */
 
 ALTER TABLE favorite_artwork
-	ADD FOREIGN KEY (aseq)
-	REFERENCES artwork (aseq)
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
-;
-
-
-ALTER TABLE review
 	ADD FOREIGN KEY (aseq)
 	REFERENCES artwork (aseq)
 	ON UPDATE CASCADE
@@ -145,14 +123,6 @@ ALTER TABLE member_gallery
 
 
 ALTER TABLE notice
-	ADD FOREIGN KEY (author)
-	REFERENCES member (id)
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
-;
-
-
-ALTER TABLE review
 	ADD FOREIGN KEY (author)
 	REFERENCES member (id)
 	ON UPDATE CASCADE
