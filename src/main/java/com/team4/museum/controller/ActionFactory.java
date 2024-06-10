@@ -108,6 +108,7 @@ public class ActionFactory {
 		case "galleryView" -> new GalleryViewAction();
 		case "galleryWriteForm" -> new GalleryWriteFormAction();
 		case "galleryWrite" -> new GalleryWriteAction();
+
 		case "galleryUpdateForm" -> new GalleryUpdateFormAction();
 		case "galleryUpdate" -> new GalleryUpdateAction();
 		case "galleryDelete" -> new GalleryDeleteAction();

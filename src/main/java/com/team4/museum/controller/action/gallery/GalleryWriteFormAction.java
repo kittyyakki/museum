@@ -19,6 +19,7 @@ public class GalleryWriteFormAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		MemberGalleryDao mgdao = MemberGalleryDao.getInstance();
 		MemberGalleryVO mgvo = new MemberGalleryVO();
 		mgvo.setTitle(request.getParameter("title"));
@@ -55,6 +56,7 @@ public class GalleryWriteFormAction implements Action {
 
 		mgdao.insertMemberGallery(mgvo);
 		request.getRequestDispatcher("museum.do?command=galleryList").forward(request, response);
+
 	}
 
 }

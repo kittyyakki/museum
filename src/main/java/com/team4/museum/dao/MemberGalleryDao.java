@@ -3,18 +3,16 @@ package com.team4.museum.dao;
 import static com.team4.museum.util.Db.executeSelect;
 import static com.team4.museum.util.Db.executeSelectOne;
 import static com.team4.museum.util.Db.executeUpdate;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
 import com.team4.museum.util.Pagination;
 import com.team4.museum.vo.MemberGalleryVO;
 
 public class MemberGalleryDao {
-
+	
 	private MemberGalleryDao() {
 	}
 
@@ -76,6 +74,7 @@ public class MemberGalleryDao {
 				pstmt -> pstmt.setInt(1, mseq));
 	}
 
+
 	public int getGalleryAllCount() {
 		return executeSelectOne(
 				"SELECT COUNT(*) AS cnt FROM member_gallery",
@@ -121,3 +120,4 @@ public class MemberGalleryDao {
 
 
 }
+
