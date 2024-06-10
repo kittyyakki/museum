@@ -29,6 +29,7 @@ import com.team4.museum.controller.action.gallery.GalleryUpdateFormAction;
 import com.team4.museum.controller.action.gallery.GalleryViewAction;
 import com.team4.museum.controller.action.gallery.GalleryWriteAction;
 import com.team4.museum.controller.action.gallery.GalleryWriteFormAction;
+import com.team4.museum.controller.action.member.ContractAcion;
 import com.team4.museum.controller.action.member.IdCheckAjaxAction;
 import com.team4.museum.controller.action.member.JoinAjaxAction;
 import com.team4.museum.controller.action.member.JoinFormAction;
@@ -84,7 +85,7 @@ public class ActionFactory {
 		case "mypageEdit" -> new MyPageEditAjaxAction();
 		case "mypageFavorite" -> new MyPageFavoriteAjaxAction();
 		case "mypageFavoriteList" -> new MyPageFavoriteListAction();
-
+		case "contract" -> new ContractAcion();
 		// artwork actions
 		case "artworkList" -> new ArtworkListAction();
 		case "artworkView" -> new ArtworkViewAction();
