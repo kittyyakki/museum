@@ -21,7 +21,7 @@ public class AdminNoticeListAction implements Action {
 		String noticeCategory = request.getParameter("noticeCategory");
 
 		Pagination pagination = Pagination.with(request, ndao.getAllCount(), "command=adminNoticeList");
-		
+
 		List<NoticeVO> noticeList = null;
 		if (searchWord != null) {
 			pagination.setItemCount(ndao.getSearchCount(searchWord));

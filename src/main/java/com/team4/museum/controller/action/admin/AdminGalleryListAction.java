@@ -12,14 +12,14 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class AdminGalleryListAction implements Action{
+public class AdminGalleryListAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MemberGalleryDao mgdao = MemberGalleryDao.getInstance();
 		Pagination pagination = Pagination.with(request, mgdao.getAllCount(), "command=adminGalleryList");
 		String searchWord = request.getParameter("searchWord");
-		
+
 		List<MemberGalleryVO> galleryList = null;
 		if (searchWord != null) {
 			pagination.setItemCount(mgdao.getSearchCount(searchWord));
@@ -29,7 +29,7 @@ public class AdminGalleryListAction implements Action{
 		} else {
 			galleryList = mgdao.getAllGallery(pagination);
 		}
-		
+
 		request.setAttribute("galleryList", galleryList);
 		request.getRequestDispatcher("/WEB-INF/views/admin/adminGalleryList.jsp").forward(request, response);
 	}

@@ -22,24 +22,24 @@ public class AdminArtworkListAction implements Action {
 		String artworkCategory = request.getParameter("artworkCategory");
 
 		Pagination pagination = Pagination.with(request, adao.getAllCount(), "command=adminArtworkList");
-		
+
 		List<ArtworkVO> artworkList = null;
-	
+
 		if (searchWord != null) {
 			pagination.setItemCount(adao.getAllSearchCount(searchWord));
 			pagination.setUrlTemplate("museum.do?command=adminArtworkList&page=%d&searchWord=" + searchWord);
 			artworkList = adao.searchArtworkAdmin(pagination, searchWord);
 			request.setAttribute("searchWord", searchWord);
 		} else if (displayState != null) {
-			if(displayState.equals("Y")) {
+			if (displayState.equals("Y")) {
 				pagination.setItemCount(adao.getDisplayCount());
-			}else {
-				pagination.setItemCount(adao.getNoDisplayCount());					
+			} else {
+				pagination.setItemCount(adao.getNoDisplayCount());
 			}
 			pagination.setUrlTemplate("museum.do?command=adminArtworkList&page=%d&displayState=" + displayState);
 			artworkList = adao.selectArtworkAsDisplayyn(pagination, displayState);
 			request.setAttribute("displayState", displayState);
-		}else if (artworkCategory != null) {
+		} else if (artworkCategory != null) {
 			pagination.setItemCount(adao.getCategoryCount(artworkCategory));
 			pagination.setUrlTemplate("museum.do?command=adminArtworkList&page=%d&artworkCategory=" + artworkCategory);
 			artworkList = adao.selectArtworkByCategory(artworkCategory, pagination);
