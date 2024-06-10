@@ -18,47 +18,30 @@ public class ArtworkListAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		response.setCharacterEncoding("utf-8");
-
-		HttpSession session = request.getSession();
-		ArtworkDao adao = ArtworkDao.getInstance();
-		session.removeAttribute("category");
-
-		String category = request.getParameter("category") == null ? ArtworkCategory.전체.name()
-				: request.getParameter("category");
-
-		// 검색창에 입력한 단어 전달받음
+		// 요청의 파라미터를 받아옵니다.
+		String category = request.getParameter("category");
 		String searchWord = request.getParameter("searchWord");
 
-		List<ArtworkVO> list = null;
-
-		Pagination pagination = Pagination.with(request, 0, "command=artworkList&category=" + category);
-		pagination.setItemsPerPage(8);
-		if (searchWord != null) { // 검색어로 조회
-			pagination.setItemCount(adao.getSearchCount(searchWord));
-			pagination.setUrlTemplate("museum.do?command=artworkList&page=%d&searchWord=" + searchWord);
-			list = adao.searchPublicArtwork(searchWord, pagination);
-			category = null;
-		} else if (category.equals(ArtworkCategory.전체.name())) { // 전체목록 조회
-			pagination.setItemCount(adao.getDisplayCount());
-			list = adao.selectPublicArtwork(pagination);
-		} else { // 카테고리 조회
-			pagination.setItemCount(adao.getPublicCategoryCount(category));
-			list = adao.selectPublicArtworkByCategory(category, pagination);
-		}
-
+		// 요청의 속성으로 저장합니다.
+		request.setAttribute("category", category);
 		request.setAttribute("searchWord", searchWord);
 
-		// 카테고리 이름 전달
-		request.setAttribute("categoryName", category);
-		session.setAttribute("category", category);
+		// 빈 파라미터를 빈 문자열로 치환합니다.
+		if (ArtworkCategory.전체.name().equals(category)) {
+			category = null;
+		}
 
-		// 카테고리로 조회한 예술품 리스트 전달
-		request.setAttribute("artworkList", list);
+		// 예술품 목록 및 페이지네이션을 저장합니다.
+		ArtworkDao adao = ArtworkDao.getInstance();
+		Pagination pagination = Pagination.with(
+				request,
+				adao.getCount(category, "Y", searchWord),
+				"command=artworkList"
+						+ "&artworkCategory=" + category
+						+ "&displayState=" + "Y"
+						+ "&searchWord=" + searchWord);
 
-		// 분류명 목록을 배열로 전달
-		request.setAttribute("artworkCategory", ArtworkCategory.values());
+		request.setAttribute("artworkList", adao.getAll(category, "Y", searchWord, pagination));
 		request.getRequestDispatcher("/WEB-INF/views/artwork/artworkList.jsp").forward(request, response);
 	}
 

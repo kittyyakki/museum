@@ -1,25 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.team4.museum.util.ArtworkCategory"%>
 <jsp:include page="/WEB-INF/views/header.jsp">
 	<jsp:param name="stylesheet" value="static/stylesheet/artwork.css" />
 	<jsp:param name="script" value="static/script/artwork.js" />
 </jsp:include>
 <section class="artwork-list-header">
-	<form action="museum.do?command=artworkList" method="post" name="searchForm" class="artwork-search-form">
+	<form action="museum.do" method="get" name="searchForm" class="artwork-search-form">
 		<h1>예술품 검색</h1>
 		<div>
+			<input type="hidden" name="command" value="artworkList">
+			<input type="hidden" name="category" value="${category}">
 			<input type="text" placeholder="작품명 또는 작가명을 검색하세요" name="searchWord" class="artwork-search-form_input" value="${searchWord}">
-			<input type="submit" value="검색" onclick="return go_search_artwork()" class="artwork-search-form_btn">
+			<input type="submit" value="검색" class="artwork-search-form_btn">
 		</div>
 	</form>
 	<div class="category-btn-container">
-		<c:forEach items="${artworkCategory}" var="c" varStatus="status">
+		<c:forEach items="${ArtworkCategory.values()}" var="c">
 			<c:choose>
-				<c:when test="${categoryName.equals(c.name())}">
-					<a href="museum.do?command=artworkList&category=${c.name()}" class="artwork-list_btn artwork-list_selected-btn">${c.name()}</a>
+				<c:when test="${category == c.name() or (empty category and c.name() == '전체')}">
+					<a href="museum.do?command=artworkList&category=${c.name()}&searchWord=${searchWord}" class="artwork-list_btn artwork-list_selected-btn">${c.name()}</a>
 				</c:when>
 				<c:otherwise>
-					<a href="museum.do?command=artworkList&category=${c.name()}" class="artwork-list_btn">${c.name()}</a>
+					<a href="museum.do?command=artworkList&category=${c.name()}&searchWord=${searchWord}" class="artwork-list_btn">${c.name()}</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
@@ -44,6 +47,6 @@
 			</div>
 		</c:forEach>
 	</div>
-<%@ include file="/WEB-INF/views/util/pagination.jsp"%>
+	<%@ include file="/WEB-INF/views/util/pagination.jsp"%>
 </main>
 <jsp:include page="/WEB-INF/views/footer.jsp" />

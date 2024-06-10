@@ -47,15 +47,6 @@ public abstract class BaseDao<T> {
 	/**
 	 * SQL 쿼리를 실행하고 결과를 반환합니다.
 	 * 
-	 * @param param SQL 쿼리에 전달할 단일 파라미터, 혹은 파라미터 배열
-	 */
-	public List<T> select(String query, Object param) {
-		return Db.executeSelect(query, prepareSetterFrom(param), this::parseVO);
-	}
-
-	/**
-	 * SQL 쿼리를 실행하고 결과를 반환합니다.
-	 * 
 	 * @param params SQL 쿼리에 전달할 파라미터 배열
 	 */
 	public List<T> select(String query, Object... params) {
@@ -85,16 +76,7 @@ public abstract class BaseDao<T> {
 	 * SQL 쿼리를 실행하고 결과 중 첫 번째 행을 반환합니다.
 	 */
 	public int selectInt(String query) {
-		return Db.executeSelectOne(query, this::parseInt);
-	}
-
-	/**
-	 * SQL 쿼리를 실행하고 결과 중 첫 번째 행을 반환합니다.
-	 * 
-	 * @param param SQL 쿼리에 전달할 단일 파라미터, 혹은 파라미터 배열
-	 */
-	public int selectInt(String query, Object param) {
-		return Db.executeSelectOne(query, prepareSetterFrom(param), this::parseInt);
+		return selectInt(query, prepareSetterFrom());
 	}
 
 	/**
@@ -103,7 +85,7 @@ public abstract class BaseDao<T> {
 	 * @param params SQL 쿼리에 전달할 파라미터 배열
 	 */
 	public int selectInt(String query, Object... params) {
-		return Db.executeSelectOne(query, prepareSetterFrom(params), this::parseInt);
+		return selectInt(query, prepareSetterFrom(params));
 	}
 
 	/**
@@ -112,7 +94,8 @@ public abstract class BaseDao<T> {
 	 * @param paramSetter SQL 쿼리를 준비하는 람다식
 	 */
 	public int selectInt(String query, ParameterSetter paramSetter) {
-		return Db.executeSelectOne(query, paramSetter, this::parseInt);
+		Integer result = Db.executeSelectOne(query, paramSetter, this::parseInt);
+		return result == null ? 0 : result;
 	}
 
 	/**
@@ -167,6 +150,11 @@ public abstract class BaseDao<T> {
 	 */
 	public <R> R call(String query, CallParameterSetter paramSetter, CallResultMapper<R> resultMapper) {
 		return Db.executeCall(query, paramSetter, resultMapper);
+	}
+
+	private static ParameterSetter prepareSetterFrom() {
+		return pstmt -> {
+		};
 	}
 
 	private static ParameterSetter prepareSetterFrom(Object param) {

@@ -2,17 +2,19 @@ package com.team4.museum.controller.action.admin;
 
 import java.io.IOException;
 
-import com.team4.museum.controller.action.Action;
 import com.team4.museum.dao.MemberDao;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class AdminDeleteMemberAction implements Action {
+public class AdminDeleteMemberAction implements AdminAction {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if (!checkAdmin(request, response)) {
+			return;
+		}
 		String[] mseqList = request.getParameter("memberIds").split(",");
 
 		for (String mseq : mseqList) {

@@ -2,7 +2,7 @@ package com.team4.museum.controller;
 
 import com.team4.museum.controller.action.Action;
 import com.team4.museum.controller.action.IndexAction;
-import com.team4.museum.controller.action.admin.AdminAction;
+import com.team4.museum.controller.action.admin.AdminMainAction;
 import com.team4.museum.controller.action.admin.AdminArtworkListAction;
 import com.team4.museum.controller.action.admin.AdminDeleteArtworkAction;
 import com.team4.museum.controller.action.admin.AdminDeleteGalleryAction;
@@ -125,7 +125,7 @@ public class ActionFactory {
 		case "deleteNotice" -> new DeleteNoticeAction();
 
 		// admin
-		case "admin" -> new AdminAction();
+		case "admin" -> new AdminMainAction();
 		case "grantAdminRights" -> new GrantAdminRightsAction();
 		case "adminMemberList" -> new AdminMemberListAction();
 		case "adminArtworkList" -> new AdminArtworkListAction();
