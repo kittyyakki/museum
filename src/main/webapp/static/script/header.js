@@ -1,4 +1,3 @@
-jQuery.noConflict();
 jQuery(document).ready(function($) {
 
 	var run_delayed = {
