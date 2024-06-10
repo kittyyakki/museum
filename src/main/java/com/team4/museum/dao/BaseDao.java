@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.team4.museum.util.Db;
+import com.team4.museum.util.Db.CallParameterSetter;
+import com.team4.museum.util.Db.CallResultMapper;
 import com.team4.museum.util.Db.ParameterSetter;
 import com.team4.museum.util.Db.ResultMapper;
 
@@ -155,6 +157,16 @@ public abstract class BaseDao<T> {
 	 */
 	public <R> R selectOne(String query, ParameterSetter paramSetter, ResultMapper<R> resultMapper) {
 		return Db.executeSelectOne(query, paramSetter, resultMapper);
+	}
+
+	/**
+	 * SQL 프로시저 쿼리를 실행하고 결과를 반환합니다.
+	 * 
+	 * @param paramSetter  SQL 쿼리를 준비하는 람다식
+	 * @param resultMapper 프로시저 결과를 추출하는 람다식
+	 */
+	public <R> R call(String query, CallParameterSetter paramSetter, CallResultMapper<R> resultMapper) {
+		return Db.executeCall(query, paramSetter, resultMapper);
 	}
 
 	private static ParameterSetter prepareSetterFrom() {
