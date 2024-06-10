@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/WEB-INF/views/header.jsp">
 	<jsp:param name="stylesheet" value="static/stylesheet/main.css" />
 	<jsp:param name="script" value="static/script/main.js" />
@@ -61,75 +63,24 @@
 				<button type="button" class="btn " onClick="location.href='museum.do?command=noticeList&category=신문'">신문</button>
 			</div>
 			<div class="notice_inner">
-					<!-- <ul>
-						<li> --><c:forEach items="${noticeList}" var="n">
-								<div class="row">
-									<div class="col col_title">
-										<a href="museum.do?command=noticeView&nseq=${n.nseq}"> ${n.content} </a>
-									</div>
-								</div>
-							</c:forEach><!-- </li>
-					</ul> -->
-				</div>
-			</div>
-		</div>
-		<div class="notice_banner">
-			<div class="swiper-container notice-swiper-container swiper-container-horizontal">
-				<div class="swiper-wrapper" style="transform: translate3d(-1390px, 0px, 0px); transition-duration: 0ms;">
-					<div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="3" style="width: 694px; margin-right: 1px;">
-						<a alt="스마트폰 모바일 전시안내 무료 서비스
-스마트폰 앱을 다운로드 후, 실행하시면
-전시안내 정보를 제공받으실 수 있습니다." href="/site/main/content/exhibition_guide_link?tab=NMK_APP_INFO" class="access m_off" style="background-image: url(/uploadfile/ecms/banner/650792.jpg);" tabindex="-1">스마트폰 전시안내 앱 서비스</a>
-					</div>
+				<ul>
 
-					<div class="swiper-slide swiper-slide-prev" data-swiper-slide-index="0" style="width: 694px; margin-right: 1px;">
-						<a alt="비상진료에 따른 병,의원 이용안내
-경증일 때는 지역의 병, 의원으로 가셔야 합니다
-상급종합병원에서 경증 환자는 지역 병,의원으로 재의뢰 되실 수 있습니다.
-문 여는 의료기관 확인
-응급의료포털(www.e-gen.or.kr)
-복지부 시도 보건소, 건보공단, 심평원 홈페이지" href="https://www.e-gen.or.kr" target="_blank" class="access m_off" style="background-image: url(/uploadfile/ecms/banner/1869687.png);" tabindex="-1">비상진료에 따른 병의원 이용안내</a>
-					</div>
+					<c:forEach items="${noticeList}" var="n">
+						<div class="row">
+							<div class="col col_title">
+								<a href="museum.do?command=noticeView&nseq=${n.nseq}"> ${n.content} </a>
+							</div>
+							<div class="col col_date">
+								<fmt:formatDate value="${n.writedate}" pattern="yyyy-MM-dd" />
+							</div>
+						</div>
+					</c:forEach>
 
-					<div class="swiper-slide swiper-slide-active" data-swiper-slide-index="1" style="width: 694px; margin-right: 1px;">
-						<a alt="박물관이 더 쉽고 편해지는
-모두를 위한 관람 안내
-장애인, 고령자, 어린이를 비롯해 더욱 많은 분들이 박물관을 편하게 관람할 수 있도록 돋습니다." href="/site/main/content/accessibility" class="access m_off" style="background-image: url(/uploadfile/ecms/banner/1762782.jpg);" tabindex="0">모두를 위한 관람 안내</a>
-					</div>
-
-					<div class="swiper-slide swiper-slide-next" data-swiper-slide-index="2" style="width: 694px; margin-right: 1px;">
-						<a alt="Children's Museum
-어린이박물관" href="/site/child/home" target="_blank" class="access m_off" style="background-image: url(/uploadfile/ecms/banner/121.jpg);" tabindex="-1">어린이박물관 홈페이지 바로가기</a>
-					</div>
-
-					<div class="swiper-slide" data-swiper-slide-index="3" style="width: 694px; margin-right: 1px;">
-						<a alt="스마트폰 모바일 전시안내 무료 서비스
-스마트폰 앱을 다운로드 후, 실행하시면
-전시안내 정보를 제공받으실 수 있습니다." href="/site/main/content/exhibition_guide_link?tab=NMK_APP_INFO" class="access m_off" style="background-image: url(/uploadfile/ecms/banner/650792.jpg);" tabindex="-1">스마트폰 전시안내 앱 서비스</a>
-					</div>
-
-					<div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-prev" data-swiper-slide-index="0" style="width: 694px; margin-right: 1px;">
-						<a alt="비상진료에 따른 병,의원 이용안내
-경증일 때는 지역의 병, 의원으로 가셔야 합니다
-상급종합병원에서 경증 환자는 지역 병,의원으로 재의뢰 되실 수 있습니다.
-문 여는 의료기관 확인
-응급의료포털(www.e-gen.or.kr)
-복지부 시도 보건소, 건보공단, 심평원 홈페이지" href="https://www.e-gen.or.kr" target="_blank" class="access m_off" style="background-image: url(/uploadfile/ecms/banner/1869687.png);" tabindex="-1">비상진료에 따른 병의원 이용안내</a>
-					</div>
-				</div>
-				<div class="notice-pagination">
-					<div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
-						<a href="javascript:void(0);" class="swiper-pagination-bullet">1</a><a href="javascript:void(0);" class="swiper-pagination-bullet swiper-pagination-bullet-active">2</a><a href="javascript:void(0);" class="swiper-pagination-bullet">3</a><a href="javascript:void(0);" class="swiper-pagination-bullet">4</a>
-					</div>
-					<div class="controller">
-						<a href="javascript:;" class="btn-pause">슬라이더 정지</a>
-					</div>
-				</div>
+				</ul>
 			</div>
 		</div>
 	</div>
-
-</div>
+	</div>
 <!----------------------------------------- 좌우로 이동하는 슬라이드 --------------------------------------->
 <div data-aos="fade-up" data-aos-offset="200" data-aos-delay="50" data-aos-duration="500" data-aos-easing="ease-in" class="main-middle-container">
 	<div class="container-box">
