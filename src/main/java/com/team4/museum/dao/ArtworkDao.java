@@ -152,6 +152,10 @@ public class ArtworkDao {
 		return executeSelectOne("SELECT COUNT(*) as cnt FROM artwork WHERE displayyn='Y'", rs -> rs.getInt("cnt"));
 	}
 	
+	public int getNoDisplayCount() {
+		return executeSelectOne("SELECT COUNT(*) as cnt FROM artwork WHERE displayyn='N'", rs -> rs.getInt("cnt"));
+	}
+	
 	public int getSearchCount(String searchWord) {
 		return executeSelectOne("SELECT COUNT(*) as cnt FROM artwork "
 				+ "WHERE (name LIKE CONCAT('%', ?, '%') OR artist LIKE CONCAT('%', ?, '%')) "
@@ -162,8 +166,23 @@ public class ArtworkDao {
 				},rs -> rs.getInt("cnt"));
 	}
 	
-	public int getCategoryCount(String category) {
+	public int getAllSearchCount(String searchWord) {
+		return executeSelectOne("SELECT COUNT(*) as cnt FROM artwork "
+				+ "WHERE (name LIKE CONCAT('%', ?, '%') OR artist LIKE CONCAT('%', ?, '%')) ",
+				pstmt->{
+					pstmt.setString(1, searchWord);
+					pstmt.setString(2, searchWord);
+				},rs -> rs.getInt("cnt"));
+	}
+	
+	public int getPublicCategoryCount(String category) {
 		return executeSelectOne("SELECT COUNT(*) as cnt FROM artwork WHERE category=? AND displayyn='Y'",
+				pstmt->	pstmt.setString(1, category),
+				rs -> rs.getInt("cnt"));
+	}
+	
+	public int getCategoryCount(String category) {
+		return executeSelectOne("SELECT COUNT(*) as cnt FROM artwork WHERE category=?",
 				pstmt->	pstmt.setString(1, category),
 				rs -> rs.getInt("cnt"));
 	}
@@ -184,4 +203,6 @@ public class ArtworkDao {
 		avo.setIndate(rs.getDate("indate"));
 		return avo;
 	}
+
+	
 }
