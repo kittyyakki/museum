@@ -1,8 +1,5 @@
 package com.team4.museum.controller.action;
 
-import static com.team4.museum.controller.action.member.LoginAjaxAction.getLoginUrl;
-import static com.team4.museum.util.UrlUtil.getUrlPath;
-import static com.team4.museum.controller.action.member.LoginAjaxAction.getLoginUserFrom;
 import static jakarta.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
 import static jakarta.servlet.http.HttpServletResponse.SC_CREATED;
 import static jakarta.servlet.http.HttpServletResponse.SC_FORBIDDEN;
@@ -15,6 +12,7 @@ import static jakarta.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
 
 import java.io.IOException;
 
+import com.team4.museum.controller.action.member.LoginAjaxAction;
 import com.team4.museum.util.UrlUtil;
 import com.team4.museum.util.ajax.AjaxException;
 import com.team4.museum.util.ajax.AjaxResult;
@@ -31,136 +29,177 @@ abstract public class AjaxAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AjaxResult result;
+
 		try {
+			// 유틸 메소드에서 사용하기 위해 현재 요청을 멤버 변수에 저장
 			currentRequest = request;
+
+			// AJAX 요청을 처리
 			result = handleAjaxRequest(request, response);
 		} catch (AjaxException e) {
+			// 확인된 AJAX 예외를 처리
 			result = new AjaxResult(e.getStatusCode(), e.getMessage(), e.getUrl());
 		} catch (Exception e) {
+			// 확인되지 않은 예외를 처리
 			e.printStackTrace();
 			result = internalServerError();
 		} finally {
+			// 현재 요청을 초기화
 			currentRequest = null;
 		}
 
+		// AJAX 결과를 응답
 		response.setStatus(result.code);
 		response.setContentType("application/json");
 		response.getWriter().write(result.toJson());
 	}
 
+	/**
+	 * AJAX 요청을 처리하는 핸들러 메소드
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws ServletException
+	 * @throws IOException
+	 * @throws AjaxException
+	 */
 	abstract protected AjaxResult handleAjaxRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, AjaxException;
 
-	protected static AjaxResult ok() {
+	/** OK(200) 알림 없이 URL로 이동되는 성공 코드를 반환 */
+	protected AjaxResult ok() {
 		return ok("성공");
 	}
 
-	protected static AjaxResult ok(String message) {
+	/** OK(200) 알림 없이 URL로 이동되는 성공 코드를 반환 */
+	protected AjaxResult ok(String message) {
 		return ok(message, "");
 	}
 
-	protected static AjaxResult ok(String message, String url) {
+	/** OK(200) 알림 없이 URL로 이동되는 성공 코드를 반환 */
+	protected AjaxResult ok(String message, String url) {
 		return new AjaxResult(SC_OK, message, url);
 	}
 
-	protected static AjaxResult created() {
+	/** CREATED(201) 알림과 함께 URL로 이동되는 성공 코드를 반환 */
+	protected AjaxResult created() {
 		return created("생성되었습니다");
 	}
 
-	protected static AjaxResult created(String message) {
+	/** CREATED(201) 알림과 함께 URL로 이동되는 성공 코드를 반환 */
+	protected AjaxResult created(String message) {
 		return created(message, "");
 	}
 
-	protected static AjaxResult created(String message, String url) {
+	/** CREATED(201) 알림과 함께 URL로 이동되는 성공 코드를 반환 */
+	protected AjaxResult created(String message, String url) {
 		return new AjaxResult(SC_CREATED, message, url);
 	}
 
-	protected static AjaxResult internalServerError() {
+	/** INTERNAL_SERVER_ERROR(500) 알림과 함께 URL로 이동되는 실패 코드를 반환 */
+	protected AjaxResult internalServerError() {
 		return internalServerError("서버 오류가 발생했습니다");
 	}
 
-	protected static AjaxResult internalServerError(String message) {
+	/** INTERNAL_SERVER_ERROR(500) 알림과 함께 URL로 이동되는 실패 코드를 반환 */
+	protected AjaxResult internalServerError(String message) {
 		return internalServerError(message, "");
 	}
 
-	protected static AjaxResult internalServerError(String message, String url) {
+	/** INTERNAL_SERVER_ERROR(500) 알림과 함께 URL로 이동되는 실패 코드를 반환 */
+	protected AjaxResult internalServerError(String message, String url) {
 		return new AjaxResult(SC_INTERNAL_SERVER_ERROR, message, url);
 	}
 
-	protected static AjaxResult badRequest() {
+	/** BAD_REQUEST(400) 알림과 함께 URL로 이동되는 실패 코드를 반환 */
+	protected AjaxResult badRequest() {
 		return badRequest("잘못된 요청입니다");
 	}
 
-	protected static AjaxResult badRequest(String message) {
+	/** BAD_REQUEST(400) 알림과 함께 URL로 이동되는 실패 코드를 반환 */
+	protected AjaxResult badRequest(String message) {
 		return badRequest(message, "");
 	}
 
-	protected static AjaxResult badRequest(String message, String url) {
+	/** BAD_REQUEST(400) 알림과 함께 URL로 이동되는 실패 코드를 반환 */
+	protected AjaxResult badRequest(String message, String url) {
 		return new AjaxResult(SC_BAD_REQUEST, message, url);
 	}
 
-	protected static AjaxResult unauthorized() {
+	/** UNAUTHORIZED(401) 알림과 함께 URL로 이동되는 실패 코드를 반환 */
+	protected AjaxResult unauthorized() {
 		return unauthorized("로그인이 필요합니다");
 	}
 
-	protected static AjaxResult unauthorized(String message) {
+	/** UNAUTHORIZED(401) 알림과 함께 URL로 이동되는 실패 코드를 반환 */
+	protected AjaxResult unauthorized(String message) {
 		return unauthorized(message, "");
 	}
 
-	protected static AjaxResult unauthorized(String message, String url) {
+	/** UNAUTHORIZED(401) 알림과 함께 URL로 이동되는 실패 코드를 반환 */
+	protected AjaxResult unauthorized(String message, String url) {
 		return new AjaxResult(SC_UNAUTHORIZED, message, url);
 	}
 
-	protected static AjaxResult forbidden() {
+	/** FORBIDDEN(403) 알림과 함께 URL로 이동되는 실패 코드를 반환 */
+	protected AjaxResult forbidden() {
 		return forbidden("접근 권한이 없습니다");
 	}
 
-	protected static AjaxResult forbidden(String message) {
+	/** FORBIDDEN(403) 알림과 함께 URL로 이동되는 실패 코드를 반환 */
+	protected AjaxResult forbidden(String message) {
 		return forbidden(message, "");
 	}
 
-	protected static AjaxResult forbidden(String message, String url) {
+	/** FORBIDDEN(403) 알림과 함께 URL로 이동되는 실패 코드를 반환 */
+	protected AjaxResult forbidden(String message, String url) {
 		return new AjaxResult(SC_FORBIDDEN, message, url);
 	}
 
-	protected static AjaxResult noContent() {
+	/** NO_CONTENT(204) 알림 없이 URL로 이동되는 성공 코드를 반환 */
+	protected AjaxResult noContent() {
 		return noContent("내용이 없습니다");
 	}
 
-	protected static AjaxResult noContent(String message) {
+	/** NO_CONTENT(204) 알림 없이 URL로 이동되는 성공 코드를 반환 */
+	protected AjaxResult noContent(String message) {
 		return noContent(message, "");
 	}
 
-	protected static AjaxResult noContent(String message, String url) {
+	/** NO_CONTENT(204) 알림 없이 URL로 이동되는 성공 코드를 반환 */
+	protected AjaxResult noContent(String message, String url) {
 		return new AjaxResult(SC_NO_CONTENT, message, url);
 	}
 
-	protected static AjaxResult notFound() {
+	/** NOT_FOUND(404) 알림과 함께 URL로 이동되는 실패 코드를 반환 */
+	protected AjaxResult notFound() {
 		return notFound("찾을 수 없습니다");
 	}
 
-	protected static AjaxResult notFound(String message) {
+	/** NOT_FOUND(404) 알림과 함께 URL로 이동되는 실패 코드를 반환 */
+	protected AjaxResult notFound(String message) {
 		return notFound(message, "");
 	}
 
-	protected static AjaxResult notFound(String message, String url) {
+	/** NOT_FOUND(404) 알림과 함께 URL로 이동되는 실패 코드를 반환 */
+	protected AjaxResult notFound(String message, String url) {
 		return new AjaxResult(SC_NOT_FOUND, message, url);
 	}
 
-	protected static AjaxResult notImplemented() {
+	/** NOT_IMPLEMENTED(501) 알림과 함께 URL로 이동되는 실패 코드를 반환 */
+	protected AjaxResult notImplemented() {
 		return notImplemented("구현되지 않은 요청입니다");
 	}
 
-	protected static AjaxResult notImplemented(String message) {
+	/** NOT_IMPLEMENTED(501) 알림과 함께 URL로 이동되는 실패 코드를 반환 */
+	protected AjaxResult notImplemented(String message) {
 		return notImplemented(message, "");
 	}
 
-	protected static AjaxResult notImplemented(String message, String url) {
+	/** NOT_IMPLEMENTED(501) 알림과 함께 URL로 이동되는 실패 코드를 반환 */
+	protected AjaxResult notImplemented(String message, String url) {
 		return new AjaxResult(SC_NOT_IMPLEMENTED, message, url);
-	}
-
-	protected static AjaxResult requireParameter(String parameter) {
-		return badRequest("'" + parameter + "'를 입력해주세요");
 	}
 
 	/**
@@ -225,9 +264,12 @@ abstract public class AjaxAction implements Action {
 	 * @return
 	 */
 	protected MemberVO mustGetLoginUser() throws AjaxException {
-		MemberVO mvo = getLoginUserFrom(currentRequest);
+		MemberVO mvo = LoginAjaxAction.getLoginUserFrom(currentRequest);
 		if (mvo == null) {
-			throw new AjaxException(SC_UNAUTHORIZED, "로그인이 필요합니다", getLoginUrl(getUrlPath(currentRequest)));
+			throw new AjaxException(
+					SC_UNAUTHORIZED,
+					"로그인이 필요합니다",
+					LoginAjaxAction.getLoginUrl(UrlUtil.getUrlPath(currentRequest)));
 		}
 		return mvo;
 	}

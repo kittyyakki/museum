@@ -6,13 +6,10 @@ import static com.team4.museum.util.Db.executeUpdate;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.team4.museum.util.Pagination;
 import com.team4.museum.vo.ArtworkVO;
-import com.team4.museum.vo.NoticeVO;
 
 public class ArtworkDao {
 

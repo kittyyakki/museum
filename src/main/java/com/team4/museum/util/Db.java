@@ -14,19 +14,29 @@ import javax.sql.DataSource;
 
 public class Db {
 
+	/**
+	 * 데이터베이스 연결을 위한 Connection 객체를 반환합니다.
+	 * 
+	 * 반환된 Connection 객체를 사용한 후에는 반드시 close() 메서드를 호출하여 자원을 반환해야 합니다.
+	 */
 	public static Connection getConnection() {
-		Connection con = null;
+		Connection conn = null;
 		try {
 			Context initContext = new InitialContext();
 			DataSource ds = (DataSource) initContext.lookup("java:/comp/env/jdbc/MysqlDB/museum");
-			con = ds.getConnection();
+			conn = ds.getConnection();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return con;
+		return conn;
 	}
 
-	public static void close(Connection con, PreparedStatement pstmt, ResultSet rs) {
+	/**
+	 * 주어진 Connection, PreparedStatement, ResultSet 객체를 닫습니다.
+	 * 
+	 * @deprecated try-with-resources를 사용하여 자동으로 자원을 반환하도록 하기 위해 사용되지 않습니다.
+	 */
+	public static void close(Connection conn, PreparedStatement pstmt, ResultSet rs) {
 		try {
 			if (rs != null) {
 				rs.close();
@@ -34,29 +44,37 @@ public class Db {
 			if (pstmt != null) {
 				pstmt.close();
 			}
-			if (con != null) {
-				con.close();
+			if (conn != null) {
+				conn.close();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * SQL 쿼리를 실행하고 영향을 받은 행의 수를 반환합니다.
+	 */
 	public static int executeUpdate(String query) {
 		return executeUpdate(query, pstmt -> {
 		});
 	}
 
-	public static int executeUpdate(String query, StatementPreparer preparer) {
+	/**
+	 * SQL 쿼리를 실행하고 영향을 받은 행의 수를 반환합니다.
+	 * 
+	 * @param paramSetter SQL 쿼리를 준비하는 람다식
+	 */
+	public static int executeUpdate(String query, ParameterSetter paramSetter) {
 		int result = 0;
-		try {
-			Connection con = getConnection();
-			PreparedStatement pstmt = con.prepareStatement(query);
 
-			preparer.prepare(pstmt);
+		try ( // try-with-resources
+				Connection conn = getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+			paramSetter.accept(pstmt);
 			result = pstmt.executeUpdate();
 
-			close(con, pstmt, null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -64,24 +82,34 @@ public class Db {
 		return result;
 	}
 
-	public static <T> List<T> executeSelect(String query, ResultSetExtractor<T> extractor) {
+	/**
+	 * SQL 쿼리를 실행하고 결과를 반환합니다.
+	 * 
+	 * @param resultMapper SQL 쿼리 결과를 매핑하는 람다식
+	 */
+	public static <T> List<T> executeSelect(String query, ResultMapper<T> resultMapper) {
 		return executeSelect(query, pstmt -> {
-		}, extractor);
+		}, resultMapper);
 	}
 
-	public static <T> List<T> executeSelect(String query, StatementPreparer preparer, ResultSetExtractor<T> extractor) {
+	/**
+	 * SQL 쿼리를 실행하고 결과를 반환합니다.
+	 * 
+	 * @param paramSetter  SQL 쿼리를 준비하는 람다식
+	 * @param resultMapper SQL 쿼리 결과를 매핑하는 람다식
+	 */
+	public static <T> List<T> executeSelect(String query, ParameterSetter paramSetter, ResultMapper<T> resultMapper) {
 		List<T> list = new ArrayList<>();
-		try {
-			Connection con = getConnection();
-			PreparedStatement pstmt = con.prepareStatement(query);
 
-			preparer.prepare(pstmt);
-			ResultSet rs = pstmt.executeQuery();
+		try ( // try-with-resources
+				Connection conn = getConnection();
+				PreparedStatement pstmt = prepareStatement(conn, query, paramSetter);
+				ResultSet rs = pstmt.executeQuery()) {
+
 			while (rs.next()) {
-				list.add(extractor.extract(rs));
+				list.add(resultMapper.apply(rs));
 			}
 
-			close(con, pstmt, rs);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -89,43 +117,43 @@ public class Db {
 		return list;
 	}
 
-	public static <T> T executeSelectOne(String query, ResultSetExtractor<T> extractor) {
+	/**
+	 * SQL 쿼리를 실행하고 결과 중 첫 번째 행을 반환합니다.
+	 * 
+	 * @param resultMapper SQL 쿼리 결과를 매핑하는 람다식
+	 */
+	public static <T> T executeSelectOne(String query, ResultMapper<T> resultMapper) {
 		return executeSelectOne(query, pstmt -> {
-		}, extractor);
+		}, resultMapper);
 	}
 
-	public static <T> T executeSelectOne(String query, StatementPreparer preparer, ResultSetExtractor<T> extractor) {
-		T result = null;
-		try {
-			Connection con = getConnection();
-			PreparedStatement pstmt = con.prepareStatement(query);
-
-			preparer.prepare(pstmt);
-			ResultSet rs = pstmt.executeQuery();
-			if (rs.next()) {
-				result = extractor.extract(rs);
-			}
-
-			close(con, pstmt, rs);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return result;
+	/**
+	 * SQL 쿼리를 실행하고 결과 중 첫 번째 행을 반환합니다.
+	 * 
+	 * @param paramSetter  SQL 쿼리를 준비하는 람다식
+	 * @param resultMapper SQL 쿼리 결과를 매핑하는 람다식
+	 */
+	public static <T> T executeSelectOne(String query, ParameterSetter paramSetter, ResultMapper<T> resultMapper) {
+		List<T> list = executeSelect(query, paramSetter, resultMapper);
+		return list.isEmpty() ? null : list.get(0);
 	}
 
-	public static <T> T executeCall(String query, CallStatementPreparer preparer, CallOutExtractor<T> extractor) {
+	/**
+	 * SQL 프로시저 쿼리를 실행하고 결과를 반환합니다.
+	 * 
+	 * @param resultMapper 프로시저 결과를 추출하는 람다식
+	 */
+	public static <T> T executeCall(String query, CallParameterSetter paramSetter, CallResultMapper<T> resultMapper) {
 		T result = null;
-		try {
-			Connection con = getConnection();
-			CallableStatement pstmt = con.prepareCall(query);
 
-			preparer.prepare(pstmt);
+		try ( // try-with-resources
+				Connection conn = getConnection();
+				CallableStatement pstmt = conn.prepareCall(query)) {
+
+			paramSetter.accept(pstmt);
 			pstmt.execute();
+			result = resultMapper.extract(pstmt);
 
-			result = extractor.extract(pstmt);
-
-			close(con, pstmt, null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -133,23 +161,61 @@ public class Db {
 		return result;
 	}
 
-	@FunctionalInterface
-	public interface StatementPreparer {
-		void prepare(PreparedStatement pstmt) throws SQLException;
+	/**
+	 * Connection 객체와 query 문자열로 생성된 PreparedStatement 객체에 대해 파라미터 설정을 수행합니다.
+	 * 
+	 * @param paramSetter SQL 쿼리를 준비하는 람다식
+	 * @return 준비된 PreparedStatement 객체
+	 * @throws SQLException
+	 */
+	private static PreparedStatement prepareStatement(Connection conn, String query, ParameterSetter paramSetter)
+			throws SQLException {
+		PreparedStatement pstmt = conn.prepareStatement(query);
+		paramSetter.accept(pstmt);
+		return pstmt;
 	}
 
+	/**
+	 * {@link java.util.function.Consumer}의 역할을 수행
+	 * 
+	 * {@link java.sql.PreparedStatement}를 처리하는 메서드에 대한 명시적인 의미를 부여하고,
+	 * {@link java.sql.SQLException}을 던질 수 있도록 하기 위해 별도로 정의한 함수형 인터페이스입니다.
+	 */
 	@FunctionalInterface
-	public interface ResultSetExtractor<T> {
-		T extract(ResultSet rs) throws SQLException;
+	public interface ParameterSetter {
+		void accept(PreparedStatement pstmt) throws SQLException;
 	}
 
+	/**
+	 * {@link java.util.function.Function}의 역할을 수행
+	 * 
+	 * {@link java.sql.ResultSet}를 처리하고 결과를 반환하는 메서드에 대한 명시적인 의미를 부여하고,
+	 * {@link java.sql.SQLException}을 던질 수 있도록 하기 위해 별도로 정의한 함수형 인터페이스입니다.
+	 */
 	@FunctionalInterface
-	public interface CallStatementPreparer {
-		void prepare(CallableStatement cstmt) throws SQLException;
+	public interface ResultMapper<T> {
+		T apply(ResultSet rs) throws SQLException;
 	}
 
+	/**
+	 * {@link java.util.function.Consumer}의 역할을 수행
+	 * 
+	 * {@link java.sql.CallableStatement}를 처리하는 메서드에 대한 명시적인 의미를 부여하고,
+	 * {@link java.sql.SQLException}을 던질 수 있도록 하기 위해 별도로 정의한 함수형 인터페이스입니다.
+	 */
 	@FunctionalInterface
-	public interface CallOutExtractor<T> {
+	public interface CallParameterSetter {
+		void accept(CallableStatement cstmt) throws SQLException;
+	}
+
+	/**
+	 * {@link java.util.function.Function}의 역할을 수행
+	 * 
+	 * {@link java.sql.CallableStatement}를 처리하고 결과를 반환하는 메서드에 대한 명시적인 의미를 부여하고,
+	 * {@link java.sql.SQLException}을 던질 수 있도록 하기 위해 별도로 정의한 함수형 인터페이스입니다.
+	 */
+	@FunctionalInterface
+	public interface CallResultMapper<T> {
 		T extract(CallableStatement cstmt) throws SQLException;
 	}
 

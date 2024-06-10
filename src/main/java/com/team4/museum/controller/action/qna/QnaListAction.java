@@ -13,11 +13,12 @@ import jakarta.servlet.http.HttpServletResponse;
 public class QnaListAction implements Action {
 
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// QnaDao를 이용해 현재 페이지의 문의글 목록을 가져옴
 		QnaDao qdao = QnaDao.getInstance();
-
 		Pagination pagination = Pagination.with(request, qdao.getAllCount(), "command=qnaList");
-		request.setAttribute("qnaList", qdao.selectQna(pagination));
 
+		// 'qnaList'를 'qnaList.jsp'로 전달
+		request.setAttribute("qnaList", qdao.selectQna(pagination));
 		request.getRequestDispatcher("qna/qnaList.jsp").forward(request, response);
 	}
 

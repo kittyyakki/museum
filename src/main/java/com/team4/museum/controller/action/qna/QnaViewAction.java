@@ -25,6 +25,7 @@ public class QnaViewAction implements Action {
 			return;
 		}
 
+		// 'qnaVO'를 'qnaView.jsp'로 전달
 		request.setAttribute("qnaVO", qnaVO);
 		request.getRequestDispatcher("qna/qnaView.jsp").forward(request, response);
 	}

@@ -31,15 +31,8 @@ public class QnaReplyAjaxAction extends AjaxAction {
 			return noContent("해당 문의가 존재하지 않습니다");
 		}
 
-		try {
-			// 답변을 업데이트
-			qdao.updateQnaReply(qseq, request.getParameter("reply"));
-		} catch (Exception e) {
-			// 업데이트에 실패한 경우
-			e.printStackTrace();
-			return internalServerError("답변 업데이트에 실패했습니다");
-		}
-
+		// 답변을 업데이트하고 돌아갈 페이지 정보와 함께 성공 메시지를 반환
+		qdao.updateQnaReply(qseq, request.getParameter("reply"));
 		return created("답변이 업데이트되었습니다", "museum.do?command=qnaView&qseq=" + qseq);
 	}
 

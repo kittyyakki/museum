@@ -7,10 +7,19 @@ import jakarta.servlet.http.HttpServletRequest;
 
 public class Pagination {
 
+	/** 페이지네이션에 표시할 아이템의 총 갯수 */
 	private int itemCount;
+
+	/** 한 페이지당 표시할 아이템의 갯수 */
 	private int itemsPerPage = 10;
+
+	/** 표시될 페이지 범위 */
 	private int pageRange = 5;
+
+	/** 현재 페이지 */
 	private int currentPage;
+
+	/** 페이지의 URL 템플릿 */
 	private String urlTemplate = "museum.do?command=example&page=%d";
 
 	/**

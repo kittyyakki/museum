@@ -22,12 +22,12 @@ public class QnaDao {
 		return instance;
 	}
 
-	public List<QnaVO> selectQna() {
-		return executeSelect(
-				"SELECT * FROM qna",
-				QnaDao::extractQnaVO);
-	}
-
+	/**
+	 * 문의글 목록을 조회한다.
+	 * 
+	 * @param pagination 페이지 정보
+	 * @return 문의글 목록
+	 */
 	public List<QnaVO> selectQna(Pagination pagination) {
 		return executeSelect(
 				"SELECT * FROM qna ORDER BY qseq DESC LIMIT ? OFFSET ?",
@@ -35,16 +35,29 @@ public class QnaDao {
 				QnaDao::extractQnaVO);
 	}
 
+	/**
+	 * 답변 존재 여부에 따른 문의글 목록을 조회한다.
+	 * 
+	 * @param pagination 페이지 정보
+	 * @param isReply    답변이 있는지 여부 (Y: 답변 있음, N: 답변 없음)
+	 * @return 문의글 목록
+	 */
 	public List<QnaVO> selectQna(Pagination pagination, String isReply) {
 		String query;
 		if (isReply.equals("Y")) {
-			query = "SELECT * FROM qna WHERE reply IS NOT NULL ORDER BY qseq DESC LIMIT ? OFFSET ?";
+			query = "SELECT * FROM qna WHERE COALESCE (reply, '') <> '' ORDER BY qseq DESC LIMIT ? OFFSET ?";
 		} else {
-			query = "SELECT * FROM qna WHERE reply IS NULL ORDER BY qseq DESC LIMIT ? OFFSET ?";
+			query = "SELECT * FROM qna WHERE COALESCE (reply, '') = '' ORDER BY qseq DESC LIMIT ? OFFSET ?";
 		}
 		return executeSelect(query, pagination::applyTo, QnaDao::extractQnaVO);
 	}
 
+	/**
+	 * 문의글을 조회한다.
+	 * 
+	 * @param qseq 문의글 번호 (qna sequence)
+	 * @return 문의글 정보
+	 */
 	public QnaVO getQna(int qseq) {
 		return executeSelectOne(
 				"SELECT * FROM qna WHERE qseq = ?",
@@ -52,6 +65,12 @@ public class QnaDao {
 				QnaDao::extractQnaVO);
 	}
 
+	/**
+	 * 문의글을 등록한다.
+	 * 
+	 * @param qvo 문의글 정보 (qna sequence)
+	 * @return 등록된 문의글 번호
+	 */
 	public int insertQna(QnaVO qvo) {
 		executeUpdate(
 				"INSERT INTO qna (title, content, email, phone, publicyn, pwd) VALUES (?, ?, ?, ?, ? ,?)",
@@ -69,6 +88,12 @@ public class QnaDao {
 				rs -> rs.getInt("qseq"));
 	}
 
+	/**
+	 * 문의글을 수정한다.
+	 * 
+	 * @param qvo 문의글 정보 (qna sequence)
+	 * @return 수정된 문의글 번호
+	 */
 	public int updateQna(QnaVO qvo) {
 		executeUpdate(
 				"UPDATE qna SET title = ?, content = ?, email = ?, phone = ?, publicyn = ?, pwd = ? WHERE qseq = ?",
@@ -85,12 +110,23 @@ public class QnaDao {
 		return qvo.getQseq();
 	}
 
+	/**
+	 * 문의글을 삭제한다.
+	 * 
+	 * @param qseq 문의글 번호 (qna sequence)
+	 */
 	public void deleteQna(int qseq) {
 		executeUpdate(
 				"DELETE FROM qna WHERE qseq = ?",
 				pstmt -> pstmt.setInt(1, qseq));
 	}
 
+	/**
+	 * 문의글에 답변을 등록한다.
+	 * 
+	 * @param qseq  문의글 번호 (qna sequence)
+	 * @param reply 답변 내용
+	 */
 	public void updateQnaReply(int qseq, String reply) {
 		executeUpdate(
 				"UPDATE qna SET reply = ? WHERE qseq = ?",
@@ -100,12 +136,22 @@ public class QnaDao {
 				});
 	}
 
+	/**
+	 * 문의글 총 개수를 조회한다.
+	 * 
+	 * @return 문의글 총 개수
+	 */
 	public int getAllCount() {
-		return executeSelectOne(
-				"SELECT COUNT(*) AS cnt FROM qna",
-				rs -> rs.getInt("cnt"));
+		return executeSelectOne("SELECT COUNT(*) FROM qna", rs -> rs.getInt(1));
 	}
 
+	/**
+	 * 문의글 검색 결과를 조회한다.
+	 * 
+	 * @param pagination 페이지 정보
+	 * @param searchWord 검색어
+	 * @return 문의글 목록
+	 */
 	public Object searchQna(Pagination pagination, String searchWord) {
 		return executeSelect(
 				"SELECT * FROM qna "
@@ -119,6 +165,12 @@ public class QnaDao {
 				QnaDao::extractQnaVO);
 	}
 
+	/**
+	 * 문의글 정보를 ResultSet에서 추출한다.
+	 * 
+	 * @param rs ResultSet 객체
+	 * @return QnaVO 문의글 정보 객체
+	 */
 	private static QnaVO extractQnaVO(ResultSet rs) throws SQLException {
 		QnaVO qvo = new QnaVO();
 		qvo.setQseq(rs.getInt("qseq"));
