@@ -35,7 +35,11 @@
 		</div>
 		<c:forEach items="${noticeList}" var="noticeList">
 			<div class="row">
-				<div class="col col_number">${noticeList.nseq}</div>
+				<%-- <div class="col col_number">${noticeList.nseq}</div> --%>
+				<div class="col col_number">
+				<a href="museum.do?command=noticeView&nseq=${noticeList.nseq}"> ${noticeList.nseq} </a>
+					&nbsp;
+				</div>
 				<div class="col col_title">
 					<a href="museum.do?command=noticeView&nseq=${noticeList.nseq}"> ${noticeList.title} </a>
 					&nbsp;

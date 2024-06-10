@@ -9,7 +9,6 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-bottom: 80px;
 }
 
 #main-center-imgs {
@@ -30,8 +29,8 @@
 	position: absolute;
 	width: 100%;
 	height: 50px;
-	bottom: 15px; /* Adjusted to be 10px from the bottom */
-	left: 470px;
+	bottom: 26px;
+	right: -27%;
 	display: flex;
 	justify-content: center; /* Center the navigation dots */
 }
@@ -61,6 +60,7 @@
 	flex-wrap: wrap;
 	width: 70%;
 	margin: 0 auto;
+	margin-bottom: 150px;
 }
 
 /* Main Info Area */
@@ -68,7 +68,10 @@
 	display: flex;
 	flex-direction: column;
 	flex: 1;
-	margin-right: 20px; /* 각 요소 사이의 간격 조정을 위해 추가 */
+	margin-right: 20px; 
+	position: relative;
+    bottom: -80px;
+    left: 50px;
 }
 
 .main_info {
@@ -151,6 +154,8 @@
 	padding: 0;
 	margin: 0;
 	display: flex;
+	position: relative;
+    bottom: -103px;
 }
 
 .info-link ul li {
@@ -179,9 +184,10 @@
 }
 
 .main-middle-container {
-	width: 100%;
+	width: 70%;
 	height: 600px;
 	overflow: hidden;
+	margin:0 auto;
 }
 
 .container-box {
