@@ -1,22 +1,22 @@
 package com.team4.museum.controller.action.admin;
 
 import java.io.IOException;
-import java.util.List;
 
-import com.team4.museum.controller.action.Action;
 import com.team4.museum.dao.ArtworkDao;
-import com.team4.museum.util.ArtworkCategory;
 import com.team4.museum.util.Pagination;
-import com.team4.museum.vo.ArtworkVO;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class AdminArtworkListAction implements Action {
+public class AdminArtworkListAction implements AdminAction {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if (!checkAdmin(request, response)) {
+			return;
+		}
+
 		// 요청의 파라미터를 받아옵니다.
 		String category = request.getParameter("category");
 		String displayState = request.getParameter("displayState");

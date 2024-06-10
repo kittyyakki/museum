@@ -2,7 +2,6 @@ package com.team4.museum.controller.action.admin;
 
 import java.io.IOException;
 
-import com.team4.museum.controller.action.Action;
 import com.team4.museum.dao.MemberDao;
 import com.team4.museum.util.Pagination;
 
@@ -10,10 +9,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class AdminMemberListAction implements Action {
+public class AdminMemberListAction implements AdminAction {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if (!checkAdmin(request, response)) {
+			return;
+		}
 
 		MemberDao mdao = MemberDao.getInstance();
 		String searchWord = request.getParameter("searchWord");
