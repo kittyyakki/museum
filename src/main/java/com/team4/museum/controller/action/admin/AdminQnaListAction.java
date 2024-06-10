@@ -25,6 +25,12 @@ public class AdminQnaListAction implements Action {
 			request.setAttribute("qnaList", qdao.searchQna(pagination, searchWord));
 
 		} else if (isReply != null) {
+			if(isReply.equals("Y")) {
+				pagination.setItemCount(qdao.getReplyCount());
+			}else {
+				pagination.setItemCount(qdao.getAllCount() - qdao.getReplyCount());					
+			}
+			pagination.setUrlTemplate("museum.do?command=adminArtworkList&page=%d&isReply=" + isReply);
 			request.setAttribute("qnaList", qdao.selectQna(pagination, isReply));
 			request.setAttribute("isReply", isReply);
 		} else {
