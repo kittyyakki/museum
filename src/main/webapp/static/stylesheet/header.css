@@ -319,7 +319,6 @@ header a:hover::after {
 }
 
 
-
-
-
-
+.content-wrap{
+	flex:1;
+}
