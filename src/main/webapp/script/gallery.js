@@ -30,6 +30,16 @@ function go_update() {
 	}
 }
 
+function go_search() {
+	let inputText = document.searchForm.searchWord.value;
+	if (inputText === "") {
+		alert("검색어를 입력하세요");
+		return false;
+	} else {
+		return true;
+	}
+}
+
 function go_gallery() {
 	let form = document.galleryList;
 	if (form.id.value == "") {
