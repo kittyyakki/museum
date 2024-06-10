@@ -30,7 +30,7 @@ public class AdminQnaListAction implements Action {
 			}else {
 				pagination.setItemCount(qdao.getAllCount() - qdao.getReplyCount());					
 			}
-			pagination.setUrlTemplate("museum.do?command=adminArtworkList&page=%d&isReply=" + isReply);
+			pagination.setUrlTemplate("museum.do?command=adminQnaList&page=%d&isReply=" + isReply);
 			request.setAttribute("qnaList", qdao.selectQna(pagination, isReply));
 			request.setAttribute("isReply", isReply);
 		} else {
