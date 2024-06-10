@@ -3,7 +3,9 @@
 <jsp:include page="/WEB-INF/views/header.jsp">
 	<jsp:param name="stylesheet" value="static/stylesheet/artwork.css" />
 </jsp:include>
-<section class="artwork-list-header"></section>
+<section class="artwork-list-header">
+	<h1>나의 관심 예술품</h1>
+</section>
 <main class="artwork-list-main">
 	<div class="artwork-list-head">
 		<h4>총 ${pagination.itemCount}개의 관심 예술품이 존재합니다.</h4>
