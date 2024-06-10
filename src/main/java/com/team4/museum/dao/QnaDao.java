@@ -124,6 +124,14 @@ public class QnaDao extends BaseDao<QnaVO> {
 	public int getAllCount() {
 		return selectInt("SELECT COUNT(*) FROM qna");
 	}
+	
+	public int getSearchCount(String searchWord) {
+		return selectInt(
+				"SELECT COUNT(*) FROM qna "
+						+ " WHERE title LIKE CONCAT('%', ?, '%') OR content LIKE CONCAT('%', ?, '%') ",
+				searchWord,
+				searchWord);
+	}
 
 	/**
 	 * 문의글 검색 결과를 조회한다.
