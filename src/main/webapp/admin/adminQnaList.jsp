@@ -21,7 +21,7 @@ String isReply = request.getParameter("isReply") != null ? request.getParameter(
 				<input type="checkbox" onclick="checkAll()" class="select-all-box">
 			</li>
 			<li>
-				<select onchange="displayFilter('adminQnaList', 'isReply')" name="selectFilter" class="admin-select">
+				<select onchange="displayFilter('adminQnaList', 'isReply')" name="selectDisplayFilter" class="admin-select">
 					<option value="state">답변 여부</option>
 					<option value="Y" <%=isReply.equals("Y") ? "selected" : ""%>>YES</option>
 					<option value="N" <%=isReply.equals("N") ? "selected" : ""%>>NO</option>
