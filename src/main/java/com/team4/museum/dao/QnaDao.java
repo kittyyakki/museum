@@ -40,7 +40,7 @@ public class QnaDao extends BaseDao<QnaVO> {
 	public List<QnaVO> selectQna(Pagination pagination, String isReply) {
 		String query;
 		if (isReply.equals("Y")) {
-			query = "SELECT * FROM qna WHERE COALESCE (reply, '') <> '' ORDER BY qseq DESC LIMIT ? OFFSET ?";
+			query = "SELECT * FROM qna WHERE COALESCE(reply, '') <> '' ORDER BY qseq DESC LIMIT ? OFFSET ?";
 		} else {
 			query = "SELECT * FROM qna WHERE COALESCE (reply, '') = '' ORDER BY qseq DESC LIMIT ? OFFSET ?";
 		}
@@ -131,6 +131,10 @@ public class QnaDao extends BaseDao<QnaVO> {
 						+ " WHERE title LIKE CONCAT('%', ?, '%') OR content LIKE CONCAT('%', ?, '%') ",
 				searchWord,
 				searchWord);
+	}
+
+	public int getReplyCount() {
+		return selectInt("SELECT COUNT(*) FROM qna WHERE COALESCE(reply, '') <> '' ");
 	}
 
 	/**
