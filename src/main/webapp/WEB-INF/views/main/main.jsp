@@ -56,6 +56,8 @@
         </ul>
     </div>
 </div>
+
+<!-- ---- -->
 <!----------------------------------------- 좌우로 이동하는 슬라이드 --------------------------------------->
 <div data-aos="fade-up" data-aos-offset="200" data-aos-delay="50" data-aos-duration="500" data-aos-easing="ease-in"
      class="main-middle-container">
