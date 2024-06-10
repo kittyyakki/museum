@@ -192,6 +192,7 @@
 .imagelist>img {
 	width: 200px;
 	height: 200px;
+	object-fit: contain;
 }
 
 .main-middle-container {
