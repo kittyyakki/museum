@@ -4,7 +4,7 @@
 	margin: 0 auto;
 	position: relative;
 	width: 100%;
-	height: 50px;
+	height: 40px;
 	border-bottom: 1px solid #ccc;
 	margin-bottom: 20px;
 	position: relative;
@@ -12,8 +12,8 @@
 
 .util-link {
 	position: absolute;
-	top: 0;
-	left: 68%;
+	top: 7px;
+	left: 54%;
 	font-size: 0.5rem;
 	display: flex;
 	width: 46%;
@@ -43,12 +43,39 @@ header {
 	border-bottom: 1px solid #ccc;
 }
 
+
+
 header nav h1 {
 	cursor: pointer;
+}
+.logo01{
+	transform: translate(50px, 0px);
+}
+.logo02{
+	transform: translate(78px, 0px);
+}
+.logo03{
+	transform: translate(103px, 0px);
+}
+.logo04{
+	transform: translate(131px, 0px);
+}
+.logo05{
+	transform: translate(157px, 0px);
+}
+.logo06{
+	transform: translate(182px, 0px);
+}
+.logo07{
+	transform: translate(208px, 0px);
+}
+.logo08{
+	transform: translate(50px, 31px);
 }
 
 header nav {
 	position: relative;
+	top: 7px;
 	display: flex;
 }
 
@@ -57,7 +84,7 @@ header nav {
 	position: relative;
 	align-items: center;
 	font-size: 1.1rem;
-	margin-left: 40px;
+	margin-left: 0px;
 	width: 100%;
 	font-weight: bold;
 }
@@ -66,9 +93,6 @@ header nav {
 	margin-right: 20px;
 }
 
-.header_gnb a:nth-child(1):hover, .header_gnb a:nth-child(2):hover {
-	
-}
 
 .header_logo {
 	width: 208px;
@@ -112,7 +136,7 @@ header a:hover::after {
 	align-items: center;
 	width: 40%;
 	height: 40px;
-	margin-left: 30px;
+	margin-left: 0px;
 	color: #1D1D1D;
 	border-bottom: 1px solid #ccc;
 	padding: 5px;
@@ -139,9 +163,10 @@ header a:hover::after {
 }
 
 .login_join_box {
+	font-size:0.8rem;
 	position: absolute;
-	top: 20px;
-	right: 20px;
+	top: -23px;
+	right: 0px;
 	margin-left: auto;
 }
 
@@ -154,34 +179,25 @@ header a:hover::after {
 }
 
 /* 하위 컨테이너  */
-/* .header_gnb > a:nth-child(1):hover + .header_gnb_list_container {
-    display: block;
-} */
-.header_gnb>a:nth-child(1):hover+.header_gnb_list_containner {
-	display: block;
-}
 
-.header_gnb_list_containner {
-	border-top: 1px solid #ccc;
-	display: none !important;
+
+.header_gnb_list_containner  {
+	display:none;
 	position: absolute;
-	top: 87px;
+	top: 169px;
 	left: 0px;
-	display: block;
 	width: 100%;
-	height: 60px;
-	font-size: 1.1rem;
+	height: 40px;
 	font-weight: bold;
 	background-color: #F8F8F8;
-	/* 	border: 1px solid red; */
-	font-size: 1.1rem;
+	font-size: 1rem;
+	border-bottom: 1px solid #ccc;
 }
 
-.header_gnb_list_containner>div {
-	width: 40%;
+.header_gnb_list_containner div {
+	width: 60%;
 	height: 100%;
-	margin-left: 14%;
-	/* border: 1px solid blue; */
+	margin-left: 25%;
 	margin-top: 10px;
 }
 
@@ -216,3 +232,89 @@ header a:hover::after {
 	transform: scaleX(1);
 	transform-origin: left;
 }
+
+.header_gnb_list_containner01  {
+	display:none;
+	position: absolute;
+	top: 169px;
+	left: 0px;
+	width: 100%;
+	height: 40px;
+	font-weight: bold;
+	background-color: #F8F8F8;
+	font-size: 1rem;
+	border-bottom: 1px solid #ccc;
+}
+
+.header_gnb_list_containner01 div {
+	width: 60%;
+	height: 100%;
+	margin-left: 25%;
+	/* border: 1px solid blue; */
+	margin-top: 10px;
+}
+
+.header_gnb_list_containner01 a {
+	margin-right: 20px;
+	font-family: 'notokr-medium';
+	position: relative;
+	display: inline-block;
+	color: #1D1D1D;
+	text-decoration: none;
+	transition: 0.3s ease-in-out;
+}
+
+.header_gnb_list_containner01 a:hover {
+	color: #4D4D4D;
+}
+
+.header_gnb_list_containner01 a::after {
+	position: absolute;
+	content: "";
+	top: 100%;
+	left: 0;
+	width: 100%;
+	height: 3px;
+	background: #1D1D1D;
+	transform: scaleX(0);
+	transform-origin: right;
+	transition: transform 0.3s ease-in-out;
+}
+
+.header_gnb_list_containner01 a:hover::after {
+	transform: scaleX(1);
+	transform-origin: left;
+}
+.login_join_box span{
+	cursor:pointer;
+	position: relative;
+	display: inline-block;
+	color: #1D1D1D;
+	text-decoration: none;
+	transition: 0.3s ease-in-out;
+}
+.login_join_box span:hover{
+	color: #4D4D4D;
+}
+
+.login_join_box span::after{
+	position: absolute;
+	content: "";
+	top: 100%;
+	left: 0;
+	width: 100%;
+	height: 3px;
+	background: #1D1D1D;
+	transform: scaleX(0);
+	transform-origin: right;
+	transition: transform 0.3s ease-in-out;
+}
+
+.login_join_box span:hover::after{
+	transform: scaleX(1);
+	transform-origin: left;
+}
+
+
+
+
