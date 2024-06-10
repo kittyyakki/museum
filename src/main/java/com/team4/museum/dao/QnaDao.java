@@ -1,9 +1,5 @@
 package com.team4.museum.dao;
 
-import static com.team4.museum.util.Db.executeSelect;
-import static com.team4.museum.util.Db.executeSelectOne;
-import static com.team4.museum.util.Db.executeUpdate;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -11,7 +7,7 @@ import java.util.List;
 import com.team4.museum.util.Pagination;
 import com.team4.museum.vo.QnaVO;
 
-public class QnaDao {
+public class QnaDao extends BaseDao<QnaVO> {
 
 	private QnaDao() {
 	}
@@ -29,10 +25,9 @@ public class QnaDao {
 	 * @return 문의글 목록
 	 */
 	public List<QnaVO> selectQna(Pagination pagination) {
-		return executeSelect(
+		return select(
 				"SELECT * FROM qna ORDER BY qseq DESC LIMIT ? OFFSET ?",
-				pagination::applyTo,
-				QnaDao::extractQnaVO);
+				pagination::applyTo);
 	}
 
 	/**
@@ -49,7 +44,7 @@ public class QnaDao {
 		} else {
 			query = "SELECT * FROM qna WHERE COALESCE (reply, '') = '' ORDER BY qseq DESC LIMIT ? OFFSET ?";
 		}
-		return executeSelect(query, pagination::applyTo, QnaDao::extractQnaVO);
+		return select(query, pagination::applyTo);
 	}
 
 	/**
@@ -59,10 +54,7 @@ public class QnaDao {
 	 * @return 문의글 정보
 	 */
 	public QnaVO getQna(int qseq) {
-		return executeSelectOne(
-				"SELECT * FROM qna WHERE qseq = ?",
-				pstmt -> pstmt.setInt(1, qseq),
-				QnaDao::extractQnaVO);
+		return selectOne("SELECT * FROM qna WHERE qseq = ?", qseq);
 	}
 
 	/**
@@ -72,20 +64,16 @@ public class QnaDao {
 	 * @return 등록된 문의글 번호
 	 */
 	public int insertQna(QnaVO qvo) {
-		executeUpdate(
+		update(
 				"INSERT INTO qna (title, content, email, phone, publicyn, pwd) VALUES (?, ?, ?, ?, ? ,?)",
-				pstmt -> {
-					pstmt.setString(1, qvo.getTitle());
-					pstmt.setString(2, qvo.getContent());
-					pstmt.setString(3, qvo.getEmail());
-					pstmt.setString(4, qvo.getPhone());
-					pstmt.setString(5, qvo.getPublicyn());
-					pstmt.setString(6, qvo.getPwd());
-				});
+				qvo.getTitle(),
+				qvo.getContent(),
+				qvo.getEmail(),
+				qvo.getPhone(),
+				qvo.getPublicyn(),
+				qvo.getPwd());
 
-		return executeSelectOne(
-				"SELECT LAST_INSERT_ID() AS qseq",
-				rs -> rs.getInt("qseq"));
+		return selectInt("SELECT LAST_INSERT_ID()");
 	}
 
 	/**
@@ -95,19 +83,18 @@ public class QnaDao {
 	 * @return 수정된 문의글 번호
 	 */
 	public int updateQna(QnaVO qvo) {
-		executeUpdate(
+		int qseq = qvo.getQseq();
+		update(
 				"UPDATE qna SET title = ?, content = ?, email = ?, phone = ?, publicyn = ?, pwd = ? WHERE qseq = ?",
-				pstmt -> {
-					pstmt.setString(1, qvo.getTitle());
-					pstmt.setString(2, qvo.getContent());
-					pstmt.setString(3, qvo.getEmail());
-					pstmt.setString(4, qvo.getPhone());
-					pstmt.setString(5, qvo.getPublicyn());
-					pstmt.setString(6, qvo.getPwd());
-					pstmt.setInt(7, qvo.getQseq());
-				});
+				qvo.getTitle(),
+				qvo.getContent(),
+				qvo.getEmail(),
+				qvo.getPhone(),
+				qvo.getPublicyn(),
+				qvo.getPwd(),
+				qseq);
 
-		return qvo.getQseq();
+		return qseq;
 	}
 
 	/**
@@ -116,9 +103,7 @@ public class QnaDao {
 	 * @param qseq 문의글 번호 (qna sequence)
 	 */
 	public void deleteQna(int qseq) {
-		executeUpdate(
-				"DELETE FROM qna WHERE qseq = ?",
-				pstmt -> pstmt.setInt(1, qseq));
+		update("DELETE FROM qna WHERE qseq = ?", qseq);
 	}
 
 	/**
@@ -128,12 +113,7 @@ public class QnaDao {
 	 * @param reply 답변 내용
 	 */
 	public void updateQnaReply(int qseq, String reply) {
-		executeUpdate(
-				"UPDATE qna SET reply = ? WHERE qseq = ?",
-				pstmt -> {
-					pstmt.setString(1, reply);
-					pstmt.setInt(2, qseq);
-				});
+		update("UPDATE qna SET reply = ? WHERE qseq = ?", reply, qseq);
 	}
 
 	/**
@@ -142,7 +122,7 @@ public class QnaDao {
 	 * @return 문의글 총 개수
 	 */
 	public int getAllCount() {
-		return executeSelectOne("SELECT COUNT(*) FROM qna", rs -> rs.getInt(1));
+		return selectInt("SELECT COUNT(*) FROM qna");
 	}
 
 	/**
@@ -152,26 +132,24 @@ public class QnaDao {
 	 * @param searchWord 검색어
 	 * @return 문의글 목록
 	 */
-	public Object searchQna(Pagination pagination, String searchWord) {
-		return executeSelect(
+	public List<QnaVO> searchQna(Pagination pagination, String searchWord) {
+		return select(
 				"SELECT * FROM qna "
 						+ " WHERE title LIKE CONCAT('%', ?, '%') OR content LIKE CONCAT('%', ?, '%') "
 						+ " ORDER BY qseq DESC LIMIT ? OFFSET ?",
-				pstmt -> {
-					pstmt.setString(1, searchWord);
-					pstmt.setString(2, searchWord);
-					pagination.applyTo(pstmt, 3, 4);
-				},
-				QnaDao::extractQnaVO);
+				searchWord,
+				searchWord,
+				pagination.getLimit(),
+				pagination.getOffset());
 	}
 
 	/**
-	 * 문의글 정보를 ResultSet에서 추출한다.
+	 * ResultSet의 데이터를 통해 QnaVO 객체를 생성합니다.
 	 * 
 	 * @param rs ResultSet 객체
-	 * @return QnaVO 문의글 정보 객체
+	 * @return QnaVO VO 객체
 	 */
-	private static QnaVO extractQnaVO(ResultSet rs) throws SQLException {
+	protected QnaVO parseVO(ResultSet rs) throws SQLException {
 		QnaVO qvo = new QnaVO();
 		qvo.setQseq(rs.getInt("qseq"));
 		qvo.setTitle(rs.getString("title"));
