@@ -14,7 +14,7 @@ public class ArtworkWriteAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("category", ArtworkCategory.values());
-		request.getRequestDispatcher("artwork/artworkWriteForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/artwork/artworkWriteForm.jsp").forward(request, response);
 	}
 
 }
