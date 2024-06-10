@@ -11,7 +11,7 @@
 			<input type="hidden" name="memberIds">
 			<input type="button" value="삭제" onclick="deletePost('adminDeleteGallery', 'li:nth-child(2)')">
 			<input type="text" placeholder="ID 또는 이름으로 검색하세요" name="searchWord" value="${searchWord}">
-			<input type="button" value="검색" onclick="searchAdmin('adminArtworkList')">
+			<input type="button" value="검색" onclick="searchAdmin('adminGalleryList')">
 		</div>
 		<ul class="admin-list-header admin-artwork-list">
 			<li>
