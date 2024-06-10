@@ -66,7 +66,7 @@ public class FavoriteDao extends BaseDao<FavoriteVO> {
 	 * @return FavoriteVO 즐겨찾기 정보 객체
 	 */
 	protected FavoriteVO parseVO(ResultSet rs) throws SQLException {
-		FavoriteVO fvo = FavoriteVO.fromArtwork(ArtworkDao.extractArtworkVO(rs));
+		FavoriteVO fvo = FavoriteVO.fromArtwork(ArtworkDao.getInstance().parseVO(rs));
 		fvo.setMemberId(rs.getString("member_id"));
 		return fvo;
 	}

@@ -10,29 +10,29 @@
 String displayState = request.getParameter("displayState") != null ? request.getParameter("displayState") : "";
 %>
 <section class="admin-list">
-	<form method="post" name="adminForm">
+	<form action="museum.do" method="get" name="adminForm">
 		<div class="admin-list-btn">
-			<input type="hidden" name="memberIds">
+			<input type="hidden" name="command" value="adminArtworkList">
 			<input type="button" value="추가" onclick="location.href='museum.do?command=artworkWrite'">
 			<input type="button" value="수정" onclick="updatePost('artworkUpdate&aseq=', 'li:nth-child(3)')">
 			<input type="button" value="삭제" onclick="deletePost('adminDeleteArtwork', 'li:nth-child(3)')">
 			<input type="text" placeholder="작품명 또는 작가명을 검색하세요" name="searchWord" value="${searchWord}">
-			<input type="button" value="검색" onclick="searchAdmin('adminArtworkList')">
+			<input type="submit" value="검색">
 		</div>
 		<ul class="admin-list-header admin-artwork-list">
 			<li><input type="checkbox" onclick="checkAll()" class="select-all-box"></li>
-			<li><select onchange="displayFilter('adminArtworkList', 'displayState')" name="selectDisplayFilter" class="admin-select">
-					<option value="state">전시 상태</option>
+			<li><select name=displayState class="admin-select" onchange="this.form.submit();">
+					<option value="">전시 상태</option>
 					<option value="Y" <%=displayState.equals("Y") ? "selected" : ""%>>Y</option>
 					<option value="N" <%=displayState.equals("N") ? "selected" : ""%>>N</option>
 			</select></li>
 			<li>번호</li>
-			<li><select onchange="categoryFilter('adminArtworkList', 'artworkCategory', event)" name="selectCategoryFilter" class="admin-select">
-					<option value="state">분류</option>
+			<li><select name="category" class="admin-select" onchange="this.form.submit();">
+					<option value="">분류</option>
 					<c:forEach items="${ArtworkCategory.values()}" var="c">
 						<c:if test="${!c.name().equals('전체')}">
 							<c:choose>
-								<c:when test="${c.name().equals(selectedCategory)}">
+								<c:when test="${c.name().equals(category)}">
 									<option value="${c.name()}" selected>${c.name()}</option>
 								</c:when>
 								<c:otherwise>

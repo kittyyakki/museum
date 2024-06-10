@@ -17,7 +17,7 @@ public class ArtworkViewAction implements Action {
 		int aseq = Integer.parseInt(request.getParameter("aseq"));
 
 		ArtworkDao adao = ArtworkDao.getInstance();
-		ArtworkVO avo = adao.selectArtworkOne(aseq);
+		ArtworkVO avo = adao.get(aseq);
 
 		request.setAttribute("artwork", avo);
 		request.getRequestDispatcher("/WEB-INF/views/artwork/artworkView.jsp").forward(request, response);
