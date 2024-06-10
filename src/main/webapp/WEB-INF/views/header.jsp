@@ -107,7 +107,6 @@
 					<a href="museum.do?command=noticeList">소식지</a>
 					<a href="museum.do?command=galleryList">이용자 갤러리</a>
 					<a href="museum.do?command=qnaList">고객센터</a>
-					<a href="museum.do?command=mypage">마이페이지</a>
 				</div>
 				<div class="header_search">
 					<div>
@@ -130,7 +129,7 @@
 						<a href="museum.do?command=contract&returnUrl=${urlPath}">회원가입</a>
 					</c:when>
 					<c:otherwise>
-						<a href="#">${loginUser.name}(${loginUser.id})</a>
+						<a href="museum.do?command=mypage">${loginUser.name}(${loginUser.id})</a>
 						<span onclick="ajax({command:'logout',returnUrl:'${urlPath}'})">로그아웃</span>
 					</c:otherwise>
 				</c:choose>
