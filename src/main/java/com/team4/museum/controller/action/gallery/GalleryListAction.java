@@ -17,12 +17,19 @@ public class GalleryListAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MemberGalleryDao mgdao = MemberGalleryDao.getInstance();
+		String searchWord = request.getParameter("searchWord");
 		Pagination pagination = Pagination.with(request, mgdao.getGalleryAllCount(), "command=galleryList");
 		pagination.setItemsPerPage(4);
-		List<MemberGalleryVO> list = mgdao.getAllGallery(pagination);
 		
+		List<MemberGalleryVO> galleryList = null;
+		if (searchWord != null) {
+			galleryList = mgdao.searchGallery(pagination, searchWord);
+			request.setAttribute("searchWord", searchWord);
+		}else {
+			galleryList = mgdao.getAllGallery(pagination);
+		}
 		
-		request.setAttribute("galleryList", list);
+		request.setAttribute("galleryList", galleryList);
 		request.setAttribute("pagination", pagination);
 		request.getRequestDispatcher("gallery/galleryList.jsp").forward(request, response);
 	}
