@@ -38,7 +38,7 @@ public class AdminNoticeListAction implements Action {
 
 		request.setAttribute("noticeList", noticeList);
 
-		request.getRequestDispatcher("admin/adminNoticeList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/admin/adminNoticeList.jsp").forward(request, response);
 	}
 
 }

@@ -19,7 +19,7 @@ public class QnaListAction implements Action {
 
 		// 'qnaList'를 'qnaList.jsp'로 전달
 		request.setAttribute("qnaList", qdao.selectQna(pagination));
-		request.getRequestDispatcher("qna/qnaList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/qna/qnaList.jsp").forward(request, response);
 	}
 
 }

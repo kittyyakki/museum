@@ -33,7 +33,7 @@ public class ArtworkUpdateFormAction implements Action {
 
 		HttpSession session = request.getSession();
 		ServletContext context = session.getServletContext();
-		String uploadFilePath = context.getRealPath("images/artwork");
+		String uploadFilePath = context.getRealPath("static/image/artwork");
 
 		File uploadDir = new File(uploadFilePath);
 		if (!uploadDir.exists())

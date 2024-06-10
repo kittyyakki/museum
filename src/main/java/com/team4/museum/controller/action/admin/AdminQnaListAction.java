@@ -31,7 +31,7 @@ public class AdminQnaListAction implements Action {
 			request.setAttribute("qnaList", qdao.selectQna(pagination));
 		}
 
-		request.getRequestDispatcher("admin/adminQnaList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/admin/adminQnaList.jsp").forward(request, response);
 	}
 
 }

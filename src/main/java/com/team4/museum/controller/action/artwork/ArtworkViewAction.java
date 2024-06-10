@@ -20,7 +20,7 @@ public class ArtworkViewAction implements Action {
 		ArtworkVO avo = adao.selectArtworkOne(aseq);
 
 		request.setAttribute("artwork", avo);
-		request.getRequestDispatcher("artwork/artworkView.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/artwork/artworkView.jsp").forward(request, response);
 	}
 
 }

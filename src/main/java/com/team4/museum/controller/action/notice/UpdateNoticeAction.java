@@ -38,7 +38,7 @@ public class UpdateNoticeAction implements Action {
 
 		HttpSession session = request.getSession();
 		ServletContext context = session.getServletContext();
-		String uploadFilePath = context.getRealPath("images");
+		String uploadFilePath = context.getRealPath("static/image/notice");
 		File uploadDir = new File(uploadFilePath);
 		if (!uploadDir.exists())
 			uploadDir.mkdir();

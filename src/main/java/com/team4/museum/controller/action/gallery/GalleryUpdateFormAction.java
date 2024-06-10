@@ -23,7 +23,7 @@ public class GalleryUpdateFormAction implements Action {
 		mgvo.setContent(request.getParameter("content"));
 		mgvo.setAuthorId(request.getParameter("authorid"));
 
-		MultipartFileInfo info = MultipartFileInfo.getFromRequest(request, "images/gallery");
+		MultipartFileInfo info = MultipartFileInfo.getFromRequest(request, "static/image/gallery");
 		if(info.getFileName().equals("") || info.getFileName() == null) {
 			mgdao.updateMemberGalleryWithoutImg(mgvo);
 		}else {

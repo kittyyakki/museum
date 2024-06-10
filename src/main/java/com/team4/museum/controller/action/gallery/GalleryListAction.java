@@ -31,7 +31,7 @@ public class GalleryListAction implements Action {
 		
 		request.setAttribute("galleryList", galleryList);
 		request.setAttribute("pagination", pagination);
-		request.getRequestDispatcher("gallery/galleryList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/gallery/galleryList.jsp").forward(request, response);
 	}
 
 }

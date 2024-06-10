@@ -28,7 +28,7 @@ public class AdminMemberListAction implements Action {
 			request.setAttribute("memberList", mdao.getMemberList(pagination));
 		}
 
-		request.getRequestDispatcher("admin/adminMemberList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/admin/adminMemberList.jsp").forward(request, response);
 	}
 
 }

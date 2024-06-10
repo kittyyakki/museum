@@ -25,7 +25,7 @@ public class GalleryViewAction implements Action{
 		MemberGalleryVO mgvo = mgdao.getMemberGalleryOne(mseq);
 		request.setAttribute("galleryVO", mgvo);
 		
-		request.getRequestDispatcher("gallery/galleryView.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/gallery/galleryView.jsp").forward(request, response);
 	}
 
 }

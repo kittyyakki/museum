@@ -49,7 +49,7 @@ public class AdminArtworkListAction implements Action {
 		}
 
 		request.setAttribute("artworkList", artworkList);
-		request.getRequestDispatcher("admin/adminArtworkList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/admin/adminArtworkList.jsp").forward(request, response);
 	}
 
 }

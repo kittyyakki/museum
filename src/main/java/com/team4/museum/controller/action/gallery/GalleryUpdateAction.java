@@ -18,7 +18,7 @@ public class GalleryUpdateAction implements Action{
 		MemberGalleryVO mgvo = MemberGalleryDao.getInstance().getMemberGalleryOne(mseq);
 		
 		request.setAttribute("mgvo", mgvo);
-		request.getRequestDispatcher("gallery/galleryUpdateForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/gallery/galleryUpdateForm.jsp").forward(request, response);
 	}
 
 }

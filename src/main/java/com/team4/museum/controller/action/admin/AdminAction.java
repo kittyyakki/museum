@@ -12,7 +12,7 @@ public class AdminAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/admin/adminMain.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/admin/adminMain.jsp").forward(request, response);
 	}
 
 }

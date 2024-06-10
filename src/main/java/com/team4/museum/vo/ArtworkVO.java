@@ -102,7 +102,7 @@ public class ArtworkVO {
 			return savefilename;
 		}
 
-		return "images/artwork/" + savefilename;
+		return "static/image/artwork/" + savefilename;
 	}
 
 	public Date getIndate() {

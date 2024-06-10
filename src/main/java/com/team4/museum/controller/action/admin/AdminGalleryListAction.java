@@ -19,7 +19,7 @@ public class AdminGalleryListAction implements Action{
 		
 		
 		request.setAttribute("galleryList", mgdao.getAllGallery(pagination));
-		request.getRequestDispatcher("admin/adminGalleryList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/admin/adminGalleryList.jsp").forward(request, response);
 	}
 
 }

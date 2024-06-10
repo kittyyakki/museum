@@ -34,7 +34,7 @@ public class NoticeListAction implements Action {
 			pagination.setItemCount(ndao.getAllCount());
 			noticeList = ndao.selectNoticeList(pagination);
 		} else if (category.equals(NoticeCategory.매거진.name())) {
-			request.getRequestDispatcher("notice/noticeMagazine.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/notice/noticeMagazine.jsp").forward(request, response);
 			return;
 		} else if (category.equals(NoticeCategory.신문.name())) {
 			request.getRequestDispatcher("notice/noticeNewpaper.jsp").forward(request, response);
@@ -49,7 +49,7 @@ public class NoticeListAction implements Action {
 		request.setAttribute("noticeList", noticeList);
 
 		request.setAttribute("noticeCategory", NoticeCategory.values());
-		request.getRequestDispatcher("notice/noticeList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/notice/noticeList.jsp").forward(request, response);
 
 	}
 

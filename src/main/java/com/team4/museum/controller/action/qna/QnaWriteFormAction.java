@@ -20,7 +20,7 @@ public class QnaWriteFormAction implements Action {
 
 		// 'qnaVO'를 'qnaView.jsp'로 전달
 		request.setAttribute("qnaVO", qnaVO);
-		request.getRequestDispatcher("qna/qnaWriteForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/qna/qnaWriteForm.jsp").forward(request, response);
 	}
 
 }

@@ -26,7 +26,7 @@ public class MyPageFavoriteListAction implements Action {
 		Pagination pagination = Pagination.with(request, fdao.getCount(memberId), "command=mypageFavoriteList");
 
 		request.setAttribute("artworkList", fdao.selectFavorite(memberId, pagination));
-		request.getRequestDispatcher("member/mypage/mypageFavoriteList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/member/mypage/mypageFavoriteList.jsp").forward(request, response);
 	}
 
 }

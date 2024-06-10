@@ -59,7 +59,7 @@ public class MuseumServlet extends HttpServlet {
 		if (ac == null) {
 			// 요청된 액션이 존재하지 않는 경우 404 페이지로 포워딩
 			System.out.println("Action not found : " + command);
-			request.getRequestDispatcher("util/404.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/util/404.jsp").forward(request, response);
 			return;
 		}
 		System.out.println(ac.getClass().getSimpleName());

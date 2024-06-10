@@ -59,7 +59,7 @@ public class ArtworkListAction implements Action {
 
 		// 분류명 목록을 배열로 전달
 		request.setAttribute("artworkCategory", ArtworkCategory.values());
-		request.getRequestDispatcher("artwork/artworkList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/artwork/artworkList.jsp").forward(request, response);
 	}
 
 }

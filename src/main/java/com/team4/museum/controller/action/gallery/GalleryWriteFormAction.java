@@ -28,7 +28,7 @@ public class GalleryWriteFormAction implements Action {
 
 		HttpSession session = request.getSession();
 		ServletContext context = session.getServletContext();
-		String uploadFilePath = context.getRealPath("images/gallery");
+		String uploadFilePath = context.getRealPath("static/image/gallery");
 
 		File uploadDir = new File(uploadFilePath);
 		if (!uploadDir.exists())
