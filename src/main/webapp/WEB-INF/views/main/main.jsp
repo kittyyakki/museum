@@ -80,6 +80,24 @@
 			</div>
 		</div>
 	</div>
+	<div data-aos="fade-up" data-aos-offset="200" data-aos-delay="50" data-aos-duration="500" data-aos-easing="ease-in" id="main-center_slide02">
+	<div class="main_inner_center02">
+		<div id="main-center-imgs02">
+			<img src="static/image/main/main_image1.png"> <img src="static/image/main/main_image2.jpg"> <img src="static/image/main/main_image3.jpg"> <img src="static/image/main/main_image4.jpg"> <img src="static/image/main/main_image5.jpg"> <img src="static/image/main/main_image6.jpg"> <img src="static/image/main/main_image7.jpg"> <img src="static/image/main/main_image8.jpg">
+		</div>
+	</div>
+</div>
+<div id="main-center-remote02">
+	<div class="selected"></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div>▶</div>
+</div>
 	</div>
 <!----------------------------------------- 좌우로 이동하는 슬라이드 --------------------------------------->
 <div data-aos="fade-up" data-aos-offset="200" data-aos-delay="50" data-aos-duration="500" data-aos-easing="ease-in" class="main-middle-container">

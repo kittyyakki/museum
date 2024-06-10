@@ -298,6 +298,60 @@
 	
 }
 
+/* side slide */
+#main-center_slide02 {
+	position: relative;
+	width: 70%; /* Adjusted to your requirement */
+	height: 600px;
+	margin: 0 auto;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#main-center-imgs02 {
+	position: relative;
+	width: 100%; /* Adjusted to fit the container width */
+	height: 100%; /* Adjusted to fit the container height */
+	display: flex;
+	transition: left 1s; /* Smooth transition */
+}
+
+#main-center-imgs02 img {
+	width: 100%; /* Ensure each image takes up 70% of the container */
+	height: auto; /* Maintain aspect ratio */
+	margin: 0 auto; /* Center the images horizontally */
+}
+
+#main-center-remote02 {
+	position: absolute;
+	width: 100%;
+	height: 50px;
+	bottom: 26px;
+	right: -27%;
+	display: flex;
+	justify-content: center; /* Center the navigation dots */
+}
+
+#main-center-remote02 div {
+	width: 20px;
+	height: 20px;
+	background: white;
+	border-radius: 50%;
+	margin: 15px 7px;
+	text-align: center;
+	line-height: 17px;
+	font-weight: bold;
+	cursor: pointer;
+	border: 1px solid #ccc;
+}
+
+#main-center-remote02 .selected {
+	background: #ccc;
+	border: 1px solid #ccc;
+}
+
 
 
 /* 아래 움직이는 슬라이드 */
