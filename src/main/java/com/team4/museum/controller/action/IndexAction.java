@@ -10,7 +10,7 @@ public class IndexAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("main.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/main/main.jsp").forward(request, response);
 	}
 
 }

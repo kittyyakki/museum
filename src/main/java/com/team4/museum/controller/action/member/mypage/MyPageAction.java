@@ -15,7 +15,7 @@ public class MyPageAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (isLogined(request, response)) {
-			request.getRequestDispatcher("member/mypage/mypage.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/member/mypage/mypage.jsp").forward(request, response);
 		}
 	}
 

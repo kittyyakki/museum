@@ -37,7 +37,7 @@ public class InsertNoticeAction implements Action {
 		nvo.setCategory(request.getParameter("category"));
 
 		ServletContext context = session.getServletContext();
-		String uploadFilePath = context.getRealPath("images");
+		String uploadFilePath = context.getRealPath("static/image/notice");
 
 		// 저장경로 생성
 		File uploadDir = new File(uploadFilePath);

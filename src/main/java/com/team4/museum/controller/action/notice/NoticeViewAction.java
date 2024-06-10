@@ -24,7 +24,7 @@ public class NoticeViewAction implements Action {
 		NoticeVO nvo = ndao.getNotice(nseq);
 
 		request.setAttribute("noticeView", nvo);
-		request.getRequestDispatcher("notice/noticeView.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/notice/noticeView.jsp").forward(request, response);
 	}
 
 }

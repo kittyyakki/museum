@@ -17,7 +17,7 @@ public class GalleryWriteAction implements Action {
 		if (LoginAjaxAction.isLogined(request, response)) {
 			MemberVO mvo = LoginAjaxAction.getLoginUserFrom(request);
 			request.setAttribute("mvo", mvo);
-			request.getRequestDispatcher("gallery/galleryWriteForm.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/gallery/galleryWriteForm.jsp").forward(request, response);
 		}
 	}
 

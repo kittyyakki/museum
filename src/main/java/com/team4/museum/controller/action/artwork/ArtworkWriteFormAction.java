@@ -26,7 +26,7 @@ public class ArtworkWriteFormAction implements Action {
 		avo.setDisplayyn(request.getParameter("displayYn"));
 		avo.setContent(request.getParameter("content"));
 
-		MultipartFileInfo info = MultipartFileInfo.getFromRequest(request, "images/artwork");
+		MultipartFileInfo info = MultipartFileInfo.getFromRequest(request, "static/image/artwork");
 		avo.setImage(info.getFileName());
 		avo.setSavefilename(info.getSaveFileName());
 

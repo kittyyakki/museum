@@ -21,7 +21,7 @@ public class UpdateNoticeFormAction implements Action {
 		NoticeVO nvo = ndao.getNotice(nseq);
 
 		request.setAttribute("noticeUpdate", nvo);
-		request.getRequestDispatcher("notice/updateNoticeForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/notice/updateNoticeForm.jsp").forward(request, response);
 	}
 
 }

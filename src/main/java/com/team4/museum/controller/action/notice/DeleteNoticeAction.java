@@ -16,7 +16,7 @@ public class DeleteNoticeAction implements Action {
 		int nseq = Integer.parseInt(request.getParameter("nseq"));
 		NoticeDao.getInstance().deleteNotice(nseq);
 
-		request.getRequestDispatcher("notice/noticeDeleteOk.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/notice/noticeDeleteOk.jsp").forward(request, response);
 	}
 
 }
