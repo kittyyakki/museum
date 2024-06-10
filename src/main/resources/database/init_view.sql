@@ -14,17 +14,6 @@ FROM member_gallery
 ORDER BY member_gallery.writedate;
 
 
-CREATE OR REPLACE VIEW review_view AS
-SELECT rseq,
-       author as author_id,
-       name   as author_name,
-       title,
-       writedate,
-       content
-FROM review
-         INNER JOIN member ON review.author = member.id
-ORDER BY review.writedate;
-
 
 CREATE OR REPLACE VIEW favorite_view AS
 SELECT id AS member_id, artwork.*
@@ -32,10 +21,14 @@ FROM favorite_artwork
          INNER JOIN artwork ON favorite_artwork.aseq = artwork.aseq
 ORDER BY favorite_artwork.writedate;
 
+
+
 -- START TOGGLE_FAVORITE_ARTWORK PROCEDURE
+DROP PROCEDURE IF EXISTS toggle_favorite_artwork;
+
 DELIMITER //
 
-CREATE PROCEDURE IF NOT EXISTS toggle_favorite_artwork(
+CREATE PROCEDURE toggle_favorite_artwork(
     IN input_id VARCHAR(45),
     IN input_aseq INT UNSIGNED,
     OUT result BOOLEAN
@@ -66,4 +59,5 @@ BEGIN
 END //
 
 DELIMITER ;
+
 -- END TOGGLE_FAVORITE_ARTWORK PROCEDURE
