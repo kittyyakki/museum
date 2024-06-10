@@ -20,6 +20,8 @@ public class AdminMemberListAction implements Action {
 
 		Pagination pagination = Pagination.with(request, mdao.getAllCount(), "command=adminMemberList");
 		if (searchWord != null) {
+			pagination.setItemCount(mdao.getSearchCount(searchWord));
+			pagination.setUrlTemplate("museum.do?command=adminMemberList&page=%d&searchWord=" + searchWord);
 			request.setAttribute("memberList", mdao.searchMemberList(pagination, searchWord));
 			request.setAttribute("searchWord", searchWord);
 		} else {

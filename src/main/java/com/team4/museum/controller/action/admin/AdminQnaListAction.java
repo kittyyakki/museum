@@ -20,6 +20,8 @@ public class AdminQnaListAction implements Action {
 
 		Pagination pagination = Pagination.with(request, qdao.getAllCount(), "command=adminQnaList");
 		if (searchWord != null) {
+			/* pagination.setItemCount(qdao.getSearchCount(searchWord)); */
+			pagination.setUrlTemplate("museum.do?command=adminQnaList&page=%d&searchWord=" + searchWord);
 			request.setAttribute("qnaList", qdao.searchQna(pagination, searchWord));
 
 		} else if (isReply != null) {

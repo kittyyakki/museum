@@ -79,11 +79,6 @@ public class MemberDao {
 		executeUpdate("DELETE FROM member WHERE id = ?", pstmt -> pstmt.setString(1, id));
 	}
 
-	public int getAllCount() {
-		return executeSelectOne(
-				"SELECT COUNT(*) as cnt FROM member",
-				rs -> rs.getInt("cnt"));
-	}
 
 	public void adminRightsAction(String memberId, String action) {
 		executeUpdate(
@@ -92,6 +87,13 @@ public class MemberDao {
 					pstmt.setString(1, action.equals("grant") ? "Y" : "N");
 					pstmt.setString(2, memberId);
 				});
+	}
+	
+	/* 카운트 메서드 =================>*/
+	public int getAllCount() {
+		return executeSelectOne(
+				"SELECT COUNT(*) as cnt FROM member",
+				rs -> rs.getInt("cnt"));
 	}
 
 	private static MemberVO extractMemberVO(ResultSet rs) throws SQLException {
@@ -104,6 +106,18 @@ public class MemberDao {
 		mvo.setPhone(rs.getString("phone"));
 		mvo.setAdminyn(rs.getString("adminyn"));
 		return mvo;
+	}
+
+	public int getSearchCount(String searchWord) {
+		return executeSelectOne("SELECT COUNT(*) as cnt FROM member "
+				+ "WHERE id LIKE CONCAT('%', ?, '%') "
+				+ "OR name LIKE CONCAT('%', ?, '%') "
+				+ "OR email LIKE CONCAT('%', ?, '%') ",
+				pstmt->{
+					pstmt.setString(1, searchWord);
+					pstmt.setString(2, searchWord);
+					pstmt.setString(3, searchWord);
+				},rs -> rs.getInt("cnt"));
 	}
 
 }

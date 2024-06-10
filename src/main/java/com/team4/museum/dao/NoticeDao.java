@@ -82,35 +82,6 @@ final public class NoticeDao {
 				pstmt -> pstmt.setInt(1, nseq));
 	}
 
-	public int getNoticeCount() {
-		return executeSelectOne(
-				"SELECT COUNT(*) AS cnt FROM notice",
-				rs -> rs.getInt("cnt"));
-	}
-
-	public int getNoticeCount(String category) {
-		return executeSelectOne(
-				"SELECT COUNT(*) AS cnt FROM notice WHERE category = ?",
-				pstmt -> pstmt.setString(1, category),
-				rs -> rs.getInt("cnt"));
-	}
-
-	public int getReplyCount(int nseq) {
-		int count = 0;
-		con = Db.getConnection();
-		String sql = "SELECT COUNT(*) AS cnt FROM reply WHERE nseq=?";
-		try {
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, nseq);
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			Db.close(con, pstmt, rs);
-		}
-		return count;
-	}
-
 	public void plusReadCount(int nseq) {
 		con = Db.getConnection();
 		String sql = "UPDATE notice SET readcount=readcount+1 WHERE nseq=?";
@@ -167,5 +138,34 @@ final public class NoticeDao {
 		notice.setCategory(rs.getString("category"));
 		return notice;
 	}
+	
+	/* 카운트 메서드 */
+	public int getAllCount() {
+		return executeSelectOne(
+				"SELECT COUNT(*) AS cnt FROM notice",
+				rs -> rs.getInt("cnt"));
+	}
 
+	
+	public int getNoticeCount(String category) {
+		return executeSelectOne(
+				"SELECT COUNT(*) AS cnt FROM notice WHERE category = ?",
+				pstmt -> pstmt.setString(1, category),
+				rs -> rs.getInt("cnt"));
+	}
+
+	public int getSearchCount(String searchWord) {
+		return executeSelectOne("SELECT COUNT(*) as cnt FROM notice "
+				+ "WHERE (title LIKE CONCAT('%', ?, '%') OR content LIKE CONCAT('%', ?, '%')) ",
+				pstmt->{
+					pstmt.setString(1, searchWord);
+					pstmt.setString(2, searchWord);
+				},rs -> rs.getInt("cnt"));
+	}
+
+	public int getCategoryCount(String category) {
+		return executeSelectOne("SELECT COUNT(*) as cnt FROM notice WHERE category=?",
+				pstmt->	pstmt.setString(1, category),
+				rs -> rs.getInt("cnt"));
+	}
 }

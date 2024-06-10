@@ -118,6 +118,19 @@ public class MemberGalleryDao {
 	}
 
 
+	public List<MemberGalleryVO> searchGallery(Pagination pagination, String searchWord) {
+		
+		return executeSelect(
+				"SELECT * FROM member_gallery " + " WHERE (title LIKE CONCAT('%', ?, '%') OR content LIKE CONCAT('%', ?, '%')) "
+						+ " ORDER BY aseq DESC LIMIT ? OFFSET ?",
+				pstmt -> {
+					pstmt.setString(1, searchWord);
+					pstmt.setString(2, searchWord);
+					pagination.applyTo(pstmt, 3, 4);
+				}, MemberGalleryDao::extractMemberGalleryVO);
+	}
+
+
 
 }
 

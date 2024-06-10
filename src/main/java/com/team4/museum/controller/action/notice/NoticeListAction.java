@@ -31,7 +31,7 @@ public class NoticeListAction implements Action {
 		Pagination pagination = Pagination.with(request, 0, "command=noticeList&category=" + category);
 		List<NoticeVO> noticeList = ndao.selectNoticeList(pagination);
 		if (category.equals(NoticeCategory.전체.name())) {// 전체목록 조회
-			pagination.setItemCount(ndao.getNoticeCount());
+			pagination.setItemCount(ndao.getAllCount());
 			noticeList = ndao.selectNoticeList(pagination);
 		} else if (category.equals(NoticeCategory.매거진.name())) {
 			request.getRequestDispatcher("/WEB-INF/views/notice/noticeMagazine.jsp").forward(request, response);
