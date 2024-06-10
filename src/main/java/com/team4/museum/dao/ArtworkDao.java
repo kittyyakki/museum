@@ -155,4 +155,8 @@ public class ArtworkDao extends BaseDao<ArtworkVO> {
 		return avo;
 	}
 
+	public List<ArtworkVO> getRandomList() {
+		return select("SELECT * FROM museum.artwork ORDER BY RAND() LIMIT 6");
+	}
+
 }
