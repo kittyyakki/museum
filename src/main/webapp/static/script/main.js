@@ -62,3 +62,12 @@ function swiperRun(swiper) {
 	selectImage(0);
 	togglePlay();
 }
+
+
+window.addEventListener('load', function() {
+	// 스와이퍼 컨테이너 요소 배열
+	var swipers = document.querySelectorAll('.main-swiper');
+	for (var i = 0; i < swipers.length; i++) {
+		swiperRun(swipers[i]);
+	}
+});
