@@ -73,7 +73,6 @@ public class InsertNoticeAction implements Action {
 		}
 
 		ndao.insertNotice(nvo);
-		// System.out.println(ndao.insertNotice(nvo));
 		response.sendRedirect("museum.do?command=noticeList");
 
 	}
