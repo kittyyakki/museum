@@ -73,11 +73,12 @@
 </div>
 
 <!-- -- 알립니다 -- -->
-<div class="main_notice_wrap_alarm">
+<div data-aos="fade-up" data-aos-offset="200" data-aos-delay="50" data-aos-duration="500" data-aos-easing="ease-in" class="main_notice_wrap_alarm">
 	<h3 class="notice-tit">
 		<i></i>
 		<a href="/site/main/archive/united/category/128">알립니다</a>
 	</h3>
+	<div class="main_notice_inner">
 	<div class="notice-area">
 		<div class="notice_content">
 			<div class="notice_tabBtn">
@@ -90,11 +91,11 @@
 				<ul>
 
 					<c:forEach items="${noticeList}" var="n">
-						<div class="row">
-							<div class="col col_title">
+						<div class="main_notice_inner_row">
+							<div class="col_col_title">
 								<a href="museum.do?command=noticeView&nseq=${n.nseq}"> ${n.content} </a>
 							</div>
-							<div class="col col_date">
+							<div class="col_col_date">
 								<fmt:formatDate value="${n.writedate}" pattern="yyyy-MM-dd" />
 							</div>
 						</div>
@@ -105,31 +106,24 @@
 		</div>
 	</div>
 	<div data-aos="fade-up" data-aos-offset="200" data-aos-delay="50" data-aos-duration="500" data-aos-easing="ease-in" id="main-center_slide02">
-		<div class="main_inner_center02">
-			<div id="main-center-imgs02">
-				<img src="static/image/main/main_image1.png">
-				<img src="static/image/main/main_image2.jpg">
-				<img src="static/image/main/main_image3.jpg">
-				<img src="static/image/main/main_image4.jpg">
-				<img src="static/image/main/main_image5.jpg">
-				<img src="static/image/main/main_image6.jpg">
-				<img src="static/image/main/main_image7.jpg">
-				<img src="static/image/main/main_image8.jpg">
-			</div>
+	<div class="main_inner_center02">
+		<div id="main-center-imgs02">
+			<img src="static/image/main/side_img01.jpg"> 
+			<img src="static/image/main/side_img02.jpg"> 
+			<img src="static/image/main/side_img03.jpg"> 
+			<img src="static/image/main/side_img04.jpg"> 
 		</div>
 	</div>
-	<div id="main-center-remote02">
-		<div class="selected"></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div>▶</div>
-	</div>
 </div>
+<div id="main-center-remote02">
+	<div class="selected"></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div>▶</div>
+</div>
+	</div>
+	</div>
 <!----------------------------------------- 좌우로 이동하는 슬라이드 --------------------------------------->
 <div data-aos="fade-up" data-aos-offset="200" data-aos-duration="500" data-aos-easing="linear" class="main-middle-container">
 	<div class="container-box">

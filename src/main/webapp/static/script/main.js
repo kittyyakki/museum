@@ -39,6 +39,48 @@ $(function() {
 });
 
 
+$(function() {
+	var imgNum = 0;
+	var timer;
+	var state = false;
+	$('#main-center-remote02 div').click(
+		function() {
+			var idx = $(this).index();
+			var dist;
+			if (idx == 4) { // 자동 버튼
+				if (state == false) { // 자동동작 멈춤상태
+					state = true;
+					$('#main-center-remote02 div:eq(4)').html('||');
+					timer = window.setInterval(function() {
+						imgNum++;
+						if (imgNum > 3)
+							imgNum = 0;
+						dist = -100 * imgNum; // 너비 비율을 100%로 설정
+						$('#main-center-imgs02').animate({
+							left: dist + '%'
+						}, 1000);
+						$('#main-center-remote02 div').removeClass('selected');
+						$('#main-center-remote02 div').eq(imgNum).addClass('selected');
+					}, 3500);
+				} else { // 자동동작 상태
+					state = false;
+					$('#main-center-remote02 div:eq(4)').html('▶');
+					window.clearInterval(timer);
+				}
+			} else {
+				imgNum = idx;
+				dist = -100 * imgNum; // 너비 비율을 100%로 설정
+				$('#main-center-imgs02').animate({
+					left: dist + '%'
+				}, 1000);
+			}
+			$('#main-center-remote02 div').removeClass('selected');
+			$('#main-center-remote02 div').eq(imgNum).addClass('selected');
+		});
+});
+
+
+
 let container = document.querySelector('.image-list');
 container.id = 'container1';
 
@@ -54,3 +96,6 @@ document.querySelector('#container2').style.left = document.querySelector('.imag
 
 container.classList.add('original');
 clone.classList.add('clone');
+
+
+
