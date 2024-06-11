@@ -23,6 +23,8 @@ public class GalleryListAction implements Action {
 		
 		List<MemberGalleryVO> galleryList = null;
 		if (searchWord != null) {
+			pagination.setItemCount(mgdao.getSearchCount(searchWord));
+			pagination.setUrlTemplate("command=galleryList&searchWord=" + searchWord);
 			galleryList = mgdao.searchGallery(pagination, searchWord);
 			request.setAttribute("searchWord", searchWord);
 		}else {
