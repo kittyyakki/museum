@@ -49,7 +49,7 @@ function deleteNotice(pwd, nseq) {
 	var inputpwd = prompt('삭제에 필요한 비밀번호를 입력하세요', '');
 	if (pwd != inputpwd) {
 		alert('비밀번호가 일치하지 않습니다');
-		location.href = 'museum.do?command=loginForm';
+		return;
 	} else {
 		location.href = 'museum.do?command=deleteNotice&nseq=' + nseq;
 	}
