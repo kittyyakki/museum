@@ -3,6 +3,7 @@ package com.team4.museum.controller.action.artwork;
 import java.io.IOException;
 
 import com.team4.museum.controller.action.Action;
+import com.team4.museum.controller.action.member.LoginAjaxAction;
 import com.team4.museum.dao.ArtworkDao;
 
 import jakarta.servlet.ServletException;
@@ -13,6 +14,10 @@ public class ArtworkDisplaySetAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if (!LoginAjaxAction.isAdmin(request)) {
+			return;
+		}
+
 		int aseq = Integer.parseInt(request.getParameter("aseq"));
 		ArtworkDao.getInstance().displayChangeArtwork(aseq);
 
