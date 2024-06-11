@@ -6,10 +6,10 @@
 </jsp:include>
 <main class="gallery-list">
 	<section class="gallery-list-header">
-		<form action="museum.do?command=galleryList" method="post" name="searchForm" class="">
+		<form action="museum.do?command=galleryList" method="post" name="searchForm">
 			<h1>갤러리 검색</h1>
 			<div>
-				<input type="text" placeholder="컬렉션명을 검색하세요" name="searchWord" class="" value="${searchWord}">
+				<input type="text" placeholder="제목 또는 내용을 검색하세요" name="searchWord" value="${searchWord}">
 				<input type="submit" value="검색" onclick="return go_search()" class="artwork-search-form_btn">
 			</div>
 		</form>
@@ -21,10 +21,8 @@
 		</div>
 		<div class="gallery-list-main-content">
 			<c:forEach items="${galleryList}" var="mgvo">
-				<div
-					onclick="location.href='museum.do?command=galleryView&mseq=${mgvo.mseq}'">
-					<img src="static/image/gallery/${mgvo.savefilename}"
-						alt="member_gallery_image" />
+				<div onclick="location.href='museum.do?command=galleryView&mseq=${mgvo.mseq}'">
+					<img src="static/image/gallery/${mgvo.savefilename}" alt="member_gallery_image" />
 					<div class="gallery-list-main-content_info">
 						<h1 class="glmc_info-title">${mgvo.title}</h1>
 						<p class="glmc_info-name">${mgvo.authorName}님의갤러리</p>
