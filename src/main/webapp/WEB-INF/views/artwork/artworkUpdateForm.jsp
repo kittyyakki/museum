@@ -10,36 +10,46 @@
 		<div class="artwork-write-form_info">
 			<ul>
 				<li>
-					<div>작가명</div> <input type="text" name="artist" value="${artwork.artist}" onchange="changeValue('unknownArtist')"> <c:choose>
+					<div>작가명</div>
+					<input type="text" name="artist" value="${artwork.artist}" onchange="changeValue('unknownArtist')">
+					<c:choose>
 						<c:when test="${artwork.artist.equals('작자미상')}">
 							<input type="checkbox" name="unknownArtist" onclick="artistUnknown()" id="unknownArtist" checked="checked">
 						</c:when>
 						<c:otherwise>
 							<input type="checkbox" name="unknownArtist" onclick="artistUnknown()" id="unknownArtist">
 						</c:otherwise>
-					</c:choose> <label for="unknownArtist" class="unknown-label">작자미상</label>
+					</c:choose>
+					<label for="unknownArtist" class="unknown-label">작자미상</label>
 				</li>
 				<li>
-					<div>작품명</div> <input type="text" name="artname" value="${artwork.name}">
+					<div>작품명</div>
+					<input type="text" name="artname" value="${artwork.name}">
 				</li>
 				<li>
-					<div>제작연도</div> <input type="text" name="year" value="${artwork.year}" onchange="changeValue('unknownYear')"> <c:choose>
+					<div>제작연도</div>
+					<input type="text" name="year" value="${artwork.year}" maxlength="4" onchange="changeValue('unknownYear')">
+					<c:choose>
 						<c:when test="${artwork.year.equals('연도미상')}">
 							<input type="checkbox" name="unknownYear" onclick="yearUnknown()" id="unknownYear" checked="checked">
 						</c:when>
 						<c:otherwise>
 							<input type="checkbox" name="unknownYear" onclick="yearUnknown()" id="unknownYear">
 						</c:otherwise>
-					</c:choose> <label for="unknownYear" class="unknown-label">연도미상</label>
+					</c:choose>
+					<label for="unknownYear" class="unknown-label">연도미상</label>
 				</li>
 				<li>
-					<div>재료</div> <input type="text" name="material" value="${artwork.material}">
+					<div>재료</div>
+					<input type="text" name="material" value="${artwork.material}">
 				</li>
 				<li>
-					<div>규격</div> <input type="text" name="size" value="${artwork.size}">
+					<div>규격</div>
+					<input type="text" name="size" value="${artwork.size}">
 				</li>
 				<li>
-					<div>부문</div> <select name="category">
+					<div>부문</div>
+					<select name="category">
 						<c:forEach items="${category}" var="c" varStatus="status">
 							<c:choose>
 								<c:when test="${status.index ==0}">
@@ -53,10 +63,11 @@
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
-				</select>
+					</select>
 				</li>
 				<li>
-					<div>전시상태</div> <c:choose>
+					<div>전시상태</div>
+					<c:choose>
 						<c:when test="${artwork.displayyn.equals('Y')}">
 							<input type="radio" name="displayYn" value="Y" id="displayOn" checked="checked">
 							<label for="displayOn">공개</label>
@@ -72,9 +83,12 @@
 					</c:choose>
 				</li>
 				<li>
-					<div>이미지 등록</div> <input type="file" name="image" accept="image/*" onchange="previewImage()">
+					<div>이미지 등록</div>
+					<input type="file" name="image" accept="image/*" onchange="previewImage()">
 				</li>
-				<li><img alt="image" src="${artwork.fullSavefilename}" name="uploadedImage"></li>
+				<li>
+					<img alt="image" src="${artwork.fullSavefilename}" name="uploadedImage">
+				</li>
 			</ul>
 			<div>
 				<div>작품설명</div>
