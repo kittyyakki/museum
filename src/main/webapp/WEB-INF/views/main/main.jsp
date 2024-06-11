@@ -88,21 +88,19 @@
 				<button type="button" class="btn " onClick="location.href='museum.do?command=noticeList&category=신문'">신문</button>
 			</div>
 			<div class="notice_inner">
-				<ul>
-
-					<c:forEach items="${noticeList}" var="n">
-						<div class="main_notice_inner_row">
-							<div class="col_col_title">
-								<a href="museum.do?command=noticeView&nseq=${n.nseq}"> ${n.content} </a>
-							</div>
-							<div class="col_col_date">
-								<fmt:formatDate value="${n.writedate}" pattern="yyyy-MM-dd" />
-							</div>
-						</div>
-					</c:forEach>
-
-				</ul>
-			</div>
+    <ul>
+        <c:forEach items="${noticeList}" var="n">
+            <li class="main_notice_inner_row">
+                <div class="col_col_title">
+                    <a href="museum.do?command=noticeView&nseq=${n.nseq}"> ${n.content} </a>
+                </div>
+                <div class="col_col_date">
+                    <fmt:formatDate value="${n.writedate}" pattern="yyyy-MM-dd" />
+                </div>
+            </li>
+        </c:forEach>
+    </ul>
+</div>
 		</div>
 	</div>
 	<div data-aos="fade-up" data-aos-offset="200" data-aos-delay="50" data-aos-duration="500" data-aos-easing="ease-in" id="main-center_slide02">
