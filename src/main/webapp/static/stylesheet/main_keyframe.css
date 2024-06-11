@@ -1,7 +1,5 @@
 @charset "UTF-8";
 
-@import url("./main_keyframe.css");
-
 /* 옆으로 넘어가는 슬라이드 */
 .main-swiper {
 	position: relative;
@@ -266,41 +264,40 @@
 
 .notice_inner .main_notice_inner_row {
 	display: flex;
-	position: relative;
-	padding-left: 15px;
-	/* adjust as needed to provide space for the circle */
+    position: relative;
+    padding-left: 15px; /* adjust as needed to provide space for the circle */
 }
 
 .notice_inner .col_col_title a::before {
-	content: '';
-	width: 6px;
-	height: 6px;
-	border-radius: 50%;
-	background-color: #222;
-	position: absolute;
-	left: 0;
-	top: 50%;
-	transform: translateY(-50%);
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #222;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .notice_inner .col_col_title a {
-	text-decoration: none; /* 기본적으로 밑줄 제거 */
+    text-decoration: none; /* 기본적으로 밑줄 제거 */
 }
 
 .notice_inner .col_col_title a:hover {
-	text-decoration: underline; /* 마우스 올렸을 때 밑줄 추가 */
+    text-decoration: underline; /* 마우스 올렸을 때 밑줄 추가 */
 }
 
 .notice_inner .col_col_title a::before {
-	content: '';
-	width: 6px;
-	height: 6px;
-	border-radius: 50%;
-	background-color: #222;
-	position: absolute;
-	left: 0;
-	top: 50%;
-	transform: translateY(-50%);
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #222;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .col_col_title {
@@ -462,6 +459,69 @@
 #main-center-remote02 .selected {
 	background: #ccc;
 	border: 1px solid #ccc;
+}
+
+/* 아래 움직이는 슬라이드 *//* 아래 움직이는 슬라이드 */
+@keyframes container1 {
+  0%{
+    transform: translateX(0);
+  }
+
+  50% {
+    transform:
+      translateX(100%);
+  }
+
+  50.01% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform:
+      translateX(0);
+  }
+}
+
+@keyframes container2 {
+  0%{
+    transform: translateX(-200%);
+  }
+
+  100% {
+    transform:
+      translateX(0);
+  }
+}
+
+@keyframes container3 {
+  0% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform:
+      translateX(-100%);
+  }
+
+  50.01% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform:
+      translateX(0);
+  }
+}
+
+@keyframes container4 {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform:
+      translateX(-200%);
+  }
 }
 
 #container1 {
