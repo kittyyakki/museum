@@ -24,6 +24,7 @@
 	</div>
 	<div class="mypage_button_wrapper">
 		<a class="mypage_button" href="museum.do?command=mypageEditForm"> 개인정보수정 </a>
+		<a class="mypage_button" href="museum.do?command=withdrawForm"> 회원탈퇴 </a>
 		<a class="mypage_button" href="museum.do?command=mypageFavoriteList"> 관심예술품 </a>
 	</div>
 </main>
