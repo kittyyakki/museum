@@ -2,7 +2,6 @@ package com.team4.museum.controller;
 
 import com.team4.museum.controller.action.Action;
 import com.team4.museum.controller.action.IndexAction;
-import com.team4.museum.controller.action.admin.AdminMainAction;
 import com.team4.museum.controller.action.admin.AdminArtworkListAction;
 import com.team4.museum.controller.action.admin.AdminDeleteArtworkAction;
 import com.team4.museum.controller.action.admin.AdminDeleteGalleryAction;
@@ -10,6 +9,7 @@ import com.team4.museum.controller.action.admin.AdminDeleteMemberAction;
 import com.team4.museum.controller.action.admin.AdminDeleteNoticeAction;
 import com.team4.museum.controller.action.admin.AdminDeleteQnaAction;
 import com.team4.museum.controller.action.admin.AdminGalleryListAction;
+import com.team4.museum.controller.action.admin.AdminMainAction;
 import com.team4.museum.controller.action.admin.AdminMemberListAction;
 import com.team4.museum.controller.action.admin.AdminNoticeListAction;
 import com.team4.museum.controller.action.admin.AdminQnaListAction;
@@ -36,6 +36,8 @@ import com.team4.museum.controller.action.member.JoinFormAction;
 import com.team4.museum.controller.action.member.LoginAjaxAction;
 import com.team4.museum.controller.action.member.LoginFormAction;
 import com.team4.museum.controller.action.member.LogoutAjaxAction;
+import com.team4.museum.controller.action.member.WithdrawAjaxAction;
+import com.team4.museum.controller.action.member.WithdrawFormAction;
 import com.team4.museum.controller.action.member.mypage.MyPageAction;
 import com.team4.museum.controller.action.member.mypage.MyPageEditAjaxAction;
 import com.team4.museum.controller.action.member.mypage.MyPageEditFormAction;
@@ -86,6 +88,9 @@ public class ActionFactory {
 		case "mypageFavorite" -> new MyPageFavoriteAjaxAction();
 		case "mypageFavoriteList" -> new MyPageFavoriteListAction();
 		case "contract" -> new ContractAcion();
+		case "withdrawForm" -> new WithdrawFormAction();
+		case "withdraw" -> new WithdrawAjaxAction();
+
 		// artwork actions
 		case "artworkList" -> new ArtworkListAction();
 		case "artworkView" -> new ArtworkViewAction();
