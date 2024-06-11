@@ -1,6 +1,9 @@
 @charset "UTF-8";
 
 .qna-write {
+	--color-success: #1D1D1D;
+	--color-failure: #1D1D1D;
+	--color-primary: #1D1D1D;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -65,13 +68,13 @@
 }
 
 .qna-write_input-wrapper:has(:focus) {
-	border-color: #1DBD7D;
-	box-shadow: 0 2px 0 0 #1DBD7D;
+	border-color: var(--color-success);
+	box-shadow: 0 2px 0 0 var(--color-success);
 }
 
 .qna-write_input-wrapper:has(:invalid) {
-	border-color: #F18181;
-	box-shadow: 0 1px 0 0 #F18181;
+	border-color: var(--color-failure);
+	box-shadow: 0 1px 0 0 var(--color-failure);
 }
 
 .qna-write_input-wrapper input, .qna-write_input-wrapper textarea {
@@ -136,19 +139,19 @@
 	font-weight: bold;
 	padding: 0.5rem;
 	color: white;
-	background: #F18181;
+	background: var(--color-failure);
 	cursor: pointer;
 }
 
 .qna-write_input-wrapper input[type="checkbox"]:checked::after {
 	content: '[공개]';
 	color: white;
-	background: #1DBD7D;
+	background: var(--color-success);
 }
 
 .qna-write_input-wrapper ::selection {
 	color: #F1F1F1;
-	background-color: #1DBD7D;
+	background-color: var(--color-success);
 }
 
 .qna-write_input-wrapper label {
@@ -173,11 +176,11 @@
 
 .qna-write_input-wrapper :focus+label, .qna-write_input-wrapper :valid+label
 	{
-	color: #1DBD7D !important;
+	color: var(--color-success) !important;
 }
 
 .qna-write_input-wrapper :invalid:not(:placeholder-shown)+label {
-	color: #F18181 !important;
+	color: var(--color-failure) !important;
 }
 
 @media only screen and (min-width: 768px) {
@@ -242,15 +245,11 @@
 }
 
 .qna-write_button+label:has(.upload) {
-	background: #1DBD7D;
-}
-
-.qna-write_button+label:has(.delete) {
-	background: #F18181;
+	background: #A1F1A1;
 }
 
 .qna-write_button+label:has(.cancel) {
-	background: #F1D100;
+	background: #A1A1F1;
 }
 
 .qna-write_button-wrapper:hover .qna-write_button+label {

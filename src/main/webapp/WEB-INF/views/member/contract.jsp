@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/WEB-INF/views/header.jsp">
-	<jsp:param name="stylesheet" value="static/stylesheet/member/NewFile.css" />
+	<jsp:param name="stylesheet" value="static/stylesheet/member/contract.css" />
 	<jsp:param name="script" value="static/script/member.js" />
 </jsp:include>
 <main class="contract-form-wrapper">
