@@ -3,6 +3,7 @@ package com.team4.museum.controller;
 import com.team4.museum.controller.action.Action;
 import com.team4.museum.controller.action.IndexAction;
 import com.team4.museum.controller.action.admin.AdminArtworkListAction;
+import com.team4.museum.controller.action.admin.AdminDbResetAjaxAction;
 import com.team4.museum.controller.action.admin.AdminDeleteArtworkAction;
 import com.team4.museum.controller.action.admin.AdminDeleteGalleryAction;
 import com.team4.museum.controller.action.admin.AdminDeleteMemberAction;
@@ -142,6 +143,7 @@ public class ActionFactory {
 		case "adminDeleteNotice" -> new AdminDeleteNoticeAction();
 		case "adminDeleteGallery" -> new AdminDeleteGalleryAction();
 		case "adminDeleteQna" -> new AdminDeleteQnaAction();
+		case "adminDbReset" -> new AdminDbResetAjaxAction();
 
 		// default
 		default -> null;
