@@ -14,12 +14,6 @@
 			<input type="button" value="관리자 권한 부여" onclick="adminRightsAction('grant')">
 			<input type="button" value="관리자 권한 해제" onclick="adminRightsAction('revoke')">
 			<input type="button" value="회원 삭제" onclick="deletePost('adminDeleteMember', 'li:nth-child(2)>span:first-child')">
-			<select class="admin-select" name="searchFieldName">
-				<option>분류</option>
-				<option value="id">ID</option>
-				<option value="name">이름</option>
-				<option value="email">Email</option>
-			</select>
 			<input type="text" placeholder="검색어를 입력하세요" name="searchWord" value="${searchWord}">
 			<input type="button" value="검색" onclick="searchAdmin('adminMemberList')">
 		</div>
