@@ -21,6 +21,16 @@
 			<div class="notice_update_field">
 				<label>카테고리</label>
 				<textarea name="category" rows="10" cols="100">${noticeUpdate.category}</textarea>
+				<%-- <select name="category" id="category">
+					<option value="">선택하세요</option>
+					<c:forEach items="${noticeCategory}" var="category">
+						<c:choose>
+							<c:when test="${category.name() == '공지사항' || category.name() == '이벤트' }">
+								<option value="${category.name()}">${category.name()}</option>
+							</c:when>
+						</c:choose>
+					</c:forEach>
+				</select> --%>
 			</div>
 			<input type="hidden" name="oldimage" value="${noticeUpdate.image}" /> <input type="hidden" name="oldsavefilename" value="${noticeUpdate.savefilename}" />
 			<div class="notice_update_field_btn">
