@@ -50,7 +50,7 @@
 </div>
 
 <!-- -- 알립니다 -- -->
-<div class="main_notice_wrap_alarm">
+<div data-aos="fade-up" data-aos-offset="200" data-aos-delay="50" data-aos-duration="500" data-aos-easing="ease-in" class="main_notice_wrap_alarm">
 	<h3 class="notice-tit">
 		<i></i><a href="/site/main/archive/united/category/128">알립니다</a>
 	</h3>
