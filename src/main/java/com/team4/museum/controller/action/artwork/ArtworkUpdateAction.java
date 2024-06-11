@@ -30,7 +30,7 @@ public class ArtworkUpdateAction implements Action {
 		}
 
 		request.setAttribute("artwork", avo);
-		request.setAttribute("ArtworkCategoryValues", ArtworkCategory.values());
+		request.setAttribute("category", ArtworkCategory.values());
 		request.getRequestDispatcher("/WEB-INF/views/artwork/artworkUpdateForm.jsp").forward(request, response);
 	}
 
