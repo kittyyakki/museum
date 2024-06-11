@@ -15,6 +15,10 @@
 	text-rendering: optimizeLegibility;
 }
 
+html {
+	overflow-x: hidden;
+}
+
 html, body {
 	height: 100%;
 }

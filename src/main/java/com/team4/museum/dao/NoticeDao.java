@@ -31,7 +31,7 @@ final public class NoticeDao {
 
 	public List<NoticeVO> selectNoticeList(Pagination pagination) {
 		return executeSelect(
-				"SELECT * FROM notice LIMIT ? OFFSET ? ",
+				"SELECT * FROM notice ORDER BY nseq DESC LIMIT ? OFFSET ? ",
 				pagination::applyTo,
 				NoticeDao::extractNoticeVO);
 	}

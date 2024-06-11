@@ -25,12 +25,12 @@ public class LoginAjaxAction extends AjaxAction {
 		// 입력된 'id'에 해당하는 사용자 계정이 없는 경우
 		MemberVO mvo = MemberDao.getInstance().getMember(id);
 		if (mvo == null) {
-			return notFound("존재하지 않는 아이디입니다");
+			return badRequest("ID 혹은 비밀번호가 일치하지 않습니다"); // 보안을 위해 ID 존재 여부를 알리지 않음
 		}
 
 		// 입력된 'pwd'가 사용자 계정의 비밀번호와 일치하지 않는 경우
 		if (!mvo.getPwd().equals(pwd)) {
-			return badRequest("비밀번호가 일치하지 않습니다");
+			return badRequest("ID 혹은 비밀번호가 일치하지 않습니다");
 		}
 
 		// 로그인 성공 시 세션에 로그인 정보를 저장
