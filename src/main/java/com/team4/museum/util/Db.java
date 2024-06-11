@@ -1,10 +1,14 @@
 package com.team4.museum.util;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +53,63 @@ public class Db {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	public static void executeSqlFile(String sqlFilePath) {
+		try (Connection connection = getConnection();
+				Statement statement = connection.createStatement()) {
+
+			connection.setAutoCommit(false); // 자동 커밋 비활성화
+
+			// SQL 파일 읽기
+			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+			InputStream inputStream = classLoader.getResourceAsStream(sqlFilePath);
+			if (inputStream == null) {
+				throw new IllegalArgumentException("SQL file not found: " + sqlFilePath);
+			}
+
+			try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+				StringBuilder sql = new StringBuilder();
+				String line;
+				String delimiter = ";"; // 기본 구분자
+
+				while ((line = reader.readLine()) != null) {
+					line = line.trim();
+					if (line.startsWith("DELIMITER ")) {
+						delimiter = line.substring(10).trim();
+						continue;
+					}
+					sql.append(line).append("\n");
+					if (line.endsWith(delimiter)) {
+						String sqlCommand = sql.toString();
+						if (!sqlCommand.trim().isEmpty()) {
+							addBatch(statement, sqlCommand, delimiter);
+						}
+						sql.setLength(0); // StringBuilder 초기화
+					}
+				}
+
+				// 남은 마지막 쿼리 실행
+				if (sql.length() > 0) {
+					addBatch(statement, sql.toString(), delimiter);
+				}
+
+				// 배치 실행
+				statement.executeBatch();
+				connection.commit();
+				System.out.println("SQL file executed successfully : " + sqlFilePath);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void addBatch(Statement statement, String sqlCommand, String delimiter) throws SQLException {
+		for (String command : sqlCommand.split(delimiter)) {
+			if (!command.trim().isEmpty()) {
+				statement.addBatch(command.trim());
+			}
 		}
 	}
 
