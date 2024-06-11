@@ -37,7 +37,7 @@ public class ArtworkListAction implements Action {
 				request,
 				adao.getCount(category, "Y", searchWord),
 				"command=artworkList"
-						+ "&artworkCategory=" + category
+						+ "&category=" + category
 						+ "&displayState=" + "Y"
 						+ "&searchWord=" + searchWord);
 
