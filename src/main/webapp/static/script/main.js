@@ -39,24 +39,6 @@ $(function() {
 });
 
 
-let container = document.querySelector('.image-list');
-container.id = 'container1';
-
-let clone = container.cloneNode(true)
-
-clone.id = 'container2';
-
-document.querySelector('.container-box').appendChild(clone);
-
-document.querySelector('#container1').style.left = '0px';
-document.querySelector('#container2').style.left = document.querySelector('.image-list').offsetWidth + 'px';
-
-
-container.classList.add('original');
-clone.classList.add('clone');
-
-
-
 $(function() {
 	var imgNum = 0;
 	var timer;
@@ -96,3 +78,24 @@ $(function() {
 			$('#main-center-remote02 div').eq(imgNum).addClass('selected');
 		});
 });
+
+
+
+let container = document.querySelector('.image-list');
+container.id = 'container1';
+
+let clone = container.cloneNode(true)
+
+clone.id = 'container2';
+
+document.querySelector('.container-box').appendChild(clone);
+
+document.querySelector('#container1').style.left = '0px';
+document.querySelector('#container2').style.left = document.querySelector('.image-list').offsetWidth + 'px';
+
+
+container.classList.add('original');
+clone.classList.add('clone');
+
+
+
