@@ -107,7 +107,7 @@
 					<a href="museum.do?command=galleryList">이용자 갤러리</a>
 					<a href="museum.do?command=qnaList">고객센터</a>
 				</div>
-				<div class="header_search">
+				<!-- <div class="header_search">
 					<div>
 						<input type="text" placeholder="검색어를 입력하세요">
 					</div>
@@ -116,7 +116,7 @@
 							<img src="static/image/header/btn_search_open.png" alt="검색">
 						</a>
 					</div>
-				</div>
+				</div> -->
 			</div>
 			<div class="login_join_box">
 				<c:choose>
@@ -124,11 +124,11 @@
 						<c:if test="${not empty returnUrl}">
 							<c:set var="urlPath" value="${returnUrl}" />
 						</c:if>
-						<a href="museum.do?command=loginForm&returnUrl=${urlPath}">로그인</a>
+						<a href="museum.do?command=loginForm&returnUrl=${urlPath}" class="login-join-box_btn">로그인</a>
 						<a href="museum.do?command=contract&returnUrl=${urlPath}">회원가입</a>
 					</c:when>
 					<c:otherwise>
-						<a href="museum.do?command=mypage">${loginUser.name}(${loginUser.id})</a>
+						<a href="museum.do?command=mypage" class="login-join-box_btn">${loginUser.name}(${loginUser.id})</a>
 						<span onclick="ajax({command:'logout',returnUrl:'${urlPath}'})">로그아웃</span>
 					</c:otherwise>
 				</c:choose>
