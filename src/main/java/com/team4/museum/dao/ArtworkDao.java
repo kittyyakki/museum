@@ -46,12 +46,12 @@ public class ArtworkDao extends BaseDao<ArtworkVO> {
 		return update(
 				"UPDATE artwork SET artist=?, name=?, year=?, material=?, size=?, category=?, displayyn=?, content=?, image=?, savefilename=? "
 						+ " WHERE aseq=?",
-				avo.getName(),
-				avo.getCategory(),
 				avo.getArtist(),
+				avo.getName(),
 				avo.getYear(),
 				avo.getMaterial(),
 				avo.getSize(),
+				avo.getCategory(),
 				avo.getDisplayyn(),
 				avo.getContent(),
 				avo.getImage(),
