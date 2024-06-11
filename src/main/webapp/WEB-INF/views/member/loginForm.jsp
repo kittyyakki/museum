@@ -24,7 +24,7 @@
 		</div>
 		<div class="btn">
 			<input type="submit" value="로그인" required>
-			<input type="button" value="회원가입" onclick="location.href='museum.do?command=joinForm'" required>
+			<input type="button" value="회원가입" onclick="location.href='museum.do?command=contract'" required>
 			<input type="button" value="아이디 찾기" onclick="" required>
 		</div>
 	</form>
