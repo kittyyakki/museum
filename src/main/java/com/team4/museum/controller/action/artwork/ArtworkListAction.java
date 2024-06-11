@@ -1,18 +1,15 @@
 package com.team4.museum.controller.action.artwork;
 
 import java.io.IOException;
-import java.util.List;
 
 import com.team4.museum.controller.action.Action;
 import com.team4.museum.dao.ArtworkDao;
 import com.team4.museum.util.ArtworkCategory;
 import com.team4.museum.util.Pagination;
-import com.team4.museum.vo.ArtworkVO;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 public class ArtworkListAction implements Action {
 
@@ -27,8 +24,11 @@ public class ArtworkListAction implements Action {
 		request.setAttribute("searchWord", searchWord);
 
 		// 빈 파라미터를 빈 문자열로 치환합니다.
-		if (ArtworkCategory.전체.name().equals(category)) {
+		if (category == null || ArtworkCategory.전체.name().equals(category)) {
 			category = "";
+		}
+		if (searchWord == null) {
+			searchWord = "";
 		}
 
 		// 예술품 목록 및 페이지네이션을 저장합니다.
