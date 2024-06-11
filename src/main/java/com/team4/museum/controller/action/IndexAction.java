@@ -19,14 +19,17 @@ public class IndexAction implements Action {
 		NoticeDao ndao = NoticeDao.getInstance();
 		ArtworkDao adao = ArtworkDao.getInstance();
 
-		for (int i = 1; i <= 4; i++) {
-			List<ArtworkVO> randomArtworkList = adao.getRandomList();
-			request.setAttribute("artworkList" + i, randomArtworkList);
-		}
-
+		// 최근 공지사항 5개 불러오기
 		List<NoticeVO> noticeList = ndao.getRecentNotice();
 		request.setAttribute("noticeList", noticeList);
 
+		// 랜덤 예술품 24개 불러오기 (4행 6열)
+		List<ArtworkVO> randomArtworkList = adao.getRandomList(24);
+		for (int i = 0; i < 4; ++i) {
+			request.setAttribute("artworkList" + (i + 1), randomArtworkList.subList(i * 6, i * 6 + 6));
+		}
+
+		// main.jsp로 포워딩
 		request.getRequestDispatcher("/WEB-INF/views/main/main.jsp").forward(request, response);
 	}
 
