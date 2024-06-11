@@ -107,16 +107,6 @@
 					<a href="museum.do?command=galleryList">이용자 갤러리</a>
 					<a href="museum.do?command=qnaList">고객센터</a>
 				</div>
-				<!-- <div class="header_search">
-					<div>
-						<input type="text" placeholder="검색어를 입력하세요">
-					</div>
-					<div>
-						<a class="btn_icon" href="#" title="검색">
-							<img src="static/image/header/btn_search_open.png" alt="검색">
-						</a>
-					</div>
-				</div> -->
 			</div>
 			<div class="login_join_box">
 				<c:choose>
@@ -133,39 +123,20 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
-			<%-- 			<div class="artwork sub-menu">
-				<!-- request.setAttribute("kindList", ArtworkKind.values()); -->
-				<c:forEach items="${ArtworkCategory.values()}" var="category">
-					<a href="museum.do?command=artwork&category=${category.name()}">${category.name()}</a>
-				</c:forEach>
-			</div>
-			<div class="notice sub-menu">
-				<c:forEach items="${NoticeCategory.values()}" var="category">
-					<a href="museum.do?command=notice&category=${category.name()}">${category.name()}</a>
-				</c:forEach>
-			</div>  --%>
 		</nav>
 	</header>
 	<div class="header_gnb_list_containner">
 		<div>
-			<a href="museum.do?command=artworkList">전체</a>
-			<a href="museum.do?command=artworkList&category=회화">회화</a>
-			<a href="museum.do?command=artworkList&category=드로잉">드로잉</a>
-			<a href="museum.do?command=artworkList&category=판화">판화</a>
-			<a href="museum.do?command=artworkList&category=조각ㆍ설치">조각/설치</a>
-			<a href="museum.do?command=artworkList&category=사진">사진</a>
-			<a href="museum.do?command=artworkList&category=공예">공예</a>
-			<a href="museum.do?command=artworkList&category=디자인">디자인</a>
-			<a href="museum.do?command=artworkList&category=서예">서예</a>
+			<c:forEach items="${ArtworkCategory.values()}" var="category">
+					<a href="museum.do?command=artwork&category=${category.name()}">${category.name()}</a>
+			</c:forEach>
 		</div>
 	</div>
 	<div class="header_gnb_list_containner01">
 		<div>
-			<a href="museum.do?command=noticeList&category=전체">전체</a>
-			<a href="museum.do?command=noticeList&category=공지사항">공지사항</a>
-			<a href="museum.do?command=noticeList&category=이벤트">이벤트</a>
-			<a href="museum.do?command=noticeList&category=매거진">매거진</a>
-			<a href="museum.do?command=noticeList&category=신문">신문</a>
+			<c:forEach items="${NoticeCategory.values()}" var="category">
+					<a href="museum.do?command=notice&category=${category.name()}">${category.name()}</a>
+			</c:forEach>
 		</div>
 	</div>
 	<script>
