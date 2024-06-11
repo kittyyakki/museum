@@ -80,6 +80,10 @@
 	}
 }
 
+#main-notice-swiper {
+	width: 35%;
+}
+
 /* 관람시간 관람료 오시는길 예약하기 */
 /* Main Section Text */
 .main-section_text {
@@ -345,7 +349,7 @@
 }
 
 .notice-area {
-	width: 50%;
+	width: 65%;
 }
 
 .notice_tabBtn {

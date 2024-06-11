@@ -49,7 +49,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="main-swiper" data-aos="fade-up" data-aos-offset="200" data-aos-delay="50" data-aos-duration="500" data-aos-easing="ease-in">
+		<div id="main-notice-swiper" class="main-swiper" data-aos="fade-up" data-aos-offset="200" data-aos-delay="50" data-aos-duration="500" data-aos-easing="ease-in">
 			<div class="main-swiper_image-container">
 				<img src="static/image/main/side_img01.jpg">
 				<img src="static/image/main/side_img02.jpg">
