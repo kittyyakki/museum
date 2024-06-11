@@ -125,38 +125,6 @@ header a:hover::after {
 	transform-origin: left;
 }
 
-.header_search {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: 40%;
-	height: 40px;
-	margin-left: 12%;
-	color: #1D1D1D;
-	border-bottom: 1px solid #ccc;
-	padding: 5px;
-	border-radius: 5px;
-}
-
-.header_search input[type="text"] {
-	flex: 1;
-	padding: 8px;
-	border: none;
-	border-radius: 5px;
-	outline: none;
-}
-
-.header_search .btn_icon {
-	width: 30px; /* 버튼의 고정된 너비 */
-	height: 30px; /* 버튼의 고정된 높이 */
-	background-color: transparent; /* 배경 투명으로 설정 */
-	background-size: cover;
-	background-position: center;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-}
-
 .login_join_box {
 	font-size: 1.1rem;
 	position: absolute;
@@ -165,6 +133,10 @@ header a:hover::after {
 	margin-left: auto;
 	font-weight:bold;
 }
+ 
+.login-join-box_btn{
+ 	margin-right: 1rem;
+ }
  
 .artwork, .notice {
 	margin-top: 1rem;

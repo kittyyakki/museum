@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.team4.museum.controller.action.Action;
 import com.team4.museum.dao.ArtworkDao;
+import com.team4.museum.util.ArtworkCategory;
 import com.team4.museum.util.Pagination;
 import com.team4.museum.util.Security;
 
@@ -31,8 +32,14 @@ public class AdminArtworkListAction implements Action {
 		request.setAttribute("searchWord", searchWord);
 
 		// 빈 파라미터를 빈 문자열로 치환합니다.
-		if ("분류".equals(category)) {
-			category = null;
+		if (category == null || ArtworkCategory.전체.name().equals(category)) {
+			category = "";
+		}
+		if (searchWord == null) {
+			searchWord = "";
+		}
+		if(displayState == null){
+			displayState = "";
 		}
 
 		// 예술품 목록 및 페이지네이션을 저장합니다.
