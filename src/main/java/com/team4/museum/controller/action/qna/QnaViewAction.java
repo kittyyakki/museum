@@ -6,6 +6,7 @@ import static com.team4.museum.controller.action.qna.QnaAccessValidator.getValid
 import java.io.IOException;
 
 import com.team4.museum.controller.action.Action;
+import com.team4.museum.util.Security;
 import com.team4.museum.vo.QnaVO;
 
 import jakarta.servlet.ServletException;
@@ -18,10 +19,8 @@ public class QnaViewAction implements Action {
 		// 'RESTRICT' 접근 조건을 만족하는 문의글 정보를 가져옴
 		QnaVO qnaVO = getValidatedQna(request, RESTRICT);
 
-		// 'qnaVO'가 null 이면 잘못된 요청임을 표시하고 뒤로 가기 실행
-		if (qnaVO == null) {
-			response.setContentType("text/html; charset=UTF-8");
-			response.getWriter().write("<script>alert('잘못된 요청입니다.'); history.back();</script>");
+		// 'qnaVO'가 null 이면 404 페이지로 포워딩
+		if (!Security.trueOr404Forward(qnaVO != null, request, response)) {
 			return;
 		}
 

@@ -3,8 +3,10 @@ package com.team4.museum.controller.action.artwork;
 import java.io.IOException;
 
 import com.team4.museum.controller.action.Action;
+import com.team4.museum.controller.action.member.LoginAjaxAction;
 import com.team4.museum.dao.ArtworkDao;
 import com.team4.museum.util.MultipartFileInfo;
+import com.team4.museum.util.Security;
 import com.team4.museum.vo.ArtworkVO;
 
 import jakarta.servlet.ServletException;
@@ -15,7 +17,11 @@ public class ArtworkWriteFormAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArtworkDao adao = ArtworkDao.getInstance();
+		// 관리자 권한이 없으면 404 페이지로 포워딩
+		if (!Security.adminOr404Forward(request, response)) {
+			return;
+		}
+
 		ArtworkVO avo = new ArtworkVO();
 		avo.setName(request.getParameter("artname"));
 		avo.setCategory(request.getParameter("category"));
@@ -30,7 +36,7 @@ public class ArtworkWriteFormAction implements Action {
 		avo.setImage(info.getFileName());
 		avo.setSavefilename(info.getSaveFileName());
 
-		adao.insertArtwork(avo);
+		ArtworkDao.getInstance().insertArtwork(avo);
 		request.getRequestDispatcher("museum.do?command=artworkList").forward(request, response);
 	}
 

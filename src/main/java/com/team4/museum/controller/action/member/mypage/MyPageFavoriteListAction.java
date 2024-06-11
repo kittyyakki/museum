@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class MyPageFavoriteListAction implements Action {
 
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 로그인 정보가 없으면 로그인 페이지로 이동
 		MemberVO mvo = getLoginUser(request, response);
 		if (mvo == null) {
 			return;

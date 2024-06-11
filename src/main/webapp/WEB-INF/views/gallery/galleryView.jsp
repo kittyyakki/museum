@@ -14,11 +14,11 @@
 </script> -->
 
 <section class="gallery-view">
+	<h1>${galleryVO.title}</h1>
 	<ul class="gallery-header">
-		<h1>${galleryVO.title}</h1>
 		<li>${galleryVO.content}</li>
 		<li>
-			<a href="location.href='museum.do?command=memberGallery?mseq=${galleryVO.authorId}'"> ${galleryVO.authorId}님의 갤러리
+			<a href="museum.do?command=memberGallery?mseq=${galleryVO.authorId}"> ${galleryVO.authorId}님의 갤러리
 			</a>
 		</li>
 		<li>
