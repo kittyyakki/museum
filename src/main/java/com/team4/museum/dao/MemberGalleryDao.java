@@ -99,7 +99,6 @@ public class MemberGalleryDao extends BaseDao<MemberGalleryVO>{
 		mgvo.setReadcount(rs.getInt("readcount"));
 		mgvo.setImage(rs.getString("image"));
 		mgvo.setSavefilename(rs.getString("savefilename"));
-		mgvo.setLikecount(rs.getInt("likecount"));
 		return mgvo;
 	}
 
@@ -152,7 +151,6 @@ public class MemberGalleryDao extends BaseDao<MemberGalleryVO>{
 		mgvo.setReadcount(rs.getInt("readcount"));
 		mgvo.setImage(rs.getString("image"));
 		mgvo.setSavefilename(rs.getString("savefilename"));
-		mgvo.setLikecount(rs.getInt("likecount"));
 		return mgvo;
 	}
 

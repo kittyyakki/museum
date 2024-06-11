@@ -13,7 +13,6 @@ public class MemberGalleryVO {
 	private int readcount;
 	private String image;
 	private String savefilename;
-	private int likecount;
 
 	public int getMseq() {
 		return mseq;
@@ -85,14 +84,6 @@ public class MemberGalleryVO {
 
 	public void setSavefilename(String savefilename) {
 		this.savefilename = savefilename;
-	}
-
-	public int getLikecount() {
-		return likecount;
-	}
-
-	public void setLikecount(int likecount) {
-		this.likecount = likecount;
 	}
 
 }

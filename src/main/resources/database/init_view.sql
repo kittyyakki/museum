@@ -7,8 +7,7 @@ SELECT mseq,
        content,
        readcount,
        image,
-       savefilename,
-       likecount
+       savefilename
 FROM member_gallery
          INNER JOIN member ON member_gallery.author = member.id
 ORDER BY member_gallery.writedate;

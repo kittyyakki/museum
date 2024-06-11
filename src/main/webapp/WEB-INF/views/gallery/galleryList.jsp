@@ -26,7 +26,7 @@
 					<div class="gallery-list-main-content_info">
 						<h1 class="glmc_info-title">${mgvo.title}</h1>
 						<p class="glmc_info-name">${mgvo.authorName}님의갤러리</p>
-						<span>조회수 : ${mgvo.readcount}</span> <span>좋아요 : ${mgvo.likecount}</span>
+						<span>조회수 : ${mgvo.readcount}</span>
 					</div>
 				</div>
 			</c:forEach>

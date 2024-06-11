@@ -13,7 +13,6 @@
 		</li>
 		<li>
 			<span>조회수 ${galleryVO.readcount}</span>
-			<span>| 좋아요 ${galleryVO.likecount}</span>
 			<span>
 				<script type="text/javascript" src="https://ssl.pstatic.net/share/js/naver_sharebutton.js"></script>
 				<script type="text/javascript">
