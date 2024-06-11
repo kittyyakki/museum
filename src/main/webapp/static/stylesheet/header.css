@@ -83,7 +83,7 @@ header nav {
 	display: flex;
 	position: relative;
 	align-items: center;
-	font-size: 1.1rem;
+	font-size: 1.4rem;
 	margin-left: 0px;
 	width: 100%;
 	font-weight: bold;
@@ -163,7 +163,7 @@ header a:hover::after {
 }
 
 .login_join_box {
-	font-size: 1rem;
+	font-size: 1.1rem;
 	position: absolute;
 	top: -14px;
 	right: 0px;
