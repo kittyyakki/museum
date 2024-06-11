@@ -31,7 +31,7 @@ public class GalleryDeleteAction implements Action {
 		}
 
 		mgdao.deleteMemberGallery(mseq);
-		request.getRequestDispatcher("museum.do?command=galleryList").forward(request, response);
+		response.sendRedirect("museum.do?command=galleryList");
 	}
 
 }

@@ -25,7 +25,7 @@ public class AdminDeleteQnaAction implements Action {
 			QnaDao.getInstance().deleteQna(Integer.parseInt(qseq));
 		}
 
-		request.getRequestDispatcher("museum.do?command=adminQnaList").forward(request, response);
+		response.sendRedirect("museum.do?command=adminQnaList");
 	}
 
 }

@@ -25,7 +25,7 @@ public class AdminDeleteNoticeAction implements Action {
 			NoticeDao.getInstance().deleteNotice(Integer.parseInt(nseq));
 		}
 
-		request.getRequestDispatcher("museum.do?command=adminNoticeList").forward(request, response);
+		response.sendRedirect("museum.do?command=adminNoticeList");
 	}
 
 }

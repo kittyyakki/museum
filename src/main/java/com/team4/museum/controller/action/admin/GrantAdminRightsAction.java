@@ -27,7 +27,7 @@ public class GrantAdminRightsAction implements Action {
 			MemberDao.getInstance().adminRightsAction(Id, action);
 		}
 
-		request.getRequestDispatcher("museum.do?command=adminMemberList").forward(request, response);
+		response.sendRedirect("museum.do?command=adminMemberList");
 	}
 
 }

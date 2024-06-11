@@ -25,7 +25,7 @@ public class AdminDeleteMemberAction implements Action {
 			MemberDao.getInstance().deleteMember(mseq);
 		}
 
-		request.getRequestDispatcher("museum.do?command=adminMemberList").forward(request, response);
+		response.sendRedirect("museum.do?command=adminMemberList");
 	}
 
 }

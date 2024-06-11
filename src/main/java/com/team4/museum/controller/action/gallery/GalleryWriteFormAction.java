@@ -62,7 +62,7 @@ public class GalleryWriteFormAction implements Action {
 		}
 
 		mgdao.insertMemberGallery(mgvo);
-		request.getRequestDispatcher("museum.do?command=galleryList").forward(request, response);
+		response.sendRedirect("museum.do?command=galleryList");
 
 	}
 

@@ -20,7 +20,7 @@ public class ArtworkDeleteAction implements Action {
 		}
 
 		ArtworkDao.getInstance().deleteArtwork(Integer.parseInt(request.getParameter("aseq")));
-		request.getRequestDispatcher("museum.do?command=artworkList").forward(request, response);
+		response.sendRedirect("museum.do?command=artworkList");
 	}
 
 }

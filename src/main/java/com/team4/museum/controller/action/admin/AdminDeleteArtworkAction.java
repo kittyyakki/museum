@@ -25,7 +25,7 @@ public class AdminDeleteArtworkAction implements Action {
 			ArtworkDao.getInstance().deleteArtwork(Integer.parseInt(aseq));
 		}
 
-		request.getRequestDispatcher("museum.do?command=adminArtworkList").forward(request, response);
+		response.sendRedirect("museum.do?command=adminArtworkList");
 	}
 
 }

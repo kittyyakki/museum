@@ -25,7 +25,7 @@ public class AdminDeleteGalleryAction implements Action {
 			MemberGalleryDao.getInstance().deleteMemberGallery(Integer.parseInt(mseq));
 		}
 
-		request.getRequestDispatcher("museum.do?command=adminMemberGalleryList").forward(request, response);
+		response.sendRedirect("museum.do?command=adminGalleryList");
 	}
 
 }

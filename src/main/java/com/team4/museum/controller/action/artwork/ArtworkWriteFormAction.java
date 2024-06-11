@@ -37,7 +37,7 @@ public class ArtworkWriteFormAction implements Action {
 		avo.setSavefilename(info.getSaveFileName());
 
 		ArtworkDao.getInstance().insertArtwork(avo);
-		request.getRequestDispatcher("museum.do?command=artworkList").forward(request, response);
+		response.sendRedirect("museum.do?command=artworkList");
 	}
 
 }

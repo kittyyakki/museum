@@ -46,7 +46,7 @@ public class GalleryUpdateFormAction implements Action {
 		System.out.println("getFileName : " + info.getFileName());
 		System.out.println("getSaveFileName : " + info.getSaveFileName());
 
-		request.getRequestDispatcher("museum.do?command=galleryView&mseq=" + mseq).forward(request, response);
+		response.sendRedirect("museum.do?command=galleryView&mseq=" + mseq);
 	}
 
 }

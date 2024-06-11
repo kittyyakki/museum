@@ -71,7 +71,7 @@ public class ArtworkUpdateFormAction implements Action {
 		}
 
 		ArtworkDao.getInstance().updateArtwork(avo);
-		request.getRequestDispatcher("museum.do?command=artworkView&aseq=" + aseq).forward(request, response);
+		response.sendRedirect("museum.do?command=artworkView&aseq=" + aseq);
 	}
 
 }

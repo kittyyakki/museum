@@ -22,7 +22,7 @@ public class ArtworkDisplaySetAction implements Action {
 		int aseq = Integer.parseInt(request.getParameter("aseq"));
 		ArtworkDao.getInstance().displayChangeArtwork(aseq);
 
-		request.getRequestDispatcher("museum.do?command=artworkView&aseq=" + aseq).forward(request, response);
+		response.sendRedirect("museum.do?command=artworkView&aseq=" + aseq);
 	}
 
 }
