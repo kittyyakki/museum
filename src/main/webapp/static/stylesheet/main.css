@@ -273,6 +273,7 @@
 	position: relative;
 	padding-left: 15px;
 	/* adjust as needed to provide space for the circle */
+	line-height: 1rem;
 }
 
 .notice_inner .col_col_title a::before {
@@ -289,6 +290,7 @@
 
 .notice_inner .col_col_title a {
 	text-decoration: none; /* 기본적으로 밑줄 제거 */
+	line-height: 2.25rem;
 }
 
 .notice_inner .col_col_title a:hover {
@@ -309,7 +311,6 @@
 
 .col_col_title {
 	width: 70%;
-	margin-bottom: 20px;
 	display: -webkit-box;
 	padding-left: 1rem;
 	word-break: break-all;
