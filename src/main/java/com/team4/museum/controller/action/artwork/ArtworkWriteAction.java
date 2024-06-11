@@ -21,14 +21,6 @@ public class ArtworkWriteAction implements Action {
 			return;
 		}
 
-		int aseq = Integer.parseInt(request.getParameter("aseq"));
-		ArtworkVO avo = ArtworkDao.getInstance().get(aseq);
-
-		// 예술품 정보가 없으면 404 페이지로 포워딩
-		if (!Security.trueOr404Forward(avo != null, request, response)) {
-			return;
-		}
-
 		request.setAttribute("category", ArtworkCategory.values());
 		request.getRequestDispatcher("/WEB-INF/views/artwork/artworkWriteForm.jsp").forward(request, response);
 	}
