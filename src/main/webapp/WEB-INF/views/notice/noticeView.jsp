@@ -10,7 +10,7 @@
 	<div class="noticeView_box">
 		<div class="noticeView_field">
 			<div class="noticeView_label">작성자</div>
-			<div class="noticeView_text">${loginUser.id}</div>
+			<div class="noticeView_text">${noticeView.author}</div>
 		</div>
 		<div class="noticeView_field">
 			<div class="noticeView_label">제목</div>
