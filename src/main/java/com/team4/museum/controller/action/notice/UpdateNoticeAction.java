@@ -8,6 +8,7 @@ import java.util.Calendar;
 
 import com.team4.museum.controller.action.Action;
 import com.team4.museum.dao.NoticeDao;
+import com.team4.museum.util.Security;
 import com.team4.museum.vo.MemberVO;
 import com.team4.museum.vo.NoticeVO;
 
@@ -22,14 +23,19 @@ public class UpdateNoticeAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		NoticeDao ndao = NoticeDao.getInstance();
-		NoticeVO nvo = new NoticeVO();
-
-		MemberVO mvo = getLoginUser(request, response);
-		if (mvo == null) { // 조건을 달아준다.
+		// 관리자 권한이 없으면 404 페이지로 포워딩
+		if (!Security.adminOr404Forward(request, response)) {
 			return;
 		}
 
+		// 로그인 정보가 없는 경우 로그인 페이지로 이동
+		MemberVO mvo = getLoginUser(request, response);
+		if (mvo == null) {
+			return;
+		}
+
+		NoticeDao ndao = NoticeDao.getInstance();
+		NoticeVO nvo = new NoticeVO();
 		nvo.setNseq(Integer.parseInt(request.getParameter("nseq")));
 		nvo.setAuthor(mvo.getId());
 		nvo.setTitle(request.getParameter("title"));
