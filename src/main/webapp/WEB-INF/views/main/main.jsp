@@ -19,35 +19,10 @@
 	</div>
 	<div class="main-swiper_remote-container"></div>
 </div>
-<div class="main-section_text">
-	<ul class="main-info-area">
-		<li class="main_info"><strong class="main_info-tit">관람시간</strong>
-			<div class="main_info-txt info-time">
-				<ul>
-					<li><strong>월/화/목/금/일</strong> <span>10:00 ~ 18:00&nbsp;&nbsp;&nbsp;</span></li>
-					<li><strong>수/토</strong> <span>10:00 ~ 21:00</span></li>
-					<li><span>&nbsp;&nbsp;&nbsp;* 입장 마감은 폐관30분 전까지</span></li>
-				</ul>
-			</div></li>
-		<li class="main_admission"><strong class="main_info-tit01"> 관람료</strong>
-			<div class="main_info-txt info-admission">
-				<ul>
-					<li><strong>무료</strong> <span>특별전시는 유료</span></li>
-				</ul>
-			</div></li>
-	</ul>
-	<div class="main_info info-link">
-		<ul>
-			<li><a href="#" class="main_btn btn-over">오시는길</a></li>
-			<li><a href="#" class="main_btn btn-over">예약하기</a></li>
-		</ul>
-	</div>
-</div>
 <!-- -- 알립니다 -- -->
 <div data-aos="fade-up" data-aos-offset="200" data-aos-delay="50" data-aos-duration="500" data-aos-easing="ease-in" class="main_notice_wrap_alarm">
 	<h3 class="notice-tit">
-		<i></i>
-		<a href="/site/main/archive/united/category/128">알립니다</a>
+		<i></i> 알립니다
 	</h3>
 	<div class="main_notice_inner">
 		<div class="notice-area">
