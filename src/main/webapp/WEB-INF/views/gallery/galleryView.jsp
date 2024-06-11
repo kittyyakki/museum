@@ -4,22 +4,12 @@
 	<jsp:param name="stylesheet" value="static/stylesheet/gallery.css" />
 	<jsp:param name="script" value="static/script/gallery.js" />
 </jsp:include>
-<!-- <script>
-	function shareNaver() {
-		const title = "타이틀 입력";
-		const url = "https://sample.com/index.php";
-		window.open("https://share.naver.com/web/shareView?url=" + url
-				+ "&title=" + title);
-	}
-</script> -->
-
 <section class="gallery-view">
-	<h1>${galleryVO.title}</h1>
 	<ul class="gallery-header">
+		<h1>${galleryVO.title}</h1>
 		<li>${galleryVO.content}</li>
 		<li>
-			<a href="museum.do?command=memberGallery?mseq=${galleryVO.authorId}"> ${galleryVO.authorId}님의 갤러리
-			</a>
+			<a href="museum.do?command=memberGallery?mseq=${galleryVO.authorId}"> ${galleryVO.authorId}님의 갤러리 </a>
 		</li>
 		<li>
 			<span>조회수 ${galleryVO.readcount}</span>
@@ -32,23 +22,16 @@
 					});
 				</script>
 			</span>
-
-			<!-- <button type="button" class="sns_btn" onclick="shareNaver()">
-				<img src="static/image/naver.png" alt="네이버 공유하기">
-			</button> -->
 		</li>
 		<li>
 			<span>
-				<input value="목록으로" type="button" class="gbtn-back gallery-btn"
-					onclick="location.href='museum.do?command=galleryList'">
+				<input value="목록으로" type="button" class="gbtn-back gallery-btn" onclick="location.href='museum.do?command=galleryList'">
 			</span>
 		</li>
 		<c:if test="${loginUser.id eq galleryVO.authorId}">
 			<li class="gbtn">
-				<input value="수정하기" type="button" class="gbtn-update gallery-btn"
-					onclick="location.href='museum.do?command=galleryUpdate&mseq=${galleryVO.mseq}'">
-				<input value="삭제하기" type="button" class="gbtn-delete gallery-btn"
-					onclick="go_delete(${galleryVO.mseq})">
+				<input value="수정하기" type="button" class="gbtn-update gallery-btn" onclick="location.href='museum.do?command=galleryUpdate&mseq=${galleryVO.mseq}'">
+				<input value="삭제하기" type="button" class="gbtn-delete gallery-btn" onclick="go_delete(${galleryVO.mseq})">
 			</li>
 		</c:if>
 	</ul>

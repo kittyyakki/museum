@@ -11,7 +11,9 @@
 		<div class="qna-list_header_title">
 			<h1>고객센터</h1>
 			<p>
-				총 <span>${pagination.itemCount}</span> 건이 검색되었습니다
+				총
+				<span>${pagination.itemCount}</span>
+				건이 검색되었습니다
 			</p>
 		</div>
 		<a href="museum.do?command=qnaWriteForm">
