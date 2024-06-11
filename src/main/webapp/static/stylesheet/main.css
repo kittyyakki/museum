@@ -29,7 +29,7 @@
 	position: absolute;
 	width: 100%;
 	height: 50px;
-	bottom: 26px;
+	bottom: -130px;
 	right: -27%;
 	display: flex;
 	justify-content: center; /* Center the navigation dots */
@@ -213,6 +213,7 @@
 	padding: 0 15px;
     position: relative;
     margin: 70px auto;
+    margin-bottom:150px;
 }
 
 .main_notice_inner{
