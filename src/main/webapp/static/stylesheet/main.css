@@ -89,8 +89,7 @@
 }
 
 /* Main Info */
-.main_info,
-.main_admission {
+.main_info, .main_admission {
 	margin-bottom: 20px;
 }
 
@@ -189,7 +188,7 @@
 }
 
 /* 좌우로 넘어가는 슬라이드 */
-.imagelist{
+.imagelist {
 	width: 200px;
 	height: 200px;
 	cursor: pointer;
@@ -198,11 +197,13 @@
 	text-align: center;
 	border-radius: 10px;
 }
-.imagelist:hover{
+
+.imagelist:hover {
 	background-color: #80808024;
 	box-shadow: 5px 15px 10px gray;
-	translate: 0 -25px; 
+	translate: 0 -25px;
 }
+
 .imagelist>img {
 	width: 80%;
 	height: 100%;
@@ -236,29 +237,73 @@
 .main_notice_wrap_alarm {
 	width: 70%;
 	padding: 0 15px;
-    position: relative;
-    margin: 70px auto;
-    margin-bottom:150px;
+	position: relative;
+	margin: 70px auto;
+	margin-bottom: 150px;
 }
 
-.main_notice_inner{
-	display:flex;
-	
+.main_notice_inner {
+	display: flex;
 }
-.main_notice_inner_row{
-	display:flex;
+
+.notice_inner .main_notice_inner_row {
+	display: flex;
+    position: relative;
+    padding-left: 15px; /* adjust as needed to provide space for the circle */
 }
-.col_col_title{
-	width:80%;
+
+.notice_inner .col_col_title a::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #222;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.notice_inner .col_col_title a {
+    text-decoration: none; /* 기본적으로 밑줄 제거 */
+}
+
+.notice_inner .col_col_title a:hover {
+    text-decoration: underline; /* 마우스 올렸을 때 밑줄 추가 */
+}
+
+.notice_inner .col_col_title a::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #222;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.col_col_title {
+	width: 70%;
 	margin-bottom: 20px;
+	display: -webkit-box;
+	padding-left: 1rem;
+	word-break: break-all;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
 }
-.col_col_date{
-	width:20%;
+
+.col_col_date {
+	width: 20%;
 	margin-bottom: 20px;
-	margin-left:40px;
+	margin-left: 40px;
 	text-align: right;
 }
-.main_notice_wrap_alarm .notice-tit{
+
+.main_notice_wrap_alarm .notice-tit {
 	display: block;
 	font-size: 46px;
 	margin-bottom: 42px;
@@ -288,7 +333,6 @@
 	width: 100%;
 	display: flex;
 	justify-content: center;
-
 }
 
 .main_notice_wrap_alarm .notice_content .notice_tabBtn {
@@ -299,8 +343,7 @@
 	border-bottom: 1px solid #ccc;
 }
 
-.main_notice_wrap_alarm .notice_content .notice_tabBtn .btn.selected {
-	font-family: 'notokr-bold';
+.main_notice_wrap_alarm .notice_content .notice_tabBtn .btn:hover {
 	color: #222;
 	border-bottom: 4px solid #222;
 	margin-right: 20px;
@@ -330,14 +373,15 @@
 	display: block;
 }
 
-.notice_inner{
-	width:100%;
-	height:auto;
-	font-size: 1.3rem;
+.notice_inner {
+	width: 100%;
+	height: auto;
+	font-size: 1rem;
 }
-.notice_inner ul{
-	width:100%;
-	height:100%;
+
+.notice_inner ul {
+	width: 100%;
+	height: 100%;
 	border-bottom: 1px solid #ccc;
 }
 
@@ -401,71 +445,95 @@
 	border: 1px solid #ccc;
 }
 
-
-
 /* 아래 움직이는 슬라이드 */
-@keyframes container1 {
-	0% {
-		transform: translateX(0);
-	}
-
-	50% {
-		transform:
-			translateX(100%);
-	}
-
-	50.01% {
-		transform: translateX(-100%);
-	}
-
-	100% {
-		transform:
-			translateX(0);
-	}
+@
+keyframes container1 { 0% {
+	transform: translateX(0);
 }
 
-@keyframes container2 {
-	0% {
-		transform: translateX(-200%);
-	}
-
-	100% {
-		transform:
-			translateX(0);
-	}
+50
+%
+{
+transform
+:
+translateX(
+100%
+);
+}
+50
+.01 % {
+	transform: translateX(-100%);
 }
 
-@keyframes container3 {
-	0% {
-		transform: translateX(0);
-	}
-
-	50% {
-		transform:
-			translateX(-100%);
-	}
-
-	50.01% {
-		transform: translateX(100%);
-	}
-
-	100% {
-		transform:
-			translateX(0);
-	}
+100
+%
+{
+transform
+:
+translateX(
+0
+);
+}
+}
+@
+keyframes container2 { 0% {
+	transform: translateX(-200%);
 }
 
-@keyframes container4 {
-	0% {
-		transform: translateX(0);
-	}
-
-	100% {
-		transform:
-			translateX(-200%);
-	}
+100
+%
+{
+transform
+:
+translateX(
+0
+);
+}
+}
+@
+keyframes container3 { 0% {
+	transform: translateX(0);
 }
 
+50
+%
+{
+transform
+:
+translateX(
+-100%
+);
+}
+50
+.01 % {
+	transform: translateX(100%);
+}
+
+100
+%
+{
+transform
+:
+translateX(
+0
+);
+}
+}
+@
+keyframes container4 { 0% {
+	transform: translateX(0);
+}
+
+100
+%
+{
+transform
+:
+translateX(
+-200%
+);
+}
+}
 #container1 {
 	animation: container1 100s linear infinite;
 }
