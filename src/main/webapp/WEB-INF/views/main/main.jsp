@@ -66,14 +66,14 @@
 		<div class="image-list" id="container1">
 			<c:forEach items="${artworkList1}" var="list">
 				<div class="imagelist" onclick="location.href='museum.do?command=artworkView&aseq=${list.aseq}'">
-					<img src="${list.savefilename}">
+					<img src="${list.fullSavefilename}">
 				</div>
 			</c:forEach>
 		</div>
 		<div class="image-list" id="container2">
 			<c:forEach items="${artworkList2}" var="list">
 				<div class="imagelist" onclick="location.href='museum.do?command=artworkView&aseq=${list.aseq}'">
-					<img src="${list.savefilename}">
+					<img src="${list.fullSavefilename}">
 				</div>
 			</c:forEach>
 		</div>
@@ -82,14 +82,14 @@
 		<div class="image-list" id="container3">
 			<c:forEach items="${artworkList3}" var="list">
 				<div class="imagelist" onclick="location.href='museum.do?command=artworkView&aseq=${list.aseq}'">
-					<img src="${list.savefilename}">
+					<img src="${list.fullSavefilename}">
 				</div>
 			</c:forEach>
 		</div>
 		<div class="image-list" id="container4">
 			<c:forEach items="${artworkList4}" var="list">
 				<div class="imagelist" onclick="location.href='museum.do?command=artworkView&aseq=${list.aseq}'">
-					<img src="${list.savefilename}">
+					<img src="${list.fullSavefilename}">
 				</div>
 			</c:forEach>
 		</div>
