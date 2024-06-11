@@ -1,9 +1,7 @@
 package com.team4.museum.controller.action;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import com.team4.museum.dao.ArtworkDao;
 import com.team4.museum.dao.NoticeDao;
@@ -21,11 +19,11 @@ public class IndexAction implements Action {
 		NoticeDao ndao = NoticeDao.getInstance();
 		ArtworkDao adao = ArtworkDao.getInstance();
 
-		for(int i = 1; i <= 4; i++) {
+		for (int i = 1; i <= 4; i++) {
 			List<ArtworkVO> randomArtworkList = adao.getRandomList();
-			request.setAttribute("artworkList" + i, randomArtworkList);			
+			request.setAttribute("artworkList" + i, randomArtworkList);
 		}
-		
+
 		List<NoticeVO> noticeList = ndao.getRecentNotice();
 		request.setAttribute("noticeList", noticeList);
 
