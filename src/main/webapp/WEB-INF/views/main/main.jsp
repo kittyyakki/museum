@@ -19,17 +19,17 @@
 			<img src="static/image/main/main_image8.jpg">
 		</div>
 	</div>
-</div>
-<div id="main-center-remote">
-	<div class="selected"></div>
-	<div></div>
-	<div></div>
-	<div></div>
-	<div></div>
-	<div></div>
-	<div></div>
-	<div></div>
-	<div>▶</div>
+	<div id="main-center-remote">
+		<div class="selected"></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div>▶</div>
+	</div>
 </div>
 <div class="main-section_text">
 	<ul class="main-info-area">
