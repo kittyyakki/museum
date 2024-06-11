@@ -27,3 +27,4 @@
 		<a class="mypage_button" href="museum.do?command=mypageFavoriteList"> 관심예술품 </a>
 	</div>
 </main>
+<jsp:include page="/WEB-INF/views/footer.jsp" />
