@@ -10,9 +10,10 @@
 String displayState = request.getParameter("displayState") != null ? request.getParameter("displayState") : "";
 %>
 <section class="admin-list">
-	<form action="museum.do" method="get" name="adminForm">
+	<form action="museum.do" method="post" name="adminForm">
 		<div class="admin-list-btn">
 			<input type="hidden" name="command" value="adminArtworkList">
+			<input type="hidden" name="memberIds">
 			<input type="button" value="추가" onclick="location.href='museum.do?command=artworkWrite'">
 			<input type="button" value="수정" onclick="updatePost('artworkUpdate&aseq=', 'li:nth-child(3)')">
 			<input type="button" value="삭제" onclick="deletePost('adminDeleteArtwork', 'li:nth-child(3)')">
