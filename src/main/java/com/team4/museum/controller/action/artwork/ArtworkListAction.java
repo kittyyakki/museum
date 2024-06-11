@@ -28,7 +28,7 @@ public class ArtworkListAction implements Action {
 
 		// 빈 파라미터를 빈 문자열로 치환합니다.
 		if (ArtworkCategory.전체.name().equals(category)) {
-			category = null;
+			category = "";
 		}
 
 		// 예술품 목록 및 페이지네이션을 저장합니다.
