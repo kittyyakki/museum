@@ -5,8 +5,13 @@
 	flex-direction: column;
 	margin: 0 auto;
 	padding: 0 1rem;
-	max-width: 1600px;
 	font-size: 1rem;
+}
+
+@media only screen and (min-width: 768px) {
+	.qna-list {
+		width: 90%;
+	}
 }
 
 /* -- .qna-list_header  -------------- */
@@ -57,7 +62,9 @@
 @media only screen and (min-width: 768px) {
 	.qna-list_body {
 		margin-bottom: 2rem;
-		box-shadow: 0 .1rem .5rem .1rem rgba(0, 0, 0, 0.2);
+		border: 1px solid #e0e0e0;
+		border-radius: 4px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	}
 	.qna-list_body .pagination {
 		padding: 0.5rem;
@@ -121,25 +128,22 @@
 	word-break: break-all;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	-webkit-line-clamp: 1;
+	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 }
 
 @media only screen and (min-width: 768px) {
 	.qna-list_table {
 		border-spacing: 0;
-		font-size: 1rem;
 		text-align: center;
 	}
 	.qna-list_table thead {
 		display: table-header-group;
-		font-size: 1.125rem;
-		color: #6F6F6F;
+		background-color: #f0f0f0;
 		font-weight: bold;
-		box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
 	}
 	.qna-list_table thead tr th {
-		padding: 1rem;
+		padding: 1rem 0;
 	}
 	.qna-list_table tbody tr {
 		display: table-row;
@@ -150,7 +154,7 @@
 	.qna-list_table tbody tr td {
 		display: table-cell;
 		text-align: center;
-		padding: 0.8rem;
+		padding: 0.8rem 0;
 	}
 	.qna-list_table tbody tr td:before {
 		display: none;
@@ -158,8 +162,14 @@
 	.qna-list_table tbody tr td div {
 		justify-content: center;
 	}
-	.qna-list_table tbody tr td[data-title] div {
-		padding-right: 4rem;
+	.qna-list_table thead tr th:nth-child(1) {
+		column-width: 100px;
+	}
+	.qna-list_table thead tr th:nth-child(3) {
+		column-width: 200px;
+	}
+	.qna-list_table thead tr th:nth-child(4) {
+		column-width: 100px;
 	}
 }
 
