@@ -1,62 +1,81 @@
 @charset "UTF-8";
 
-/* 옆으로 넘어가는 상단 슬라이드 */
-#main-center {
+/* 옆으로 넘어가는 슬라이드 */
+.main-swiper {
 	position: relative;
-	width: 70%;
-	/* Adjusted to your requirement */
-	height: 600px;
-	margin: 0 auto;
-	overflow: hidden;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-}
-
-#main-center-imgs {
-	position: relative;
 	width: 100%;
-	/* Adjusted to fit the container width */
-	height: 100%;
-	/* Adjusted to fit the container height */
-	display: flex;
-	transition: left 1s;
-	/* Smooth transition */
-}
-
-#main-center-imgs img {
-	width: 100%;
-	/* Ensure each image takes up 70% of the container */
+	min-width: 18rem;
 	height: auto;
-	/* Maintain aspect ratio */
+	max-height: 600px;
+	min-height: 18rem;
 	margin: 0 auto;
-	/* Center the images horizontally */
+	overflow: hidden;
 }
 
-#main-center-remote {
+.main-swiper_image-container {
+	position: relative;
+	display: flex;
+	max-width: 100%;
+	max-height: 100%;
+	transition: left 1s;
+	aspect-ratio: 16/9;
+}
+
+.main-swiper_image-container img {
+	margin: 0 auto;
+	object-fit: fill;
+	aspect-ratio: 16/9;
+}
+
+.main-swiper_remote-container {
 	position: absolute;
 	display: flex;
 	justify-content: right;
-	bottom: 0;
-	right: 0;
+	bottom: 5%;
+	right: 5%;
 	gap: 1rem;
 }
 
-#main-center-remote div {
+.main-swiper_remote-container div {
 	width: 20px;
 	height: 20px;
 	border-radius: 50%;
 	text-align: right;
 	line-height: 20px;
 	font-weight: bold;
+	border: 1px solid #4D4D4D;
+	background: #F1F1F1;
+	user-select: none;
 	cursor: pointer;
-	border: 1px solid #CFCFCF;
-	color: #6D6D6D;
 }
 
-#main-center-remote .selected {
-	background: #ccc;
-	border: 1px solid #ccc;
+.main-swiper_remote-container .selected {
+	background: #3D3D3D;
+	border: 1px solid #6D6D6D;
+}
+
+.main-swiper_remote-container .pause-button {
+	background: none;
+	border: none;
+	font-size: 1.25rem;
+	font-weight: bold;
+	color: #1D1D1D;
+	text-shadow: 0 0 1px #F1F1F1;
+}
+
+/* 상단 슬라이드 */
+#main-top-swiper {
+	width: 100%;
+	transition: width 0.3s;
+}
+
+@media only screen and (min-width: 768px) {
+	#main-top-swiper {
+		width: 70%;
+	}
 }
 
 /* 관람시간 관람료 오시는길 예약하기 */
