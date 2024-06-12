@@ -5,18 +5,6 @@
 	<jsp:param name="stylesheet" value="static/stylesheet/notice.css" />
 	<jsp:param name="script" value="static/script/notice.js" />
 </jsp:include>
-<%-- <div class="notice_header_box">
-		<c:forEach items="${noticeCategory}" var="category" varStatus="status">
-			<c:choose>
-				<c:when test="${categoryName.equals(category.name())}">
-					<a href="museum.do?command=noticeList&category=${category.name()}" class="notice-list_btn">${category.name()}</a>
-				</c:when>
-				<c:otherwise>
-					<a href="museum.do?command=noticeList&category=${category.name()}" class="notice-list_btn">${category.name()}</a>
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
-	</div> --%>
 <div class="noticeMagazine_container">
 	<div class="mu-news_left">
 		<div class="l-img"></div>

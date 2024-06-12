@@ -26,17 +26,15 @@
 				<select onchange="categoryFilter('adminNoticeList', 'noticeCategory', event)" name="selectCategoryFilter"
 					class="admin-select">
 					<option value="state">분류</option>
-					<c:forEach items="${NoticeCategory.values()}" var="c">
-						<c:if test="${!c.name().equals('전체')}">
-							<c:choose>
-								<c:when test="${c.name().equals(selectedCategory)}">
-									<option value="${c.name()}" selected>${c.name()}</option>
-								</c:when>
-								<c:otherwise>
-									<option value="${c.name()}">${c.name()}</option>
-								</c:otherwise>
-							</c:choose>
-						</c:if>
+					<c:forEach items="${NoticeCategory.validValues()}" var="c">
+						<c:choose>
+							<c:when test="${c.name().equals(selectedCategory)}">
+								<option value="${c.name()}" selected>${c.name()}</option>
+							</c:when>
+							<c:otherwise>
+								<option value="${c.name()}">${c.name()}</option>
+							</c:otherwise>
+						</c:choose>
 					</c:forEach>
 				</select>
 			</li>

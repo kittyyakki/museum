@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import com.team4.museum.controller.action.Action;
 import com.team4.museum.dao.ArtworkDao;
-import com.team4.museum.util.ArtworkCategory;
 import com.team4.museum.util.Security;
 import com.team4.museum.vo.ArtworkVO;
 
@@ -30,7 +29,6 @@ public class ArtworkUpdateAction implements Action {
 		}
 
 		request.setAttribute("artwork", avo);
-		request.setAttribute("category", ArtworkCategory.values());
 		request.getRequestDispatcher("/WEB-INF/views/artwork/artworkUpdateForm.jsp").forward(request, response);
 	}
 

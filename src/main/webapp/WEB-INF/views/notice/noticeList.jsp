@@ -1,21 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="com.team4.museum.util.NoticeCategory"%>
 <jsp:include page="/WEB-INF/views/header.jsp">
 	<jsp:param name="stylesheet" value="static/stylesheet/notice.css" />
 	<jsp:param name="script" value="static/script/notice.js" />
 </jsp:include>
 <div class="notice_box">
 	<div class="notice_header_box">
-		<c:forEach items="${noticeCategory}" var="category" varStatus="status">
-			<c:choose>
-				<c:when test="${categoryName.equals(category.name())}">
-					<a href="museum.do?command=noticeList&category=${category.name()}" class="notice-list_btn">${category.name()}</a>
-				</c:when>
-				<c:otherwise>
-					<a href="museum.do?command=noticeList&category=${category.name()}" class="notice-list_btn">${category.name()}</a>
-				</c:otherwise>
-			</c:choose>
+		<c:forEach items="${NoticeCategory.values()}" var="c">
+			<a href="museum.do?command=noticeList&category=${c.name()}" class="notice-list_btn">${c.name()}</a>
 		</c:forEach>
 		<div class="writebutton">
 			<c:if test="${isAdmin}">

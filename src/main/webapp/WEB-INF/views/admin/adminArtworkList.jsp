@@ -30,17 +30,15 @@ String displayState = request.getParameter("displayState") != null ? request.get
 			<li>번호</li>
 			<li><select name="category" class="admin-select" onchange="this.form.submit();">
 					<option value="">분류</option>
-					<c:forEach items="${ArtworkCategory.values()}" var="c">
-						<c:if test="${!c.name().equals('전체')}">
-							<c:choose>
-								<c:when test="${c.name().equals(category)}">
-									<option value="${c.name()}" selected>${c.name()}</option>
-								</c:when>
-								<c:otherwise>
-									<option value="${c.name()}">${c.name()}</option>
-								</c:otherwise>
-							</c:choose>
-						</c:if>
+					<c:forEach items="${ArtworkCategory.validValues()}" var="c">
+						<c:choose>
+							<c:when test="${c.name().equals(category)}">
+								<option value="${c.name()}" selected>${c.name()}</option>
+							</c:when>
+							<c:otherwise>
+								<option value="${c.name()}">${c.name()}</option>
+							</c:otherwise>
+						</c:choose>
 					</c:forEach>
 			</select></li>
 			<li>작품명</li>

@@ -21,16 +21,12 @@ public class NoticeListAction implements Action {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
-		HttpSession session = request.getSession();
 		NoticeDao ndao = NoticeDao.getInstance();
-		session.removeAttribute("category");
-
-		String category = request.getParameter("category") == null ? NoticeCategory.전체.name()
-				: request.getParameter("category");
+		String category = request.getParameter("category");
 
 		Pagination pagination = Pagination.with(request, 0, "command=noticeList&category=" + category);
 		List<NoticeVO> noticeList = ndao.selectNoticeList(pagination);
-		if (category.equals(NoticeCategory.전체.name())) {// 전체목록 조회
+		if (category == null || category.equals(NoticeCategory.전체.name())) {// 전체목록 조회
 			pagination.setItemCount(ndao.getAllCount());
 			noticeList = ndao.selectNoticeList(pagination);
 		} else if (category.equals(NoticeCategory.매거진.name())) {
@@ -45,10 +41,7 @@ public class NoticeListAction implements Action {
 		}
 
 		request.setAttribute("categoryName", category);
-		session.setAttribute("category", category);
 		request.setAttribute("noticeList", noticeList);
-
-		request.setAttribute("noticeCategory", NoticeCategory.values());
 		request.getRequestDispatcher("/WEB-INF/views/notice/noticeList.jsp").forward(request, response);
 
 	}

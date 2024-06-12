@@ -126,15 +126,15 @@
 	</header>
 	<div class="header_gnb_list_containner">
 		<div>
-			<c:forEach items="${ArtworkCategory.values()}" var="category">
-					<a href="museum.do?command=artworkList&category=${category.name()}">${category.name()}</a>
+			<c:forEach items="${ArtworkCategory.values()}" var="c">
+				<a href="museum.do?command=artworkList&category=${c.name()}">${c.name()}</a>
 			</c:forEach>
 		</div>
 	</div>
 	<div class="header_gnb_list_containner01">
 		<div>
-			<c:forEach items="${NoticeCategory.values()}" var="category">
-					<a href="museum.do?command=noticeList&category=${category.name()}">${category.name()}</a>
+			<c:forEach items="${NoticeCategory.values()}" var="c">
+				<a href="museum.do?command=noticeList&category=${c.name()}">${c.name()}</a>
 			</c:forEach>
 		</div>
 	</div>

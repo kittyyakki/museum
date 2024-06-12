@@ -3,10 +3,7 @@ package com.team4.museum.controller.action.artwork;
 import java.io.IOException;
 
 import com.team4.museum.controller.action.Action;
-import com.team4.museum.dao.ArtworkDao;
-import com.team4.museum.util.ArtworkCategory;
 import com.team4.museum.util.Security;
-import com.team4.museum.vo.ArtworkVO;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,7 +18,6 @@ public class ArtworkWriteAction implements Action {
 			return;
 		}
 
-		request.setAttribute("category", ArtworkCategory.values());
 		request.getRequestDispatcher("/WEB-INF/views/artwork/artworkWriteForm.jsp").forward(request, response);
 	}
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.team4.museum.util.ArtworkCategory"%>
 <jsp:include page="/WEB-INF/views/header.jsp">
 	<jsp:param name="stylesheet" value="static/stylesheet/artwork.css" />
 	<jsp:param name="script" value="static/script/artwork.js" />
@@ -37,15 +38,9 @@
 				<li>
 					<div>부문</div>
 					<select name="category">
-						<c:forEach items="${category}" var="c" varStatus="status">
-							<c:choose>
-								<c:when test="${status.index ==0}">
-									<option value="">카테고리를 선택하세요</option>
-								</c:when>
-								<c:otherwise>
-									<option value="${c.name()}">${c.name()}</option>
-								</c:otherwise>
-							</c:choose>
+						<option value="">카테고리를 선택하세요</option>
+						<c:forEach items="${ArtworkCategory.validValues()}" var="c">
+							<option value="${c.name()}">${c.name()}</option>
 						</c:forEach>
 					</select>
 				</li>

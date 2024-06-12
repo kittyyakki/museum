@@ -19,7 +19,6 @@ public class InsertNoticeFormAction implements Action {
 			return;
 		}
 
-		request.setAttribute("noticeCategory", NoticeCategory.values());
 		request.getRequestDispatcher("/WEB-INF/views/notice/insertNoticeForm.jsp").forward(request, response);
 	}
 
