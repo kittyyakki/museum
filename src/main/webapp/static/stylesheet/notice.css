@@ -323,7 +323,7 @@ h2 {
 	font-weight: bold;
 }
 
-.notice_update_field input[type="text"], .notice_update_field input[type="password"],
+.notice_update_field input[type="text"], .notice_update_field select, .notice_update_field input[type="password"],
 	.notice_update_field textarea {
 	width: 100%;
 	padding: 5px;
