@@ -9,7 +9,7 @@
 		<h1>${galleryVO.title}</h1>
 		<li>${galleryVO.content}</li>
 		<li>
-			<a href="museum.do?command=memberGallery?mseq=${galleryVO.authorId}"> ${galleryVO.authorId}님의 갤러리 </a>
+			<a href="museum.do?command=galleryList&searchWord=${galleryVO.authorName}"> ${galleryVO.authorName}님의 갤러리 </a>
 		</li>
 		<li>
 			<span>조회수 ${galleryVO.readcount}</span>

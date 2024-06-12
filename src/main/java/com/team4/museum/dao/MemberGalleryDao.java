@@ -119,8 +119,11 @@ public class MemberGalleryDao extends BaseDao<MemberGalleryVO>{
 
 	public int getSearchCount(String searchWord) {
 		return selectInt(
-				"SELECT COUNT(*) FROM member_gallery "
-						+ " WHERE title LIKE CONCAT('%', ?, '%') OR content LIKE CONCAT('%', ?, '%') ",
+				"SELECT COUNT(*) FROM member_gallery_view "
+						+ " WHERE title LIKE CONCAT('%', ?, '%')"
+						+ " OR content LIKE CONCAT('%', ?, '%') "
+						+ " OR author_name LIKE CONCAT('%', ?, '%') ",
+				searchWord,
 				searchWord,
 				searchWord);
 	}
@@ -128,13 +131,16 @@ public class MemberGalleryDao extends BaseDao<MemberGalleryVO>{
 	public List<MemberGalleryVO> searchGallery(Pagination pagination, String searchWord) {
 		
 		return executeSelect(
-				"SELECT * FROM member_gallery_view " 
-							+ " WHERE (title LIKE CONCAT('%', ?, '%') OR content LIKE CONCAT('%', ?, '%')) "
-							+ " ORDER BY mseq DESC LIMIT ? OFFSET ?",
+				"SELECT * FROM member_gallery_view "
+						+ " WHERE title LIKE CONCAT('%', ?, '%')"
+						+ " OR content LIKE CONCAT('%', ?, '%') "
+						+ " OR author_name LIKE CONCAT('%', ?, '%') "
+						+ " ORDER BY mseq DESC LIMIT ? OFFSET ?",
 				pstmt -> {
 					pstmt.setString(1, searchWord);
 					pstmt.setString(2, searchWord);
-					pagination.applyTo(pstmt, 3, 4);
+					pstmt.setString(3, searchWord);
+					pagination.applyTo(pstmt, 4, 5);
 				}, MemberGalleryDao::extractMemberGalleryVO);
 	}
 
